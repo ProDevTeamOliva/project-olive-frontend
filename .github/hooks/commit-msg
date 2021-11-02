@@ -4,13 +4,13 @@ MSG="$1"
 
 local_branch="$(git rev-parse --abbrev-ref HEAD)"
 
-valid_branch_regex="^PO-[0-9]+"
-
-result = "$(echo $local_branch | sed $valid_branch_regex)"
+result="$(echo $local_branch | grep -Po '^PO-[0-9]+_')"
 
 if ! grep -qE "$result" "$MSG";then
+    echo "----------------------------------- ERROR -----------------------------------"
     cat "$MSG"
     echo "Your commit message must contain branch identifier at the beginning ($result)"
+    echo "-----------------------------------------------------------------------------"
     exit 1
 fi
 
