@@ -1,0 +1,229 @@
+.textAnimation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+  height: 30vh;
+}
+
+.textAnimation div {
+  width: 17vw;
+  height: 12vh;
+  background-color: mediumslateblue;
+  border-radius: 25px 25px 0px 25px;
+}
+
+.textAnimation div .text {
+  position: relative;
+  margin: 0%;
+  top: 50%;
+  left: 10%;
+  width: 15vw;
+  border-right: 2px solid white;
+  overflow: hidden;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: white;
+  font-size: 150%;
+  font-weight: bold;
+  letter-spacing: 0.2vw;
+  text-align: center;
+}
+
+.textAnimation div .animation {
+  -webkit-animation: textAnimation 3s steps(13) 0.5s normal both, cursor 0.7s steps(13) 1s infinite normal;
+          animation: textAnimation 3s steps(13) 0.5s normal both, cursor 0.7s steps(13) 1s infinite normal;
+}
+
+@-webkit-keyframes textAnimation {
+  from {
+    width: 0;
+  }
+  to {
+    width: 14vw;
+  }
+}
+
+@keyframes textAnimation {
+  from {
+    width: 0;
+  }
+  to {
+    width: 14vw;
+  }
+}
+
+@-webkit-keyframes cursor {
+  from {
+    border-right-color: white;
+  }
+  to {
+    border-right-color: transparent;
+  }
+}
+
+@keyframes cursor {
+  from {
+    border-right-color: white;
+  }
+  to {
+    border-right-color: transparent;
+  }
+}
+
+.textAnimation div:hover .animation:hover {
+  -webkit-animation: textAnimation 3s steps(13) 0.5s normal paused, cursor 0.7s steps(13) 1s infinite normal;
+          animation: textAnimation 3s steps(13) 0.5s normal paused, cursor 0.7s steps(13) 1s infinite normal;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+.textAnimation div:hover .animation {
+  -webkit-animation: textAnimation 3s steps(13) 0.5s normal running, cursor 0.7s steps(13) 1s infinite normal;
+          animation: textAnimation 3s steps(13) 0.5s normal running, cursor 0.7s steps(13) 1s infinite normal;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+}
+
+@media all and (max-width: 420px) {
+  .textAnimation div {
+    width: 50vw;
+  }
+  .textAnimation div .text {
+    left: 5%;
+    width: 44vw;
+    font-size: 100%;
+  }
+  @-webkit-keyframes textAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      min-width: 40vw;
+    }
+  }
+  @keyframes textAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      min-width: 40vw;
+    }
+  }
+}
+
+@media (max-width: 768px) and (min-width: 420px) {
+  .textAnimation div {
+    width: 40vw;
+  }
+  .textAnimation div .text {
+    left: 10%;
+    width: 30vw;
+    font-size: 110%;
+  }
+  @-webkit-keyframes textAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      width: 33vw;
+    }
+  }
+  @keyframes textAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      width: 33vw;
+    }
+  }
+}
+
+@media (max-width: 960px) and (min-width: 768px) {
+  .textAnimation div {
+    width: 30vw;
+  }
+  .textAnimation div .text {
+    left: 15%;
+    width: 23vw;
+    font-size: 130%;
+  }
+  @-webkit-keyframes textAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      width: 23vw;
+    }
+  }
+  @keyframes textAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      width: 23vw;
+    }
+  }
+}
+
+@media (max-width: 1200px) and (min-width: 960px) {
+  .textAnimation div {
+    width: 20vw;
+  }
+  .textAnimation div .text {
+    left: 7%;
+    width: 17vw;
+    font-size: 120%;
+  }
+  @-webkit-keyframes textAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      width: 17vw;
+    }
+  }
+  @keyframes textAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      width: 17vw;
+    }
+  }
+}
+
+@media (max-width: 1500px) and (min-width: 1200px) {
+  .textAnimation div {
+    width: 20vw;
+  }
+  .textAnimation div .text {
+    left: 10%;
+    width: 16vw;
+    font-size: 130%;
+  }
+  @-webkit-keyframes textAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      width: 16vw;
+    }
+  }
+  @keyframes textAnimation {
+    from {
+      width: 0;
+    }
+    to {
+      width: 16vw;
+    }
+  }
+}
+/*# sourceMappingURL=LogoUp.css.map */
