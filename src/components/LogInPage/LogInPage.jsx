@@ -1,16 +1,17 @@
-import { Container, Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem } from "@chakra-ui/react";
+import LogInForm from "../LogInForm/LogInForm.jsx";
 import Logo from "../Logo/Logo.jsx";
 
-function LogInPage() {
+function LogInPage({ changeAuth }) {
   return (
-    <Container w="100vw" h="100vh">
-      <Grid templateColumns="repeat(1,100vw)" templateRows="repeat(10,10vh)">
-        <GridItem rowSpan={3}>
-          <Logo></Logo>
-        </GridItem>
-        <GridItem rowSpan={7}>{/* Form login */}</GridItem>
-      </Grid>
-    </Container>
+    <Grid templateColumns="repeat(1,1fr)" templateRows="repeat(10,9vh)">
+      <GridItem rowSpan={3}>
+        <Logo></Logo>
+      </GridItem>
+      <GridItem rowSpan={7} align="center">
+        <LogInForm changeAuth={changeAuth}></LogInForm>
+      </GridItem>
+    </Grid>
   );
 }
 
