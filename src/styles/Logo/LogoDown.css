@@ -8,7 +8,7 @@
           flex-direction: column;
   height: 100%;
   width: 100%;
-  margin-top: 4%;
+  margin-top: 6%;
 }
 
 .logo .writingAnimation {
@@ -65,6 +65,24 @@
   15% {
     -webkit-transform: translateY(-15px);
             transform: translateY(-15px);
+  }
+}
+
+@media all and (max-width: 420px) {
+  .logo {
+    margin-top: 35%;
+  }
+  .logo .writingAnimation {
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 420px) {
+  .logo {
+    margin-top: 15%;
+  }
+  .logo .writingAnimation {
+    margin-top: 30px;
   }
 }
 /*# sourceMappingURL=LogoDown.css.map */

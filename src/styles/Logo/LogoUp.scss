@@ -28,6 +28,7 @@
     }
 
     .animation {
+      word-wrap: normal;
       animation: textAnimation 3s steps(13) 0.5s normal both,
         cursor 0.7s steps(13) 1s infinite normal;
     }
