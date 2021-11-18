@@ -1,20 +1,20 @@
-import { useState } from "react";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect,
 } from "react-router-dom";
+import { logIn, signUp } from "./actions/authActions.js";
 import AuthRoute from "./components/Auth/AuthRoute.jsx";
 import LogInPage from "./components/LogInPage/LogInPage.jsx";
 import MainPage from "./components/MainPage/MainPage.jsx";
 import NotPermission from "./components/MainPage/NotPermission.jsx";
+import {connect} from "react-redux"
+function App({auth, logIn, signUp}) {
+  const isAuth = auth.isAuth
 
-function App() {
-  const [isAuth, setAuth] = useState(false);
-
-  const changeAuth = (value) => {
-    setAuth(value);
+  const loginSubmit = (data) => {
+    logIn(data)
   };
 
   return (
@@ -35,11 +35,17 @@ function App() {
         </Switch>
         <Route
           path="/login"
-          component={() => <LogInPage changeAuth={changeAuth} />}
+          component={() => <LogInPage loginSubmit={loginSubmit} />}
         ></Route>
       </Router>
     </div>
   );
 }
-
-export default App;
+const mapStateToProps = (state) => ({
+  auth: state.auth
+})
+const mapDispatchToProps = (dispatch) => ({
+  signUp: (data) => dispatch(signUp(data)),
+  logIn: (data) => dispatch(logIn(data))
+})
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -3,11 +3,11 @@ import { Formik, Form } from "formik";
 import Inputs from "./Input";
 import { staticPl } from "../../constants/Forms";
 
-function LogInForm({ changeAuth }) {
+function LogInForm({ loginSubmit }) {
   const initialDataLogin = { login: "", password: "" };
 
-  const handleSubmit = () => {
-    changeAuth(true);
+  const handleSubmit = (values) => {
+    loginSubmit(values)
   };
 
   return (
