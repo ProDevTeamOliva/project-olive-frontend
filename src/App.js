@@ -9,12 +9,12 @@ import AuthRoute from "./components/Auth/AuthRoute.jsx";
 import LogInPage from "./components/LogInPage/LogInPage.jsx";
 import MainPage from "./components/MainPage/MainPage.jsx";
 import NotPermission from "./components/MainPage/NotPermission.jsx";
-import {connect} from "react-redux"
-function App({auth, logIn, signUp}) {
-  const isAuth = auth.isAuth
+import { connect } from "react-redux";
+function App({ auth, logIn, signUp }) {
+  const isAuth = auth.isAuth;
 
   const loginSubmit = (data) => {
-    logIn(data)
+    logIn(data);
   };
 
   return (
@@ -42,10 +42,10 @@ function App({auth, logIn, signUp}) {
   );
 }
 const mapStateToProps = (state) => ({
-  auth: state.auth
-})
+  auth: state.auth,
+});
 const mapDispatchToProps = (dispatch) => ({
   signUp: (data) => dispatch(signUp(data)),
-  logIn: (data) => dispatch(logIn(data))
-})
+  logIn: (data) => dispatch(logIn(data)),
+});
 export default connect(mapStateToProps, mapDispatchToProps)(App);
