@@ -1,4 +1,4 @@
-import { Button, Stack } from "@chakra-ui/react";
+import { Grid, Button } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import Inputs from "./Input";
 import { staticPl } from "../../constants/Forms";
@@ -7,7 +7,7 @@ function LogInForm({ loginSubmit }) {
   const initialDataLogin = { login: "", password: "" };
 
   const handleSubmit = (values) => {
-    loginSubmit(values)
+    loginSubmit(values);
   };
 
   return (
@@ -20,30 +20,24 @@ function LogInForm({ loginSubmit }) {
       {({ handleSubmit, isSubmitting, initialValues: { login, password } }) => (
         <Form
           onSubmit={handleSubmit}
-          style={{ height: "100%", marginTop: "7%" }}
+          style={{ display: "inline-block", width: "100%" }}
         >
-          <Inputs name={staticPl.login} id="login" value={login} />
-          <Inputs name={staticPl.password} id="password" value={password} />
+          <Grid placeItems="center" templateRows="auto" gap="25px">
+            <Inputs name={staticPl.login} id="login" value={login} />
+            <Inputs name={staticPl.password} id="password" value={password} />
 
-          <Stack
-            direction="column"
-            spacing={4}
-            align="center"
-            justify="center"
-            mt={4}
-          >
             <Button
               colorScheme="blue"
               isLoading={isSubmitting}
               type="submit"
-              w={["60%", "45%", "40%", "35%", "25%", "20%"]}
+              w="100%"
             >
               {staticPl.log}
             </Button>
             <Button color="green.500" fontSize="150%" variant="link">
               {staticPl.reg}
             </Button>
-          </Stack>
+          </Grid>
         </Form>
       )}
     </Formik>

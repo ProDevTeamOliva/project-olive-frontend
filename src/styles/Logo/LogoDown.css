@@ -1,33 +1,16 @@
-.logo {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  height: 100%;
-  width: 100%;
-  margin-top: 6%;
+.writingAnimation {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  -ms-grid-columns: (auto)[3];
+      grid-template-columns: repeat(3, auto);
+  grid-gap: 1em;
 }
 
-.logo .writingAnimation {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  height: 100vh;
-  width: 100vw;
-  margin-left: -1%;
-  margin-top: 3%;
-}
-
-.logo .writingAnimation .sign {
-  height: 3vh;
-  width: 3vh;
-  margin-left: 2.5%;
+.writingAnimation .sign {
+  width: 50%;
+  height: 50%;
+  margin: 1.5em;
   background: gray;
   border-radius: 50%;
   -webkit-animation: writingAnimation 1.5s linear infinite;
@@ -36,12 +19,12 @@
           animation-delay: -1s;
 }
 
-.logo .writingAnimation .sign.two {
+.writingAnimation .sign.two {
   -webkit-animation-delay: -0.8s;
           animation-delay: -0.8s;
 }
 
-.logo .writingAnimation .sign:nth-child(3) {
+.writingAnimation .sign.three {
   -webkit-animation-delay: -0.6s;
           animation-delay: -0.6s;
 }
@@ -65,24 +48,6 @@
   15% {
     -webkit-transform: translateY(-15px);
             transform: translateY(-15px);
-  }
-}
-
-@media all and (max-width: 420px) {
-  .logo {
-    margin-top: 35%;
-  }
-  .logo .writingAnimation {
-    margin-top: 30px;
-  }
-}
-
-@media (max-width: 768px) and (min-width: 420px) {
-  .logo {
-    margin-top: 15%;
-  }
-  .logo .writingAnimation {
-    margin-top: 30px;
   }
 }
 /*# sourceMappingURL=LogoDown.css.map */

@@ -7,17 +7,16 @@ function Inputs({ name, id, value }) {
     <>
       <Field name={id} value={value}>
         {({ field }) => (
-          <FormControl w={["60%", "45%", "40%", "35%", "25%", "20%"]}>
-            <FormLabel htmlFor="login" mt="5%" mb="3%">
+          <FormControl>
+            <FormLabel htmlFor="login" mb="5%">
               {name}
             </FormLabel>
             <Input
               {...field}
               id={id}
               placeholder={name}
-              borderColor="blackAlpha.500"
+              borderColor="white"
               focusBorderColor="blue.500"
-              h="50px"
             />
           </FormControl>
         )}

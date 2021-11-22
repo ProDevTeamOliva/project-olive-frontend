@@ -1,12 +1,14 @@
-import "../../styles/Logo/LogoDown.css";
+import { Grid } from "@chakra-ui/layout";
 import LogoDown from "./LogoDown";
 import LogoUp from "./LogoUp";
-function Logo() {
+
+function Logo({ fontSize }) {
   return (
-    <div className="logo">
-      <LogoUp />
+    <Grid placeItems="center" gap="25px" w="100%">
+      <LogoUp fontSize={fontSize} />
       <LogoDown />
-    </div>
+    </Grid>
   );
 }
+
 export default Logo;
