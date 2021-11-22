@@ -6,7 +6,7 @@ function AuthRoute({ isAuth, component, exact, path }) {
     <Route
       exact={exact}
       path={path}
-      render={() => (isAuth ? component : <Redirect to="/notPermission" />)}
+      render={() => (isAuth ? component : <Redirect to="/noPermission" />)}
     />
   );
 }

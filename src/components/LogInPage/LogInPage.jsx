@@ -1,16 +1,14 @@
-import { Grid, GridItem } from "@chakra-ui/react";
-import LogInForm from "../LogInForm/LogInForm.jsx";
-import Logo from "../Logo/Logo.jsx";
+import { Grid } from "@chakra-ui/react";
+import LogInForm from "../LogInForm/LogInForm";
+import Logo from "../Logo/Logo";
 
 function LogInPage({ loginSubmit }) {
   return (
-    <Grid templateColumns="repeat(1,1fr)" templateRows="repeat(10,9vh)">
-      <GridItem rowSpan={3}>
-        <Logo></Logo>
-      </GridItem>
-      <GridItem rowSpan={7} align="center">
-        <LogInForm loginSubmit={loginSubmit}></LogInForm>
-      </GridItem>
+    <Grid placeItems="center" h="100%">
+      <Grid placeItems="center" w="300px" m="25px" gap="25px">
+        <Logo fontSize="27px" />
+        <LogInForm loginSubmit={loginSubmit} />
+      </Grid>
     </Grid>
   );
 }

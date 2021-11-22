@@ -1,3 +1,5 @@
+import "../../styles/Logo/LogoDown.css";
+
 function LogoDown() {
   return (
     <div className="writingAnimation">

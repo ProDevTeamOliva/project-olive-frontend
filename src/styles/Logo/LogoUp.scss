@@ -1,29 +1,24 @@
 .textAnimation {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 30vh;
+  display: grid;
+  place-items: center;
+  width: 90%;
+  max-height: 90%;
+  font-size: 1em;
   div {
-    width: 17vw;
-    height: 12vh;
+    display: grid;
+    place-items: center;
+    width: 100%;
+    max-height: 100%;
+    aspect-ratio: 3 / 1;
     background-color: mediumslateblue;
-    border-radius: 25px 25px 0px 25px;
+    border-radius: 1.25em 1.25em 0 1.25em;
     .text {
-      position: relative;
-      margin: 0%;
-      top: 50%;
-      left: 10%;
-      width: 15vw;
       border-right: 2px solid white;
       overflow: hidden;
-      transform: translateY(-50%);
-      font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      font-family: monospace;
       color: white;
-      font-size: 150%;
       font-weight: bold;
-      letter-spacing: 0.2vw;
+      letter-spacing: 0.1em;
       text-align: center;
     }
 
@@ -38,7 +33,7 @@
         width: 0;
       }
       to {
-        width: 14vw;
+        width: 84%;
       }
     }
     @keyframes cursor {
@@ -52,118 +47,22 @@
   }
   div:hover {
     .animation:hover {
-      animation: textAnimation 3s steps(13) 0.5s normal paused,
-        cursor 0.7s steps(13) 1s infinite normal;
+      animation: textAnimationHover 3s steps(14) 0.5s normal paused,
+        cursor 0.7s steps(14) 1s infinite normal;
       animation-iteration-count: infinite;
     }
     .animation {
-      animation: textAnimation 3s steps(13) 0.5s normal running,
-        cursor 0.7s steps(13) 1s infinite normal;
+      animation: textAnimationHover 3s steps(14) 0.5s normal running,
+        cursor 0.7s steps(14) 1s infinite normal;
       animation-iteration-count: infinite;
     }
   }
-}
-@media all and (max-width: 420px) {
-  .textAnimation {
-    div {
-      width: 50vw;
-      .text {
-        left: 5%;
-        width: 44vw;
-        font-size: 100%;
-      }
-
-      @keyframes textAnimation {
-        from {
-          width: 0;
-        }
-        to {
-          min-width: 40vw;
-        }
-      }
+  @keyframes textAnimationHover {
+    from {
+      width: 0;
     }
-  }
-}
-@media (max-width: 768px) and (min-width: 420px) {
-  .textAnimation {
-    div {
-      width: 40vw;
-      .text {
-        left: 10%;
-        width: 30vw;
-
-        font-size: 110%;
-      }
-      @keyframes textAnimation {
-        from {
-          width: 0;
-        }
-        to {
-          width: 33vw;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 960px) and (min-width: 768px) {
-  .textAnimation {
-    div {
-      width: 30vw;
-      .text {
-        left: 15%;
-        width: 23vw;
-        font-size: 130%;
-      }
-      @keyframes textAnimation {
-        from {
-          width: 0;
-        }
-        to {
-          width: 23vw;
-        }
-      }
-    }
-  }
-}
-
-@media (max-width: 1200px) and (min-width: 960px) {
-  .textAnimation {
-    div {
-      width: 20vw;
-      .text {
-        left: 7%;
-        width: 17vw;
-        font-size: 120%;
-      }
-      @keyframes textAnimation {
-        from {
-          width: 0;
-        }
-        to {
-          width: 17vw;
-        }
-      }
-    }
-  }
-}
-@media (max-width: 1500px) and (min-width: 1200px) {
-  .textAnimation {
-    div {
-      width: 20vw;
-      .text {
-        left: 10%;
-        width: 16vw;
-        font-size: 130%;
-      }
-      @keyframes textAnimation {
-        from {
-          width: 0;
-        }
-        to {
-          width: 16vw;
-        }
-      }
+    to {
+      width: 92%;
     }
   }
 }
