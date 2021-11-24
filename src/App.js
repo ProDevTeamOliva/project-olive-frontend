@@ -10,42 +10,43 @@ import LogInPage from "./components/LogInPage/LogInPage";
 import MainPage from "./components/MainPage/MainPage";
 import NoPermission from "./components/MainPage/NoPermission";
 import { connect } from "react-redux";
-import i18next from 'i18next';
-import { initReactI18next, useTranslation } from 'react-i18next';
-import Backend from 'i18next-http-backend';
-import languages from './config/languages';
+import i18next from "i18next";
+import { initReactI18next, useTranslation } from "react-i18next";
+import Backend from "i18next-http-backend";
+import languages from "./config/languages";
 
-const language = languages.find(value => value === localStorage.getItem('language'));
+const language = languages.find(
+  (value) => value === localStorage.getItem("language")
+);
 
-i18next.use(Backend)
+i18next
+  .use(Backend)
   .use(initReactI18next)
   .init({
-    lng: language || 'en',
-    fallbackLng: 'en',
-    ns: [ 'main' ],
-    defaultNS: 'main',
+    lng: language || "en",
+    fallbackLng: "en",
+    ns: ["main"],
+    defaultNS: "main",
     react: {
       wait: true,
-      useSuspense: false
+      useSuspense: false,
     },
     interpolation: {
-      escapeValue: false
+      escapeValue: false,
     },
     backend: {
-      loadPath: '/locales/{{lng}}/{{ns}}.json'
-    }
-  })
-
+      loadPath: "/locales/{{lng}}/{{ns}}.json",
+    },
+  });
 
 function App({ auth, logIn, signUp }) {
-  
   const { t, i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
-    localStorage.setItem('language', lng);
-  }
-  
+    localStorage.setItem("language", lng);
+  };
+
   const isAuth = auth.isAuth;
 
   const loginSubmit = (data) => {
@@ -54,8 +55,8 @@ function App({ auth, logIn, signUp }) {
 
   return (
     <div className="App" style={{ height: "100%" }}>
-      <button onClick={() => changeLanguage('pl')}>PL</button>
-      <button onClick={() => changeLanguage('en')}>EN</button>
+      <button onClick={() => changeLanguage("pl")}>PL</button>
+      <button onClick={() => changeLanguage("en")}>EN</button>
       <Router>
         <Switch>
           <Route exact path="/">
