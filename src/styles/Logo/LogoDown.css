@@ -11,7 +11,7 @@
   width: 50%;
   height: 50%;
   margin: 1.5em;
-  background: gray;
+  background: #bac3ce;
   border-radius: 50%;
   -webkit-animation: writingAnimation 1.5s linear infinite;
           animation: writingAnimation 1.5s linear infinite;
