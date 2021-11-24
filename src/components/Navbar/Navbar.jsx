@@ -22,7 +22,7 @@ const Navbar = () => {
         w="100%"
         placeItems="center"
       >
-        <LogoUp fontSize="15.2px" />
+        <LogoUp fontSize="15.2" scaleWidth={9.4} />
         <Search />
         <Grid templateColumns="repeat(3, 50px)" gridColumn="3/4">
           <Image

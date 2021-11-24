@@ -1,13 +1,25 @@
 export const staticPl = {
-  log: "Zaloguj się",
-  reg: "Zarejestruj się",
+  logIn: "Zaloguj się",
+  register: "Zarejestruj się",
   login: "Login",
   password: "Hasło",
+  repeatPassword: "Powtórz hasło",
+  createAccount: "Utwórz konto",
+  firstName: "Imię",
+  secondName: "Nazwisko",
+  registrationData: "Dane rejestracyjne",
+  userData: "Dane użytkownika",
 };
 
 export const staticAng = {
-  log: "Log in",
-  reg: "Register",
+  logIn: "Log in",
+  register: "Register",
   login: "Login",
   password: "Password",
+  repeatPassword: "Repeat password",
+  createAccount: "Create an account",
+  firstName: "First name",
+  secondName: "Second name",
+  registrationData: "Registration data",
+  userData: "User date",
 };
