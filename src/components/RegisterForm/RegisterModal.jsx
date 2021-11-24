@@ -10,17 +10,17 @@ import {
   Divider,
   Text,
 } from "@chakra-ui/react";
-import { staticPl } from "../../constants/Forms";
 import RegisterForm from "./RegisterForm";
 import { purpleButtonStyle } from "../../styles/Buttons/purpleButton";
+import { useTranslation } from 'react-i18next';
 
 function RegisterModal() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
+  const { t } = useTranslation();
   return (
     <>
       <Button onClick={onOpen} {...purpleButtonStyle}>
-        {staticPl.register}
+        {t('register')}
       </Button>
 
       <Modal onClose={onClose} isOpen={isOpen} size="xl" bg="gray.50">
@@ -33,7 +33,7 @@ function RegisterModal() {
               fontWeight="bold"
               fontSize="110%"
             >
-              {staticPl.createAccount}
+              {t('createAccount')}
             </Text>
             <Divider borderColor="gray.900" border="1px"></Divider>
           </ModalHeader>

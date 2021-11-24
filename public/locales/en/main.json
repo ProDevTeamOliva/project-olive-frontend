@@ -1,0 +1,15 @@
+{
+    "logIn": "Log in",
+    "logging": "Logging",
+    "register": "Register",
+    "login": "Login",
+    "password": "Password",
+    "repeatPassword": "Repeat password",
+    "createAccount": "Create an account",
+    "firstName": "First name",
+    "secondName": "Second name",
+    "registrationData": "Registration data",
+    "userData": "User date",
+    "NoAccess": "No Access!",
+    "SearchNavBar": "Search ..."
+  }

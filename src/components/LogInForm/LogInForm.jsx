@@ -1,13 +1,13 @@
 import { Grid, Button, Box, Text, Divider } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import InputComponent from "../Inputs/InputComponent";
-import { staticPl } from "../../constants/Forms";
 import RegisterModal from "../RegisterForm/RegisterModal";
 import { blueButtonStyle } from "../../styles/Buttons/blueButton";
+import { useTranslation } from 'react-i18next';
 
 function LogInForm({ loginSubmit }) {
   const initialDataLogin = { login: "", password: "" };
-
+  const { t } = useTranslation()
   const handleSubmit = (values) => {
     loginSubmit(values);
   };
@@ -31,7 +31,7 @@ function LogInForm({ loginSubmit }) {
         fontWeight="bold"
         align="center"
       >
-        Logowanie
+        {t('logging')}
       </Text>
       <Divider borderColor="gray.900" mb="20px" borderWidth="1px" />
       <Formik
@@ -51,14 +51,14 @@ function LogInForm({ loginSubmit }) {
           >
             <Grid placeItems="center" templateRows="auto" gap="20px">
               <InputComponent
-                name={staticPl.login}
+                name={t('login')}
                 id="login"
                 type="text"
                 value={login}
                 {...inputColors}
               />
               <InputComponent
-                name={staticPl.password}
+                name={t('password')}
                 type="password"
                 id="password"
                 value={password}
@@ -72,7 +72,7 @@ function LogInForm({ loginSubmit }) {
                 mt="20px"
                 {...blueButtonStyle}
               >
-                {staticPl.logIn}
+                {t('logIn')}
               </Button>
             </Grid>
           </Form>

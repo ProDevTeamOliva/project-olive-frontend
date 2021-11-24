@@ -1,0 +1,15 @@
+{
+    "logIn": "Zaloguj się",
+    "logging": "Logowanie",
+    "register": "Zarejestruj się",
+    "login": "Login",
+    "password": "Hasło",
+    "repeatPassword": "Powtórz hasło",
+    "createAccount": "Utwórz konto",
+    "firstName": "Imię",
+    "secondName": "Nazwisko",
+    "registrationData": "Dane rejestracyjne",
+    "userData": "Dane użytkownika",
+    "NoAccess": "Brak dostępu!",
+    "SearchNavBar": "Szukaj ..."
+  }
