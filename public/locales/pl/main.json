@@ -11,5 +11,9 @@
     "registrationData": "Dane rejestracyjne",
     "userData": "Dane użytkownika",
     "NoAccess": "Brak dostępu!",
-    "SearchNavBar": "Szukaj ..."
+    "SearchNavBar": "Szukaj ...",
+    "alertRegistrationBody": "Czy potwierdzasz utworzenie konta ?",
+    "accept":"Akceptuj",
+    "cancel": "Anuluj",
+    "required":"*Wymagane"
   }

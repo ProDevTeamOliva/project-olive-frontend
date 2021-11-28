@@ -40,7 +40,7 @@ i18next
   });
 
 function App({ auth, logIn, signUp }) {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);

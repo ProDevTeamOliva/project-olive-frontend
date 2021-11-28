@@ -13,8 +13,8 @@ const authReducer = (state = init_state, action) => {
       };
     case REGISTER_SUCCESS:
       return {
-        isAuth: true,
         msg: action.payload.msg,
+        ...state,
       };
     // zmienić isAuth tutaj na false w przypadku failure
     case LOGIN_FAILURE:
@@ -24,8 +24,8 @@ const authReducer = (state = init_state, action) => {
       };
     case REGISTER_FAILURE:
       return {
-        isAuth: true,
         msg: action.payload.msg,
+        ...state,
       };
     default:
       return state;

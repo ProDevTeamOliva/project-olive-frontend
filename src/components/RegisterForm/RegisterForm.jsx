@@ -1,10 +1,22 @@
 import { Button, Grid, Box, Divider, Text } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import InputComponent from "../Inputs/InputComponent";
-import { staticPl } from "../../constants/Forms";
 import { purpleButtonStyle } from "../../styles/Buttons/purpleButton";
+import { connect } from "react-redux";
+import { signUp } from "../../actions/authActions";
+import { useState, useRef } from "react";
+import Alert from "../Alert/Alert";
+import { validatePassword } from "../../validators/validatePassword";
+import { useTranslation } from "react-i18next";
 
-function RegisterForm() {
+function RegisterForm({ onClose, signUp }) {
+  const { t } = useTranslation();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const onCloseAlert = () => setIsOpen(false);
+  const cancelRef = useRef();
+  const [formValues, setFormValues] = useState({});
+
   const initialDataRegister = {
     nameFirst: "",
     nameLast: "",
@@ -13,22 +25,33 @@ function RegisterForm() {
     repeatPassword: "",
   };
   const inputColors = { color: "gray.700", borderColor: "gray.100" };
-  const handleSubmit = (values) => {};
+
+  const handleSubmit = (values) => {
+    const { repeatPassword, ...payload } = values;
+    setFormValues(payload);
+    setIsOpen(true);
+  };
+
+  const register = () => {
+    console.log(formValues);
+    onCloseAlert();
+    onClose();
+    // signUp(formValues);
+  };
 
   return (
     <Box p="20px">
       <Formik
         initialValues={initialDataRegister}
-        onSubmit={() => {
-          handleSubmit();
+        onSubmit={(values) => {
+          handleSubmit(values);
         }}
       >
         {({
           handleSubmit,
-          isSubmitting,
           initialValues: {
             nameFirst,
-            nameSecond,
+            nameLast,
             login,
             password,
             repeatPassword,
@@ -37,64 +60,77 @@ function RegisterForm() {
           <Form onSubmit={handleSubmit}>
             <Grid placeItems="center" templateRows="auto" gap="15px">
               <Text color="gray.900" fontWeight="bold" fontSize="110%">
-                {staticPl.userData}
+                {t("userData")}
               </Text>
               <Divider borderColor="mediumslateblue" border="1px"></Divider>
 
               <InputComponent
-                name={staticPl.firstName}
+                name={t("firstName")}
                 id="nameFirst"
                 type="text"
                 value={nameFirst}
                 {...inputColors}
               />
               <InputComponent
-                name={staticPl.secondName}
+                name={t("secondName")}
                 type="text"
-                id="nameSecond"
-                value={nameSecond}
+                id="nameLast"
+                value={nameLast}
                 {...inputColors}
               />
               <Text color="gray.900" fontWeight="bold" fontSize="110%">
-                {staticPl.registrationData}
+                {t("registrationData")}
               </Text>
               <Divider borderColor="mediumslateblue" border="1px"></Divider>
               <InputComponent
-                name={staticPl.login}
+                name={t("login")}
                 id="login"
                 type="text"
                 value={login}
                 {...inputColors}
               />
               <InputComponent
-                name={staticPl.password}
+                name={t("password")}
                 id="password"
                 type="password"
                 value={password}
+                validate={(value) => validatePassword(value, t("required"))}
                 {...inputColors}
               />
               <InputComponent
-                name={staticPl.repeatPassword}
+                name={t("repeatPassword")}
                 id="repeatPassword"
-                type="password"
+                type="repeatPassword"
                 value={repeatPassword}
                 {...inputColors}
               />
-              <Button
-                isLoading={isSubmitting}
-                type="submit"
-                mb="10px"
-                mt="30px"
-                {...purpleButtonStyle}
-              >
-                {staticPl.register}
+              <Button type="submit" mb="10px" mt="30px" {...purpleButtonStyle}>
+                {t("register")}
               </Button>
             </Grid>
           </Form>
         )}
       </Formik>
+
+      <Alert
+        isOpen={isOpen}
+        onCloseAlert={onCloseAlert}
+        register={register}
+        cancelRef={cancelRef}
+        header={t("createAccount")}
+        body={t("alertRegistrationBody")}
+      />
     </Box>
   );
 }
 
-export default RegisterForm;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signUp: (payload) => dispatch(signUp(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);

@@ -11,5 +11,9 @@
     "registrationData": "Registration data",
     "userData": "User date",
     "NoAccess": "No Access!",
-    "SearchNavBar": "Search ..."
+    "SearchNavBar": "Search ...",
+    "alertRegistrationBody": "Do you confirm the presence of the account ?",
+    "accept":"Accept",
+    "cancel": "Cancel",
+    "required":"*Required"
   }
