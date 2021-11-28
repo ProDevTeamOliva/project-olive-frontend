@@ -1,13 +1,25 @@
 import { Input } from "@chakra-ui/react";
-import { FormControl, FormLabel } from "@chakra-ui/form-control";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+} from "@chakra-ui/form-control";
 import { Field } from "formik";
 
-function InputComponent({ name, id, value, type, color, borderColor }) {
+function InputComponent({
+  name,
+  id,
+  value,
+  type,
+  color,
+  borderColor,
+  validate,
+}) {
   return (
     <>
-      <Field name={id} value={value}>
-        {({ field }) => (
-          <FormControl>
+      <Field name={id} value={value} validate={validate}>
+        {({ field, form }) => (
+          <FormControl isInvalid={form.errors[id] && form.touched[id]}>
             <FormLabel
               htmlFor="login"
               mb="5%"
@@ -31,6 +43,7 @@ function InputComponent({ name, id, value, type, color, borderColor }) {
               borderRadius="1.25em"
               shadow="0px 0px 4px 0px #171923"
             />
+            <FormErrorMessage color="red">{form.errors[id]}</FormErrorMessage>
           </FormControl>
         )}
       </Field>

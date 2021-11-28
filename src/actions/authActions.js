@@ -8,37 +8,31 @@ import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
 } from "../types/registerTypes";
-import { createAction } from "redux-api-middleware";
+import { RSAA } from "redux-api-middleware";
+import { baseUrl } from "../config/baseUrl";
 
-export const signUp = (data) => (dispatch) => {
-  const dataJson = JSON.stringify(data);
-  console.log(dataJson);
-  return dispatch(
-    createAction({
-      endpoint: "http://localhost:5000/users/register",
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      types: [REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE],
-      body: dataJson,
-    })
-  );
-};
-export const logIn = (data) => (dispatch) => {
-  const dataJson = JSON.stringify(data);
-  console.log("data JSON: ", dataJson);
-  return dispatch(
-    createAction({
-      endpoint: "http://localhost:5000/users/login",
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE],
-      body: dataJson,
-    })
-  );
-};
+export const signUp = (payload) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/users/register`,
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE],
+  },
+});
+
+export const logIn = (payload) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/users/login`,
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE],
+  },
+});
