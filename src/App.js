@@ -4,7 +4,6 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { logIn, signUp } from "./actions/authActions.js";
 import AuthRoute from "./components/Auth/AuthRoute";
 import LogInPage from "./components/LogInPage/LogInPage";
 import MainPage from "./components/MainPage/MainPage";
@@ -14,6 +13,7 @@ import i18next from "i18next";
 import { initReactI18next, useTranslation } from "react-i18next";
 import Backend from "i18next-http-backend";
 import languages from "./config/languages";
+import Cookies from "js-cookie";
 
 const language = languages.find(
   (value) => value === localStorage.getItem("language")
@@ -39,7 +39,8 @@ i18next
     },
   });
 
-function App({ auth, logIn, signUp }) {
+function App({ auth }) {
+  console.log(Cookies.get());
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
@@ -48,10 +49,6 @@ function App({ auth, logIn, signUp }) {
   };
 
   const isAuth = auth.isAuth;
-
-  const loginSubmit = (data) => {
-    logIn(data);
-  };
 
   return (
     <div className="App" style={{ height: "100%" }}>
@@ -71,10 +68,7 @@ function App({ auth, logIn, signUp }) {
           <Route path="/noPermission" component={NoPermission}></Route>
           {isAuth ? <Redirect to="/user" /> : null}
         </Switch>
-        <Route
-          path="/login"
-          component={() => <LogInPage loginSubmit={loginSubmit} />}
-        />
+        <Route path="/login" component={() => <LogInPage />} />
       </Router>
     </div>
   );
@@ -84,9 +78,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  signUp: (data) => dispatch(signUp(data)),
-  logIn: (data) => dispatch(logIn(data)),
-});
+const mapDispatchToProps = () => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -4,13 +4,17 @@ import InputComponent from "../Inputs/InputComponent";
 import RegisterModal from "../RegisterForm/RegisterModal";
 import { blueButtonStyle } from "../../styles/Buttons/blueButton";
 import { useTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { logIn } from "../../actions/authActions";
 
-function LogInForm({ loginSubmit }) {
+function LogInForm({ logIn }) {
   const initialDataLogin = { login: "", password: "" };
   const { t } = useTranslation();
+
   const handleSubmit = (values) => {
-    loginSubmit(values);
+    logIn(values);
   };
+
   const inputColors = { color: "gray.800", borderColor: "gray.600" };
   return (
     <Box
@@ -33,11 +37,12 @@ function LogInForm({ loginSubmit }) {
       >
         {t("logging")}
       </Text>
+
       <Divider borderColor="mediumslateblue" mb="20px" borderWidth="1px" />
       <Formik
         initialValues={initialDataLogin}
-        onSubmit={() => {
-          handleSubmit();
+        onSubmit={(values) => {
+          handleSubmit(values);
         }}
       >
         {({
@@ -83,4 +88,12 @@ function LogInForm({ loginSubmit }) {
   );
 }
 
-export default LogInForm;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  logIn: (data) => dispatch(logIn(data)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);

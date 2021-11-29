@@ -8,10 +8,10 @@ import { useState, useRef } from "react";
 import Alert from "../Alert/Alert";
 import { validatePassword } from "../../validators/validatePassword";
 import { useTranslation } from "react-i18next";
+import { store } from "../..";
 
-function RegisterForm({ onClose, signUp }) {
+function RegisterForm({ onOpen, signUp }) {
   const { t } = useTranslation();
-
   const [isOpen, setIsOpen] = useState(false);
   const onCloseAlert = () => setIsOpen(false);
   const cancelRef = useRef();
@@ -34,13 +34,21 @@ function RegisterForm({ onClose, signUp }) {
 
   const register = () => {
     console.log(formValues);
-    onCloseAlert();
-    onClose();
-    // signUp(formValues);
+    signUp(formValues);
+    // onCloseAlert();
   };
 
   return (
     <Box p="20px">
+      <Text
+        color="gray.700"
+        fontSize="150%"
+        mb="10px"
+        fontWeight="bold"
+        align="center"
+      >
+        {store.getState().auth.msg}
+      </Text>
       <Formik
         initialValues={initialDataRegister}
         onSubmit={(values) => {

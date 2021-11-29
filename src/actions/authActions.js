@@ -13,7 +13,7 @@ import { baseUrl } from "../config/baseUrl";
 
 export const signUp = (payload) => ({
   [RSAA]: {
-    endpoint: `${baseUrl}/users/register`,
+    endpoint: `${baseUrl}/register`,
     method: "POST",
     body: JSON.stringify(payload),
     headers: {
@@ -26,7 +26,7 @@ export const signUp = (payload) => ({
 
 export const logIn = (payload) => ({
   [RSAA]: {
-    endpoint: `${baseUrl}/users/login`,
+    endpoint: `${baseUrl}/login`,
     method: "POST",
     body: JSON.stringify(payload),
     headers: {

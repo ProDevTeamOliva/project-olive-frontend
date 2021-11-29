@@ -1,10 +1,15 @@
 import { Box, Grid, Image } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
+import axios from "axios";
+import { baseUrl } from "../../config/baseUrl";
 
 function MainPage() {
+  const logout = async () =>
+    await axios.post(`${baseUrl}/logout`, { withCredentials: true });
   return (
     <Box h="100vh" mt="75px" d="grid" justifyContent="center">
       <Navbar />
+      <button onClick={logout}>logout</button>
       <Grid templateColumns="minmax(200px, 500px)" gap={5} m="25px">
         <Image
           w="100%"

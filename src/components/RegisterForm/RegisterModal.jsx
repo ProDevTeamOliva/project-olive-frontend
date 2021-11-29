@@ -44,7 +44,7 @@ function RegisterModal() {
           />
 
           <ModalBody>
-            <RegisterForm onClose={onClose}></RegisterForm>
+            <RegisterForm onOpen={onOpen}></RegisterForm>
           </ModalBody>
         </ModalContent>
       </Modal>
