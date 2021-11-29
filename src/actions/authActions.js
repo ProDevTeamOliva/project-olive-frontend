@@ -29,6 +29,7 @@ export const logIn = (payload) => ({
     endpoint: `${baseUrl}/login`,
     method: "POST",
     body: JSON.stringify(payload),
+    credentials: 'include',
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

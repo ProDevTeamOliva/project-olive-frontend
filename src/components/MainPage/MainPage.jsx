@@ -5,7 +5,7 @@ import { baseUrl } from "../../config/baseUrl";
 
 function MainPage() {
   const logout = async () =>
-    await axios.post(`${baseUrl}/logout`, { withCredentials: true });
+    await axios.post(`${baseUrl}/logout`, {}, { withCredentials: true, credentials: "include" });
   return (
     <Box h="100vh" mt="75px" d="grid" justifyContent="center">
       <Navbar />
