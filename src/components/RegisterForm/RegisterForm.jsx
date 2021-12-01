@@ -9,9 +9,8 @@ import Alert from "../Alert/Alert";
 import { validatePassword } from "../../validators/validatePassword";
 import { useTranslation } from "react-i18next";
 
-function RegisterForm({ onClose, signUp }) {
+function RegisterForm({ status, signUp, message }) {
   const { t } = useTranslation();
-
   const [isOpen, setIsOpen] = useState(false);
   const onCloseAlert = () => setIsOpen(false);
   const cancelRef = useRef();
@@ -28,25 +27,27 @@ function RegisterForm({ onClose, signUp }) {
 
   const handleSubmit = (values) => {
     const { repeatPassword, ...payload } = values;
-    setFormValues(payload);
     setIsOpen(true);
+    return setFormValues(payload);
   };
 
   const register = () => {
-    console.log(formValues);
     onCloseAlert();
-    onClose();
-    // signUp(formValues);
+    return signUp(formValues);
   };
 
   return (
     <Box p="20px">
-      <Formik
-        initialValues={initialDataRegister}
-        onSubmit={(values) => {
-          handleSubmit(values);
-        }}
+      <Text
+        color={status.startsWith("4") ? "red" : "green"}
+        fontSize="110%"
+        mb="10px"
+        fontWeight="bold"
+        align="center"
       >
+        {message}
+      </Text>
+      <Formik initialValues={initialDataRegister} onSubmit={handleSubmit}>
         {({
           handleSubmit,
           initialValues: {
@@ -100,7 +101,7 @@ function RegisterForm({ onClose, signUp }) {
               <InputComponent
                 name={t("repeatPassword")}
                 id="repeatPassword"
-                type="repeatPassword"
+                type="password"
                 value={repeatPassword}
                 {...inputColors}
               />
@@ -125,7 +126,8 @@ function RegisterForm({ onClose, signUp }) {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  message: state.register.message,
+  status: state.register.status.toString(),
 });
 const mapDispatchToProps = (dispatch) => {
   return {
