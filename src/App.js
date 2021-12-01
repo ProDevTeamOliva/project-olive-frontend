@@ -13,7 +13,6 @@ import i18next from "i18next";
 import { initReactI18next, useTranslation } from "react-i18next";
 import Backend from "i18next-http-backend";
 import languages from "./config/languages";
-import Cookies from "js-cookie";
 
 const language = languages.find(
   (value) => value === localStorage.getItem("language")
@@ -39,16 +38,13 @@ i18next
     },
   });
 
-function App({ auth }) {
-  console.log(Cookies.get());
+function App({ isAuth }) {
   const { i18n } = useTranslation();
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     localStorage.setItem("language", lng);
   };
-
-  const isAuth = auth.isAuth;
 
   return (
     <div className="App" style={{ height: "100%" }}>
@@ -75,7 +71,7 @@ function App({ auth }) {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  isAuth: state.logIn.isAuth,
 });
 
 const mapDispatchToProps = () => ({});

@@ -13,13 +13,23 @@ import {
 import RegisterForm from "./RegisterForm";
 import { purpleButtonStyle } from "../../styles/Buttons/purpleButton";
 import { useTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import {
+  restartLogInMessage,
+  restartRegisterMessage,
+} from "../../actions/authActions";
 
-function RegisterModal() {
+function RegisterModal({ restartLogInMessage, restartRegisterMessage }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
+  const openModal = () => {
+    onOpen();
+    restartLogInMessage();
+    restartRegisterMessage();
+  };
   return (
     <>
-      <Button onClick={onOpen} {...purpleButtonStyle}>
+      <Button onClick={openModal} {...purpleButtonStyle}>
         {t("register")}
       </Button>
 
@@ -44,7 +54,7 @@ function RegisterModal() {
           />
 
           <ModalBody>
-            <RegisterForm onOpen={onOpen}></RegisterForm>
+            <RegisterForm></RegisterForm>
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -52,4 +62,13 @@ function RegisterModal() {
   );
 }
 
-export default RegisterModal;
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    restartLogInMessage: () => dispatch(restartLogInMessage()),
+    restartRegisterMessage: () => dispatch(restartRegisterMessage()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterModal);

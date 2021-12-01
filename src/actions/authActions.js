@@ -2,10 +2,12 @@ import {
   LOGIN_REQUEST,
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
+  LOGIN_RESTART,
 } from "../types/loginTypes";
 import {
   REGISTER_FAILURE,
   REGISTER_REQUEST,
+  REGISTER_RESTART,
   REGISTER_SUCCESS,
 } from "../types/registerTypes";
 import { RSAA } from "redux-api-middleware";
@@ -29,11 +31,19 @@ export const logIn = (payload) => ({
     endpoint: `${baseUrl}/login`,
     method: "POST",
     body: JSON.stringify(payload),
-    credentials: 'include',
+    credentials: "include",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
     types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE],
   },
+});
+
+export const restartLogInMessage = () => ({
+  type: LOGIN_RESTART,
+});
+
+export const restartRegisterMessage = () => ({
+  type: REGISTER_RESTART,
 });

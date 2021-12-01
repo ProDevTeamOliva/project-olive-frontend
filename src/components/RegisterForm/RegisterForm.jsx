@@ -8,9 +8,8 @@ import { useState, useRef } from "react";
 import Alert from "../Alert/Alert";
 import { validatePassword } from "../../validators/validatePassword";
 import { useTranslation } from "react-i18next";
-import { store } from "../..";
 
-function RegisterForm({ onOpen, signUp }) {
+function RegisterForm({ status, signUp, message }) {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const onCloseAlert = () => setIsOpen(false);
@@ -28,33 +27,27 @@ function RegisterForm({ onOpen, signUp }) {
 
   const handleSubmit = (values) => {
     const { repeatPassword, ...payload } = values;
-    setFormValues(payload);
     setIsOpen(true);
+    return setFormValues(payload);
   };
 
   const register = () => {
-    console.log(formValues);
-    signUp(formValues);
-    // onCloseAlert();
+    onCloseAlert();
+    return signUp(formValues);
   };
 
   return (
     <Box p="20px">
       <Text
-        color="gray.700"
-        fontSize="150%"
+        color={status.startsWith("4") ? "red" : "green"}
+        fontSize="110%"
         mb="10px"
         fontWeight="bold"
         align="center"
       >
-        {store.getState().auth.msg}
+        {message}
       </Text>
-      <Formik
-        initialValues={initialDataRegister}
-        onSubmit={(values) => {
-          handleSubmit(values);
-        }}
-      >
+      <Formik initialValues={initialDataRegister} onSubmit={handleSubmit}>
         {({
           handleSubmit,
           initialValues: {
@@ -108,7 +101,7 @@ function RegisterForm({ onOpen, signUp }) {
               <InputComponent
                 name={t("repeatPassword")}
                 id="repeatPassword"
-                type="repeatPassword"
+                type="password"
                 value={repeatPassword}
                 {...inputColors}
               />
@@ -133,7 +126,8 @@ function RegisterForm({ onOpen, signUp }) {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  message: state.register.message,
+  status: state.register.status.toString(),
 });
 const mapDispatchToProps = (dispatch) => {
   return {
