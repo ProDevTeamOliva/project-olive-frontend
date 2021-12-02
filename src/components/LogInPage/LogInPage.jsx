@@ -1,8 +1,9 @@
 import { Grid } from "@chakra-ui/react";
+import { Redirect } from "react-router";
 import LogInForm from "../LogInForm/LogInForm";
 import Logo from "../Logo/Logo";
 
-function LogInPage({ loginSubmit }) {
+function LogInPage({ isAuth, loginSubmit }) {
   return (
     <Grid placeItems="center" h="100%">
       <Grid
@@ -14,6 +15,11 @@ function LogInPage({ loginSubmit }) {
         <Logo fontSize="26" scaleWidth={9.4} />
         <LogInForm loginSubmit={loginSubmit} />
       </Grid>
+      {isAuth !== true ? (
+        <Redirect to="/login"></Redirect>
+      ) : (
+        <Redirect to="/user"></Redirect>
+      )}
     </Grid>
   );
 }

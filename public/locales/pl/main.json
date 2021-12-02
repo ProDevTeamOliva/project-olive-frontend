@@ -15,5 +15,17 @@
     "alertRegistrationBody": "Czy potwierdzasz utworzenie konta ?",
     "accept":"Akceptuj",
     "cancel": "Anuluj",
-    "required":"*Wymagane"
+    "required":"*Wymagane",
+    "apiRegisterSuccess":"Rejstracja przebiegła pomyślnie",
+    "apiServerError":"Bład serwera",
+    "apiUserExistsError":"Użytkownik już istnieje w naszej bazie",
+    "apiMissingUsernameError":"Login jest wymagany",
+    "apiMissingPasswordError":"Hasło jest wymagane",
+    "apiUnknownError": "Nieznany błąd",
+    "apiLoginSuccess": "Zalogowano",
+    "apiMissingCredentialsError":"Brak danych uwierzytelniających",
+    "apiUnauthorizedError":"Nieautoryzowany",
+    "apiLogoutSuccess":"Poprawnie wylogowano",
+    "apiIncorrectCredentialsError": "Nieprawidłowe dane uwierzytelniające",
+    "logout":"Wyloguj się"
   }

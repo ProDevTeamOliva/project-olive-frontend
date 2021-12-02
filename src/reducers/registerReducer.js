@@ -10,11 +10,9 @@ const init_state = {
 const registerReducer = (state = init_state, action) => {
   switch (action.type) {
     case REGISTER_SUCCESS:
-      // Zmieni się jak backend zmieni
       return {
-        // message: action.payload.message,
-        // status: "",
-        ...state,
+        message: action.payload.message,
+        status: "201",
       };
     case REGISTER_FAILURE:
       return {
