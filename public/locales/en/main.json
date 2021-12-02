@@ -15,5 +15,17 @@
     "alertRegistrationBody": "Do you confirm the presence of the account ?",
     "accept":"Accept",
     "cancel": "Cancel",
-    "required":"*Required"
+    "required":"*Required",
+    "apiRegisterSuccess":"Register success",
+    "apiServerError":"Server error",
+    "apiUserExistsError":"User already exists",
+    "apiMissingUsernameError":"Missing login",
+    "apiMissingPasswordError":"Missing password",
+    "apiUnknownError": "Unknown error",
+    "apiLoginSuccess": "Login success",
+    "apiMissingCredentialsError":"Missing credentials",
+    "apiUnauthorizedError":"Unauthorized",
+    "apiLogoutSuccess":"Logout success",
+    "apiIncorrectCredentialsError": "Incorrect credentials",
+    "logout":"Log out"
   }

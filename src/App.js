@@ -45,7 +45,6 @@ function App({ isAuth }) {
     i18n.changeLanguage(lng);
     localStorage.setItem("language", lng);
   };
-
   return (
     <div className="App" style={{ height: "100%" }}>
       <button onClick={() => changeLanguage("pl")}>PL</button>
@@ -64,7 +63,7 @@ function App({ isAuth }) {
           <Route path="/noPermission" component={NoPermission}></Route>
           {isAuth ? <Redirect to="/user" /> : null}
         </Switch>
-        <Route path="/login" component={() => <LogInPage />} />
+        <Route path="/login" component={() => <LogInPage isAuth={isAuth} />} />
       </Router>
     </div>
   );

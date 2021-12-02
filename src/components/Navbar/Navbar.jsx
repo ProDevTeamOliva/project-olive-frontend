@@ -1,9 +1,18 @@
-import { Box, Grid, Image } from "@chakra-ui/react";
+import { Box, Grid, Image, Button } from "@chakra-ui/react";
 import LogoUp from "../Logo/LogoUp";
 import Search from "../Search/Search";
 import Account from "../../img/account_white.png";
+import { connect } from "react-redux";
+import { logout, restartRegisterMessage } from "../../actions/authActions";
+import { useTranslation } from "react-i18next";
 
-const Navbar = () => {
+const Navbar = ({ logout, restartRegisterMessage }) => {
+  const { t } = useTranslation();
+  const logOut = () => {
+    localStorage.removeItem("token");
+    restartRegisterMessage();
+    return logout();
+  };
   return (
     <Box
       pos="fixed"
@@ -25,6 +34,8 @@ const Navbar = () => {
         <LogoUp fontSize="15.2" scaleWidth={9.4} />
         <Search />
         <Grid templateColumns="repeat(3, 50px)" gridColumn="3/4">
+          {/* To tylko na czas testów */}
+          <Button onClick={logOut}>{t("logout")}</Button>
           <Image
             src={Account}
             alt="Account"
@@ -38,4 +49,13 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+const mapStateToProps = () => ({});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(logout()),
+    restartRegisterMessage: () => dispatch(restartRegisterMessage()),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

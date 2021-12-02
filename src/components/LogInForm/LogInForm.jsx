@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { logIn } from "../../actions/authActions";
 
-function LogInForm({ logIn, message }) {
+function LogInForm({ logIn, message, status }) {
   const initialDataLogin = { login: "", password: "" };
   const { t } = useTranslation();
 
@@ -40,13 +40,13 @@ function LogInForm({ logIn, message }) {
 
       <Divider borderColor="mediumslateblue" mb="20px" borderWidth="1px" />
       <Text
-        color="red"
+        color={status.startsWith("2") ? "green" : "red"}
         fontSize="100%"
         mb="10px"
         fontWeight="bold"
         align="center"
       >
-        {message}
+        {t(message)}
       </Text>
       <Formik initialValues={initialDataLogin} onSubmit={handleSubmit}>
         {({
@@ -94,6 +94,7 @@ function LogInForm({ logIn, message }) {
 
 const mapStateToProps = (state) => ({
   message: state.logIn.message,
+  status: state.logIn.status.toString(),
 });
 
 const mapDispatchToProps = (dispatch) => ({

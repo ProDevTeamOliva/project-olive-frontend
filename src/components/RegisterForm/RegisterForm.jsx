@@ -39,13 +39,13 @@ function RegisterForm({ status, signUp, message }) {
   return (
     <Box p="20px">
       <Text
-        color={status.startsWith("4") ? "red" : "green"}
+        color={status.startsWith("2") ? "green" : "red"}
         fontSize="110%"
         mb="10px"
         fontWeight="bold"
-        align="center"
+        align="left"
       >
-        {message}
+        {t(message)}
       </Text>
       <Formik initialValues={initialDataRegister} onSubmit={handleSubmit}>
         {({

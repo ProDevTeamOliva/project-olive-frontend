@@ -3,6 +3,9 @@ import {
   LOGIN_FAILURE,
   LOGIN_SUCCESS,
   LOGIN_RESTART,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILURE,
 } from "../types/loginTypes";
 import {
   REGISTER_FAILURE,
@@ -37,6 +40,19 @@ export const logIn = (payload) => ({
       "Content-Type": "application/json",
     },
     types: [LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE],
+  },
+});
+
+export const logout = () => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/logout`,
+    method: "POST",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE],
   },
 });
 
