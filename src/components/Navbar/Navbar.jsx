@@ -25,25 +25,32 @@ const Navbar = ({ logout, restartRegisterMessage }) => {
       backdropFilter="blur(50px)"
       className="blur"
     >
-      <Grid
-        templateColumns="170px 1fr 170px"
-        h="100%"
-        w="100%"
-        placeItems="center"
-      >
-        <LogoUp fontSize="15.2" scaleWidth={9.4} />
+      <Grid templateColumns="150px 1fr 75px 75px" placeItems="center">
+        <LogoUp fontSize="14" scaleWidth={9.2} />
         <Search />
-        <Grid templateColumns="repeat(3, 50px)" gridColumn="3/4">
-          {/* To tylko na czas testów */}
-          <Button onClick={logOut}>{t("logout")}</Button>
-          <Image
-            src={Account}
-            alt="Account"
-            h="50px"
-            cursor="pointer"
-            gridColumn="3/4"
-          />
-        </Grid>
+        <Box pos="relative" d="inline-block" gridColumn="4/5" role="group">
+          <Image src={Account} alt="Account" p="12.5px" cursor="pointer" />
+          <Box
+            d="none"
+            pos="absolute"
+            bgColor="#283141"
+            minW="150px"
+            right="0"
+            _groupHover={{
+              display: "grid",
+              gridAutoRows: "50px",
+              placeItems: "center",
+              padding: "0 12.5px 7.5px 12.5px",
+            }}
+          >
+            <Button w="125px">{t("myAccount")}</Button>
+            <Button w="125px">{t("friends")}</Button>
+            <Button w="125px">{t("groups")}</Button>
+            <Button w="125px" onClick={logOut}>
+              {t("logout")}
+            </Button>
+          </Box>
+        </Box>
       </Grid>
     </Box>
   );
