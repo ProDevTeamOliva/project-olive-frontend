@@ -30,5 +30,9 @@
   "logout": "Wyloguj się",
   "myAccount": "Moje konto",
   "friends": "Znajomi",
-  "groups": "Grupy"
+  "groups": "Grupy",
+  "writeCommentPlaceHolder": "Jaki jest twój komentarz ?",
+  "postBottomCommentBoxTitle": "Komentarze:",
+  "likes": "Polubienia:",
+  "iLikeIt": "Lubię to !"
 }

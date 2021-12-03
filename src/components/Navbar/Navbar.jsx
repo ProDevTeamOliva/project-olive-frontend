@@ -27,7 +27,7 @@ const Navbar = ({ logout, restartRegisterMessage }) => {
     >
       <Grid templateColumns="150px 1fr 75px 75px" placeItems="center">
         <LogoUp fontSize="14" scaleWidth={9.2} />
-        <Search />
+        <Search placeholder={t('SearchNavBar')}/>
         <Box pos="relative" d="inline-block" gridColumn="4/5" role="group">
           <Image src={Account} alt="Account" p="12.5px" cursor="pointer" />
           <Box
