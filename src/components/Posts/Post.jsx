@@ -23,7 +23,7 @@ const Post = ({post}) => {
       nameFirst: 'Wiktor',
       nameLast: 'Morawski',
       postType: 'Public',
-      content: 'Cześć, właśnie robię stronę w REACT-cie 🤪',
+      content: 'Cześć, właśnie robię stronę w REACT-cie 🤪 bsugbrdugbdugdrhjbrkuhkgrbudgveurygvrubg ubudrb ugb dubg udrgb dubr gubrj db g jdbryg dybrgjy dbrjg bvudrbgudbrgudrbgudbrygjdgousergyfuosguydgdgrdgdrgdrgdgdrgdfgbdfjhgbdfukgbdfgbdubgriygbdigybrdigbdigbdrigbdigrbdrigbdigrbidbgidbgid',
       likes: 12,
     }
     const [hiddenContent, setHiddenContent] = useState(true)
@@ -34,7 +34,9 @@ const Post = ({post}) => {
       <Box borderWidth='1px' borderRadius='lg' overflow='hidden' bgColor="rgba(0, 0, 0, 0.1)"
       backdropFilter="blur(50px)"
       className="blur"
-      bgColor="rgba(255, 255, 255, 0.2)">
+      bgColor="rgba(255, 255, 255, 0.2)"
+      maxW='xl'
+      >
   
         <Box p='6'>
           <Box display='flex' alignItems='baseline' justifyContent='space-between' alignItems='center'>
@@ -77,7 +79,9 @@ const Post = ({post}) => {
             </Box>
           </Box>
         </Box>
-        <Image src={property.imageUrl} alt={property.imageAlt} />
+        <Box>
+          <Image display='block' marginLeft='auto' marginRight='auto' src={property.imageUrl} alt={property.imageAlt} />
+        </Box>
         <Box display="flex" flexWrap='wrap' justifyContent="space-between">
             <Box padding='2'>
                 {t('likes')} {property.likes}
