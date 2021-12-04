@@ -30,5 +30,9 @@
   "logout": "Log out",
   "myAccount": "My account",
   "friends": "Friends",
-  "groups": "Groups"
+  "groups": "Groups",
+  "writeCommentPlaceHolder": "What's your comment ?",
+  "postBottomCommentBoxTitle": "Comments:",
+  "likes": "Likes:",
+  "iLikeIt": "I Like it !"
 }

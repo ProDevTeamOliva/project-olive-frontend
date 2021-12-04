@@ -1,11 +1,10 @@
 import { Input } from "@chakra-ui/input";
-import {useTranslation} from 'react-i18next'
-const Search = () => {
-  const { t } = useTranslation()
+
+const Search = ({placeholder}) => {
   return (
     <Input
       variant="unstyled"
-      placeholder={t('SearchNavBar')}
+      placeholder={placeholder}
       w={["50%", "80%", "50%", "40%", "30%"]}
       bgColor="rgba(255, 255, 255, 0.2)"
       border="none"
