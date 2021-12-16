@@ -10,7 +10,7 @@
   "secondName": "Second name",
   "registrationData": "Registration data",
   "userData": "User date",
-  "NoAccess": "No Access!",
+  "noAccess": "Page Not Found",
   "SearchNavBar": "Search ...",
   "alertRegistrationBody": "Do you confirm the presence of the account ?",
   "accept": "Accept",
@@ -34,5 +34,6 @@
   "writeCommentPlaceHolder": "What's your comment ?",
   "postBottomCommentBoxTitle": "Comments:",
   "likes": "Likes:",
-  "iLikeIt": "I Like it !"
+  "iLikeIt": "I Like it !",
+  "noExistPage":"The page you're looking for does not seem to exist"
 }

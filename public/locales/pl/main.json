@@ -10,7 +10,7 @@
   "secondName": "Nazwisko",
   "registrationData": "Dane rejestracyjne",
   "userData": "Dane użytkownika",
-  "NoAccess": "Brak dostępu!",
+  "noAccess": "Nie znaleziono strony",
   "SearchNavBar": "Szukaj ...",
   "alertRegistrationBody": "Czy potwierdzasz utworzenie konta ?",
   "accept": "Akceptuj",
@@ -34,5 +34,7 @@
   "writeCommentPlaceHolder": "Jaki jest twój komentarz ?",
   "postBottomCommentBoxTitle": "Komentarze:",
   "likes": "Polubienia:",
-  "iLikeIt": "Lubię to !"
+  "iLikeIt": "Lubię to !",
+  "noExistPage":"Strona, której szukasz, nie istnieje"
+
 }
