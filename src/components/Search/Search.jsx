@@ -1,6 +1,6 @@
 import { Input } from "@chakra-ui/input";
 
-const Search = ({placeholder}) => {
+const Search = ({ placeholder }) => {
   return (
     <Input
       variant="unstyled"

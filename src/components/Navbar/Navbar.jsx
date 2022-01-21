@@ -5,8 +5,9 @@ import Account from "../../img/account_white.png";
 import { connect } from "react-redux";
 import { logout, restartRegisterMessage } from "../../actions/authActions";
 import { useTranslation } from "react-i18next";
+import Language from "../Language/Language";
 
-const Navbar = ({ logout, restartRegisterMessage }) => {
+const Navbar = ({ logout, restartRegisterMessage, changeLanguage }) => {
   const { t } = useTranslation();
   const logOut = () => {
     localStorage.removeItem("token");
@@ -27,7 +28,7 @@ const Navbar = ({ logout, restartRegisterMessage }) => {
     >
       <Grid templateColumns="150px 1fr 75px 75px" placeItems="center">
         <LogoUp fontSize="14" scaleWidth={9.2} />
-        <Search placeholder={t('SearchNavBar')}/>
+        <Search placeholder={t("SearchNavBar")} />
         <Box pos="relative" d="inline-block" gridColumn="4/5" role="group">
           <Image src={Account} alt="Account" p="12.5px" cursor="pointer" />
           <Box
@@ -43,6 +44,7 @@ const Navbar = ({ logout, restartRegisterMessage }) => {
               padding: "0 12.5px 7.5px 12.5px",
             }}
           >
+            <Language changeLanguage={changeLanguage} />
             <Button w="125px">{t("myAccount")}</Button>
             <Button w="125px">{t("friends")}</Button>
             <Button w="125px">{t("groups")}</Button>
