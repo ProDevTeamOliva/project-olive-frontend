@@ -11,13 +11,13 @@ function RouteAfterLogin({ changeLanguage }) {
         component={() => <MainPage changeLanguage={changeLanguage}></MainPage>}
       ></Route>
       {/* <Route exact path="/me" component={() => <MainPage></MainPage>}></Route> */}
-      {/* <Route
+      <Route
         exact
         path="/user/:id"
         component={(routerProps) => (
           <MainPage id={routerProps.match.params.id}></MainPage>
         )}
-      ></Route> */}
+      ></Route>
 
       {/* Route gotowe tylko podmienić komponenty */}
 
