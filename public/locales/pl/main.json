@@ -35,13 +35,15 @@
   "postBottomCommentBoxTitle": "Komentarze:",
   "likes": "Polubienia:",
   "iLikeIt": "Lubię to !",
-  "noExistPage":"Strona, której szukasz, nie istnieje",
-  "amoutOfSignMin2":"Wpisz kombinację co najmniej dwóch znaków",
-  "amoutOfSignMax60":"Wpisz kombinację poniżej sześćdziesięciu znaków",
-  "amoutOfSignMax20":"Wpisz kombinację poniżej dwudziestu znaków",
-  "amoutOfSignMin8":"Wpisz kombinację co najmniej ośmiu znaków",
-  "passwordValidation":"Hasło musi zawierać co najmniej jedną cyfrę oraz jedną wielką i małą literę",
-  "passwordRepeatValidation":"Hasło nie jest takie same"
-  
-
+  "noExistPage": "Strona, której szukasz, nie istnieje",
+  "amoutOfSignMin2": "Wpisz kombinację co najmniej dwóch znaków",
+  "amoutOfSignMax60": "Wpisz kombinację poniżej sześćdziesięciu znaków",
+  "amoutOfSignMax20": "Wpisz kombinację poniżej dwudziestu znaków",
+  "amoutOfSignMin8": "Wpisz kombinację co najmniej ośmiu znaków",
+  "passwordValidation": "Hasło musi zawierać co najmniej jedną cyfrę oraz jedną wielką i małą literę",
+  "passwordRepeatValidation": "Hasło nie jest takie same",
+  "addFriend": "Add friend",
+  "removeFriend": "Remove friend",
+  "posts": "Posty",
+  "images": "Zdjęcia"
 }
