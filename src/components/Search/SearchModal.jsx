@@ -7,14 +7,20 @@ import {
   Button,
   useDisclosure,
   Input,
-  Text,
+  Icon,
+  InputRightElement,
+  InputGroup,
+  VStack,
 } from "@chakra-ui/react";
+import { Search2Icon } from "@chakra-ui/icons";
+
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { restartSearchUsers, searchUsers } from "../../actions/searchActions";
 import Search from "./Search";
+import LinkSearch from "./LinkSearch";
 
-function SearchModal({ users, searchUsers, restartSearchUsers }) {
+function SearchModal({ users, searchUsers, restartSearchUsers, id }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
   const openModal = () => {
@@ -24,7 +30,7 @@ function SearchModal({ users, searchUsers, restartSearchUsers }) {
   const getUsers = (event) => {
     const value = event.target.value.toLowerCase();
     if (value !== "") {
-      return searchUsers(value);
+      return searchUsers({ valueSearch: value, id: id });
     }
   };
   return (
@@ -46,32 +52,43 @@ function SearchModal({ users, searchUsers, restartSearchUsers }) {
 
       <Modal onClose={onClose} isOpen={isOpen} size="xl">
         <ModalOverlay />
-        <ModalContent mr="3" ml="3" bg="gray.300">
+        <ModalContent mx="3" bg="gray.100">
           <ModalHeader mx={["10px", "40px"]}>
-            <Input
-              mt="20px"
-              variant="unstyled"
-              placeholder={t("SearchNavBar")}
-              bgColor="mediumslateblue"
-              border="none"
-              borderRadius="10px"
-              p="0 30px"
-              lineHeight="40px"
-              _placeholder={{ color: "white" }}
-              display={["block", "block"]}
-              onChange={getUsers}
-            />
+            <InputGroup>
+              <Input
+                mt="20px"
+                variant="unstyled"
+                placeholder={t("SearchNavBar")}
+                bgColor="mediumslateblue"
+                border="none"
+                borderRadius="10px"
+                p="0 30px"
+                lineHeight="40px"
+                _placeholder={{ color: "white" }}
+                display={["block", "block"]}
+                onChange={getUsers}
+              />
+              <InputRightElement>
+                <Icon as={Search2Icon} w="5" h="5" mt="10" />
+              </InputRightElement>
+            </InputGroup>
           </ModalHeader>
 
-          <ModalBody>
-            {users.length !== 0 &&
-              users.map((user) => {
-                return (
-                  <Text key={user.id} color="black">
-                    {user.nameFirst}
-                  </Text>
-                );
-              })}
+          <ModalBody mb="20" mt="5">
+            <VStack>
+              {users.length !== 0 &&
+                users.map(({ id, nameFirst, nameLast, avatar }) => {
+                  return (
+                    <LinkSearch
+                      key={id}
+                      id={id}
+                      nameFirst={nameFirst}
+                      nameLast={nameLast}
+                      avatar={"http://localhost:5000" + avatar}
+                    />
+                  );
+                })}
+            </VStack>
           </ModalBody>
         </ModalContent>
       </Modal>
@@ -81,6 +98,7 @@ function SearchModal({ users, searchUsers, restartSearchUsers }) {
 
 const mapStateToProps = (state) => ({
   users: state.searchUsers.users,
+  id: state.me.me.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({

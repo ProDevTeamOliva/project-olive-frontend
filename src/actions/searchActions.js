@@ -7,9 +7,9 @@ import {
   SEARCH_SUCCESS,
 } from "../types/searchTypes";
 
-export const searchUsers = (payload) => ({
+export const searchUsers = ({ valueSearch, id }) => ({
   [RSAA]: {
-    endpoint: `${baseUrl}/user/search/${payload}`,
+    endpoint: `${baseUrl}/user/${id}/search/${valueSearch}`,
     method: "GET",
     credentials: "include",
     headers: {
