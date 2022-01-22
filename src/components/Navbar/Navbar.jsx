@@ -1,19 +1,25 @@
 import { Box, Grid, Image, Button } from "@chakra-ui/react";
 import LogoUp from "../Logo/LogoUp";
-import Search from "../Search/Search";
+import SearchModal from "../Search/SearchModal";
 import Account from "../../img/account_white.png";
 import { connect } from "react-redux";
 import { logout, restartRegisterMessage } from "../../actions/authActions";
 import { useTranslation } from "react-i18next";
 import Language from "../Language/Language";
+import { getMe } from "../../actions/meActions";
+import { useEffect } from "react";
 
-const Navbar = ({ logout, restartRegisterMessage, changeLanguage }) => {
+const Navbar = ({ logout, restartRegisterMessage, changeLanguage, getMe }) => {
   const { t } = useTranslation();
   const logOut = () => {
     localStorage.removeItem("token");
     restartRegisterMessage();
     return logout();
   };
+  useEffect(() => {
+    getMe();
+  }, [getMe]);
+
   return (
     <Box
       pos="fixed"
@@ -28,7 +34,7 @@ const Navbar = ({ logout, restartRegisterMessage, changeLanguage }) => {
     >
       <Grid templateColumns="150px 1fr 75px 75px" placeItems="center">
         <LogoUp fontSize="14" scaleWidth={9.2} />
-        <Search placeholder={t("SearchNavBar")} />
+        <SearchModal></SearchModal>
         <Box pos="relative" d="inline-block" gridColumn="4/5" role="group">
           <Image src={Account} alt="Account" p="12.5px" cursor="pointer" />
           <Box
@@ -64,6 +70,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     logout: () => dispatch(logout()),
     restartRegisterMessage: () => dispatch(restartRegisterMessage()),
+    getMe: () => dispatch(getMe()),
   };
 };
 
