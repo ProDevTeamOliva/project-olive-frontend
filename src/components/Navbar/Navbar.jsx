@@ -7,6 +7,7 @@ import { logout, restartRegisterMessage } from "../../actions/authActions";
 import { useTranslation } from "react-i18next";
 import Language from "../Language/Language";
 import { getMe } from "../../actions/meActions";
+import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 const Navbar = ({ logout, restartRegisterMessage, changeLanguage, getMe }) => {
@@ -51,7 +52,9 @@ const Navbar = ({ logout, restartRegisterMessage, changeLanguage, getMe }) => {
             }}
           >
             <Language changeLanguage={changeLanguage} />
-            <Button w="125px">{t("myAccount")}</Button>
+            <Button w="125px">
+              <Link to="/me">{t("myAccount")}</Link>
+            </Button>
             <Button w="125px">{t("friends")}</Button>
             <Button w="125px">{t("groups")}</Button>
             <Button w="125px" onClick={logOut}>

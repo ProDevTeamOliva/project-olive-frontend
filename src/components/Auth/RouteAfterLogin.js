@@ -1,5 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import MainPage from "../../components/MainPage/MainPage";
+import Me from "../../components/Me/Me";
 import NoPermission from "../MainPage/NoPermission";
 
 function RouteAfterLogin({ changeLanguage }) {
@@ -10,7 +11,7 @@ function RouteAfterLogin({ changeLanguage }) {
         path="/main"
         component={() => <MainPage changeLanguage={changeLanguage}></MainPage>}
       ></Route>
-      {/* <Route exact path="/me" component={() => <MainPage></MainPage>}></Route> */}
+      <Route exact path="/me" component={() => <Me></Me>}></Route>
       <Route
         exact
         path="/user/:id"
@@ -18,8 +19,6 @@ function RouteAfterLogin({ changeLanguage }) {
           <MainPage id={routerProps.match.params.id}></MainPage>
         )}
       ></Route>
-
-      {/* Route gotowe tylko podmienić komponenty */}
 
       <Route path="*" component={() => <NoPermission></NoPermission>}></Route>
     </Switch>

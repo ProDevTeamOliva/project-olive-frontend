@@ -35,13 +35,15 @@
   "postBottomCommentBoxTitle": "Comments:",
   "likes": "Likes:",
   "iLikeIt": "I Like it !",
-  "noExistPage":"The page you're looking for does not seem to exist",
-  "amoutOfSignMin2":"Enter a combination of at least two characters",
-  "amoutOfSignMax60":"Enter a combination of less than sixty characters",
-  "amoutOfSignMax20":"Enter a combination of less than twenty characters",
-  "amoutOfSignMin8":"Enter a combination of at least eight characters",
-  "passwordValidation":"Password must contain at least one number and one uppercase and lowercase letter",
-  "passwordRepeatValidation":"The password is not the same"
-
-
+  "noExistPage": "The page you're looking for does not seem to exist",
+  "amoutOfSignMin2": "Enter a combination of at least two characters",
+  "amoutOfSignMax60": "Enter a combination of less than sixty characters",
+  "amoutOfSignMax20": "Enter a combination of less than twenty characters",
+  "amoutOfSignMin8": "Enter a combination of at least eight characters",
+  "passwordValidation": "Password must contain at least one number and one uppercase and lowercase letter",
+  "passwordRepeatValidation": "The password is not the same",
+  "addFriend": "Add friend",
+  "removeFriend": "Remove friend",
+  "posts": "Posts",
+  "images": "Images"
 }
