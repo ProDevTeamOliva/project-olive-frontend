@@ -4,6 +4,8 @@ import FriendsPostIcon from "../../img/icons/FriendsPostIcon.png";
 import GroupChatPostIcon from "../../img/icons/GroupChatPostIcon.png";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import AddCommentModal from "./AddCommentModal";
+
 const getPostTypeIcon = (postType) => {
   if (postType === "Public") {
     return publicPostIcon;
@@ -18,6 +20,7 @@ const getPostTypeIcon = (postType) => {
 };
 const Post = ({ post }) => {
   const property = {
+    id: 812,
     imageUrl:
       "https://cdn.shibe.online/shibes/54e2950bdc7710f2625867582058f940e51f7117.jpg",
     imageAlt: "piesel",
@@ -37,7 +40,7 @@ const Post = ({ post }) => {
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
-      // bgColor="rgba(0, 0, 0, 0.1)"
+      bgColor="rgba(0, 0, 0, 0.1)"
       backdropFilter="blur(50px)"
       className="blur"
       bgColor="rgba(255, 255, 255, 0.2)"
@@ -46,7 +49,7 @@ const Post = ({ post }) => {
       <Box p="6">
         <Box
           display="flex"
-          // alignItems="baseline"
+          alignItems="baseline"
           justifyContent="space-between"
           alignItems="center"
         >
@@ -115,15 +118,12 @@ const Post = ({ post }) => {
           {t("likes")} {property.likes}
         </Box>
         <Button padding="2">{t("iLikeIt")}</Button>
-        <Box padding="2">{t("postBottomCommentBoxTitle")}</Box>
-        <Box
-          padding="2"
-          borderRadius="full"
-          backgroundColor="gray.500"
-          flexBasis="100%"
-        >
-          {t("writeCommentPlaceHolder")}
-        </Box>
+        {/* Tutaj mozna odkomentowac i zobaczyc modal dodawania komentarza */}
+        {/* <Box padding='2'>
+                {t('postBottomCommentBoxTitle')}
+            </Box>
+            
+            <AddCommentModal idPost={property.id}/> */}
       </Box>
     </Box>
   );
