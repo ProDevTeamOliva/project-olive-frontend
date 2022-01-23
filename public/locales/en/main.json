@@ -46,10 +46,11 @@
   "removeFriend": "Remove friend",
   "posts": "Posts",
   "images": "Images",
-  "notifications":"Notifications",
   "addToFriends":"An invitation to a group of friends from",
   "alertAddFriend": "Do you confirm adding to friends ?",
   "noResults":"No results",
   "isFriend":"We are friends",
-  "sentInvitation":"Invitation sent"
+  "sentInvitation":"Invitation sent",
+  "notifications": "Notifications"
+
 }

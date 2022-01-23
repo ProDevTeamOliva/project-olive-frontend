@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
 import logInReducer from "./logInReducer";
 import meFriendsReducer from "./meFriendsReducer";
+import mePicturesReducer from "./mePicturesReducer";
 import meReducer from "./meReducers";
 import registerReducer from "./registerReducer";
 import searchUsersReducer from "./searchUsersReducer";
@@ -13,5 +14,7 @@ const reducers = combineReducers({
   me: meReducer,
   meFriends: meFriendsReducer,
   user: userReducer,
+  mePictures: mePicturesReducer,
 });
+
 export default reducers;
