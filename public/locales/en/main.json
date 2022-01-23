@@ -48,11 +48,11 @@
   "posts": "Posts",
   "images": "Images",
   "addPost": "Add Post",
-  "writePost": "What's on your mind ..."
-  "addToFriends":"An invitation to a group of friends from",
+  "writePost": "What's on your mind ...",
+  "addToFriends": "An invitation to a group of friends from",
   "alertAddFriend": "Do you confirm adding to friends ?",
-  "noResults":"No results",
-  "isFriend":"We are friends",
-  "sentInvitation":"Invitation sent",
+  "noResults": "No results",
+  "isFriend": "We are friends",
+  "sentInvitation": "Invitation sent",
   "notifications": "Notifications"
 }

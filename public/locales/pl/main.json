@@ -49,10 +49,10 @@
   "images": "Zdjęcia",
   "notifications": "Powiadomienia",
   "addPost": "Dodaj Post",
-  "writePost": "Co chodzi Ci po głowie ...
-  "addToFriends":"Zaproszenie do grona znajomych od",
+  "writePost": "Co chodzi Ci po głowie ...",
+  "addToFriends": "Zaproszenie do grona znajomych od",
   "alertAddFriend": "Czy potwierdzasz dodanie do znajomych ?",
-  "noResults":"Brak rezultatów",
-  "isFriend":"Jesteśmy znajomymi",
-  "sentInvitation":"Wysłano zaproszenie"
+  "noResults": "Brak rezultatów",
+  "isFriend": "Jesteśmy znajomymi",
+  "sentInvitation": "Wysłano zaproszenie"
 }
