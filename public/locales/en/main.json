@@ -35,6 +35,7 @@
   "postBottomCommentBoxTitle": "Comments:",
   "likes": "Likes:",
   "iLikeIt": "I Like it !",
+  "addComment": "Add comment",
   "noExistPage": "The page you're looking for does not seem to exist",
   "amoutOfSignMin2": "Enter a combination of at least two characters",
   "amoutOfSignMax60": "Enter a combination of less than sixty characters",
@@ -46,11 +47,12 @@
   "removeFriend": "Remove friend",
   "posts": "Posts",
   "images": "Images",
+  "addPost": "Add Post",
+  "writePost": "What's on your mind ..."
   "addToFriends":"An invitation to a group of friends from",
   "alertAddFriend": "Do you confirm adding to friends ?",
   "noResults":"No results",
   "isFriend":"We are friends",
   "sentInvitation":"Invitation sent",
   "notifications": "Notifications"
-
 }
