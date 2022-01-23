@@ -35,7 +35,7 @@
   "postBottomCommentBoxTitle": "Komentarze:",
   "likes": "Polubienia:",
   "iLikeIt": "Lubię to !",
-  "addComment": "Dodaj komentarz"
+  "addComment": "Dodaj komentarz",
   "noExistPage": "Strona, której szukasz, nie istnieje",
   "amoutOfSignMin2": "Wpisz kombinację co najmniej dwóch znaków",
   "amoutOfSignMax60": "Wpisz kombinację poniżej sześćdziesięciu znaków",
@@ -47,5 +47,7 @@
   "removeFriend": "Remove friend",
   "posts": "Posty",
   "images": "Zdjęcia",
-  "notifications":"Powiadomienia"
+  "notifications": "Powiadomienia",
+  "addPost": "Dodaj Post",
+  "writePost": "Co chodzi Ci po głowie ..."
 }

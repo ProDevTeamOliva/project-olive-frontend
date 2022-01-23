@@ -11,7 +11,11 @@ function RouteAfterLogin({ changeLanguage }) {
         path="/main"
         component={() => <MainPage changeLanguage={changeLanguage}></MainPage>}
       ></Route>
-      <Route exact path="/me" component={() => <Me></Me>}></Route>
+      <Route
+        exact
+        path="/me"
+        component={() => <Me changeLanguage={changeLanguage}></Me>}
+      ></Route>
       <Route
         exact
         path="/user/:id"
