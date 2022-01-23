@@ -1,4 +1,9 @@
-import { ME_FRIENDS_SUCCESS, ME_FRIENDS_FAILURE } from "../types/meTypes";
+import {
+  ME_FRIENDS_SUCCESS,
+  ME_FRIENDS_FAILURE,
+  ME_ACCEPT_INVITATION_SUCCESS,
+  ME_ACCEPT_INVITATION_FAILURE,
+} from "../types/meTypes";
 const init_state = {
   friends: [],
   pendingSent: [],
@@ -15,6 +20,16 @@ const meFriendsReducer = (state = init_state, action) => {
         message: action.payload.message,
       };
     case ME_FRIENDS_FAILURE:
+      return {
+        ...state,
+        message: action.payload.message,
+      };
+    case ME_ACCEPT_INVITATION_SUCCESS:
+      return {
+        ...state,
+        message: action.payload.message,
+      };
+    case ME_ACCEPT_INVITATION_FAILURE:
       return {
         ...state,
         message: action.payload.message,

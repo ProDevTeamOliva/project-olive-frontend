@@ -43,11 +43,16 @@
   "amoutOfSignMin8": "Wpisz kombinację co najmniej ośmiu znaków",
   "passwordValidation": "Hasło musi zawierać co najmniej jedną cyfrę oraz jedną wielką i małą literę",
   "passwordRepeatValidation": "Hasło nie jest takie same",
-  "addFriend": "Add friend",
-  "removeFriend": "Remove friend",
+  "addFriend": "Dodaj znajomego",
+  "removeFriend": "Usuń znajomego",
   "posts": "Posty",
   "images": "Zdjęcia",
   "notifications": "Powiadomienia",
   "addPost": "Dodaj Post",
-  "writePost": "Co chodzi Ci po głowie ..."
+  "writePost": "Co chodzi Ci po głowie ...
+  "addToFriends":"Zaproszenie do grona znajomych od",
+  "alertAddFriend": "Czy potwierdzasz dodanie do znajomych ?",
+  "noResults":"Brak rezultatów",
+  "isFriend":"Jesteśmy znajomymi",
+  "sentInvitation":"Wysłano zaproszenie"
 }
