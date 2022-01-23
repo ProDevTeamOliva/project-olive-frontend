@@ -1,3 +1,7 @@
 export const ME_REQUEST = "ME_REQUEST";
 export const ME_SUCCESS = "ME_SUCCESS";
 export const ME_FAILURE = "ME_FAILURE";
+
+export const ME_FRIENDS_REQUEST = "ME_FRIENDS_REQUEST";
+export const ME_FRIENDS_SUCCESS = "ME_FRIENDS_SUCCESS";
+export const ME_FRIENDS_FAILURE = "ME_FRIENDS_FAILURE";

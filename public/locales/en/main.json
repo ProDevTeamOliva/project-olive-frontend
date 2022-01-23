@@ -45,5 +45,6 @@
   "addFriend": "Add friend",
   "removeFriend": "Remove friend",
   "posts": "Posts",
-  "images": "Images"
+  "images": "Images",
+  "notifications":"Notifications"
 }
