@@ -1,6 +1,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Flex,
   Grid,
   Heading,
@@ -14,19 +15,41 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import Navbar from "../Navbar/Navbar";
+import { blueButtonStyle } from "../../styles/Buttons/blueButton";
 import Post from "../Posts/Post";
 import { connect } from "react-redux";
-import { getMe } from "../../actions/meActions";
 import { useEffect } from "react";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
+import { addToFriends, getUser } from "../../actions/userActions";
 
-const Me = ({ changeLanguage }) => {
+const User = ({
+  changeLanguage,
+  id,
+  getUser,
+  nameFirst,
+  nameLast,
+  login,
+  addToFriends,
+  meFriends,
+  pendingSent,
+}) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    getMe();
-  }, []);
-
+    getUser(id);
+  }, [id, getUser]);
+  const checkExistUserInMeListOfFriends = () => {
+    return meFriends.filter((friend) => friend.id === id).length === 0;
+  };
+  const checkExistUserInPendingSent = () => {
+    return pendingSent.filter((friend) => friend.id === id).length === 1;
+  };
+  const textStyle = {
+    textAlign: "center",
+    color: "blue.400",
+    fontSize: "25px",
+    w: "100%",
+  };
   return (
     <Grid
       h="100vh"
@@ -39,7 +62,7 @@ const Me = ({ changeLanguage }) => {
         <Stack
           height={{ sm: "500px", md: "20rem" }}
           direction={{ base: "column", md: "row" }}
-          p="20"
+          p="0"
         >
           <Flex flex="1" justifyContent="center" alignItems="center">
             <Avatar
@@ -54,9 +77,11 @@ const Me = ({ changeLanguage }) => {
             justifyContent="center"
             alignItems="center"
           >
-            <Heading fontSize="2xl">Ryan Florence</Heading>
+            <Heading fontSize="2xl">
+              {nameFirst} {nameLast}
+            </Heading>
             <Text fontWeight="600" color="gray.500" size="sm">
-              @ryan_florence
+              @{login}
             </Text>
 
             <Stack
@@ -66,14 +91,32 @@ const Me = ({ changeLanguage }) => {
               padding={2}
               justifyContent={"space-between"}
               alignItems={"center"}
-            ></Stack>
+            >
+              {checkExistUserInMeListOfFriends() &&
+                !checkExistUserInPendingSent() && (
+                  <Button
+                    {...blueButtonStyle}
+                    w="80%"
+                    m="auto"
+                    d="block"
+                    onClick={() => addToFriends(id)}
+                  >
+                    {t("addFriend")}
+                  </Button>
+                )}
+              {checkExistUserInPendingSent() && (
+                <Text {...textStyle}>{t("sentInvitation")}</Text>
+              )}
+              {!checkExistUserInMeListOfFriends() && (
+                <Text {...textStyle}>{t("isFriend")}</Text>
+              )}
+            </Stack>
           </Stack>
         </Stack>
         <Tabs variant="soft-rounded" align="center" p="4">
           <TabList>
             <Tab {...tabStyle}>{t("posts")}</Tab>
             <Tab {...tabStyle}>{t("images")}</Tab>
-            <Tab {...tabStyle}>{t("friends")}</Tab>
           </TabList>
           <TabPanels>
             {/* Posts */}
@@ -84,10 +127,6 @@ const Me = ({ changeLanguage }) => {
             <TabPanel>
               <p>{t("images")}</p>
             </TabPanel>
-            {/* Friends */}
-            <TabPanel>
-              <p>{t("friends")}</p>
-            </TabPanel>
           </TabPanels>
         </Tabs>
       </Box>
@@ -96,11 +135,16 @@ const Me = ({ changeLanguage }) => {
 };
 
 const mapStateToProps = (state) => ({
-  me: state.me,
+  nameFirst: state.user.user.nameFirst,
+  nameLast: state.user.user.nameLast,
+  login: state.user.user.login,
+  meFriends: state.meFriends.friends,
+  pendingSent: state.meFriends.pendingSent,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  getMe: () => dispatch(getMe()),
+  getUser: (id) => dispatch(getUser(id)),
+  addToFriends: (id) => dispatch(addToFriends(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Me);
+export default connect(mapStateToProps, mapDispatchToProps)(User);

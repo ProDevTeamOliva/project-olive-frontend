@@ -160,7 +160,7 @@ function RegisterForm({ status, signUp, message }) {
       <Alert
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
-        register={register}
+        fun={register}
         cancelRef={cancelRef}
         header={t("createAccount")}
         body={t("alertRegistrationBody")}

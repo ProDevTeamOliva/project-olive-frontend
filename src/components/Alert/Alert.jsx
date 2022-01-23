@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
-function Alert({ isOpen, onCloseAlert, register, cancelRef, header, body }) {
+function Alert({ isOpen, onCloseAlert, fun, cancelRef, header, body }) {
   const { t } = useTranslation();
 
   return (
@@ -27,10 +27,19 @@ function Alert({ isOpen, onCloseAlert, register, cancelRef, header, body }) {
           <AlertDialogBody>{body}</AlertDialogBody>
 
           <AlertDialogFooter>
-            <Button ref={cancelRef} onClick={onCloseAlert}>
+            <Button
+              _focus={{ border: "none" }}
+              ref={cancelRef}
+              onClick={onCloseAlert}
+            >
               {t("cancel")}
             </Button>
-            <Button colorScheme="purple" onClick={register} ml={3}>
+            <Button
+              _focus={{ border: "none" }}
+              colorScheme="purple"
+              onClick={fun}
+              ml={3}
+            >
               {t("accept")}
             </Button>
           </AlertDialogFooter>

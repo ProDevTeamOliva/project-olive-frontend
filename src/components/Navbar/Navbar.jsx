@@ -1,4 +1,4 @@
-import { Box, Grid, Image, Button } from "@chakra-ui/react";
+import { Box, Grid, Image, Button, Text } from "@chakra-ui/react";
 import LogoUp from "../Logo/LogoUp";
 import SearchModal from "../Search/SearchModal";
 import Account from "../../img/account_white.png";
@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import Language from "../Language/Language";
 import { getMe, getMeFriends } from "../../actions/meActions";
 import { Link } from "react-router-dom";
+import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 
 import { useEffect } from "react";
 import Bell from "../Notifications/Bell";
@@ -17,6 +18,8 @@ const Navbar = ({
   changeLanguage,
   getMe,
   getMeFriends,
+  nameFirst,
+  nameLast,
 }) => {
   const { t } = useTranslation();
   const logOut = () => {
@@ -26,8 +29,12 @@ const Navbar = ({
   };
   useEffect(() => {
     getMe();
-    getMeFriends();
   }, [getMe, getMeFriends]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => getMeFriends(), 3000);
+    return () => clearInterval(intervalId);
+  });
 
   return (
     <Box
@@ -42,7 +49,11 @@ const Navbar = ({
       className="blur"
     >
       <Grid templateColumns="150px 1fr 75px 75px" placeItems="center">
-        <LogoUp fontSize="14" scaleWidth={9.2} />
+        <Button variant="unstyled" {...unStyledButton} w="100%" h="100%" ml="2">
+          <Link to="/main">
+            <LogoUp fontSize="14" scaleWidth={9.2} />
+          </Link>
+        </Button>
         <SearchModal></SearchModal>
         <Box pos="relative" d="inline-block" gridColumn="4/5" role="group">
           <Image
@@ -65,12 +76,29 @@ const Navbar = ({
               padding: "0 12.5px 7.5px 12.5px",
             }}
           >
-            <Language changeLanguage={changeLanguage} />
+            <Box mt="-30px">
+              <Language changeLanguage={changeLanguage} />
+            </Box>
+            <Text
+              textAlign="center"
+              mt="-30px"
+              color="blue.200"
+              _focus={{ color: "blue.100" }}
+              _hover={{
+                color: "blue.100",
+              }}
+              _active={{
+                color: "blue.100",
+              }}
+            >
+              <Link to="/me">
+                {nameFirst} {nameLast}
+              </Link>
+            </Text>
             <Button w="125px">
               <Link to="/me">{t("myAccount")}</Link>
             </Button>
             <Button w="125px">{t("friends")}</Button>
-            <Button w="125px">{t("groups")}</Button>
             <Button w="125px" onClick={logOut}>
               {t("logout")}
             </Button>
@@ -82,7 +110,10 @@ const Navbar = ({
   );
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state) => ({
+  nameFirst: state.me.me.nameFirst,
+  nameLast: state.me.me.nameLast,
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {
