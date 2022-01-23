@@ -41,7 +41,8 @@
   "amoutOfSignMax20":"Wpisz kombinację poniżej dwudziestu znaków",
   "amoutOfSignMin8":"Wpisz kombinację co najmniej ośmiu znaków",
   "passwordValidation":"Hasło musi zawierać co najmniej jedną cyfrę oraz jedną wielką i małą literę",
-  "passwordRepeatValidation":"Hasło nie jest takie same"
+  "passwordRepeatValidation":"Hasło nie jest takie same",
+  "notifications":"Powiadomienia"
   
 
 }

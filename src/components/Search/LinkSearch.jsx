@@ -1,4 +1,4 @@
-import { Box, HStack, Text, Flex, Image } from "@chakra-ui/react";
+import { Box, HStack, Text, Flex, Avatar } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { BsArrow90DegLeft } from "react-icons/bs";
 const LinkSearch = ({ id, nameFirst, nameLast, avatar }) => {
@@ -20,16 +20,12 @@ const LinkSearch = ({ id, nameFirst, nameLast, avatar }) => {
       >
         <HStack align="center" h="50px">
           <Flex w="100%" align="center">
-            <Image
+            <Avatar
               boxSize="40px"
               ml="5"
-              src={
-                "https://cdn.shibe.online/shibes/54e2950bdc7710f2625867582058f940e51f7117.jpg"
-              }
-              alt={
-                "https://cdn.shibe.online/shibes/54e2950bdc7710f2625867582058f940e51f7117.jpg"
-              }
-              borderRadius="full"
+              src={avatar}
+              alt={avatar}
+              bg="gray.700"
             />
             <Text textAlign="left" pl="20px" w="100%">
               {nameFirst} {nameLast}

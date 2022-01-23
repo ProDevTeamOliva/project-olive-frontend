@@ -41,7 +41,7 @@
   "amoutOfSignMax20":"Enter a combination of less than twenty characters",
   "amoutOfSignMin8":"Enter a combination of at least eight characters",
   "passwordValidation":"Password must contain at least one number and one uppercase and lowercase letter",
-  "passwordRepeatValidation":"The password is not the same"
-
+  "passwordRepeatValidation":"The password is not the same",
+  "notifications":"Notifications"
 
 }
