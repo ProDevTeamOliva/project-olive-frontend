@@ -1,10 +1,9 @@
 import { Redirect, Route } from "react-router-dom";
-import LogInPage from "../LogInPage/LogInPage";
 
 function AuthRoute({ isAuth, component, exact, path }) {
   const redirect = () => {
     if (isAuth === "logout") {
-      return <LogInPage isAuth={isAuth}></LogInPage>;
+      return <Redirect to="/login" />;
     } else if (isAuth) {
       return component;
     } else {
