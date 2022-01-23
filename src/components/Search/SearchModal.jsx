@@ -20,7 +20,7 @@ import { restartSearchUsers, searchUsers } from "../../actions/searchActions";
 import Search from "./Search";
 import LinkSearch from "./LinkSearch";
 
-function SearchModal({ users, searchUsers, restartSearchUsers, id }) {
+function SearchModal({ users, searchUsers, restartSearchUsers }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
   const openModal = () => {
@@ -30,7 +30,7 @@ function SearchModal({ users, searchUsers, restartSearchUsers, id }) {
   const getUsers = (event) => {
     const value = event.target.value.toLowerCase();
     if (value !== "") {
-      return searchUsers({ valueSearch: value, id: id });
+      return searchUsers({ valueSearch: value });
     }
   };
   return (
@@ -98,7 +98,6 @@ function SearchModal({ users, searchUsers, restartSearchUsers, id }) {
 
 const mapStateToProps = (state) => ({
   users: state.searchUsers.users,
-  id: state.me.me.id,
 });
 
 const mapDispatchToProps = (dispatch) => ({
