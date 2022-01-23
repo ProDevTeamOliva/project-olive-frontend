@@ -42,9 +42,9 @@
   "amoutOfSignMin8": "Wpisz kombinację co najmniej ośmiu znaków",
   "passwordValidation": "Hasło musi zawierać co najmniej jedną cyfrę oraz jedną wielką i małą literę",
   "passwordRepeatValidation": "Hasło nie jest takie same",
-  "addFriend": "Add friend",
-  "removeFriend": "Remove friend",
+  "addFriend": "Dodaj znajomego",
+  "removeFriend": "Usuń znajomego",
   "posts": "Posty",
   "images": "Zdjęcia",
-  "notifications":"Powiadomienia"
+  "notifications": "Powiadomienia"
 }

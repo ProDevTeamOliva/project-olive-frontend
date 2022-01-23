@@ -7,6 +7,9 @@ import {
   ME_FRIENDS_REQUEST,
   ME_FRIENDS_SUCCESS,
   ME_FRIENDS_FAILURE,
+  ME_PICTURES_REQUEST,
+  ME_PICTURES_SUCCESS,
+  ME_PICTURES_FAILURE,
 } from "../types/meTypes";
 
 export const getMe = () => ({
@@ -32,5 +35,18 @@ export const getMeFriends = () => ({
       "Content-Type": "application/json",
     },
     types: [ME_FRIENDS_REQUEST, ME_FRIENDS_SUCCESS, ME_FRIENDS_FAILURE],
+  },
+});
+
+export const getMePictures = () => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/me/picture`,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [ME_PICTURES_REQUEST, ME_PICTURES_SUCCESS, ME_PICTURES_FAILURE],
   },
 });

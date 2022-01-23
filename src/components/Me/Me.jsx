@@ -5,6 +5,7 @@ import {
   Flex,
   Grid,
   Heading,
+  Image,
   Stack,
   Tab,
   Tabs,
@@ -17,15 +18,19 @@ import { useTranslation } from "react-i18next";
 import Navbar from "../Navbar/Navbar";
 import { blueButtonStyle } from "../../styles/Buttons/blueButton";
 import Post from "../Posts/Post";
+import MagicGrid from "magic-grid-react";
 import { connect } from "react-redux";
-import { getMe } from "../../actions/meActions";
-import { useEffect } from "react";
+import { getMe, getMePictures } from "../../actions/meActions";
+import { useEffect, useRef } from "react";
 
-const Me = ({ changeLanguage }) => {
+const Me = ({ changeLanguage, me, pictures }) => {
   const { t } = useTranslation();
+  const { nameFirst, nameLast, login, avatar } = me?.me;
+  const gridRef = useRef();
 
   useEffect(() => {
     getMe();
+    getMePictures();
   }, []);
 
   return (
@@ -33,10 +38,10 @@ const Me = ({ changeLanguage }) => {
       h="100vh"
       mt="75px"
       justifyContent="center"
-      templateColumns="minmax(200px, 800px)"
+      templateColumns="minmax(200px, 1000px)"
     >
       <Navbar changeLanguage={changeLanguage} />
-      <Box m="25px">
+      <Box p="25px">
         <Stack
           height={{ sm: "500px", md: "20rem" }}
           direction={{ base: "column", md: "row" }}
@@ -46,7 +51,7 @@ const Me = ({ changeLanguage }) => {
             <Avatar
               h={{ base: "12rem", md: "16rem" }}
               w={{ sm: "12rem", md: "16rem" }}
-              src="https://bit.ly/ryan-florence"
+              src={avatar}
             />
           </Flex>
           <Stack
@@ -55,9 +60,11 @@ const Me = ({ changeLanguage }) => {
             justifyContent="center"
             alignItems="center"
           >
-            <Heading fontSize="2xl">Ryan Florence</Heading>
+            <Heading fontSize="2xl">
+              {nameFirst} {nameLast}
+            </Heading>
             <Text fontWeight="600" color="gray.500" size="sm">
-              @ryan_florence
+              {`@${login}`}
             </Text>
 
             <Stack
@@ -74,7 +81,7 @@ const Me = ({ changeLanguage }) => {
             </Stack>
           </Stack>
         </Stack>
-        <Tabs variant="soft-rounded" align="center" p="4">
+        <Tabs variant="soft-rounded" align="center">
           <TabList>
             <Tab
               _selected={{ color: "white", bg: "blue.600" }}
@@ -87,6 +94,7 @@ const Me = ({ changeLanguage }) => {
               _selected={{ color: "white", bg: "blue.600" }}
               _hover={{ color: "gray.300" }}
               m="10px"
+              onClick={() => gridRef.current.positionItems()}
             >
               {t("images")}
             </Tab>
@@ -104,8 +112,21 @@ const Me = ({ changeLanguage }) => {
               <Post />
             </TabPanel>
             {/* Images */}
-            <TabPanel>
-              <p>{t("images")}</p>
+            <TabPanel px="0" py="4">
+              <MagicGrid
+                items={pictures.pictures.length}
+                ref={gridRef}
+                useTransform={false}
+              >
+                {pictures.pictures.map((picture) => (
+                  <Box
+                    w={{ base: "90%", md: "45%", lg: "29%" }}
+                    key={picture.id}
+                  >
+                    <Image src={picture.picture} w="100%"></Image>
+                  </Box>
+                ))}
+              </MagicGrid>
             </TabPanel>
             {/* Friends */}
             <TabPanel>
@@ -120,10 +141,12 @@ const Me = ({ changeLanguage }) => {
 
 const mapStateToProps = (state) => ({
   me: state.me,
+  pictures: state.mePictures,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getMe: () => dispatch(getMe()),
+  getMePictures: () => dispatch(getMePictures()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Me);
