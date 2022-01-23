@@ -7,6 +7,9 @@ import {
   ME_FRIENDS_REQUEST,
   ME_FRIENDS_SUCCESS,
   ME_FRIENDS_FAILURE,
+  ME_ACCEPT_INVITATION_REQUEST,
+  ME_ACCEPT_INVITATION_SUCCESS,
+  ME_ACCEPT_INVITATION_FAILURE,
   ME_PICTURES_REQUEST,
   ME_PICTURES_SUCCESS,
   ME_PICTURES_FAILURE,
@@ -48,5 +51,39 @@ export const getMePictures = () => ({
       "Content-Type": "application/json",
     },
     types: [ME_PICTURES_REQUEST, ME_PICTURES_SUCCESS, ME_PICTURES_FAILURE],
+  },
+});
+
+export const acceptFriendInvitation = (id) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/user/${id}/accept`,
+    method: "POST",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      ME_ACCEPT_INVITATION_REQUEST,
+      ME_ACCEPT_INVITATION_SUCCESS,
+      ME_ACCEPT_INVITATION_FAILURE,
+    ],
+  },
+});
+
+export const unAcceptFriendInvitation = (id) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/user/${id}/friend`,
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      ME_ACCEPT_INVITATION_REQUEST,
+      ME_ACCEPT_INVITATION_SUCCESS,
+      ME_ACCEPT_INVITATION_FAILURE,
+    ],
   },
 });

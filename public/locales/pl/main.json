@@ -46,5 +46,10 @@
   "removeFriend": "Usuń znajomego",
   "posts": "Posty",
   "images": "Zdjęcia",
-  "notifications": "Powiadomienia"
+  "notifications":"Powiadomienia",
+  "addToFriends":"Zaproszenie do grona znajomych od",
+  "alertAddFriend": "Czy potwierdzasz dodanie do znajomych ?",
+  "noResults":"Brak rezultatów",
+  "isFriend":"Jesteśmy znajomymi",
+  "sentInvitation":"Wysłano zaproszenie"
 }

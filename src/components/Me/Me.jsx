@@ -1,7 +1,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Flex,
   Grid,
   Heading,
@@ -16,10 +15,10 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import Navbar from "../Navbar/Navbar";
-import { blueButtonStyle } from "../../styles/Buttons/blueButton";
 import Post from "../Posts/Post";
 import MagicGrid from "magic-grid-react";
 import { connect } from "react-redux";
+import { tabStyle } from "../../styles/Tabs/tabStyle";
 import { getMe, getMePictures } from "../../actions/meActions";
 import { useEffect, useRef } from "react";
 
@@ -45,7 +44,7 @@ const Me = ({ changeLanguage, me, pictures }) => {
         <Stack
           height={{ sm: "500px", md: "20rem" }}
           direction={{ base: "column", md: "row" }}
-          p="4"
+          p="20"
         >
           <Flex flex="1" justifyContent="center" alignItems="center">
             <Avatar
@@ -74,37 +73,14 @@ const Me = ({ changeLanguage, me, pictures }) => {
               padding={2}
               justifyContent={"space-between"}
               alignItems={"center"}
-            >
-              <Button {...blueButtonStyle} w="80%" m="auto" d="block">
-                {t("addFriend")}
-              </Button>
-            </Stack>
+            ></Stack>
           </Stack>
         </Stack>
         <Tabs variant="soft-rounded" align="center">
           <TabList>
-            <Tab
-              _selected={{ color: "white", bg: "blue.600" }}
-              _hover={{ color: "gray.300" }}
-              m="10px"
-            >
-              {t("posts")}
-            </Tab>
-            <Tab
-              _selected={{ color: "white", bg: "blue.600" }}
-              _hover={{ color: "gray.300" }}
-              m="10px"
-              onClick={() => gridRef.current.positionItems()}
-            >
-              {t("images")}
-            </Tab>
-            <Tab
-              _selected={{ color: "white", bg: "blue.600" }}
-              _hover={{ color: "gray.300" }}
-              m="10px"
-            >
-              {t("friends")}
-            </Tab>
+            <Tab {...tabStyle}>{t("posts")}</Tab>
+            <Tab {...tabStyle}  onClick={() => gridRef.current.positionItems()}>{t("images")}</Tab>
+            <Tab {...tabStyle}>{t("friends")}</Tab>
           </TabList>
           <TabPanels>
             {/* Posts */}

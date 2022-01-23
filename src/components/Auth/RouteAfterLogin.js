@@ -2,6 +2,7 @@ import { Route, Switch } from "react-router-dom";
 import MainPage from "../../components/MainPage/MainPage";
 import Me from "../../components/Me/Me";
 import NoPermission from "../MainPage/NoPermission";
+import User from "../User/User";
 
 function RouteAfterLogin({ changeLanguage }) {
   return (
@@ -11,12 +12,19 @@ function RouteAfterLogin({ changeLanguage }) {
         path="/main"
         component={() => <MainPage changeLanguage={changeLanguage}></MainPage>}
       ></Route>
-      <Route exact path="/me" component={() => <Me></Me>}></Route>
+      <Route
+        exact
+        path="/me"
+        component={() => <Me changeLanguage={changeLanguage}></Me>}
+      ></Route>
       <Route
         exact
         path="/user/:id"
         component={(routerProps) => (
-          <MainPage id={routerProps.match.params.id}></MainPage>
+          <User
+            id={routerProps.match.params.id}
+            changeLanguage={changeLanguage}
+          ></User>
         )}
       ></Route>
 
