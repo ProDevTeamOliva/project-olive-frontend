@@ -8,6 +8,9 @@ import { useState, useRef } from "react";
 import Alert from "../Alert/Alert";
 import { validatePassword } from "../../validators/validatePassword";
 import { useTranslation } from "react-i18next";
+import { validateUserData } from "../../validators/validateUserDate";
+import { validateLogin } from "../../validators/validateLogin";
+import { validateRepeatPassword } from "../../validators/validateRepeatPassword";
 
 function RegisterForm({ status, signUp, message }) {
   const { t } = useTranslation();
@@ -50,6 +53,7 @@ function RegisterForm({ status, signUp, message }) {
       <Formik initialValues={initialDataRegister} onSubmit={handleSubmit}>
         {({
           handleSubmit,
+          values,
           initialValues: {
             nameFirst,
             nameLast,
@@ -69,13 +73,29 @@ function RegisterForm({ status, signUp, message }) {
                 name={t("firstName")}
                 id="nameFirst"
                 type="text"
+                validate={(value) =>
+                  validateUserData(
+                    value,
+                    t("required"),
+                    t("amoutOfSignMin2"),
+                    t("amoutOfSignMax60")
+                  )
+                }
                 value={nameFirst}
                 {...inputColors}
               />
               <InputComponent
                 name={t("secondName")}
-                type="text"
                 id="nameLast"
+                type="text"
+                validate={(value) =>
+                  validateUserData(
+                    value,
+                    t("required"),
+                    t("amoutOfSignMin2"),
+                    t("amoutOfSignMax60")
+                  )
+                }
                 value={nameLast}
                 {...inputColors}
               />
@@ -87,6 +107,14 @@ function RegisterForm({ status, signUp, message }) {
                 name={t("login")}
                 id="login"
                 type="text"
+                validate={(value) =>
+                  validateLogin(
+                    value,
+                    t("required"),
+                    t("amoutOfSignMin2"),
+                    t("amoutOfSignMax20")
+                  )
+                }
                 value={login}
                 {...inputColors}
               />
@@ -95,7 +123,15 @@ function RegisterForm({ status, signUp, message }) {
                 id="password"
                 type="password"
                 value={password}
-                validate={(value) => validatePassword(value, t("required"))}
+                validate={(value) =>
+                  validatePassword(
+                    value,
+                    t("required"),
+                    t("amoutOfSignMin8"),
+                    t("amoutOfSignMax20"),
+                    t("passwordValidation")
+                  )
+                }
                 {...inputColors}
               />
               <InputComponent
@@ -103,6 +139,14 @@ function RegisterForm({ status, signUp, message }) {
                 id="repeatPassword"
                 type="password"
                 value={repeatPassword}
+                validate={(value) =>
+                  validateRepeatPassword(
+                    value,
+                    values.password,
+                    t("required"),
+                    t("passwordRepeatValidation")
+                  )
+                }
                 {...inputColors}
               />
               <Button type="submit" mb="10px" mt="30px" {...purpleButtonStyle}>

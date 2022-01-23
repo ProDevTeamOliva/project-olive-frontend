@@ -10,7 +10,7 @@
   "secondName": "Nazwisko",
   "registrationData": "Dane rejestracyjne",
   "userData": "Dane użytkownika",
-  "NoAccess": "Brak dostępu!",
+  "noAccess": "Nie znaleziono strony",
   "SearchNavBar": "Szukaj ...",
   "alertRegistrationBody": "Czy potwierdzasz utworzenie konta ?",
   "accept": "Akceptuj",
@@ -36,4 +36,16 @@
   "likes": "Polubienia:",
   "iLikeIt": "Lubię to !",
   "addComment": "Dodaj komentarz"
+  "noExistPage": "Strona, której szukasz, nie istnieje",
+  "amoutOfSignMin2": "Wpisz kombinację co najmniej dwóch znaków",
+  "amoutOfSignMax60": "Wpisz kombinację poniżej sześćdziesięciu znaków",
+  "amoutOfSignMax20": "Wpisz kombinację poniżej dwudziestu znaków",
+  "amoutOfSignMin8": "Wpisz kombinację co najmniej ośmiu znaków",
+  "passwordValidation": "Hasło musi zawierać co najmniej jedną cyfrę oraz jedną wielką i małą literę",
+  "passwordRepeatValidation": "Hasło nie jest takie same",
+  "addFriend": "Add friend",
+  "removeFriend": "Remove friend",
+  "posts": "Posty",
+  "images": "Zdjęcia",
+  "notifications":"Powiadomienia"
 }

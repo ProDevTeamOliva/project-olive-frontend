@@ -6,13 +6,13 @@ import {
 } from "react-router-dom";
 import AuthRoute from "./components/Auth/AuthRoute";
 import LogInPage from "./components/LogInPage/LogInPage";
-import MainPage from "./components/MainPage/MainPage";
 import NoPermission from "./components/MainPage/NoPermission";
 import { connect } from "react-redux";
 import i18next from "i18next";
 import { initReactI18next, useTranslation } from "react-i18next";
 import Backend from "i18next-http-backend";
 import languages from "./config/languages";
+import RouteAfterLogin from "./components/Auth/RouteAfterLogin";
 
 const language = languages.find(
   (value) => value === localStorage.getItem("language")
@@ -27,7 +27,11 @@ i18next
     ns: ["main"],
     defaultNS: "main",
     react: {
-      wait: true,
+      bindI18n: "languageChanged",
+      bindI18nStore: "",
+      transEmptyNodeValue: "",
+      transSupportBasicHtmlNodes: true,
+      transKeepBasicHtmlNodesFor: ["br", "strong", "i"],
       useSuspense: false,
     },
     interpolation: {
@@ -47,23 +51,25 @@ function App({ isAuth }) {
   };
   return (
     <div className="App" style={{ height: "100%" }}>
-      <button onClick={() => changeLanguage("pl")}>PL</button>
-      <button onClick={() => changeLanguage("en")}>EN</button>
       <Router>
         <Switch>
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
+          <Route path="/noPermission" component={NoPermission}></Route>
           <AuthRoute
-            component={<MainPage></MainPage>}
+            component={<RouteAfterLogin changeLanguage={changeLanguage} />}
             isAuth={isAuth}
             exact
-            path="/user"
+            path="*"
           ></AuthRoute>
-          <Route path="/noPermission" component={NoPermission}></Route>
-          {isAuth ? <Redirect to="/user" /> : null}
         </Switch>
-        <Route path="/login" component={() => <LogInPage isAuth={isAuth} />} />
+        <Route
+          path="/login"
+          component={() => (
+            <LogInPage isAuth={isAuth} changeLanguage={changeLanguage} />
+          )}
+        />
       </Router>
     </div>
   );

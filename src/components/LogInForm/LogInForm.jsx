@@ -6,6 +6,7 @@ import { blueButtonStyle } from "../../styles/Buttons/blueButton";
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { logIn } from "../../actions/authActions";
+import { validateRequired } from "../../validators/validateRequired";
 
 function LogInForm({ logIn, message, status }) {
   const initialDataLogin = { login: "", password: "" };
@@ -63,6 +64,7 @@ function LogInForm({ logIn, message, status }) {
                 name={t("login")}
                 id="login"
                 type="text"
+                validate={(value) => validateRequired(value, t("required"))}
                 value={login}
                 {...inputColors}
               />
@@ -70,6 +72,7 @@ function LogInForm({ logIn, message, status }) {
                 name={t("password")}
                 type="password"
                 id="password"
+                validate={(value) => validateRequired(value, t("required"))}
                 value={password}
                 {...inputColors}
               />

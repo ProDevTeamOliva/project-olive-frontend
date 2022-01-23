@@ -5,6 +5,7 @@ import GroupChatPostIcon from "../../img/icons/GroupChatPostIcon.png";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import AddCommentModal from "./AddCommentModal";
+
 const getPostTypeIcon = (postType) => {
   if (postType === "Public") {
     return publicPostIcon;
