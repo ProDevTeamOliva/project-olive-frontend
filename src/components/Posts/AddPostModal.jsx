@@ -5,12 +5,11 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  Button,
   useDisclosure,
   Divider,
   Text,
   Box,
-  Center,
+  Flex,
 } from "@chakra-ui/react";
 import PostForm from "../PostForm/PostForm";
 import { useTranslation } from "react-i18next";
@@ -25,7 +24,7 @@ function AddPostModal() {
   return (
     <>
       <Box
-        height={20}
+        height={["10", "45px"]}
         margin="4"
         padding="4"
         borderRadius="full"
@@ -33,7 +32,11 @@ function AddPostModal() {
         flexBasis="100%"
         onClick={openModal}
       >
-        <Center fontSize="30">{t("writePost")}</Center>
+        <Flex justify="center" align="center" h="100%">
+          <Box fontSize={["xl"]} textAlign="center" justifyContent="center">
+            {t("writePost")}
+          </Box>
+        </Flex>
       </Box>
 
       <Modal onClose={onClose} isOpen={isOpen} size="xl" bg="gray.50">

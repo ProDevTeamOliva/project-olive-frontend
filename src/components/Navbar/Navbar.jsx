@@ -34,6 +34,7 @@ const Navbar = ({
   }, [getMe, getMeFriends]);
 
   useEffect(() => {
+    getPosts();
     const intervalId = setInterval(() => {
       getPosts();
       getMeFriends();

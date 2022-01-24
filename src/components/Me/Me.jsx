@@ -39,7 +39,7 @@ const Me = ({
     getMe();
     getMePosts();
     getMePictures();
-  }, []);
+  }, [getMe, getMePosts, getMePictures]);
 
   return (
     <Grid

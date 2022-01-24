@@ -50,7 +50,7 @@ const User = ({
     getUser(id);
     getUserPosts(id);
     getUserPictures(id);
-  }, [id]);
+  }, [getUser, getUserPictures, getUserPosts, id]);
 
   const checkExistUserInMeListOfFriends = () => {
     return meFriends.filter((friend) => friend.id === id).length === 0;
