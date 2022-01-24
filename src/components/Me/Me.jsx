@@ -73,7 +73,7 @@ const Me = ({
   const [publicPrivate, setPublicPrivate] = useState(false);
   const gridRef = useRef();
 
-useEffect(() => {
+  useEffect(() => {
     getMe();
   }, [getMe]);
 
@@ -85,7 +85,7 @@ useEffect(() => {
       getMePictures();
     }, 3000);
     return () => clearInterval(intervalId);
-  });
+  }, [getMePosts, getMePictures]);
 
   const handleAvatarUpload = () => {
     const file = document.querySelector("#avatarUpload")["files"][0];

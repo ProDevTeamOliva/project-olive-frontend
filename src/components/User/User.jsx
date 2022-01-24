@@ -49,9 +49,17 @@ const User = ({
 
   useEffect(() => {
     getUser(id);
+  }, [getUser, getUserPictures, getUserPosts, id]);
+
+  useEffect(() => {
     getUserPosts(id);
     getUserPictures(id);
-  }, [getUser, getUserPictures, getUserPosts, id]);
+    const intervalId = setInterval(() => {
+      getUserPosts(id);
+      getUserPictures(id);
+    }, 3000);
+    return () => clearInterval(intervalId);
+  }, [getUserPosts, getUserPictures, id]);
 
   const checkExistUserInMeListOfFriends = () => {
     return meFriends.filter((friend) => friend.id === id).length === 0;
