@@ -98,7 +98,7 @@ const User = ({
               {nameFirst} {nameLast}
             </Heading>
             <Text fontWeight="600" color="gray.500" size="sm">
-              @{login}
+              {login && `@${login}`}
             </Text>
 
             <Stack

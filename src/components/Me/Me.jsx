@@ -25,17 +25,20 @@ import {
 import { useTranslation } from "react-i18next";
 import Navbar from "../Navbar/Navbar";
 import FileUpload from "../FileUpload/FileUpload";
+import toBase64 from "../../operations/base64";
 import Post from "../Posts/Post";
+import PublicPrivate from "../FileUpload/PublicPrivate";
 import MagicGrid from "magic-grid-react";
 import { baseUrl } from "../../config/baseUrl";
 import { connect } from "react-redux";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   getMe,
   getMePosts,
   getMePictures,
   patchMeAvatar,
+  postMePictures,
   unAcceptFriendInvitation,
 } from "../../actions/meActions";
 import { getMeFriends } from "../../actions/meActions";
@@ -47,6 +50,7 @@ const Me = ({
   getMePosts,
   getMePictures,
   patchMeAvatar,
+  postMePictures,
   me,
   posts,
   pictures,
@@ -56,7 +60,17 @@ const Me = ({
 }) => {
   const { t } = useTranslation();
   const { nameFirst, nameLast, login, avatar } = me?.me;
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenAvatar,
+    onOpen: onOpenAvatar,
+    onClose: onCloseAvatar,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenPictures,
+    onOpen: onOpenPictures,
+    onClose: onClosePictures,
+  } = useDisclosure();
+  const [publicPrivate, setPublicPrivate] = useState(false);
   const gridRef = useRef();
 
 useEffect(() => {
@@ -74,16 +88,34 @@ useEffect(() => {
   });
 
   const handleAvatarUpload = () => {
-    const file = document.querySelector("input[type=file]")["files"][0];
+    const file = document.querySelector("#avatarUpload")["files"][0];
     const reader = new FileReader();
 
     reader.onloadend = () => {
       patchMeAvatar(file.name, reader.result);
       getMe();
-      onClose();
+      onCloseAvatar();
     };
 
     reader.readAsDataURL(file);
+  };
+
+  const handlePicturesUpload = async () => {
+    const files = document.querySelector("#picturesUpload")["files"];
+    let pictures = [];
+
+    for (const file of files) {
+      const file64 = await toBase64(file);
+      pictures.push({
+        filename: file.name,
+        picture: file64,
+        private: publicPrivate,
+      });
+    }
+
+    postMePictures(pictures);
+    gridRef.current.positionItems();
+    onClosePictures();
   };
 
   return (
@@ -102,7 +134,7 @@ useEffect(() => {
         >
           <Flex flex="1" justifyContent="center" alignItems="center">
             <Button
-              onClick={onOpen}
+              onClick={onOpenAvatar}
               variant="unstyled"
               boxSize={{ base: "12rem", md: "16rem" }}
               _focus={{ outline: "none" }}
@@ -113,13 +145,14 @@ useEffect(() => {
               />
             </Button>
 
-            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+            <Modal isOpen={isOpenAvatar} onClose={onCloseAvatar} isCentered>
               <ModalOverlay />
               <ModalContent mx="4">
                 <ModalHeader>{t("addProfilePicture")}</ModalHeader>
                 <ModalCloseButton mt="2" mr="1" _focus={{ outline: "none" }} />
                 <ModalBody pb="4">
                   <FileUpload
+                    id="avatarUpload"
                     accept="image/*"
                     w="75%"
                     d="block"
@@ -141,7 +174,7 @@ useEffect(() => {
               {nameFirst} {nameLast}
             </Heading>
             <Text fontWeight="600" color="gray.500" size="sm">
-              @{login}
+              {login && `@${login}`}
             </Text>
           </Stack>
         </Stack>
@@ -164,6 +197,40 @@ useEffect(() => {
             </TabPanel>
             {/* Images */}
             <TabPanel px="0" py="4">
+              <Button onClick={onOpenPictures} mb="4">
+                {t("addImages")}
+              </Button>
+
+              <Modal
+                isOpen={isOpenPictures}
+                onClose={onClosePictures}
+                isCentered
+              >
+                <ModalOverlay />
+                <ModalContent mx="4">
+                  <ModalHeader>{t("addImages")}</ModalHeader>
+                  <ModalCloseButton
+                    mt="2"
+                    mr="1"
+                    _focus={{ outline: "none" }}
+                  />
+                  <ModalBody pb="4">
+                    <Box mb="4" textAlign="center">
+                      <PublicPrivate setValue={setPublicPrivate} />
+                    </Box>
+                    <FileUpload
+                      id="picturesUpload"
+                      accept="image/*"
+                      multiple
+                      w="75%"
+                      d="block"
+                      mx="auto"
+                      onChange={handlePicturesUpload}
+                    />
+                  </ModalBody>
+                </ModalContent>
+              </Modal>
+
               <MagicGrid
                 items={pictures.pictures.length}
                 ref={gridRef}
@@ -175,7 +242,7 @@ useEffect(() => {
                         w={{ base: "90%", md: "45%", lg: "29%" }}
                         key={picture.id}
                       >
-                        <Image src={picture.picture} w="100%"></Image>
+                        <Image src={baseUrl + picture.picture} w="100%"></Image>
                       </Box>
                     ))
                   : t("noImages")}
@@ -220,6 +287,7 @@ const mapDispatchToProps = (dispatch) => ({
   getMePictures: () => dispatch(getMePictures()),
   patchMeAvatar: (filename, avatar) =>
     dispatch(patchMeAvatar(filename, avatar)),
+  postMePictures: (pictures) => dispatch(postMePictures(pictures)),
   getMeFriends: () => dispatch(getMeFriends()),
   unAcceptFriendInvitation: (id) => dispatch(unAcceptFriendInvitation(id)),
 });
