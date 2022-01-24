@@ -12,12 +12,14 @@ import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 
 import { useEffect } from "react";
 import Bell from "../Notifications/Bell";
+import { getPosts } from "../../actions/postActions";
 const Navbar = ({
   logout,
   restartRegisterMessage,
   changeLanguage,
   getMe,
   getMeFriends,
+  getPosts,
   nameFirst,
   nameLast,
 }) => {
@@ -32,7 +34,10 @@ const Navbar = ({
   }, [getMe, getMeFriends]);
 
   useEffect(() => {
-    const intervalId = setInterval(() => getMeFriends(), 3000);
+    const intervalId = setInterval(() => {
+      getPosts();
+      getMeFriends();
+    }, 3000);
     return () => clearInterval(intervalId);
   });
 
@@ -121,6 +126,7 @@ const mapDispatchToProps = (dispatch) => {
     restartRegisterMessage: () => dispatch(restartRegisterMessage()),
     getMe: () => dispatch(getMe()),
     getMeFriends: () => dispatch(getMeFriends()),
+    getPosts: () => dispatch(getPosts()),
   };
 };
 
