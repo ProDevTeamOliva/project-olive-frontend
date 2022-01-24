@@ -49,7 +49,7 @@ const User = ({
 
   useEffect(() => {
     getUser(id);
-  }, [getUser, getUserPictures, getUserPosts, id]);
+  }, [getUser, id]);
 
   useEffect(() => {
     getUserPosts(id);
