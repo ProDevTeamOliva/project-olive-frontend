@@ -1,4 +1,9 @@
-import { ME_PICTURES_SUCCESS, ME_PICTURES_FAILURE } from "../types/meTypes";
+import {
+  ME_PICTURES_SUCCESS,
+  ME_PICTURES_FAILURE,
+  ME_POST_PICTURES_SUCCESS,
+  ME_POST_PICTURES_FAILURE,
+} from "../types/meTypes";
 
 const init_state = {
   pictures: [],
@@ -13,6 +18,16 @@ const mePicturesReducer = (state = init_state, action) => {
         message: action.payload.message,
       };
     case ME_PICTURES_FAILURE:
+      return {
+        ...state,
+        message: action.payload.message,
+      };
+    case ME_POST_PICTURES_SUCCESS:
+      return {
+        pictures: action.payload.pictures,
+        message: action.payload.message,
+      };
+    case ME_POST_PICTURES_FAILURE:
       return {
         ...state,
         message: action.payload.message,
