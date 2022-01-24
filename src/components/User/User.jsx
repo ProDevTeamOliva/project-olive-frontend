@@ -4,6 +4,7 @@ import {
   Button,
   Flex,
   Grid,
+  GridItem,
   Heading,
   Stack,
   Tab,
@@ -20,14 +21,16 @@ import Post from "../Posts/Post";
 import { connect } from "react-redux";
 import { useEffect } from "react";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
-import { addToFriends, getUser } from "../../actions/userActions";
+import { addToFriends, getUser, getUserPosts } from "../../actions/userActions";
 
 const User = ({
   changeLanguage,
   id,
   getUser,
-  user,
+  getUserPosts,
   addToFriends,
+  user,
+  posts,
   meFriends,
   pendingSent,
 }) => {
@@ -36,19 +39,24 @@ const User = ({
 
   useEffect(() => {
     getUser(id);
-  }, [id, getUser]);
+    getUserPosts(id);
+  }, [id]);
+
   const checkExistUserInMeListOfFriends = () => {
     return meFriends.filter((friend) => friend.id === id).length === 0;
   };
+
   const checkExistUserInPendingSent = () => {
     return pendingSent.filter((friend) => friend.id === id).length === 1;
   };
+
   const textStyle = {
     textAlign: "center",
     color: "blue.400",
     fontSize: "25px",
     w: "100%",
   };
+
   return (
     <Grid
       h="100vh"
@@ -120,7 +128,13 @@ const User = ({
           <TabPanels>
             {/* Posts */}
             <TabPanel>
-              {/* <Post /> */}
+              {posts?.posts
+                ? posts.posts.map((post) => (
+                    <GridItem key={post.id}>
+                      <Post property={post} />
+                    </GridItem>
+                  ))
+                : t("noPosts")}
             </TabPanel>
             {/* Images */}
             <TabPanel>
@@ -135,12 +149,14 @@ const User = ({
 
 const mapStateToProps = (state) => ({
   user: state.user,
+  posts: state.userPosts,
   meFriends: state.meFriends.friends,
   pendingSent: state.meFriends.pendingSent,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getUser: (id) => dispatch(getUser(id)),
+  getUserPosts: (id) => dispatch(getUserPosts(id)),
   addToFriends: (id) => dispatch(addToFriends(id)),
 });
 
