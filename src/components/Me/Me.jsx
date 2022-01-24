@@ -56,7 +56,7 @@ const Me = ({
     getMe();
     getMePosts();
     getMePictures();
-  }, []);
+  }, [getMe, getMePosts, getMePictures]);
 
   const handleAvatarUpload = () => {
     const file = document.querySelector("input[type=file]")["files"][0];

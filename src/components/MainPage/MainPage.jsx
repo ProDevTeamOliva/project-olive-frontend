@@ -2,14 +2,15 @@ import { Box, Grid, GridItem } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post";
 import AddPostModal from "../Posts/AddPostModal";
-import { useEffect } from "react";
+import { useCallback } from "react";
 import { getPosts } from "../../actions/postActions";
 import { connect } from "react-redux";
 
 function MainPage({ changeLanguage, getPosts, posts }) {
-  useEffect(() => {
+  useCallback(() => {
     getPosts();
-  }, []);
+  }, [getPosts]);
+
   return (
     <Box h="100vh" mt="75px" d="grid" justifyContent="center">
       <Navbar changeLanguage={changeLanguage} />

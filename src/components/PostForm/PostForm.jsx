@@ -27,6 +27,7 @@ import { useTranslation } from "react-i18next";
 import { addPost } from "../../actions/postActions";
 import * as React from "react";
 import toBase64 from "../../operations/base64";
+import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 
 function PostForm({ onClose, addPost }) {
   const { t } = useTranslation();
@@ -142,13 +143,16 @@ function PostForm({ onClose, addPost }) {
                 )}
               </Field>
 
-              <Button type="submit" mb="20px" mt="20px">
+              <Button {...purpleButtonStyle} type="submit" mb="20px" mt="20px">
                 Submit
               </Button>
             </Form>
             <Form onSubmit={(e) => handleTagsInput(e)}>
               <Input placeholder="What about some tags ??" />
-              <Button type="submit">Add Tag</Button>
+
+              <Button {...unStyledButton} type="submit">
+                Add Tag
+              </Button>
               <HStack spacing={4}>
                 {tags.map((tag, index) => (
                   <Tag
@@ -167,13 +171,27 @@ function PostForm({ onClose, addPost }) {
           </>
         )}
       </Formik>
-      <Input
-        type="file"
-        accept="image/*"
-        multiple
-        {...purpleButtonStyle}
-        onChange={(e) => setSelectedFiles(e.target.files)}
-      />
+
+      <Button
+        {...unStyledButton}
+        onClick={() => document.getElementById("input-file").click()}
+      >
+        Select file
+        <Input
+          variant="unstyled"
+          display="none"
+          type="file"
+          id="input-file"
+          accept="image/*"
+          name="file"
+          multiple
+          mt="2"
+          onChange={(e) => setSelectedFiles(e.target.files)}
+        ></Input>
+      </Button>
+      <label style={{ marginLeft: "20px" }}>
+        Liczba plików: {selectedFiles.length}
+      </label>
     </Box>
   );
 }

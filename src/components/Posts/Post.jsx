@@ -45,30 +45,36 @@ const Post = ({ property, likePost }) => {
       bgColor="rgba(0, 0, 0, 0.1)"
       backdropFilter="blur(50px)"
       className="blur"
-      w="70vw"
+      w={["300px", "400px", "600px", "800px", "950px"]}
+      mb="2"
     >
       <Box p="6">
         <Box display="flex" justifyContent="space-between">
-          <Avatar boxSize="100" src={baseUrl + property.user.avatar} />
+          <Avatar
+            boxSize={["50", "70px", "100px"]}
+            src={baseUrl + property.user.avatar}
+            alt={property.user.id}
+          />
           <Box
             fontWeight="semibold"
             letterSpacing="wide"
-            fontSize="4xl"
+            fontSize={["xl", "xl", "3xl"]}
             textTransform="capitalization"
-            ml="2"
+            mx="5"
           >
             {property.user.nameFirst} {property.user.nameLast}
           </Box>
           <Box text="right" color="gray.500">
             {getPostTypeIcon(property.type) ? (
-              <Box display="flex">
+              <Box display="flex" flexDirection="column">
                 <Image
-                  marginRight="10px"
-                  boxSize="50"
+                  boxSize={["25px", "35px"]}
                   src={getPostTypeIcon(property.type)}
                   borderRadius="full"
-                />{" "}
-                <Text fontSize="2xl">{property.type}</Text>
+                ></Image>
+                <Text fontSize={["xs", "xs"]} textAlign="center">
+                  {property.type}
+                </Text>
               </Box>
             ) : (
               property.type
@@ -80,7 +86,8 @@ const Post = ({ property, likePost }) => {
           mt="1"
           fontWeight="semibold"
           as="h4"
-          fontSize="2xl"
+
+          fontSize={["xl", "2xl"]}
           lineHeight="tight"
           isTruncated={hiddenContent}
           onClick={() => setHiddenContent(!hiddenContent)}
