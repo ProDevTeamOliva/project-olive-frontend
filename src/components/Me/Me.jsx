@@ -20,6 +20,7 @@ import {
   TabPanels,
   Text,
   useDisclosure,
+  Wrap,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import Navbar from "../Navbar/Navbar";
@@ -35,7 +36,10 @@ import {
   getMePosts,
   getMePictures,
   patchMeAvatar,
+  unAcceptFriendInvitation,
 } from "../../actions/meActions";
+import { getMeFriends } from "../../actions/meActions";
+import Friend from "../Friend/Friend";
 
 const Me = ({
   changeLanguage,
@@ -46,6 +50,9 @@ const Me = ({
   me,
   posts,
   pictures,
+  getMeFriends,
+  friends,
+  unAcceptFriendInvitation,
 }) => {
   const { t } = useTranslation();
   const { nameFirst, nameLast, login, avatar } = me?.me;
@@ -56,7 +63,8 @@ const Me = ({
     getMe();
     getMePosts();
     getMePictures();
-  }, [getMe, getMePosts, getMePictures]);
+    getMeFriends();
+  }, [getMe, getMePosts, getMePictures, getMeFriends]);
 
   const handleAvatarUpload = () => {
     const file = document.querySelector("input[type=file]")["files"][0];
@@ -166,8 +174,25 @@ const Me = ({
                   : t("noImages")}
               </MagicGrid>
             </TabPanel>
-            {/* Friends */}
-            <TabPanel>{t("noFriends")}</TabPanel>
+
+            <TabPanel>
+              <Wrap spacing="80px" justify="center">
+                {friends.length > 0 ? (
+                  friends.map(({ id, avatar, nameFirst, nameLast }) => (
+                    <Friend
+                      key={id}
+                      id={id}
+                      avatar={avatar}
+                      nameFirst={nameFirst}
+                      nameLast={nameLast}
+                      unAcceptFriendInvitation={unAcceptFriendInvitation}
+                    />
+                  ))
+                ) : (
+                  <Text>{t("noFriends")}</Text>
+                )}
+              </Wrap>
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </Box>
@@ -179,6 +204,7 @@ const mapStateToProps = (state) => ({
   me: state.me,
   posts: state.mePosts,
   pictures: state.mePictures,
+  friends: state.meFriends.friends,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -187,6 +213,8 @@ const mapDispatchToProps = (dispatch) => ({
   getMePictures: () => dispatch(getMePictures()),
   patchMeAvatar: (filename, avatar) =>
     dispatch(patchMeAvatar(filename, avatar)),
+  getMeFriends: () => dispatch(getMeFriends()),
+  unAcceptFriendInvitation: (id) => dispatch(unAcceptFriendInvitation(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Me);
