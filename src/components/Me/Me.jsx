@@ -3,7 +3,6 @@ import {
   Box,
   Flex,
   Grid,
-  GridItem,
   Heading,
   Image,
   Stack,
@@ -20,8 +19,8 @@ import Post from "../Posts/Post";
 import MagicGrid from "magic-grid-react";
 import { connect } from "react-redux";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
-import { getMe, getMePosts, getMePictures } from "../../actions/meActions";
 import { useEffect, useRef } from "react";
+import { getMe, getMePosts, getMePictures } from "../../actions/meActions";
 
 const Me = ({
   changeLanguage,
@@ -99,9 +98,7 @@ const Me = ({
             <TabPanel>
               {posts?.posts
                 ? posts.posts.map((post) => (
-                    <GridItem key={post.id}>
-                      <Post property={post} />
-                    </GridItem>
+                    <Post property={post} key={post.id} />
                   ))
                 : t("noPosts")}
             </TabPanel>

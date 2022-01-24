@@ -7,6 +7,9 @@ import {
   USER_POSTS_REQUEST,
   USER_POSTS_SUCCESS,
   USER_POSTS_FAILURE,
+  USER_PICTURES_REQUEST,
+  USER_PICTURES_SUCCESS,
+  USER_PICTURES_FAILURE,
   USER_ADD_TO_FRIENDS_REQUEST,
   USER_ADD_TO_FRIENDS_SUCCESS,
   USER_ADD_TO_FRIENDS_FAILURE,
@@ -35,6 +38,23 @@ export const getUserPosts = (id) => ({
       "Content-Type": "application/json",
     },
     types: [USER_POSTS_REQUEST, USER_POSTS_SUCCESS, USER_POSTS_FAILURE],
+  },
+});
+
+export const getUserPictures = (id) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/user/${id}/picture`,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      USER_PICTURES_REQUEST,
+      USER_PICTURES_SUCCESS,
+      USER_PICTURES_FAILURE,
+    ],
   },
 });
 

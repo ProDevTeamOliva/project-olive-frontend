@@ -4,8 +4,8 @@ import {
   Button,
   Flex,
   Grid,
-  GridItem,
   Heading,
+  Image,
   Stack,
   Tab,
   Tabs,
@@ -18,28 +18,38 @@ import { useTranslation } from "react-i18next";
 import Navbar from "../Navbar/Navbar";
 import { blueButtonStyle } from "../../styles/Buttons/blueButton";
 import Post from "../Posts/Post";
+import MagicGrid from "magic-grid-react";
 import { connect } from "react-redux";
-import { useEffect } from "react";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
-import { addToFriends, getUser, getUserPosts } from "../../actions/userActions";
+import { useEffect, useRef } from "react";
+import {
+  addToFriends,
+  getUser,
+  getUserPosts,
+  getUserPictures,
+} from "../../actions/userActions";
 
 const User = ({
   changeLanguage,
   id,
   getUser,
   getUserPosts,
+  getUserPictures,
   addToFriends,
   user,
   posts,
+  pictures,
   meFriends,
   pendingSent,
 }) => {
   const { t } = useTranslation();
   const { nameFirst, nameLast, login, avatar } = user?.user;
+  const gridRef = useRef();
 
   useEffect(() => {
     getUser(id);
     getUserPosts(id);
+    getUserPictures(id);
   }, [id]);
 
   const checkExistUserInMeListOfFriends = () => {
@@ -130,15 +140,28 @@ const User = ({
             <TabPanel>
               {posts?.posts
                 ? posts.posts.map((post) => (
-                    <GridItem key={post.id}>
-                      <Post property={post} />
-                    </GridItem>
+                    <Post property={post} key={post.id} />
                   ))
                 : t("noPosts")}
             </TabPanel>
             {/* Images */}
-            <TabPanel>
-              <p>{t("images")}</p>
+            <TabPanel px="0" py="4">
+              <MagicGrid
+                items={pictures.pictures.length}
+                ref={gridRef}
+                useTransform={false}
+              >
+                {pictures?.pictures.length > 0
+                  ? pictures.pictures.map((picture) => (
+                      <Box
+                        w={{ base: "90%", md: "45%", lg: "29%" }}
+                        key={picture.id}
+                      >
+                        <Image src={picture.picture} w="100%"></Image>
+                      </Box>
+                    ))
+                  : t("noImages")}
+              </MagicGrid>
             </TabPanel>
           </TabPanels>
         </Tabs>
@@ -150,6 +173,7 @@ const User = ({
 const mapStateToProps = (state) => ({
   user: state.user,
   posts: state.userPosts,
+  pictures: state.userPictures,
   meFriends: state.meFriends.friends,
   pendingSent: state.meFriends.pendingSent,
 });
@@ -157,6 +181,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getUser: (id) => dispatch(getUser(id)),
   getUserPosts: (id) => dispatch(getUserPosts(id)),
+  getUserPictures: (id) => dispatch(getUserPictures(id)),
   addToFriends: (id) => dispatch(addToFriends(id)),
 });
 
