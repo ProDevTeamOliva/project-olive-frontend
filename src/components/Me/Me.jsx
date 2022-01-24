@@ -54,9 +54,17 @@ const Me = ({
 
   useEffect(() => {
     getMe();
+  }, [getMe]);
+
+  useEffect(() => {
     getMePosts();
     getMePictures();
-  }, [getMe, getMePosts, getMePictures]);
+    const intervalId = setInterval(() => {
+      getMePosts();
+      getMePictures();
+    }, 3000);
+    return () => clearInterval(intervalId);
+  });
 
   const handleAvatarUpload = () => {
     const file = document.querySelector("input[type=file]")["files"][0];
