@@ -1,18 +1,21 @@
 import { RSAA } from "redux-api-middleware";
 import { baseUrl } from "../config/baseUrl";
 import {
-  ME_FAILURE,
   ME_REQUEST,
   ME_SUCCESS,
+  ME_FAILURE,
+  ME_POSTS_REQUEST,
+  ME_POSTS_SUCCESS,
+  ME_POSTS_FAILURE,
+  ME_PICTURES_REQUEST,
+  ME_PICTURES_SUCCESS,
+  ME_PICTURES_FAILURE,
   ME_FRIENDS_REQUEST,
   ME_FRIENDS_SUCCESS,
   ME_FRIENDS_FAILURE,
   ME_ACCEPT_INVITATION_REQUEST,
   ME_ACCEPT_INVITATION_SUCCESS,
   ME_ACCEPT_INVITATION_FAILURE,
-  ME_PICTURES_REQUEST,
-  ME_PICTURES_SUCCESS,
-  ME_PICTURES_FAILURE,
 } from "../types/meTypes";
 
 export const getMe = () => ({
@@ -28,16 +31,16 @@ export const getMe = () => ({
   },
 });
 
-export const getMeFriends = () => ({
+export const getMePosts = () => ({
   [RSAA]: {
-    endpoint: `${baseUrl}/me/friend`,
+    endpoint: `${baseUrl}/me/post`,
     method: "GET",
     credentials: "include",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    types: [ME_FRIENDS_REQUEST, ME_FRIENDS_SUCCESS, ME_FRIENDS_FAILURE],
+    types: [ME_POSTS_REQUEST, ME_POSTS_SUCCESS, ME_POSTS_FAILURE],
   },
 });
 
@@ -51,6 +54,19 @@ export const getMePictures = () => ({
       "Content-Type": "application/json",
     },
     types: [ME_PICTURES_REQUEST, ME_PICTURES_SUCCESS, ME_PICTURES_FAILURE],
+  },
+});
+
+export const getMeFriends = () => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/me/friend`,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [ME_FRIENDS_REQUEST, ME_FRIENDS_SUCCESS, ME_FRIENDS_FAILURE],
   },
 });
 
