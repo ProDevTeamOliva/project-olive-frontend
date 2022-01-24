@@ -11,6 +11,9 @@ import {
   LIKE_REQUEST,
   LIKE_SUCCESS,
   LIKE_FAILURE,
+  TAGS_REQUEST,
+  TAGS_SUCCESS,
+  TAGS_FAILURE,
 } from "../types/postTypes";
 
 import { RSAA } from "redux-api-middleware";
@@ -66,5 +69,18 @@ export const likePost = (id) => ({
       "Content-Type": "application/json",
     },
     types: [LIKE_REQUEST, LIKE_SUCCESS, LIKE_FAILURE],
+  },
+});
+
+export const getPostsByTag = (tag) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/post/search/` + tag,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [TAGS_REQUEST, TAGS_SUCCESS, TAGS_FAILURE],
   },
 });
