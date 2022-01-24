@@ -86,6 +86,7 @@ const Post = ({ property, likePost }) => {
           mt="1"
           fontWeight="semibold"
           as="h4"
+
           fontSize={["xl", "2xl"]}
           lineHeight="tight"
           isTruncated={hiddenContent}

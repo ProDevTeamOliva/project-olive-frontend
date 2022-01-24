@@ -10,6 +10,9 @@ import {
   ME_PICTURES_REQUEST,
   ME_PICTURES_SUCCESS,
   ME_PICTURES_FAILURE,
+  ME_AVATAR_REQUEST,
+  ME_AVATAR_SUCCESS,
+  ME_AVATAR_FAILURE,
   ME_FRIENDS_REQUEST,
   ME_FRIENDS_SUCCESS,
   ME_FRIENDS_FAILURE,
@@ -54,6 +57,23 @@ export const getMePictures = () => ({
       "Content-Type": "application/json",
     },
     types: [ME_PICTURES_REQUEST, ME_PICTURES_SUCCESS, ME_PICTURES_FAILURE],
+  },
+});
+
+export const patchMeAvatar = (filename, avatar) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/me/avatar`,
+    method: "PATCH",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      filename: filename,
+      avatar: avatar,
+    }),
+    types: [ME_AVATAR_REQUEST, ME_AVATAR_SUCCESS, ME_AVATAR_FAILURE],
   },
 });
 
