@@ -1,10 +1,17 @@
 import {
   Avatar,
   Box,
+  Button,
   Flex,
   Grid,
   Heading,
   Image,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalCloseButton,
   Stack,
   Tab,
   Tabs,
@@ -12,27 +19,37 @@ import {
   TabPanel,
   TabPanels,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import Navbar from "../Navbar/Navbar";
+import FileUpload from "../FileUpload/FileUpload";
 import Post from "../Posts/Post";
 import MagicGrid from "magic-grid-react";
+import { baseUrl } from "../../config/baseUrl";
 import { connect } from "react-redux";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
 import { useEffect, useRef } from "react";
-import { getMe, getMePosts, getMePictures } from "../../actions/meActions";
+import {
+  getMe,
+  getMePosts,
+  getMePictures,
+  patchMeAvatar,
+} from "../../actions/meActions";
 
 const Me = ({
   changeLanguage,
   getMe,
   getMePosts,
   getMePictures,
+  patchMeAvatar,
   me,
   posts,
   pictures,
 }) => {
   const { t } = useTranslation();
   const { nameFirst, nameLast, login, avatar } = me?.me;
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const gridRef = useRef();
 
   useEffect(() => {
@@ -40,6 +57,19 @@ const Me = ({
     getMePosts();
     getMePictures();
   }, []);
+
+  const handleAvatarUpload = () => {
+    const file = document.querySelector("input[type=file]")["files"][0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      patchMeAvatar(file.name, reader.result);
+      getMe();
+      onClose();
+    };
+
+    reader.readAsDataURL(file);
+  };
 
   return (
     <Grid
@@ -53,20 +83,44 @@ const Me = ({
         <Stack
           height={{ sm: "500px", md: "20rem" }}
           direction={{ base: "column", md: "row" }}
-          p="20"
+          p="4"
         >
           <Flex flex="1" justifyContent="center" alignItems="center">
-            <Avatar
-              h={{ base: "12rem", md: "16rem" }}
-              w={{ sm: "12rem", md: "16rem" }}
-              src={avatar}
-            />
+            <Button
+              onClick={onOpen}
+              variant="unstyled"
+              boxSize={{ base: "12rem", md: "16rem" }}
+              _focus={{ outline: "none" }}
+            >
+              <Avatar
+                boxSize={{ base: "12rem", md: "16rem" }}
+                src={baseUrl + avatar}
+              />
+            </Button>
+
+            <Modal isOpen={isOpen} onClose={onClose} isCentered>
+              <ModalOverlay />
+              <ModalContent mx="4">
+                <ModalHeader>{t("addProfilePicture")}</ModalHeader>
+                <ModalCloseButton mt="2" mr="1" _focus={{ outline: "none" }} />
+                <ModalBody pb="4">
+                  <FileUpload
+                    accept="image/*"
+                    w="75%"
+                    d="block"
+                    mx="auto"
+                    onChange={handleAvatarUpload}
+                  />
+                </ModalBody>
+              </ModalContent>
+            </Modal>
           </Flex>
           <Stack
             flex="1"
             flexDirection="column"
             justifyContent="center"
             alignItems="center"
+            pt={{ base: "4", md: "0" }}
           >
             <Heading fontSize="2xl" textAlign="center">
               {nameFirst} {nameLast}
@@ -74,15 +128,6 @@ const Me = ({
             <Text fontWeight="600" color="gray.500" size="sm">
               @{login}
             </Text>
-
-            <Stack
-              w="100%"
-              mb="2rem"
-              direction="row"
-              padding="2"
-              justifyContent="space-between"
-              alignItems="center"
-            ></Stack>
           </Stack>
         </Stack>
         <Tabs variant="soft-rounded" align="center">
@@ -140,6 +185,8 @@ const mapDispatchToProps = (dispatch) => ({
   getMe: () => dispatch(getMe()),
   getMePosts: () => dispatch(getMePosts()),
   getMePictures: () => dispatch(getMePictures()),
+  patchMeAvatar: (filename, avatar) =>
+    dispatch(patchMeAvatar(filename, avatar)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Me);

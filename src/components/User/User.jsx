@@ -19,6 +19,7 @@ import Navbar from "../Navbar/Navbar";
 import { blueButtonStyle } from "../../styles/Buttons/blueButton";
 import Post from "../Posts/Post";
 import MagicGrid from "magic-grid-react";
+import { baseUrl } from "../../config/baseUrl";
 import { connect } from "react-redux";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
 import { useEffect, useRef } from "react";
@@ -79,13 +80,12 @@ const User = ({
         <Stack
           height={{ sm: "500px", md: "20rem" }}
           direction={{ base: "column", md: "row" }}
-          p="20"
+          p="4"
         >
           <Flex flex="1" justifyContent="center" alignItems="center">
             <Avatar
-              h={{ base: "12rem", md: "16rem" }}
-              w={{ sm: "12rem", md: "16rem" }}
-              src={avatar}
+              boxSize={{ base: "12rem", md: "16rem" }}
+              src={baseUrl + avatar}
             />
           </Flex>
           <Stack

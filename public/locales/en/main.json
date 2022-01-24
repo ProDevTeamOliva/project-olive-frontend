@@ -43,6 +43,8 @@
   "amoutOfSignMin8": "Enter a combination of at least eight characters",
   "passwordValidation": "Password must contain at least one number and one uppercase and lowercase letter",
   "passwordRepeatValidation": "The password is not the same",
+  "addProfilePicture": "Add profile picture",
+  "upload": "Upload",
   "addFriend": "Add friend",
   "removeFriend": "Remove friend",
   "posts": "Posts",
