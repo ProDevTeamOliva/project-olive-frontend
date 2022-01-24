@@ -10,3 +10,7 @@ export const GET_POSTS_FAILURE = "GET_POSTS_FAILURE";
 export const LIKE_REQUEST = "LIKE_REQUEST";
 export const LIKE_SUCCESS = "LIKE_SUCCESS";
 export const LIKE_FAILURE = "LIKE_FAILURE";
+
+export const TAGS_REQUEST = "TAGS_REQUEST";
+export const TAGS_SUCCESS = "TAGS_SUCCESS";
+export const TAGS_FAILURE = "TAGS_FAILURE";
