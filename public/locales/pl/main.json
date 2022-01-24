@@ -43,6 +43,8 @@
   "amoutOfSignMin8": "Wpisz kombinację co najmniej ośmiu znaków",
   "passwordValidation": "Hasło musi zawierać co najmniej jedną cyfrę oraz jedną wielką i małą literę",
   "passwordRepeatValidation": "Hasło nie jest takie same",
+  "addProfilePicture": "Dodaj zdjęcie profilowe",
+  "upload": "Prześlij",
   "addFriend": "Dodaj znajomego",
   "removeFriend": "Usuń znajomego",
   "posts": "Posty",

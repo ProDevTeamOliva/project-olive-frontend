@@ -1,7 +1,6 @@
 import {
   Box,
   Image,
-  Badge,
   Button,
   Avatar,
   Text,
@@ -50,13 +49,7 @@ const Post = ({ property, likePost }) => {
     >
       <Box p="6">
         <Box display="flex" justifyContent="space-between">
-          <Badge borderRadius="full" colorScheme="teal">
-            <Avatar
-              boxSize="100"
-              src={baseUrl + property.user.avatar}
-              alt={property.user.id}
-            />
-          </Badge>
+          <Avatar boxSize="100" src={baseUrl + property.user.avatar} />
           <Box
             fontWeight="semibold"
             letterSpacing="wide"
@@ -74,7 +67,7 @@ const Post = ({ property, likePost }) => {
                   boxSize="50"
                   src={getPostTypeIcon(property.type)}
                   borderRadius="full"
-                ></Image>{" "}
+                />{" "}
                 <Text fontSize="2xl">{property.type}</Text>
               </Box>
             ) : (
@@ -87,7 +80,7 @@ const Post = ({ property, likePost }) => {
           mt="1"
           fontWeight="semibold"
           as="h4"
-          fontSize={"2xl"}
+          fontSize="2xl"
           lineHeight="tight"
           isTruncated={hiddenContent}
           onClick={() => setHiddenContent(!hiddenContent)}
