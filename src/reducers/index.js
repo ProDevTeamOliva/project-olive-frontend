@@ -9,6 +9,7 @@ import postsReducer from "./postsReducer";
 import searchUsersReducer from "./searchUsersReducer";
 import userReducer from "./userReducer";
 import userPostsReducer from "./userPostsReducer";
+import userPicturesReducer from "./userPicturesReducer";
 
 const reducers = combineReducers({
   logIn: logInReducer,
@@ -21,6 +22,7 @@ const reducers = combineReducers({
   meFriends: meFriendsReducer,
   user: userReducer,
   userPosts: userPostsReducer,
+  userPictures: userPicturesReducer,
 });
 
 export default reducers;
