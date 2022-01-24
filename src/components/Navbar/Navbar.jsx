@@ -9,7 +9,6 @@ import Language from "../Language/Language";
 import { getMe, getMeFriends } from "../../actions/meActions";
 import { Link } from "react-router-dom";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
-
 import { useEffect } from "react";
 import Bell from "../Notifications/Bell";
 import { getPosts } from "../../actions/postActions";
@@ -104,7 +103,6 @@ const Navbar = ({
             <Button w="125px">
               <Link to="/me">{t("myAccount")}</Link>
             </Button>
-            <Button w="125px">{t("friends")}</Button>
             <Button w="125px" onClick={logOut}>
               {t("logout")}
             </Button>

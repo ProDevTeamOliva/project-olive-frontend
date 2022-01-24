@@ -85,6 +85,7 @@ function SearchModal({ users, searchUsers, restartSearchUsers }) {
                       nameFirst={nameFirst}
                       nameLast={nameLast}
                       avatar={"http://localhost:5000" + avatar}
+                      onClose={onClose}
                     />
                   );
                 })}

@@ -59,5 +59,16 @@
   "alertAddFriend": "Czy potwierdzasz dodanie do znajomych ?",
   "noResults": "Brak rezultatów",
   "isFriend": "Jesteśmy znajomymi",
-  "sentInvitation": "Wysłano zaproszenie"
+  "sentInvitation": "Wysłano zaproszenie",
+  "submitPostAdd": "OPUBLIKUJ",
+  "amountOfFilesUploaded": "Liczba plików:",
+  "selectFile": "Wybierz Plik",
+  "Public": "Publiczny",
+  "Friends": "Znajomi",
+  "postType": "Typ Postu",
+  "addPostContentPlaceHolder": "O czym myślisz ?",
+  "meLikingPost": "oraz Ty",
+  "iDisLikeIt": "Dislike it!"
+  "delFriend": "Usunięcie znajomego",
+  "alertDelFriend": "Czy potwierdzasz usunięcie znajomego ?"
 }
