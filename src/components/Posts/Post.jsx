@@ -121,7 +121,6 @@ const Post = ({ property, likePost }) => {
         <Button padding="2" onClick={handleLikeButtonClick}>
           {t("iLikeIt")}
         </Button>
-        {/* Tutaj mozna odkomentowac i zobaczyc modal dodawania komentarza */}
         {/* <Box padding='2'>
                 {t('postBottomCommentBoxTitle')}
             </Box>
