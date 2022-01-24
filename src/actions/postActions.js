@@ -75,7 +75,6 @@ export const likePost = (id) => ({
   },
 });
 
-
 export const dislikePost = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/${id}/like`,
