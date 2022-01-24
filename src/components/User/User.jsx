@@ -165,7 +165,7 @@ const User = ({
                         w={{ base: "90%", md: "45%", lg: "29%" }}
                         key={picture.id}
                       >
-                        <Image src={picture.picture} w="100%"></Image>
+                        <Image src={baseUrl + picture.picture} w="100%"></Image>
                       </Box>
                     ))
                   : t("noImages")}
