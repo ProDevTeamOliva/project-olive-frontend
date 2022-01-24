@@ -4,6 +4,9 @@ import {
   USER_FAILURE,
   USER_REQUEST,
   USER_SUCCESS,
+  USER_POSTS_REQUEST,
+  USER_POSTS_SUCCESS,
+  USER_POSTS_FAILURE,
   USER_ADD_TO_FRIENDS_REQUEST,
   USER_ADD_TO_FRIENDS_SUCCESS,
   USER_ADD_TO_FRIENDS_FAILURE,
@@ -19,6 +22,19 @@ export const getUser = (id) => ({
       "Content-Type": "application/json",
     },
     types: [USER_REQUEST, USER_SUCCESS, USER_FAILURE],
+  },
+});
+
+export const getUserPosts = (id) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/user/${id}/post`,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [USER_POSTS_REQUEST, USER_POSTS_SUCCESS, USER_POSTS_FAILURE],
   },
 });
 

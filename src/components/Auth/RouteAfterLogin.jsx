@@ -1,6 +1,6 @@
 import { Route, Switch } from "react-router-dom";
-import MainPage from "../../components/MainPage/MainPage";
-import Me from "../../components/Me/Me";
+import MainPage from "../MainPage/MainPage";
+import Me from "../Me/Me";
 import NoPermission from "../MainPage/NoPermission";
 import User from "../User/User";
 
