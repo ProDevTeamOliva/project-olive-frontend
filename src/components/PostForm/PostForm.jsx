@@ -2,10 +2,6 @@ import {
   Button,
   Box,
   Input,
-  HStack,
-  TagLabel,
-  TagCloseButton,
-  Tag,
   Text,
   Image,
   RadioGroup,
@@ -32,7 +28,6 @@ import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 function PostForm({ onClose, addPost }) {
   const { t } = useTranslation();
   const [selectedFiles, setSelectedFiles] = useState([]);
-  const [tags, setTags] = useState([]);
 
   const getPostTypeIcon = (postType) => {
     if (postType === "Public") {
@@ -49,11 +44,22 @@ function PostForm({ onClose, addPost }) {
 
   const initialData = {
     content: "",
-    type: "",
-    tags,
+    type: "Public",
+  };
+
+  const getHashtags = (val) => {
+    const splittedContent = val.split(/[ ,.]/g);
+    let hashtags = [];
+    for (const idx in splittedContent) {
+      if (splittedContent[idx].charAt(0) === "#") {
+        hashtags.push(splittedContent[idx].slice(1).toLowerCase());
+      }
+    }
+    return hashtags;
   };
 
   const handleSubmit = async (values) => {
+    const hashtags = getHashtags(values.content);
     if (selectedFiles.length > 0) {
       let files64 = [];
       for (const file of selectedFiles) {
@@ -62,14 +68,14 @@ function PostForm({ onClose, addPost }) {
       }
       addPost({
         content: values.content,
-        tags,
+        tags: hashtags,
         type: values.type,
         pictures: files64,
       });
     } else {
       addPost({
         content: values.content,
-        tags,
+        tags: hashtags,
         type: values.type,
         pictures: [],
       });
@@ -82,16 +88,6 @@ function PostForm({ onClose, addPost }) {
       error = "Content is required";
     }
     return error;
-  };
-
-  const handleTagsInput = (e) => {
-    if (!tags.includes(e.target[0].value)) {
-      setTags([...tags, e.target[0].value]);
-    }
-    e.preventDefault();
-  };
-  const deleteTag = (name) => {
-    setTags(tags.filter((tag) => tag !== name));
   };
 
   return (
@@ -108,7 +104,7 @@ function PostForm({ onClose, addPost }) {
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder="Share what's on your mind ?"
+                      placeholder={t("addPostContentPlaceHolder")}
                       height={"10vh"}
                       id="content"
                       name="content"
@@ -124,17 +120,26 @@ function PostForm({ onClose, addPost }) {
                     id={"type"}
                     isInvalid={!!form.errors["type"] && !!form.touched["type"]}
                   >
-                    <FormLabel htmlFor={"type"}>Post TYPE</FormLabel>
-                    <RadioGroup {...field} id={"type"}>
+                    <FormLabel htmlFor={"type"}>{t("postType")}</FormLabel>
+                    <RadioGroup
+                      {...field}
+                      id={"type"}
+                      style={{ touchAction: "none" }}
+                    >
                       {["Public", "Friends"].map((value, index) => (
-                        <Radio {...field} value={value} key={index}>
+                        <Radio
+                          {...field}
+                          value={value}
+                          key={index}
+                          style={{ touchAction: "none" }}
+                        >
                           <Image
                             marginRight="10px"
                             boxSize="50"
                             src={getPostTypeIcon(value)}
                             borderRadius="full"
                           ></Image>{" "}
-                          <Text fontSize="2xl">{value}</Text>
+                          <Text fontSize="2xl">{t(value)}</Text>
                         </Radio>
                       ))}
                     </RadioGroup>
@@ -142,56 +147,33 @@ function PostForm({ onClose, addPost }) {
                   </FormControl>
                 )}
               </Field>
-
+              <Button
+                {...unStyledButton}
+                onClick={() => document.getElementById("input-file").click()}
+              >
+                {t("selectFile")}
+                <Input
+                  variant="unstyled"
+                  display="none"
+                  type="file"
+                  id="input-file"
+                  accept="image/*"
+                  name="file"
+                  multiple
+                  mt="2"
+                  onChange={(e) => setSelectedFiles(e.target.files)}
+                ></Input>
+              </Button>
+              <label style={{ marginLeft: "20px" }}>
+                {t("amountOfFilesUploaded")} {selectedFiles.length}
+              </label>
               <Button {...purpleButtonStyle} type="submit" mb="20px" mt="20px">
-                Submit
+                {t("submitPostAdd")}
               </Button>
-            </Form>
-            <Form onSubmit={(e) => handleTagsInput(e)}>
-              <Input placeholder="What about some tags ??" />
-
-              <Button {...unStyledButton} type="submit">
-                Add Tag
-              </Button>
-              <HStack spacing={4}>
-                {tags.map((tag, index) => (
-                  <Tag
-                    size={"20"}
-                    key={index}
-                    borderRadius="full"
-                    variant="solid"
-                    colorScheme="green"
-                  >
-                    <TagLabel>{tag}</TagLabel>
-                    <TagCloseButton onClick={() => deleteTag(tag)} />
-                  </Tag>
-                ))}
-              </HStack>
             </Form>
           </>
         )}
       </Formik>
-
-      <Button
-        {...unStyledButton}
-        onClick={() => document.getElementById("input-file").click()}
-      >
-        Select file
-        <Input
-          variant="unstyled"
-          display="none"
-          type="file"
-          id="input-file"
-          accept="image/*"
-          name="file"
-          multiple
-          mt="2"
-          onChange={(e) => setSelectedFiles(e.target.files)}
-        ></Input>
-      </Button>
-      <label style={{ marginLeft: "20px" }}>
-        Liczba plików: {selectedFiles.length}
-      </label>
     </Box>
   );
 }

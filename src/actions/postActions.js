@@ -11,6 +11,9 @@ import {
   LIKE_REQUEST,
   LIKE_SUCCESS,
   LIKE_FAILURE,
+  DISLIKE_REQUEST,
+  DISLIKE_SUCCESS,
+  DISLIKE_FAILURE,
   TAGS_REQUEST,
   TAGS_SUCCESS,
   TAGS_FAILURE,
@@ -69,6 +72,19 @@ export const likePost = (id) => ({
       "Content-Type": "application/json",
     },
     types: [LIKE_REQUEST, LIKE_SUCCESS, LIKE_FAILURE],
+  },
+});
+
+export const dislikePost = (id) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/post/${id}/like`,
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [DISLIKE_REQUEST, DISLIKE_SUCCESS, DISLIKE_FAILURE],
   },
 });
 
