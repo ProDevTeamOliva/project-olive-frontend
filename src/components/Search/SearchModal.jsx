@@ -19,6 +19,7 @@ import { connect } from "react-redux";
 import { restartSearchUsers, searchUsers } from "../../actions/searchActions";
 import Search from "./Search";
 import LinkSearch from "./LinkSearch";
+import { baseUrl } from "../../config/baseUrl";
 
 function SearchModal({ users, searchUsers, restartSearchUsers }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -84,7 +85,7 @@ function SearchModal({ users, searchUsers, restartSearchUsers }) {
                       id={id}
                       nameFirst={nameFirst}
                       nameLast={nameLast}
-                      avatar={"http://localhost:5000" + avatar}
+                      avatar={baseUrl + avatar}
                       onClose={onClose}
                     />
                   );
