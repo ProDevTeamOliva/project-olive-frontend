@@ -14,6 +14,9 @@ import {
   DISLIKE_REQUEST,
   DISLIKE_SUCCESS,
   DISLIKE_FAILURE,
+  TAGS_REQUEST,
+  TAGS_SUCCESS,
+  TAGS_FAILURE,
 } from "../types/postTypes";
 
 import { RSAA } from "redux-api-middleware";
@@ -72,6 +75,7 @@ export const likePost = (id) => ({
   },
 });
 
+
 export const dislikePost = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/${id}/like`,
@@ -82,5 +86,18 @@ export const dislikePost = (id) => ({
       "Content-Type": "application/json",
     },
     types: [DISLIKE_REQUEST, DISLIKE_SUCCESS, DISLIKE_FAILURE],
+  },
+});
+
+export const getPostsByTag = (tag) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/post/search/` + tag,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [TAGS_REQUEST, TAGS_SUCCESS, TAGS_FAILURE],
   },
 });

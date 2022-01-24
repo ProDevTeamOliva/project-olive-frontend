@@ -3,6 +3,7 @@ import MainPage from "../MainPage/MainPage";
 import Me from "../Me/Me";
 import NoPermission from "../MainPage/NoPermission";
 import User from "../User/User";
+import PostsFiltered from "../Posts/PostsFiltered";
 
 function RouteAfterLogin({ changeLanguage }) {
   return (
@@ -25,6 +26,16 @@ function RouteAfterLogin({ changeLanguage }) {
             id={routerProps.match.params.id}
             changeLanguage={changeLanguage}
           ></User>
+        )}
+      ></Route>
+      <Route
+        exact
+        path="/posts/:tag"
+        component={(routerProps) => (
+          <PostsFiltered
+            tag={routerProps.match.params.tag}
+            changeLanguage={changeLanguage}
+          ></PostsFiltered>
         )}
       ></Route>
 

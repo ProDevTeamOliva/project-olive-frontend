@@ -16,6 +16,7 @@ import { baseUrl } from "../../config/baseUrl";
 import { connect } from "react-redux";
 import { dislikePost, likePost } from "../../actions/postActions";
 import Carousel from "../Carousel/Carousel";
+import { Link } from "react-router-dom";
 
 const getPostTypeIcon = (postType) => {
   if (postType === "Public") {
@@ -127,9 +128,11 @@ const Post = ({ property, likePost, dislikePost, me }) => {
           <HStack>
             {property.tags &&
               property.tags.map((tag, index) => (
-                <Tag key={index} size={"md"} variant="solid" colorScheme="teal">
-                  {tag}
-                </Tag>
+                <Link to={`/posts/${tag}`} key={index}>
+                  <Tag size={"md"} variant="solid" colorScheme="teal">
+                    {tag}
+                  </Tag>
+                </Link>
               ))}
           </HStack>
         </Box>

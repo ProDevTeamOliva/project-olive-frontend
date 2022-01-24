@@ -78,7 +78,7 @@ const Notification = ({
         onCloseAlert={onCloseAlert}
         fun={acceptFriend}
         cancelRef={cancelRef}
-        header={t("addFriend")}
+        header={t("addFriends")}
         body={t("alertAddFriend")}
       />
     </Box>

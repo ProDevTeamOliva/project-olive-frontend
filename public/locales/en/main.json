@@ -69,4 +69,6 @@
   "addPostContentPlaceHolder": "Share what's on your mind ?",
   "meLikingPost": "and You",
   "iDisLikeIt": "Dislike it!"
+  "delFriend": "Removing a friend",
+  "alertDelFriend": "Do you confirm removal of a friend ?"
 }
