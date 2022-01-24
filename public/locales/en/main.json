@@ -59,5 +59,14 @@
   "noResults": "No results",
   "isFriend": "We are friends",
   "sentInvitation": "Invitation sent",
-  "notifications": "Notifications"
+  "notifications": "Notifications",
+  "submitPostAdd": "PUBLISH",
+  "amountOfFilesUploaded": "Amount of files:",
+  "selectFile": "Select File",
+  "Public": "Public",
+  "Friends": "Friends",
+  "postType": "Type of Post",
+  "addPostContentPlaceHolder": "Share what's on your mind ?",
+  "meLikingPost": "and You",
+  "iDisLikeIt": "Dislike it!"
 }

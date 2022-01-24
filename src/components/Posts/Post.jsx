@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { baseUrl } from "../../config/baseUrl";
 import { connect } from "react-redux";
-import { likePost } from "../../actions/postActions";
+import { dislikePost, likePost } from "../../actions/postActions";
 import Carousel from "../Carousel/Carousel";
 
 const getPostTypeIcon = (postType) => {
@@ -30,13 +30,39 @@ const getPostTypeIcon = (postType) => {
   return null;
 };
 
-const Post = ({ property, likePost }) => {
+const Post = ({ property, likePost, dislikePost, me }) => {
   const [hiddenContent, setHiddenContent] = useState(true);
 
   const { t } = useTranslation();
   const handleLikeButtonClick = () => {
     likePost(property.id);
   };
+  const handleDisLikeButtonClick = () => {
+    dislikePost(property.id);
+  };
+  const checkIfILikePost = () => {
+    const res = property.likes.filter((like) => like.login === me.me.login);
+    if (res.length > 0) {
+      return true;
+    }
+    return false;
+  };
+
+  const renderLikeDislikeButton = () => {
+    if (checkIfILikePost()) {
+      return (
+        <Button padding="2" onClick={handleDisLikeButtonClick}>
+          {t("iDisLikeIt")}
+        </Button>
+      );
+    }
+    return (
+      <Button padding="2" onClick={handleLikeButtonClick}>
+        {t("iLikeIt")}
+      </Button>
+    );
+  };
+
   return (
     <Box
       borderWidth="1px"
@@ -73,11 +99,11 @@ const Post = ({ property, likePost }) => {
                   borderRadius="full"
                 ></Image>
                 <Text fontSize={["xs", "xs"]} textAlign="center">
-                  {property.type}
+                  {t(property.type)}
                 </Text>
               </Box>
             ) : (
-              property.type
+              t(property.type)
             )}
           </Box>
         </Box>
@@ -86,7 +112,6 @@ const Post = ({ property, likePost }) => {
           mt="1"
           fontWeight="semibold"
           as="h4"
-
           fontSize={["xl", "2xl"]}
           lineHeight="tight"
           isTruncated={hiddenContent}
@@ -116,11 +141,10 @@ const Post = ({ property, likePost }) => {
 
       <Box display="flex" flexWrap="wrap" justifyContent="space-between">
         <Box padding="2">
-          {t("likes")} {property.likes.length}
+          {t("likes")} {property.likes.length}{" "}
+          {checkIfILikePost() && t("meLikingPost")}
         </Box>
-        <Button padding="2" onClick={handleLikeButtonClick}>
-          {t("iLikeIt")}
-        </Button>
+        {renderLikeDislikeButton()}
         {/* <Box padding='2'>
                 {t('postBottomCommentBoxTitle')}
             </Box>
@@ -130,9 +154,12 @@ const Post = ({ property, likePost }) => {
     </Box>
   );
 };
-
+const mapStateToProps = (state) => ({
+  me: state.me,
+});
 const mapDispatchToProps = (dispatch) => ({
   likePost: (id) => dispatch(likePost(id)),
+  dislikePost: (id) => dispatch(dislikePost(id)),
 });
 
-export default connect(null, mapDispatchToProps)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
