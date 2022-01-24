@@ -122,9 +122,9 @@ const Post = ({ property, likePost, dislikePost, me }) => {
         </Box>
 
         <Box display="grid" mt="2" alignItems="center">
-          <Box color="gray.300" fontSize="sm" textShadow="sm">
+          {/* <Box color="gray.300" fontSize="sm" textShadow="sm">
             {property.feeling} (TUTAJ DOROBIĆ nastrój w poście.) 😎🤬🤢
-          </Box>
+          </Box> */}
           <HStack>
             {property.tags &&
               property.tags.map((tag, index) => (
