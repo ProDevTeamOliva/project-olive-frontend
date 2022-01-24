@@ -155,7 +155,9 @@ const User = ({
             {/* Images */}
             <TabPanel px="0" py="4">
               <MagicGrid
-                items={pictures.pictures.length}
+                items={
+                  pictures && pictures.pictures ? pictures.pictures.length : 0
+                }
                 ref={gridRef}
                 useTransform={false}
               >
