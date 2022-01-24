@@ -86,7 +86,9 @@ const Me = ({ changeLanguage, me, pictures }) => {
           </TabList>
           <TabPanels>
             {/* Posts */}
-            <TabPanel>{/* <Post /> */}</TabPanel>
+            <TabPanel>
+              <Post />
+            </TabPanel>
             {/* Images */}
             <TabPanel px="0" py="4">
               <MagicGrid
