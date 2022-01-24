@@ -59,12 +59,19 @@ const Me = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const gridRef = useRef();
 
-  useEffect(() => {
+useEffect(() => {
     getMe();
+  }, [getMe]);
+
+  useEffect(() => {
     getMePosts();
     getMePictures();
-    getMeFriends();
-  }, [getMe, getMePosts, getMePictures, getMeFriends]);
+    const intervalId = setInterval(() => {
+      getMePosts();
+      getMePictures();
+    }, 3000);
+    return () => clearInterval(intervalId);
+  });
 
   const handleAvatarUpload = () => {
     const file = document.querySelector("input[type=file]")["files"][0];
