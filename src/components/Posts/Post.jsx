@@ -3,7 +3,6 @@ import {
   Image,
   Badge,
   Button,
-  StatHelpText,
   Avatar,
   Text,
   HStack,
@@ -14,11 +13,10 @@ import FriendsPostIcon from "../../img/icons/FriendsPostIcon.png";
 import GroupChatPostIcon from "../../img/icons/GroupChatPostIcon.png";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import AddCommentModal from "./AddCommentModal";
 import { baseUrl } from "../../config/baseUrl";
-import SimpleImageSlider from "react-simple-image-slider";
 import { connect } from "react-redux";
 import { likePost } from "../../actions/postActions";
+import Carousel from "../Carousel/Carousel";
 
 const getPostTypeIcon = (postType) => {
   if (postType === "Public") {
@@ -31,13 +29,6 @@ const getPostTypeIcon = (postType) => {
     return GroupChatPostIcon;
   }
   return null;
-};
-
-const convertArrayToArrayOfObjects = (arr) => {
-  let acc = [];
-  arr.forEach((elem) => acc.push({ url: baseUrl + elem }));
-  console.log(acc);
-  return acc;
 };
 
 const Post = ({ property, likePost }) => {
@@ -110,8 +101,8 @@ const Post = ({ property, likePost }) => {
           </Box>
           <HStack>
             {property.tags &&
-              property.tags.map((tag) => (
-                <Tag size={"md"} variant="solid" colorScheme="teal">
+              property.tags.map((tag, index) => (
+                <Tag key={index} size={"md"} variant="solid" colorScheme="teal">
                   {tag}
                 </Tag>
               ))}
@@ -119,21 +110,8 @@ const Post = ({ property, likePost }) => {
         </Box>
       </Box>
 
-      {/* <Image
-          display="block"
-          marginLeft="auto"
-          marginRight="auto"
-          src={property.imageUrl}
-          alt={property.imageAlt}
-        /> */}
       {property.pictures && property.pictures.length > 0 && (
-        <SimpleImageSlider
-          height={600}
-          width={"100%"}
-          images={convertArrayToArrayOfObjects(property.pictures)}
-          showBullets={true}
-          showNavs={true}
-        />
+        <Carousel cards={property.pictures} />
       )}
 
       <Box display="flex" flexWrap="wrap" justifyContent="space-between">

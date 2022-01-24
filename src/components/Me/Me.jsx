@@ -79,14 +79,14 @@ const Me = ({ changeLanguage, me, pictures }) => {
         <Tabs variant="soft-rounded" align="center">
           <TabList>
             <Tab {...tabStyle}>{t("posts")}</Tab>
-            <Tab {...tabStyle}  onClick={() => gridRef.current.positionItems()}>{t("images")}</Tab>
+            <Tab {...tabStyle} onClick={() => gridRef.current.positionItems()}>
+              {t("images")}
+            </Tab>
             <Tab {...tabStyle}>{t("friends")}</Tab>
           </TabList>
           <TabPanels>
             {/* Posts */}
-            <TabPanel>
-              <Post />
-            </TabPanel>
+            <TabPanel>{/* <Post /> */}</TabPanel>
             {/* Images */}
             <TabPanel px="0" py="4">
               <MagicGrid

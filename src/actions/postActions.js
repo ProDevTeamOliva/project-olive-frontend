@@ -18,7 +18,7 @@ import { baseUrl } from "../config/baseUrl";
 
 export const addPost = (payload) => ({
   [RSAA]: {
-    endpoint: `${baseUrl}/login`,
+    endpoint: `${baseUrl}/post`,
     method: "POST",
     body: JSON.stringify(payload),
     credentials: "include",

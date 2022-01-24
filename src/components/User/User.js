@@ -120,9 +120,7 @@ const User = ({
           </TabList>
           <TabPanels>
             {/* Posts */}
-            <TabPanel>
-              <Post />
-            </TabPanel>
+            <TabPanel>{/* <Post /> */}</TabPanel>
             {/* Images */}
             <TabPanel>
               <p>{t("images")}</p>
