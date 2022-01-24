@@ -39,7 +39,7 @@ const Navbar = ({
       getMeFriends();
     }, 3000);
     return () => clearInterval(intervalId);
-  });
+  }, [getPosts, getMeFriends]);
 
   return (
     <Box
