@@ -3,6 +3,7 @@ import {
   Box,
   Flex,
   Grid,
+  GridItem,
   Heading,
   Image,
   Stack,
@@ -19,16 +20,25 @@ import Post from "../Posts/Post";
 import MagicGrid from "magic-grid-react";
 import { connect } from "react-redux";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
-import { getMe, getMePictures } from "../../actions/meActions";
+import { getMe, getMePosts, getMePictures } from "../../actions/meActions";
 import { useEffect, useRef } from "react";
 
-const Me = ({ changeLanguage, me, pictures }) => {
+const Me = ({
+  changeLanguage,
+  getMe,
+  getMePosts,
+  getMePictures,
+  me,
+  posts,
+  pictures,
+}) => {
   const { t } = useTranslation();
   const { nameFirst, nameLast, login, avatar } = me?.me;
   const gridRef = useRef();
 
   useEffect(() => {
     getMe();
+    getMePosts();
     getMePictures();
   }, []);
 
@@ -59,33 +69,41 @@ const Me = ({ changeLanguage, me, pictures }) => {
             justifyContent="center"
             alignItems="center"
           >
-            <Heading fontSize="2xl">
+            <Heading fontSize="2xl" textAlign="center">
               {nameFirst} {nameLast}
             </Heading>
             <Text fontWeight="600" color="gray.500" size="sm">
-              {`@${login}`}
+              @{login}
             </Text>
 
             <Stack
-              width={"100%"}
-              mb={"2rem"}
-              direction={"row"}
-              padding={2}
-              justifyContent={"space-between"}
-              alignItems={"center"}
+              w="100%"
+              mb="2rem"
+              direction="row"
+              padding="2"
+              justifyContent="space-between"
+              alignItems="center"
             ></Stack>
           </Stack>
         </Stack>
         <Tabs variant="soft-rounded" align="center">
           <TabList>
             <Tab {...tabStyle}>{t("posts")}</Tab>
-            <Tab {...tabStyle}  onClick={() => gridRef.current.positionItems()}>{t("images")}</Tab>
+            <Tab {...tabStyle} onClick={() => gridRef.current.positionItems()}>
+              {t("images")}
+            </Tab>
             <Tab {...tabStyle}>{t("friends")}</Tab>
           </TabList>
           <TabPanels>
             {/* Posts */}
             <TabPanel>
-              <Post />
+              {posts?.posts
+                ? posts.posts.map((post) => (
+                    <GridItem key={post.id}>
+                      <Post property={post} />
+                    </GridItem>
+                  ))
+                : t("noPosts")}
             </TabPanel>
             {/* Images */}
             <TabPanel px="0" py="4">
@@ -94,20 +112,20 @@ const Me = ({ changeLanguage, me, pictures }) => {
                 ref={gridRef}
                 useTransform={false}
               >
-                {pictures.pictures.map((picture) => (
-                  <Box
-                    w={{ base: "90%", md: "45%", lg: "29%" }}
-                    key={picture.id}
-                  >
-                    <Image src={picture.picture} w="100%"></Image>
-                  </Box>
-                ))}
+                {pictures?.pictures.length > 0
+                  ? pictures.pictures.map((picture) => (
+                      <Box
+                        w={{ base: "90%", md: "45%", lg: "29%" }}
+                        key={picture.id}
+                      >
+                        <Image src={picture.picture} w="100%"></Image>
+                      </Box>
+                    ))
+                  : t("noImages")}
               </MagicGrid>
             </TabPanel>
             {/* Friends */}
-            <TabPanel>
-              <p>{t("friends")}</p>
-            </TabPanel>
+            <TabPanel>{t("noFriends")}</TabPanel>
           </TabPanels>
         </Tabs>
       </Box>
@@ -117,11 +135,13 @@ const Me = ({ changeLanguage, me, pictures }) => {
 
 const mapStateToProps = (state) => ({
   me: state.me,
+  posts: state.mePosts,
   pictures: state.mePictures,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getMe: () => dispatch(getMe()),
+  getMePosts: () => dispatch(getMePosts()),
   getMePictures: () => dispatch(getMePictures()),
 });
 

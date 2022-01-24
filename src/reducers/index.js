@@ -1,8 +1,9 @@
 import { combineReducers } from "redux";
 import logInReducer from "./logInReducer";
-import meFriendsReducer from "./meFriendsReducer";
-import mePicturesReducer from "./mePicturesReducer";
 import meReducer from "./meReducers";
+import mePostsReducer from "./mePostsReducer";
+import mePicturesReducer from "./mePicturesReducer";
+import meFriendsReducer from "./meFriendsReducer";
 import registerReducer from "./registerReducer";
 import postsReducer from "./postsReducer";
 import searchUsersReducer from "./searchUsersReducer";
@@ -14,9 +15,10 @@ const reducers = combineReducers({
   posts: postsReducer,
   searchUsers: searchUsersReducer,
   me: meReducer,
+  mePosts: mePostsReducer,
+  mePictures: mePicturesReducer,
   meFriends: meFriendsReducer,
   user: userReducer,
-  mePictures: mePicturesReducer,
 });
 
 export default reducers;

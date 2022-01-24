@@ -26,14 +26,13 @@ const User = ({
   changeLanguage,
   id,
   getUser,
-  nameFirst,
-  nameLast,
-  login,
+  user,
   addToFriends,
   meFriends,
   pendingSent,
 }) => {
   const { t } = useTranslation();
+  const { nameFirst, nameLast, login, avatar } = user?.user;
 
   useEffect(() => {
     getUser(id);
@@ -55,20 +54,20 @@ const User = ({
       h="100vh"
       mt="75px"
       justifyContent="center"
-      templateColumns="minmax(200px, 800px)"
+      templateColumns="minmax(200px, 1000px)"
     >
       <Navbar changeLanguage={changeLanguage} />
-      <Box my="25px">
+      <Box p="25px">
         <Stack
           height={{ sm: "500px", md: "20rem" }}
           direction={{ base: "column", md: "row" }}
-          p="0"
+          p="20"
         >
           <Flex flex="1" justifyContent="center" alignItems="center">
             <Avatar
               h={{ base: "12rem", md: "16rem" }}
               w={{ sm: "12rem", md: "16rem" }}
-              src="https://bit.ly/ryan-florence"
+              src={avatar}
             />
           </Flex>
           <Stack
@@ -77,7 +76,7 @@ const User = ({
             justifyContent="center"
             alignItems="center"
           >
-            <Heading fontSize="2xl">
+            <Heading fontSize="2xl" textAlign="center">
               {nameFirst} {nameLast}
             </Heading>
             <Text fontWeight="600" color="gray.500" size="sm">
@@ -85,12 +84,12 @@ const User = ({
             </Text>
 
             <Stack
-              width={"100%"}
-              mb={"2rem"}
-              direction={"row"}
-              padding={2}
-              justifyContent={"space-between"}
-              alignItems={"center"}
+              w="100%"
+              mb="2rem"
+              direction="row"
+              padding="2"
+              justifyContent="space-between"
+              alignItems="center"
             >
               {checkExistUserInMeListOfFriends() &&
                 !checkExistUserInPendingSent() && (
@@ -113,7 +112,7 @@ const User = ({
             </Stack>
           </Stack>
         </Stack>
-        <Tabs variant="soft-rounded" align="center" p="4">
+        <Tabs variant="soft-rounded" align="center">
           <TabList>
             <Tab {...tabStyle}>{t("posts")}</Tab>
             <Tab {...tabStyle}>{t("images")}</Tab>
@@ -121,7 +120,7 @@ const User = ({
           <TabPanels>
             {/* Posts */}
             <TabPanel>
-              <Post />
+              {/* <Post /> */}
             </TabPanel>
             {/* Images */}
             <TabPanel>
@@ -135,9 +134,7 @@ const User = ({
 };
 
 const mapStateToProps = (state) => ({
-  nameFirst: state.user.user.nameFirst,
-  nameLast: state.user.user.nameLast,
-  login: state.user.user.login,
+  user: state.user,
   meFriends: state.meFriends.friends,
   pendingSent: state.meFriends.pendingSent,
 });
