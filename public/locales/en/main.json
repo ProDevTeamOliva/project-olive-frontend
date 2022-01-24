@@ -59,5 +59,7 @@
   "noResults": "No results",
   "isFriend": "We are friends",
   "sentInvitation": "Invitation sent",
-  "notifications": "Notifications"
+  "notifications": "Notifications",
+  "delFriend": "Removing a friend",
+  "alertDelFriend": "Do you confirm removal of a friend ?"
 }

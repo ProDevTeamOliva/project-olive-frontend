@@ -59,5 +59,8 @@
   "alertAddFriend": "Czy potwierdzasz dodanie do znajomych ?",
   "noResults": "Brak rezultatów",
   "isFriend": "Jesteśmy znajomymi",
-  "sentInvitation": "Wysłano zaproszenie"
+  "sentInvitation": "Wysłano zaproszenie",
+  "delFriend": "Usunięcie znajomego",
+  "alertDelFriend": "Czy potwierdzasz usunięcie znajomego ?"
+
 }
