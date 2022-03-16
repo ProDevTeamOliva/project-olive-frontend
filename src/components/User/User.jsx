@@ -17,7 +17,7 @@ import {
 import { useTranslation } from "react-i18next";
 import Navbar from "../Navbar/Navbar";
 import { blueButtonStyle } from "../../styles/Buttons/blueButton";
-import Post from "../Posts/Post";
+import Post from "../Posts/Post/Post";
 import MagicGrid from "magic-grid-react";
 import { baseUrl } from "../../config/baseUrl";
 import { connect } from "react-redux";

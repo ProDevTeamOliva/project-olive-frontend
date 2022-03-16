@@ -1,17 +1,20 @@
 import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
-import Post from "../Posts/Post";
+import Post from "../Posts/Post/Post";
 import SearchByTags from "../Search/SearchByTags";
-import AddPostModal from "../Posts/AddPostModal";
+import AddPostModal from "../Posts/AddPost/AddPostModal";
 import { useCallback } from "react";
 import { getPosts } from "../../actions/postActions";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 
-function MainPage({ changeLanguage, getPosts, posts }) {
-  useCallback(() => {
-    getPosts();
-  }, [getPosts]);
+function MainPage({ changeLanguage, getPosts }) {
+  // useCallback(() => {
+  //   getPosts();
+  // }, [getPosts]);
+
+  const postsIds = useSelector((state) => state.posts.map((post) => post.id));
+
   const { t } = useTranslation();
 
   return (
@@ -20,12 +23,8 @@ function MainPage({ changeLanguage, getPosts, posts }) {
       <SearchByTags />
       <AddPostModal />
       <Grid m="25px" gap={5}>
-        {posts.length > 0 ? (
-          posts.map((post) => (
-            <GridItem key={post.id}>
-              <Post property={post} key={post.id} />
-            </GridItem>
-          ))
+        {postsIds.length > 0 ? (
+          postsIds.map((postId) => <Post key={postId} id={postId} />)
         ) : (
           <Text textAlign="center">{t("noPosts")}</Text>
         )}
@@ -34,10 +33,7 @@ function MainPage({ changeLanguage, getPosts, posts }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  posts: state.posts,
-});
 const mapDispatchToProps = (dispatch) => ({
   getPosts: () => dispatch(getPosts()),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
+export default connect(null, mapDispatchToProps)(MainPage);

@@ -4,7 +4,7 @@ import Language from "../Language/Language";
 import LogInForm from "../LogInForm/LogInForm";
 import Logo from "../Logo/Logo";
 
-function LogInPage({ isAuth, loginSubmit, changeLanguage }) {
+function LogInPage({ isAuth, changeLanguage }) {
   return (
     <Box>
       <Language changeLanguage={changeLanguage} />
@@ -16,7 +16,7 @@ function LogInPage({ isAuth, loginSubmit, changeLanguage }) {
           gap="25px"
         >
           <Logo fontSize="26" scaleWidth={9.4} />
-          <LogInForm loginSubmit={loginSubmit} />
+          <LogInForm />
         </Grid>
         {isAuth !== true ? (
           <Redirect to="/login"></Redirect>

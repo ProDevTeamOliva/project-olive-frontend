@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import { Box, IconButton, Image, useBreakpointValue } from "@chakra-ui/react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import Slider from "react-slick";
@@ -18,7 +18,6 @@ const settings = {
 
 const Carousel = ({ cards }) => {
   const [slider, setSlider] = useState(null);
-
   const top = useBreakpointValue({ base: "90%", md: "50%" });
   const side = useBreakpointValue({ base: "30%", md: "10px" });
   return (
@@ -85,4 +84,4 @@ const Carousel = ({ cards }) => {
     </Box>
   );
 };
-export default Carousel;
+export default memo(Carousel);
