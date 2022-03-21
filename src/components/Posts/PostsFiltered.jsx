@@ -1,6 +1,6 @@
 import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
-import Post from "../Posts/Post";
+import Post from "../Posts/Post/Post";
 import { useEffect } from "react";
 import { getPostsByTag } from "../../actions/postActions";
 import { connect } from "react-redux";

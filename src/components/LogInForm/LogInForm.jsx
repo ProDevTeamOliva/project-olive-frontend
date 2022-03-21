@@ -1,12 +1,12 @@
-import { Grid, Button, Box, Text, Divider } from "@chakra-ui/react";
+import { Grid, Box, Text, Divider } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import InputComponent from "../Inputs/InputComponent";
 import RegisterModal from "../RegisterForm/RegisterModal";
-import { blueButtonStyle } from "../../styles/Buttons/blueButton";
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { logIn } from "../../actions/authActions";
 import { validateRequired } from "../../validators/validateRequired";
+import ButtonLoginForm from "./ButtonLoginForm";
 
 function LogInForm({ logIn, message, status }) {
   const initialDataLogin = { login: "", password: "" };
@@ -76,16 +76,7 @@ function LogInForm({ logIn, message, status }) {
                 value={password}
                 {...inputColors}
               />
-
-              <Button
-                isLoading={isSubmitting}
-                type="submit"
-                mb="20px"
-                mt="20px"
-                {...blueButtonStyle}
-              >
-                {t("logIn")}
-              </Button>
+              <ButtonLoginForm isSubmitting={isSubmitting} t={t} />
             </Grid>
           </Form>
         )}

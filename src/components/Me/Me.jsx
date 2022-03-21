@@ -26,7 +26,7 @@ import { useTranslation } from "react-i18next";
 import Navbar from "../Navbar/Navbar";
 import FileUpload from "../FileUpload/FileUpload";
 import toBase64 from "../../operations/base64";
-import Post from "../Posts/Post";
+import Post from "../Posts/Post/Post";
 import PublicPrivate from "../FileUpload/PublicPrivate";
 import MagicGrid from "magic-grid-react";
 import { baseUrl } from "../../config/baseUrl";

@@ -11,7 +11,7 @@ import {
   Box,
   Flex,
 } from "@chakra-ui/react";
-import PostForm from "../PostForm/PostForm";
+import PostForm from "../../PostForm/PostForm";
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 
