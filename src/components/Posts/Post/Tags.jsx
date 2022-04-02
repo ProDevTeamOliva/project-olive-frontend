@@ -21,7 +21,6 @@ const customCompareMemoTags = (prevstate, nextstate) => {
 };
 
 const Tags = ({ tags }) => {
-  console.log("Wszedlem w tags");
   return (
     <HStack>
       {tags &&

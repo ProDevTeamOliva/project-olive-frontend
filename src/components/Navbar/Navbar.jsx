@@ -49,7 +49,7 @@ const Navbar = ({
       zIndex={999}
       h="75px"
       w="100%"
-      bgColor="rgba(0, 0, 0, 0.1)"
+      bgColor="rgba(0, 0, 0, 0.25)"
       backdropFilter="blur(50px)"
       className="blur"
     >

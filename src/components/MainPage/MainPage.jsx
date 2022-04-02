@@ -1,9 +1,8 @@
-import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Box, Grid, Text } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
 import SearchByTags from "../Search/SearchByTags";
 import AddPostModal from "../Posts/AddPost/AddPostModal";
-import { useCallback } from "react";
 import { getPosts } from "../../actions/postActions";
 import { connect, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";

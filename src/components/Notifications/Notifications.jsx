@@ -27,7 +27,7 @@ const Notifications = ({
     <>
       <Drawer onClose={onClose} isOpen={isOpen} size={["xs"]}>
         <DrawerOverlay />
-        <DrawerContent mt="70px">
+        <DrawerContent mt="75px" bg="blue.700">
           <DrawerCloseButton color="white" {...unStyledButton} />
 
           <DrawerHeader>{t("notifications")}</DrawerHeader>
