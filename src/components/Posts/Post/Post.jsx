@@ -1,24 +1,13 @@
-import {
-  Box,
-  Image,
-  Button,
-  Text,
-  HStack,
-  Tag,
-  GridItem,
-} from "@chakra-ui/react";
+import { Box, Button, GridItem } from "@chakra-ui/react";
 import publicPostIcon from "../../../img/icons/PublicPostIcon.png";
 import FriendsPostIcon from "../../../img/icons/FriendsPostIcon.png";
 import GroupChatPostIcon from "../../../img/icons/GroupChatPostIcon.png";
 import { useTranslation } from "react-i18next";
-import { memo, useState } from "react";
-import { baseUrl } from "../../../config/baseUrl";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { memo } from "react";
+import { useSelector } from "react-redux";
 import { dislikePost, likePost } from "../../../actions/postActions";
 import Carousel from "../../Carousel/Carousel";
-import { Link } from "react-router-dom";
 import AddCommentModal from "../AddComment/AddCommentModal";
-import AvatarUser from "./Avatar";
 import AuthorPostSection from "./AuthorPostSection";
 import Content from "./Content";
 import Feeling from "./Feeling";
@@ -38,8 +27,6 @@ const getPostTypeIcon = (postType) => {
 };
 
 const Post = ({ id }) => {
-  console.log("Wszedlem w post");
-
   const me = useSelector((state) => state.me);
   const property = useSelector((state) =>
     state.posts.find((post) => post.id === id)

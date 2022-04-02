@@ -2,9 +2,9 @@ import { Button, Grid, Box, Divider, Text } from "@chakra-ui/react";
 import { Formik, Form } from "formik";
 import InputComponent from "../Inputs/InputComponent";
 import { purpleButtonStyle } from "../../styles/Buttons/purpleButton";
-import { connect } from "react-redux";
-import { signUp } from "../../actions/authActions";
-import { useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { logIn, signUp } from "../../actions/authActions";
+import { useState, useRef, memo } from "react";
 import Alert from "../Alert/Alert";
 import { validatePassword } from "../../validators/validatePassword";
 import { useTranslation } from "react-i18next";
@@ -12,21 +12,28 @@ import { validateUserData } from "../../validators/validateUserDate";
 import { validateLogin } from "../../validators/validateLogin";
 import { validateRepeatPassword } from "../../validators/validateRepeatPassword";
 
-function RegisterForm({ status, signUp, message }) {
+const initialDataRegister = {
+  nameFirst: "",
+  nameLast: "",
+  login: "",
+  password: "",
+  repeatPassword: "",
+};
+const inputColors = { color: "gray.700", borderColor: "gray.100" };
+
+function RegisterForm() {
+  const dispatch = useDispatch();
+  const message = useSelector((state) => state.register.message);
+  const status = useSelector((state) => state.register.status).toString();
+
   const { t } = useTranslation();
+
   const [isOpen, setIsOpen] = useState(false);
   const onCloseAlert = () => setIsOpen(false);
   const cancelRef = useRef();
-  const [formValues, setFormValues] = useState({});
 
-  const initialDataRegister = {
-    nameFirst: "",
-    nameLast: "",
-    login: "",
-    password: "",
-    repeatPassword: "",
-  };
-  const inputColors = { color: "gray.700", borderColor: "gray.100" };
+  const [formValues, setFormValues] = useState({});
+  const [load, setLoad] = useState(false);
 
   const handleSubmit = (values) => {
     const { repeatPassword, ...payload } = values;
@@ -34,13 +41,25 @@ function RegisterForm({ status, signUp, message }) {
     return setFormValues(payload);
   };
 
-  const register = () => {
+  const register = async () => {
+    setLoad(true);
     onCloseAlert();
-    return signUp(formValues);
+    return dispatch(signUp(formValues));
+  };
+
+  const login = () => {
+    if (status === "201") {
+      const { nameFirst, nameLast, repeatPassword, ...dataToLogIn } =
+        formValues;
+      setTimeout(() => {
+        dispatch(logIn(dataToLogIn));
+      }, 1000);
+    }
   };
 
   return (
     <Box p="20px">
+      {login()}
       <Text
         color={status.startsWith("2") ? "green" : "red"}
         fontSize="110%"
@@ -149,9 +168,26 @@ function RegisterForm({ status, signUp, message }) {
                 }
                 {...inputColors}
               />
-              <Button type="submit" mb="10px" mt="30px" {...purpleButtonStyle}>
-                {t("register")}
-              </Button>
+              {load && !status.startsWith("4") ? (
+                <Button
+                  isLoading
+                  mb="10px"
+                  mt="30px"
+                  {...purpleButtonStyle}
+                  loadingText={t("register")}
+                >
+                  {t("register")}
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  mb="10px"
+                  mt="30px"
+                  {...purpleButtonStyle}
+                >
+                  {t("register")}
+                </Button>
+              )}
             </Grid>
           </Form>
         )}
@@ -169,14 +205,4 @@ function RegisterForm({ status, signUp, message }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  message: state.register.message,
-  status: state.register.status.toString(),
-});
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signUp: (payload) => dispatch(signUp(payload)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterForm);
+export default memo(RegisterForm);

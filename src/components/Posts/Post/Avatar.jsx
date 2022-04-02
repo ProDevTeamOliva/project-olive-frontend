@@ -3,7 +3,6 @@ import { memo } from "react";
 import { baseUrl } from "../../../config/baseUrl";
 
 const AvatarUser = (props) => {
-  console.log("Załadowano Awatara");
   return (
     <Avatar
       boxSize={["50", "70px", "100px"]}
