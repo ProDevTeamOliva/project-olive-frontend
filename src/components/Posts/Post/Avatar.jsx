@@ -2,7 +2,7 @@ import { Avatar } from "@chakra-ui/react";
 import { memo } from "react";
 import { baseUrl } from "../../../config/baseUrl";
 
-const AvatarUser = (props) => {
+function AvatarUser(props) {
   return (
     <Avatar
       boxSize={["50", "70px", "100px"]}
@@ -10,5 +10,5 @@ const AvatarUser = (props) => {
       alt={props.id}
     />
   );
-};
+}
 export default memo(AvatarUser);

@@ -20,17 +20,23 @@ import {
 } from "../../actions/authActions";
 
 function RegisterModal({ restartLogInMessage, restartRegisterMessage }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
+  const languageValues = {
+    register: t("register"),
+    createAccount: t("createAccount"),
+  };
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const openModal = () => {
     onOpen();
     restartLogInMessage();
     restartRegisterMessage();
   };
+
   return (
     <>
       <Button onClick={openModal} {...purpleButtonStyle}>
-        {t("register")}
+        {languageValues.register}
       </Button>
 
       <Modal onClose={onClose} isOpen={isOpen} size="xl" bg="gray.50">
@@ -43,7 +49,7 @@ function RegisterModal({ restartLogInMessage, restartRegisterMessage }) {
               fontWeight="bold"
               fontSize="110%"
             >
-              {t("createAccount")}
+              {languageValues.createAccount}
             </Text>
             <Divider borderColor="gray.900" border="1px"></Divider>
           </ModalHeader>
@@ -52,7 +58,6 @@ function RegisterModal({ restartLogInMessage, restartRegisterMessage }) {
             _focus={{ borderColor: "gray.900" }}
             fontSize="120%"
           />
-
           <ModalBody>
             <RegisterForm></RegisterForm>
           </ModalBody>

@@ -49,6 +49,7 @@ function App({ isAuth }) {
     i18n.changeLanguage(lng);
     localStorage.setItem("language", lng);
   };
+
   return (
     <div className="App" style={{ height: "100%" }}>
       <Router>

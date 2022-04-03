@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { BsFillBellFill } from "react-icons/bs";
 import Notifications from "./Notifications";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
-const Bell = ({ pendingReceived }) => {
+
+function Bell({ pendingReceived }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -51,7 +52,7 @@ const Bell = ({ pendingReceived }) => {
       </Box>
     </Box>
   );
-};
+}
 
 const mapStateToProps = (state) => ({
   pendingReceived: state.meFriends.pendingReceived,

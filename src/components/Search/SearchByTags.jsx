@@ -10,18 +10,24 @@ import {
 } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
 import { Formik, Form, Field } from "formik";
-import { validateRequired } from "../../validators/validateRequired";
+import { validatorOfRequired } from "../../validators/validatorOfRequired";
 import { FormControl, FormErrorMessage } from "@chakra-ui/form-control";
 import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-const SearchByTags = () => {
+function SearchByTags() {
+  const { t } = useTranslation();
+  const languageValues = {
+    required: t("required"),
+  };
+
   const history = useHistory();
+
   const handleSubmit = ({ tag }) => {
     history.push(`/posts/${tag.toLowerCase()}`);
   };
-  const { t } = useTranslation();
 
+  const validateRequired = validatorOfRequired(languageValues.required);
   return (
     <Box px="4" mt="10" mb="10px">
       <Formik initialValues={{ tag: "" }} onSubmit={handleSubmit}>
@@ -31,7 +37,7 @@ const SearchByTags = () => {
               <Field
                 name="tag"
                 value={tag}
-                validate={(value) => validateRequired(value, t("required"))}
+                validate={(value) => validateRequired(value)}
               >
                 {({ field, form }) => (
                   <FormControl
@@ -82,6 +88,6 @@ const SearchByTags = () => {
       </Formik>
     </Box>
   );
-};
+}
 
 export default SearchByTags;

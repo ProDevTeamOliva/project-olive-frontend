@@ -11,6 +11,10 @@ import { useTranslation } from "react-i18next";
 
 function Alert({ isOpen, onCloseAlert, fun, cancelRef, header, body }) {
   const { t } = useTranslation();
+  const languageValues = {
+    cancel: t("cancel"),
+    accept: t("accept"),
+  };
 
   return (
     <AlertDialog
@@ -32,7 +36,7 @@ function Alert({ isOpen, onCloseAlert, fun, cancelRef, header, body }) {
               ref={cancelRef}
               onClick={onCloseAlert}
             >
-              {t("cancel")}
+              {languageValues.cancel}
             </Button>
             <Button
               _focus={{ border: "none" }}
@@ -40,7 +44,7 @@ function Alert({ isOpen, onCloseAlert, fun, cancelRef, header, body }) {
               onClick={fun}
               ml={3}
             >
-              {t("accept")}
+              {languageValues.accept}
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

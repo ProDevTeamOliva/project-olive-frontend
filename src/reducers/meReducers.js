@@ -6,7 +6,14 @@ import {
 } from "../types/meTypes";
 
 const init_state = {
-  me: {},
+  me: {
+    nameLast: "",
+    nameFirst: "",
+    registrationDate: "",
+    id: "",
+    avatar: "",
+    login: "",
+  },
   message: "",
 };
 
@@ -14,17 +21,17 @@ const meReducer = (state = init_state, action) => {
   switch (action.type) {
     case ME_SUCCESS:
       return {
-        me: action.payload.user,
+        me: { ...state.me, ...action.payload.user },
         message: action.payload.message,
       };
     case ME_FAILURE:
       return {
-        me: {},
+        ...state,
         message: action.payload.message,
       };
     case ME_AVATAR_SUCCESS:
       return {
-        me: action.payload.user,
+        me: { ...state.me, ...action.payload.user },
         message: action.payload.message,
       };
     case ME_AVATAR_FAILURE:

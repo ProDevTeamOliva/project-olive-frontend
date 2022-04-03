@@ -1,4 +1,4 @@
-export const validateRequired = (value, required) => {
+export const validatorOfRequired = (required) => (value) => {
   const error = {};
 
   if (!value) {

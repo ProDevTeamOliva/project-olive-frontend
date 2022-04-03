@@ -21,12 +21,23 @@ import { purpleButtonStyle } from "../../styles/Buttons/purpleButton";
 import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { addPost } from "../../actions/postActions";
-import * as React from "react";
 import toBase64 from "../../operations/base64";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 
+const initialData = {
+  content: "",
+  type: "Public",
+};
 function PostForm({ onClose, addPost }) {
   const { t } = useTranslation();
+  const languageValues = {
+    addPostContentPlaceHolder: t("addPostContentPlaceHolder"),
+    postType: t("postType"),
+    selectFile: t("selectFile"),
+    amountOfFilesUploaded: t("amountOfFilesUploaded"),
+    submitPostAdd: t("submitPostAdd"),
+  };
+
   const [selectedFiles, setSelectedFiles] = useState([]);
 
   const getPostTypeIcon = (postType) => {
@@ -40,11 +51,6 @@ function PostForm({ onClose, addPost }) {
       return GroupChatPostIcon;
     }
     return null;
-  };
-
-  const initialData = {
-    content: "",
-    type: "Public",
   };
 
   const getHashtags = (val) => {
@@ -82,6 +88,7 @@ function PostForm({ onClose, addPost }) {
     }
     onClose();
   };
+
   const validateContent = (val) => {
     let error;
     if (!val) {
@@ -104,7 +111,7 @@ function PostForm({ onClose, addPost }) {
                   <FormControl>
                     <Input
                       {...field}
-                      placeholder={t("addPostContentPlaceHolder")}
+                      placeholder={languageValues.addPostContentPlaceHolder}
                       height={"10vh"}
                       id="content"
                       name="content"
@@ -120,7 +127,9 @@ function PostForm({ onClose, addPost }) {
                     id={"type"}
                     isInvalid={!!form.errors["type"] && !!form.touched["type"]}
                   >
-                    <FormLabel htmlFor={"type"}>{t("postType")}</FormLabel>
+                    <FormLabel htmlFor={"type"}>
+                      {languageValues.postType}
+                    </FormLabel>
                     <RadioGroup
                       {...field}
                       id={"type"}
@@ -151,7 +160,7 @@ function PostForm({ onClose, addPost }) {
                 {...unStyledButton}
                 onClick={() => document.getElementById("input-file").click()}
               >
-                {t("selectFile")}
+                {languageValues.selectFile}
                 <Input
                   variant="unstyled"
                   display="none"
@@ -165,10 +174,10 @@ function PostForm({ onClose, addPost }) {
                 ></Input>
               </Button>
               <label style={{ marginLeft: "20px" }}>
-                {t("amountOfFilesUploaded")} {selectedFiles.length}
+                {languageValues.amountOfFilesUploaded} {selectedFiles.length}
               </label>
               <Button {...purpleButtonStyle} type="submit" mb="20px" mt="20px">
-                {t("submitPostAdd")}
+                {languageValues.submitPostAdd}
               </Button>
             </Form>
           </>

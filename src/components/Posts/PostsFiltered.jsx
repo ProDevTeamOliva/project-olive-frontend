@@ -7,6 +7,11 @@ import { connect } from "react-redux";
 import { useTranslation } from "react-i18next";
 
 function PostsFiltered({ tag, changeLanguage, getPostsByTag, posts }) {
+  const { t } = useTranslation();
+  const languageValues = {
+    noPosts: t("noPosts"),
+  };
+
   useEffect(() => {
     getPostsByTag(tag);
     const intervalId = setInterval(() => {
@@ -15,8 +20,6 @@ function PostsFiltered({ tag, changeLanguage, getPostsByTag, posts }) {
     return () => clearInterval(intervalId);
   }, [tag, getPostsByTag]);
 
-  const { t } = useTranslation();
-
   return (
     <Box h="100vh" mt="75px" d="grid" justifyContent="center">
       <Navbar changeLanguage={changeLanguage} />
@@ -24,11 +27,11 @@ function PostsFiltered({ tag, changeLanguage, getPostsByTag, posts }) {
         {posts.length > 0 ? (
           posts.map((post) => (
             <GridItem key={post.id}>
-              <Post property={post} />
+              <Post property={post} id={post.id} />
             </GridItem>
           ))
         ) : (
-          <Text textAlign="center">{t("noPosts")}</Text>
+          <Text textAlign="center">{languageValues.noPosts}</Text>
         )}
       </Grid>
     </Box>

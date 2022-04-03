@@ -1,38 +1,42 @@
 import { Box, Button, GridItem } from "@chakra-ui/react";
-import publicPostIcon from "../../../img/icons/PublicPostIcon.png";
-import FriendsPostIcon from "../../../img/icons/FriendsPostIcon.png";
-import GroupChatPostIcon from "../../../img/icons/GroupChatPostIcon.png";
 import { useTranslation } from "react-i18next";
 import { memo } from "react";
 import { useSelector } from "react-redux";
 import { dislikePost, likePost } from "../../../actions/postActions";
-import Carousel from "../../Carousel/Carousel";
+import Carousel from "../../Images/Carousel.jsx";
 import AddCommentModal from "../AddComment/AddCommentModal";
 import AuthorPostSection from "./AuthorPostSection";
 import Content from "./Content";
 import Feeling from "./Feeling";
 import Tags from "./Tags";
 
-const getPostTypeIcon = (postType) => {
-  if (postType === "Public") {
-    return publicPostIcon;
-  }
-  if (postType === "Friends") {
-    return FriendsPostIcon;
-  }
-  if (postType === "Group") {
-    return GroupChatPostIcon;
-  }
-  return null;
-};
+// const getPostTypeIcon = (postType) => {
+//   if (postType === "Public") {
+//     return publicPostIcon;
+//   }
+//   if (postType === "Friends") {
+//     return FriendsPostIcon;
+//   }
+//   if (postType === "Group") {
+//     return GroupChatPostIcon;
+//   }
+//   return null;
+// };
 
 const Post = ({ id }) => {
+  const { t } = useTranslation();
+  const languageValues = {
+    iDisLikeIt: t("iDisLikeIt"),
+    iLikeIt: t("iLikeIt"),
+    likes: t("likes"),
+    meLikingPost: t("meLikingPost"),
+    postBottomCommentBoxTitle: t("postBottomCommentBoxTitle"),
+  };
+
   const me = useSelector((state) => state.me);
   const property = useSelector((state) =>
     state.posts.find((post) => post.id === id)
   );
-
-  const { t } = useTranslation();
 
   const handleLikeButtonClick = () => {
     likePost(property.id);
@@ -40,7 +44,6 @@ const Post = ({ id }) => {
   const handleDisLikeButtonClick = () => {
     dislikePost(property.id);
   };
-
   const checkIfILikePost = () => {
     const res = property.likes.filter((like) => like.login === me.me.login);
     if (res.length > 0) {
@@ -48,18 +51,17 @@ const Post = ({ id }) => {
     }
     return false;
   };
-
   const renderLikeDislikeButton = () => {
     if (checkIfILikePost()) {
       return (
         <Button padding="2" onClick={handleDisLikeButtonClick}>
-          {t("iDisLikeIt")}
+          {languageValues.iDisLikeIt}
         </Button>
       );
     }
     return (
       <Button padding="2" onClick={handleLikeButtonClick}>
-        {t("iLikeIt")}
+        {languageValues.iLikeIt}
       </Button>
     );
   };
@@ -95,11 +97,11 @@ const Post = ({ id }) => {
 
         <Box display="flex" flexWrap="wrap" justifyContent="space-between">
           <Box padding="2">
-            {t("likes")} {property.likes.length}{" "}
-            {checkIfILikePost() && t("meLikingPost")}
+            {languageValues.likes} {property.likes.length}{" "}
+            {checkIfILikePost() && languageValues.meLikingPost}
           </Box>
           {renderLikeDislikeButton()}
-          <Box padding="2">{t("postBottomCommentBoxTitle")}</Box>
+          <Box padding="2">{languageValues.postBottomCommentBoxTitle}</Box>
 
           <AddCommentModal idPost={property.id} />
         </Box>
@@ -108,10 +110,4 @@ const Post = ({ id }) => {
   );
 };
 
-// const mapDispatchToProps = (dispatch) => ({
-//   likePost: (id) => dispatch(likePost(id)),
-//   dislikePost: (id) => dispatch(dislikePost(id)),
-// });
-
-// export default connect(null, mapDispatchToProps)(memo(Post));
 export default memo(Post);

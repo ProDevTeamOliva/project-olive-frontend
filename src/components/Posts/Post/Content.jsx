@@ -3,6 +3,7 @@ import { memo, useState } from "react";
 
 const Content = ({ content }) => {
   const [hiddenContent, setHiddenContent] = useState(true);
+
   return (
     <Box
       mt="1"

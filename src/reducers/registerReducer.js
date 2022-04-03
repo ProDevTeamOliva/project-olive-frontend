@@ -3,10 +3,12 @@ import {
   REGISTER_FAILURE,
   REGISTER_RESTART,
 } from "../types/registerTypes";
+
 const init_state = {
   message: "",
   status: "",
 };
+
 const registerReducer = (state = init_state, action) => {
   switch (action.type) {
     case REGISTER_SUCCESS:

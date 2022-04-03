@@ -6,7 +6,8 @@ import {
   Center,
 } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
-const Search = ({ placeholder }) => {
+
+function Search({ placeholder }) {
   return (
     <Center>
       <InputGroup w={["100%", "80%", "50%", "40%", "30%"]}>
@@ -33,6 +34,6 @@ const Search = ({ placeholder }) => {
       </InputGroup>
     </Center>
   );
-};
+}
 
 export default Search;
