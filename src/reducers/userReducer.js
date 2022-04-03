@@ -4,10 +4,12 @@ import {
   USER_ADD_TO_FRIENDS_SUCCESS,
   USER_ADD_TO_FRIENDS_FAILURE,
 } from "../types/userTypes";
+
 const init_state = {
   user: {},
   message: "",
 };
+
 const userReducer = (state = init_state, action) => {
   switch (action.type) {
     case USER_SUCCESS:

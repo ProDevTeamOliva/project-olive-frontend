@@ -13,42 +13,42 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { Search2Icon } from "@chakra-ui/icons";
-
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { restartSearchUsers, searchUsers } from "../../actions/searchActions";
 import Search from "./Search";
 import LinkSearch from "./LinkSearch";
 import { baseUrl } from "../../config/baseUrl";
+import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 
 function SearchModal({ users, searchUsers, restartSearchUsers }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
+  const languageValues = {
+    searchNavBar: t("searchNavBar"),
+  };
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const openModal = () => {
     restartSearchUsers();
     onOpen();
   };
+
   const getUsers = (event) => {
     const value = event.target.value.toLowerCase();
     if (value !== "") {
       return searchUsers({ valueSearch: value });
     }
   };
+
   return (
     <>
       <Button
         onClick={openModal}
         variant="unstyled"
         width="100%"
-        _focus={{ borderColor: "none" }}
-        _hover={{
-          bg: "none",
-        }}
-        _active={{
-          bg: "none",
-        }}
+        {...unStyledButton}
       >
-        <Search placeholder={t("SearchNavBar")}></Search>
+        <Search placeholder={languageValues.searchNavBar}></Search>
       </Button>
 
       <Modal onClose={onClose} isOpen={isOpen} size="xl">
@@ -59,7 +59,7 @@ function SearchModal({ users, searchUsers, restartSearchUsers }) {
               <Input
                 mt="20px"
                 variant="unstyled"
-                placeholder={t("SearchNavBar")}
+                placeholder={languageValues.searchNavBar}
                 bgColor="mediumslateblue"
                 border="none"
                 borderRadius="10px"

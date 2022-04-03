@@ -5,11 +5,13 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILURE,
 } from "../types/loginTypes";
+
 const init_state = {
   isAuth: localStorage.getItem("token") ? true : false,
   message: "",
   status: "",
 };
+
 const logInReducer = (state = init_state, action) => {
   switch (action.type) {
     case LOGIN_SUCCESS:

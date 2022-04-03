@@ -5,18 +5,25 @@ import RegisterModal from "../RegisterForm/RegisterModal";
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { logIn } from "../../actions/authActions";
-import { validateRequired } from "../../validators/validateRequired";
+import { validatorOfRequired } from "../../validators/validatorOfRequired";
 import ButtonLoginForm from "./ButtonLoginForm";
 
+const initialDataLogin = { login: "", password: "" };
+const inputColors = { color: "gray.800", borderColor: "gray.600" };
+
 function LogInForm({ logIn, message, status }) {
-  const initialDataLogin = { login: "", password: "" };
   const { t } = useTranslation();
+  const languageValues = {
+    required: t("required"),
+    login: t("login"),
+    password: t("password"),
+  };
 
   const handleSubmit = (values) => {
     return logIn(values);
   };
+  const validateRequired = validatorOfRequired(languageValues.required);
 
-  const inputColors = { color: "gray.800", borderColor: "gray.600" };
   return (
     <Box
       width="100%"
@@ -61,27 +68,27 @@ function LogInForm({ logIn, message, status }) {
           >
             <Grid placeItems="center" templateRows="auto" gap="20px">
               <InputComponent
-                name={t("login")}
+                name={languageValues.login}
                 id="login"
                 type="text"
-                validate={(value) => validateRequired(value, t("required"))}
+                validate={(value) => validateRequired(value)}
                 value={login}
                 {...inputColors}
               />
               <InputComponent
-                name={t("password")}
+                name={languageValues.password}
                 type="password"
                 id="password"
-                validate={(value) => validateRequired(value, t("required"))}
+                validate={(value) => validateRequired(value)}
                 value={password}
                 {...inputColors}
               />
-              <ButtonLoginForm isSubmitting={isSubmitting} t={t} />
+              <ButtonLoginForm isSubmitting={isSubmitting} />
             </Grid>
           </Form>
         )}
       </Formik>
-      <RegisterModal></RegisterModal>
+      <RegisterModal />
     </Box>
   );
 }

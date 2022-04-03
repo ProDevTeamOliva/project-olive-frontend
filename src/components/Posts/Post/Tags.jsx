@@ -6,21 +6,18 @@ const customCompareMemoTags = (prevstate, nextstate) => {
   if (prevstate.tags.length !== nextstate.tags.length) {
     return false;
   }
-
   if (nextstate.tags.length < 1) {
     return true;
   }
-
   for (let i in prevstate.tags) {
     if (prevstate.tags[i] !== nextstate.tags[i]) {
       return false;
     }
   }
-
   return true;
 };
 
-const Tags = ({ tags }) => {
+function Tags({ tags }) {
   return (
     <HStack>
       {tags &&
@@ -33,6 +30,6 @@ const Tags = ({ tags }) => {
         ))}
     </HStack>
   );
-};
+}
 
 export default memo(Tags, customCompareMemoTags);

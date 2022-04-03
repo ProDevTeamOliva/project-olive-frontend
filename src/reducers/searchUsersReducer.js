@@ -3,10 +3,12 @@ import {
   SEARCH_FAILURE,
   SEARCH_RESTART,
 } from "../types/searchTypes";
+
 const init_state = {
   users: [],
   message: "",
 };
+
 const searchUsersReducer = (state = init_state, action) => {
   switch (action.type) {
     case SEARCH_SUCCESS:

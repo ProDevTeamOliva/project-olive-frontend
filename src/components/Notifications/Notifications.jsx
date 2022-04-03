@@ -15,14 +15,20 @@ import {
   acceptFriendInvitation,
   unAcceptFriendInvitation,
 } from "../../actions/meActions";
-const Notifications = ({
+
+function Notifications({
   onClose,
   isOpen,
   pendingReceived,
   acceptFriendInvitation,
   unAcceptFriendInvitation,
-}) => {
+}) {
   const { t } = useTranslation();
+  const languageValues = {
+    notifications: t("notifications"),
+    noResults: t("noResults"),
+  };
+
   return (
     <>
       <Drawer onClose={onClose} isOpen={isOpen} size={["xs"]}>
@@ -30,7 +36,7 @@ const Notifications = ({
         <DrawerContent mt="75px" bg="blue.700">
           <DrawerCloseButton color="white" {...unStyledButton} />
 
-          <DrawerHeader>{t("notifications")}</DrawerHeader>
+          <DrawerHeader>{languageValues.notifications}</DrawerHeader>
           <DrawerBody>
             {pendingReceived.length > 0 ? (
               pendingReceived.map(({ id, nameFirst, nameLast, avatar }) => (
@@ -46,7 +52,7 @@ const Notifications = ({
               ))
             ) : (
               <Text textAlign="center" color="gray.400" fontSize="30px">
-                {t("noResults")}
+                {languageValues.noResults}
               </Text>
             )}
           </DrawerBody>
@@ -54,7 +60,7 @@ const Notifications = ({
       </Drawer>
     </>
   );
-};
+}
 
 const mapStateToProps = (state) => ({
   pendingReceived: state.meFriends.pendingReceived,

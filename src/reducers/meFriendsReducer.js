@@ -4,12 +4,14 @@ import {
   ME_ACCEPT_INVITATION_SUCCESS,
   ME_ACCEPT_INVITATION_FAILURE,
 } from "../types/meTypes";
+
 const init_state = {
   friends: [],
   pendingSent: [],
   pendingReceived: [],
   message: "",
 };
+
 const meFriendsReducer = (state = init_state, action) => {
   switch (action.type) {
     case ME_FRIENDS_SUCCESS:

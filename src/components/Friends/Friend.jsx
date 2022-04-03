@@ -6,13 +6,13 @@ import { useTranslation } from "react-i18next";
 import { useRef, useState } from "react";
 import Alert from "../Alert/Alert";
 
-const Friend = ({
-  id,
-  nameFirst,
-  nameLast,
-  avatar,
-  unAcceptFriendInvitation,
-}) => {
+function Friend({ id, nameFirst, nameLast, avatar, unAcceptFriendInvitation }) {
+  const { t } = useTranslation();
+  const languageValues = {
+    delFriend: t("delFriend"),
+    alertDelFriend: t("alertDelFriend"),
+  };
+
   const [isOpen, setIsOpen] = useState(false);
   const onCloseAlert = () => setIsOpen(false);
   const cancelRef = useRef();
@@ -21,7 +21,6 @@ const Friend = ({
     onCloseAlert();
     return unAcceptFriendInvitation(id);
   };
-  const { t } = useTranslation();
 
   return (
     <WrapItem key={id}>
@@ -51,11 +50,11 @@ const Friend = ({
         onCloseAlert={onCloseAlert}
         fun={ignore}
         cancelRef={cancelRef}
-        header={t("delFriend")}
-        body={t("alertDelFriend")}
+        header={languageValues.delFriend}
+        body={languageValues.alertDelFriend}
       />
     </WrapItem>
   );
-};
+}
 
 export default Friend;

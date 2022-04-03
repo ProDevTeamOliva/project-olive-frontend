@@ -7,14 +7,8 @@ import GroupChatPostIcon from "../../../img/icons/GroupChatPostIcon.png";
 import AvatarUser from "./Avatar";
 
 const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
-  console.log("Wszedlem w Author Post Section", [
-    avatar,
-    id,
-    nameFirst,
-    nameLast,
-    type,
-  ]);
   const { t } = useTranslation();
+
   const getPostTypeIcon = useCallback(() => {
     if (type === "Public") {
       return publicPostIcon;
@@ -27,6 +21,7 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
     }
     return null;
   }, [type]);
+
   return (
     <Box display="flex" justifyContent="space-between">
       <AvatarUser avatar={avatar} id={id} />

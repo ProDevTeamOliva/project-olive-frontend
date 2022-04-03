@@ -6,11 +6,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { logIn, signUp } from "../../actions/authActions";
 import { useState, useRef, memo } from "react";
 import Alert from "../Alert/Alert";
-import { validatePassword } from "../../validators/validatePassword";
+import { validatorOfPassword } from "../../validators/validatorOfPassword";
 import { useTranslation } from "react-i18next";
-import { validateUserData } from "../../validators/validateUserDate";
-import { validateLogin } from "../../validators/validateLogin";
-import { validateRepeatPassword } from "../../validators/validateRepeatPassword";
+import { validatorOfUserData } from "../../validators/validatorOfUserData";
+import { validatorOfLogin } from "../../validators/validatorOfLogin";
+import { validatorOfRepeatPassword } from "../../validators/validatorOfRepeatPassword";
 
 const initialDataRegister = {
   nameFirst: "",
@@ -22,11 +22,29 @@ const initialDataRegister = {
 const inputColors = { color: "gray.700", borderColor: "gray.100" };
 
 function RegisterForm() {
+  const { t } = useTranslation();
+  const languageValues = {
+    required: t("required"),
+    amoutOfSignMin2: t("amoutOfSignMin2"),
+    amoutOfSignMin8: t("amoutOfSignMin8"),
+    amoutOfSignMax20: t("amoutOfSignMax20"),
+    amoutOfSignMax60: t("amoutOfSignMax60"),
+    password: t("password"),
+    passwordValidation: t("passwordValidation"),
+    repeatPassword: t("repeatPassword"),
+    passwordRepeatValidation: t("passwordRepeatValidation"),
+    userData: t("userData"),
+    registrationData: t("registrationData"),
+    firstName: t("firstName"),
+    secondName: t("secondName"),
+    register: t("register"),
+    createAccount: t("createAccount"),
+    alertRegistrationBody: t("alertRegistrationBody"),
+  };
+
   const dispatch = useDispatch();
   const message = useSelector((state) => state.register.message);
   const status = useSelector((state) => state.register.status).toString();
-
-  const { t } = useTranslation();
 
   const [isOpen, setIsOpen] = useState(false);
   const onCloseAlert = () => setIsOpen(false);
@@ -41,7 +59,7 @@ function RegisterForm() {
     return setFormValues(payload);
   };
 
-  const register = async () => {
+  const register = () => {
     setLoad(true);
     onCloseAlert();
     return dispatch(signUp(formValues));
@@ -56,6 +74,34 @@ function RegisterForm() {
       }, 1000);
     }
   };
+
+  const validateNameFirst = validatorOfUserData(
+    languageValues.required,
+    languageValues.amoutOfSignMin2,
+    languageValues.amoutOfSignMax60
+  );
+
+  const validateNameLast = validatorOfUserData(
+    languageValues.required,
+    languageValues.amoutOfSignMin2,
+    languageValues.amoutOfSignMax60
+  );
+  const validateLogin = validatorOfLogin(
+    languageValues.required,
+    languageValues.amoutOfSignMin2,
+    languageValues.amoutOfSignMax20
+  );
+  const validatePassword = validatorOfPassword(
+    languageValues.required,
+    languageValues.amoutOfSignMin8,
+    languageValues.amoutOfSignMax20,
+    languageValues.passwordValidation
+  );
+
+  const validateRepeatPassword = validatorOfRepeatPassword(
+    languageValues.required,
+    languageValues.passwordRepeatValidation
+  );
 
   return (
     <Box p="20px">
@@ -84,87 +130,53 @@ function RegisterForm() {
           <Form onSubmit={handleSubmit}>
             <Grid placeItems="center" templateRows="auto" gap="15px">
               <Text color="gray.900" fontWeight="bold" fontSize="110%">
-                {t("userData")}
+                {languageValues.userData}
               </Text>
               <Divider borderColor="mediumslateblue" border="1px"></Divider>
 
               <InputComponent
-                name={t("firstName")}
+                name={languageValues.firstName}
                 id="nameFirst"
                 type="text"
-                validate={(value) =>
-                  validateUserData(
-                    value,
-                    t("required"),
-                    t("amoutOfSignMin2"),
-                    t("amoutOfSignMax60")
-                  )
-                }
+                validate={(value) => validateNameFirst(value)}
                 value={nameFirst}
                 {...inputColors}
               />
               <InputComponent
-                name={t("secondName")}
+                name={languageValues.secondName}
                 id="nameLast"
                 type="text"
-                validate={(value) =>
-                  validateUserData(
-                    value,
-                    t("required"),
-                    t("amoutOfSignMin2"),
-                    t("amoutOfSignMax60")
-                  )
-                }
+                validate={(value) => validateNameLast(value)}
                 value={nameLast}
                 {...inputColors}
               />
               <Text color="gray.900" fontWeight="bold" fontSize="110%">
-                {t("registrationData")}
+                {languageValues.registrationData}
               </Text>
               <Divider borderColor="mediumslateblue" border="1px"></Divider>
               <InputComponent
                 name={t("login")}
                 id="login"
                 type="text"
-                validate={(value) =>
-                  validateLogin(
-                    value,
-                    t("required"),
-                    t("amoutOfSignMin2"),
-                    t("amoutOfSignMax20")
-                  )
-                }
+                validate={(value) => validateLogin(value)}
                 value={login}
                 {...inputColors}
               />
               <InputComponent
-                name={t("password")}
+                name={languageValues.password}
                 id="password"
                 type="password"
                 value={password}
-                validate={(value) =>
-                  validatePassword(
-                    value,
-                    t("required"),
-                    t("amoutOfSignMin8"),
-                    t("amoutOfSignMax20"),
-                    t("passwordValidation")
-                  )
-                }
+                validate={(value) => validatePassword(value)}
                 {...inputColors}
               />
               <InputComponent
-                name={t("repeatPassword")}
+                name={languageValues.repeatPassword}
                 id="repeatPassword"
                 type="password"
                 value={repeatPassword}
                 validate={(value) =>
-                  validateRepeatPassword(
-                    value,
-                    values.password,
-                    t("required"),
-                    t("passwordRepeatValidation")
-                  )
+                  validateRepeatPassword(value, values.password)
                 }
                 {...inputColors}
               />
@@ -174,9 +186,9 @@ function RegisterForm() {
                   mb="10px"
                   mt="30px"
                   {...purpleButtonStyle}
-                  loadingText={t("register")}
+                  loadingText={languageValues.register}
                 >
-                  {t("register")}
+                  {languageValues.register}
                 </Button>
               ) : (
                 <Button
@@ -185,7 +197,7 @@ function RegisterForm() {
                   mt="30px"
                   {...purpleButtonStyle}
                 >
-                  {t("register")}
+                  {languageValues.register}
                 </Button>
               )}
             </Grid>
@@ -198,7 +210,7 @@ function RegisterForm() {
         onCloseAlert={onCloseAlert}
         fun={register}
         cancelRef={cancelRef}
-        header={t("createAccount")}
+        header={languageValues.createAccount}
         body={t("alertRegistrationBody")}
       />
     </Box>

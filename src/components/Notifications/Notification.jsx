@@ -4,15 +4,23 @@ import { useTranslation } from "react-i18next";
 import { useRef, useState } from "react";
 import Alert from "../Alert/Alert";
 
-const Notification = ({
+function Notification({
   id,
   nameFirst,
   nameLast,
   avatar,
   acceptFriendInvitation,
   unAcceptFriendInvitation,
-}) => {
+}) {
   const { t } = useTranslation();
+  const languageValues = {
+    addFriends: t("addFriends"),
+    alertAddFriend: t("alertAddFriend"),
+  };
+
+  const [isOpen, setIsOpen] = useState(false);
+  const onCloseAlert = () => setIsOpen(false);
+  const cancelRef = useRef();
 
   const buttonStyle = (color1, color2) => {
     return {
@@ -28,19 +36,20 @@ const Notification = ({
       },
     };
   };
-  const [isOpen, setIsOpen] = useState(false);
-  const onCloseAlert = () => setIsOpen(false);
-  const cancelRef = useRef();
+
   const accept = () => {
     setIsOpen(true);
   };
+
   const ignore = () => {
     unAcceptFriendInvitation(id);
   };
+
   const acceptFriend = () => {
     onCloseAlert();
     return acceptFriendInvitation(id);
   };
+
   return (
     <Box
       bg="gray.500"
@@ -78,11 +87,11 @@ const Notification = ({
         onCloseAlert={onCloseAlert}
         fun={acceptFriend}
         cancelRef={cancelRef}
-        header={t("addFriends")}
-        body={t("alertAddFriend")}
+        header={languageValues.addFriends}
+        body={languageValues.alertAddFriend}
       />
     </Box>
   );
-};
+}
 
 export default Notification;

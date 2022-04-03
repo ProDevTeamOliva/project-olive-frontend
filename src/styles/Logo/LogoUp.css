@@ -30,10 +30,8 @@
 
 .textAnimation div .animation {
   word-wrap: normal;
-  -webkit-animation: textAnimation 3s steps(13) 0.5s normal both,
-    cursor 0.7s steps(13) 1s infinite normal;
-  animation: textAnimation 3s steps(13) 0.5s normal both,
-    cursor 0.7s steps(13) 1s infinite normal;
+  -webkit-animation: textAnimation 3s steps(13) 0.5s normal both, cursor 0.7s steps(13) 1s infinite normal;
+          animation: textAnimation 3s steps(13) 0.5s normal both, cursor 0.7s steps(13) 1s infinite normal;
 }
 
 @-webkit-keyframes textAnimation {
@@ -41,7 +39,7 @@
     width: 0;
   }
   to {
-    width: var(--widthChange);
+    width: 100%;
   }
 }
 
@@ -50,7 +48,7 @@
     width: 0;
   }
   to {
-    width: var(--widthChange);
+    width: 100%;
   }
 }
 
@@ -73,21 +71,17 @@
 }
 
 .textAnimation div:hover .animation:hover {
-  -webkit-animation: textAnimationHover 3s steps(13) 0.5s normal paused,
-    cursor 0.7s steps(13) 1s infinite normal;
-  animation: textAnimationHover 3s steps(13) 0.5s normal paused,
-    cursor 0.7s steps(13) 1s infinite normal;
+  -webkit-animation: textAnimationHover 3s steps(13) 0.5s normal paused, cursor 0.7s steps(13) 1s infinite normal;
+          animation: textAnimationHover 3s steps(13) 0.5s normal paused, cursor 0.7s steps(13) 1s infinite normal;
   -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
 }
 
 .textAnimation div:hover .animation {
-  -webkit-animation: textAnimationHover 3s steps(13) 0.5s normal running,
-    cursor 0.7s steps(13) 1s infinite normal;
-  animation: textAnimationHover 3s steps(13) 0.5s normal running,
-    cursor 0.7s steps(13) 1s infinite normal;
+  -webkit-animation: textAnimationHover 3s steps(13) 0.5s normal running, cursor 0.7s steps(13) 1s infinite normal;
+          animation: textAnimationHover 3s steps(13) 0.5s normal running, cursor 0.7s steps(13) 1s infinite normal;
   -webkit-animation-iteration-count: infinite;
-  animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes textAnimationHover {
@@ -95,7 +89,7 @@
     width: 0;
   }
   to {
-    width: var(--widthChange);
+    width: 100%;
   }
 }
 
@@ -104,7 +98,7 @@
     width: 0;
   }
   to {
-    width: var(--widthChange);
+    width: 100%;
   }
 }
 /*# sourceMappingURL=LogoUp.css.map */
