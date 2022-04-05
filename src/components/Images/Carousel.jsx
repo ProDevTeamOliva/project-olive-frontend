@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import { memo, useState } from "react";
 import { Box, IconButton, Image, useBreakpointValue } from "@chakra-ui/react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import Slider from "react-slick";
@@ -16,10 +16,22 @@ const settings = {
   slidesToScroll: 1,
 };
 
-const Carousel = ({ cards }) => {
+function Carousel({ cards }) {
   const [slider, setSlider] = useState(null);
+
   const top = useBreakpointValue({ base: "90%", md: "50%" });
   const side = useBreakpointValue({ base: "30%", md: "10px" });
+  const iconStyle = {
+    colorScheme: "messenger",
+    borderRadius: "full",
+    position: "absolute",
+    top: top,
+    transform: "translate(0%, -50%)",
+    zIndex: "2",
+    _focus: { border: "none" },
+  };
+
+  const link = "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0";
   return (
     <Box
       position={"relative"}
@@ -31,38 +43,28 @@ const Carousel = ({ cards }) => {
         rel="stylesheet"
         type="text/css"
         charSet="UTF-8"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+        href={link + "/slick.min.css"}
       />
       <link
         rel="stylesheet"
         type="text/css"
-        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+        href={link + "/slick-theme.min.css"}
       />
 
       {cards.length > 1 && (
         <>
           <IconButton
             aria-label="left-arrow"
-            colorScheme="messenger"
-            borderRadius="full"
-            position="absolute"
+            {...iconStyle}
             left={side}
-            top={top}
-            transform={"translate(0%, -50%)"}
-            zIndex={2}
             onClick={() => slider?.slickPrev()}
           >
             <BiLeftArrowAlt />
           </IconButton>
           <IconButton
             aria-label="right-arrow"
-            colorScheme="messenger"
-            borderRadius="full"
-            position="absolute"
+            {...iconStyle}
             right={side}
-            top={top}
-            transform={"translate(0%, -50%)"}
-            zIndex={2}
             onClick={() => slider?.slickNext()}
           >
             <BiRightArrowAlt />
@@ -83,5 +85,5 @@ const Carousel = ({ cards }) => {
       </Slider>
     </Box>
   );
-};
+}
 export default memo(Carousel);

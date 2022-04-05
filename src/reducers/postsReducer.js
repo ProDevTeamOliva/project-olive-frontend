@@ -5,6 +5,7 @@ import {
 } from "../types/postTypes";
 
 const init_state = [];
+
 const postsReducer = (state = init_state, action) => {
   switch (action.type) {
     case GET_POSTS_SUCCESS:
@@ -12,7 +13,6 @@ const postsReducer = (state = init_state, action) => {
     case LIKE_SUCCESS:
       return state;
     case ADD_POST_SUCCESS:
-      alert("Dodano Post!");
       return state;
     default:
       return state;

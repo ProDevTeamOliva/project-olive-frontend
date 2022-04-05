@@ -4,11 +4,13 @@ import {
   SEARCH_RESTART,
   SEARCH_REQUEST,
 } from "../types/searchTypes";
+
 const init_state = {
   users: [],
   message: "",
   loading: false,
 };
+
 const searchUsersReducer = (state = init_state, action) => {
   switch (action.type) {
     case SEARCH_SUCCESS:

@@ -13,14 +13,19 @@ import {
 } from "@chakra-ui/react";
 import PostForm from "../../PostForm/PostForm";
 import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
 
 function AddPostModal() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { t } = useTranslation();
+  const languageValues = {
+    writePost: t("writePost"),
+    addPost: t("addPost"),
+  };
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const openModal = () => {
     onOpen();
   };
+
   return (
     <>
       <Box
@@ -34,7 +39,7 @@ function AddPostModal() {
       >
         <Flex justify="center" align="center" h="100%">
           <Box fontSize={["xl"]} textAlign="center" justifyContent="center">
-            {t("writePost")}
+            {languageValues.writePost}
           </Box>
         </Flex>
       </Box>
@@ -44,7 +49,7 @@ function AddPostModal() {
         <ModalContent mr="3" ml="3" bg="gray.500">
           <ModalHeader>
             <Text mb="3px" color="white" fontWeight="bold" fontSize="110%">
-              {t("addPost")}
+              {languageValues.addPost}
             </Text>
             <Divider borderColor="gray.900" border="1px"></Divider>
           </ModalHeader>
@@ -63,8 +68,4 @@ function AddPostModal() {
   );
 }
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = (dispatch) => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddPostModal);
+export default AddPostModal;
