@@ -118,6 +118,7 @@ const SearchBar = () => {
 		}
 	};
 
+	const isBottomOpen = isOpen && inputValue.length > 2
 
 	const handleKeyDown = (event) => {
 		if(event.key === 'ArrowDown' || event.key === 'ArrowUp'){
@@ -139,6 +140,7 @@ const SearchBar = () => {
 					ref={searchBarRef}
 					className={isOpen ? 'm-menu -active' : 'm-menu '}
 					justifySelf='center'
+					marginTop={isBottomOpen && '15px'}
 					w={{ 'xl': '40vw' }}>
 					<InputLeftElement
 						pointerEvents='none'
@@ -167,6 +169,7 @@ const SearchBar = () => {
 							'fontWeight': 'lighter',
 							'fontStretch': 'normal',
 							'fontStyle': 'normal',
+							'fontSize': 'medium',
 							'lineHeight': 'normal',
 							'letterSpacing': '1.5px',
 							'textAlign': 'left',
@@ -178,7 +181,7 @@ const SearchBar = () => {
 				</InputGroup>
 			</Center>
 			<Center gridRow='2'>
-				{(isOpen && inputValue.length > 2) && renderSuggestions()}
+				{isBottomOpen && renderSuggestions()}
 			</Center>
 		</Box>
 	);

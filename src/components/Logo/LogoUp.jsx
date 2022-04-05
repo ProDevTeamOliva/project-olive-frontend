@@ -24,7 +24,7 @@ function LogoUp({ fontSize, scaleWidth }) {
         <p
           className="text animation"
           id="animation"
-          style={{ fontSize: fontSize + "px" }}
+          style={{ fontSize: fontSize + "px" , margin: '6px'}}
         >
           ChatterMatter
         </p>
