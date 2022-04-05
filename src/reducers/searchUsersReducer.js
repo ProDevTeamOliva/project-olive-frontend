@@ -16,7 +16,7 @@ const searchUsersReducer = (state = init_state, action) => {
     case SEARCH_SUCCESS:
       return {
         users: action.payload.users,
-        message: '',
+        message: "",
         loading: false,
       };
     case SEARCH_FAILURE:
@@ -28,9 +28,9 @@ const searchUsersReducer = (state = init_state, action) => {
     case SEARCH_REQUEST:
       return {
         users: [],
-        message: '',
+        message: "",
         loading: true,
-      }
+      };
     case SEARCH_RESTART:
       return {
         users: [],
