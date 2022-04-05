@@ -8,6 +8,7 @@ import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import { useEffect } from "react";
 import Bell from "../Notifications/Bell";
 import { getPosts } from "../../actions/postActions";
+import Search from "../SearchBar/Search";
 import DropDown from "./DropDown";
 
 function Navbar({ changeLanguage, getMe, getMeFriends, getPosts }) {
@@ -32,13 +33,15 @@ function Navbar({ changeLanguage, getMe, getMeFriends, getPosts }) {
       backdropFilter="blur(50px)"
       className="blur"
     >
-      <Grid templateColumns="150px 1fr 75px 75px" placeItems="center">
-        <Button variant="unstyled" {...unStyledButton} w="100%" h="100%" ml="2">
+      <Grid templateColumns="150px 1fr 75px 75px" placeItems="center" templateRows="1fr 1fr">
+        <Button variant="unstyled" {...unStyledButton} w="100%" h="100%" ml="2" gridRow='1'>
           <Link to="/main">
             <LogoUp fontSize="14" scaleWidth={9.2} />
           </Link>
         </Button>
-        <SearchModal></SearchModal>
+        <Box pos="relative" gridRow='1/3' alignContent='start'>
+          <Search/>
+        </Box>
         <DropDown changeLanguage={changeLanguage} />
         <Bell />
       </Grid>

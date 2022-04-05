@@ -4,7 +4,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "./theme";
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
 import { createMiddleware } from "redux-api-middleware";
 import thunk from "redux-thunk";
 import reducers from "./reducers/index";
@@ -12,7 +12,10 @@ import { Provider } from "react-redux";
 
 export const store = createStore(
   reducers,
-  applyMiddleware(thunk, createMiddleware())
+  compose(
+    applyMiddleware(thunk, createMiddleware()),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  )
 );
 
 ReactDOM.render(
