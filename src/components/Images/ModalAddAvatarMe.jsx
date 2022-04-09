@@ -13,13 +13,16 @@ import {
 import { useTranslation } from "react-i18next";
 import FileUpload from "../FileUpload/FileUpload";
 import { baseUrl } from "../../config/baseUrl";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getMe, patchMeAvatar } from "../../actions/meActions";
 
-function ModalAddAvatarMe({ getMe, patchMeAvatar }) {
+function ModalAddAvatarMe() {
   const { t } = useTranslation();
   const languageValues = {
     addProfilePicture: t("addProfilePicture"),
   };
+
+  const dispatch = useDispatch();
 
   const avatar = useSelector((state) => state.me.me.avatar);
 
@@ -34,8 +37,8 @@ function ModalAddAvatarMe({ getMe, patchMeAvatar }) {
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      patchMeAvatar(file.name, reader.result);
-      getMe();
+      dispatch(patchMeAvatar(file.name, reader.result));
+      dispatch(getMe());
       onCloseAvatar();
     };
 
