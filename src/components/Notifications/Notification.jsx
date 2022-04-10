@@ -14,7 +14,7 @@ function Notification({
 }) {
   const { t } = useTranslation();
   const languageValues = {
-    addFriends: t("addFriends"),
+    addFriends: t("addFriend"),
     alertAddFriend: t("alertAddFriend"),
   };
 

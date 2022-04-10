@@ -44,6 +44,7 @@
   "passwordValidation": "Hasło musi zawierać co najmniej jedną cyfrę oraz jedną wielką i małą literę",
   "passwordRepeatValidation": "Hasło nie jest takie same",
   "addProfilePicture": "Dodaj zdjęcie profilowe",
+  "alertAddProfilePicture": "Czy potwierdzasz dodanie zdjęcia profilowego ?",
   "upload": "Prześlij",
   "addFriend": "Dodaj znajomego",
   "removeFriend": "Usuń znajomego",
@@ -71,5 +72,7 @@
   "meLikingPost": "oraz Ty",
   "iDisLikeIt": "Nie lubie!",
   "delFriend": "Usunięcie znajomego",
-  "alertDelFriend": "Czy potwierdzasz usunięcie znajomego ?"
+  "alertDelFriend": "Czy potwierdzasz usunięcie znajomego ?",
+  "sendInvitation": "Wyślij zaproszenie",
+  "alertSendInvitation":  "Czy potwierdzasz wysłanie zaproszenia ?"
 }

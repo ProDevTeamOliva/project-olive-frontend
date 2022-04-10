@@ -4,6 +4,8 @@ import { blueButtonStyle } from "../../styles/Buttons/blueButton";
 import { useDispatch, useSelector } from "react-redux";
 import { addToFriends } from "../../actions/userActions";
 import { baseUrl } from "../../config/baseUrl";
+import { useRef, useState } from "react";
+import Alert from "../Alert/Alert";
 
 const textStyle = {
   textAlign: "center",
@@ -18,11 +20,17 @@ function InfoAboutUser({ id }) {
     addFriend: t("addFriend"),
     sentInvitation: t("sentInvitation"),
     isFriend: t("isFriend"),
+    sendInvitation: t("sendInvitation"),
+    alertSendInvitation: t("alertSendInvitation"),
   };
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const meFriends = useSelector((state) => state.meFriends);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const onCloseAlert = () => setIsOpen(false);
+  const cancelRef = useRef();
 
   const checkExistUserInMeListOfFriends = () => {
     return meFriends.friends.filter((friend) => friend.id === id).length === 0;
@@ -32,6 +40,11 @@ function InfoAboutUser({ id }) {
     return (
       meFriends.pendingSent.filter((friend) => friend.id === id).length === 1
     );
+  };
+
+  const addFriend = () => {
+    onCloseAlert();
+    return dispatch(addToFriends(id));
   };
 
   return (
@@ -73,7 +86,7 @@ function InfoAboutUser({ id }) {
               w="80%"
               m="auto"
               d="block"
-              onClick={() => dispatch(addToFriends(id))}
+              onClick={() => setIsOpen(true)}
             >
               {languageValues.addFriend}
             </Button>
@@ -86,6 +99,14 @@ function InfoAboutUser({ id }) {
           )}
         </Stack>
       </Stack>
+      <Alert
+        isOpen={isOpen}
+        onCloseAlert={onCloseAlert}
+        fun={addFriend}
+        cancelRef={cancelRef}
+        header={languageValues.sendInvitation}
+        body={languageValues.alertSendInvitation}
+      />
     </Stack>
   );
 }

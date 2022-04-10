@@ -9,7 +9,6 @@ function LogoUp({ fontSize, scaleWidth }) {
     if (isFirefox) {
       document
         .getElementById("animation")
-
         .style.setProperty("--widthChange", `${widthForFirefox}px`);
     } else {
       document
@@ -24,7 +23,7 @@ function LogoUp({ fontSize, scaleWidth }) {
         <p
           className="text animation"
           id="animation"
-          style={{ fontSize: fontSize + "px" , margin: '6px'}}
+          style={{ fontSize: fontSize + "px" }}
         >
           ChatterMatter
         </p>

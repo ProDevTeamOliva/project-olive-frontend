@@ -1,7 +1,7 @@
 import { Button, Input, InputGroup } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
-const FileUpload = (props) => {
+function FileUpload(props) {
   const { t } = useTranslation();
   const languageValues = {
     upload: t("upload"),
@@ -19,11 +19,12 @@ const FileUpload = (props) => {
           hiddenInput = e;
         }}
       />
-      <Button {...props}>
+
+      <Button {...props} _focus={{ border: "none" }}>
         {props?.text ? props.text : languageValues.upload}
       </Button>
     </InputGroup>
   );
-};
+}
 
 export default FileUpload;

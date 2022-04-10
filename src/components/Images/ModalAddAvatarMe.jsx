@@ -15,15 +15,17 @@ import FileUpload from "../FileUpload/FileUpload";
 import { baseUrl } from "../../config/baseUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { getMe, patchMeAvatar } from "../../actions/meActions";
+import { useRef, useState } from "react";
+import Alert from "../Alert/Alert";
 
 function ModalAddAvatarMe() {
   const { t } = useTranslation();
   const languageValues = {
     addProfilePicture: t("addProfilePicture"),
+    alertAddProfilePicture: t("alertAddProfilePicture"),
   };
 
   const dispatch = useDispatch();
-
   const avatar = useSelector((state) => state.me.me.avatar);
 
   const {
@@ -32,7 +34,12 @@ function ModalAddAvatarMe() {
     onClose: onCloseAvatar,
   } = useDisclosure();
 
+  const [isOpen, setIsOpen] = useState(false);
+  const onCloseAlert = () => setIsOpen(false);
+  const cancelRef = useRef();
+
   const handleAvatarUpload = () => {
+    onCloseAlert();
     const file = document.querySelector("#avatarUpload")["files"][0];
     const reader = new FileReader();
 
@@ -71,11 +78,19 @@ function ModalAddAvatarMe() {
               w="75%"
               d="block"
               mx="auto"
-              onChange={handleAvatarUpload}
+              onChange={() => setIsOpen(true)}
             />
           </ModalBody>
         </ModalContent>
       </Modal>
+      <Alert
+        isOpen={isOpen}
+        onCloseAlert={onCloseAlert}
+        fun={handleAvatarUpload}
+        cancelRef={cancelRef}
+        header={languageValues.addProfilePicture}
+        body={languageValues.alertAddProfilePicture}
+      />
     </Flex>
   );
 }
