@@ -44,6 +44,7 @@
   "passwordValidation": "Password must contain at least one number and one uppercase and lowercase letter",
   "passwordRepeatValidation": "The password is not the same",
   "addProfilePicture": "Add profile picture",
+  "alertAddProfilePicture": "Do you confirm add profile picture ?",
   "upload": "Upload",
   "addFriend": "Add friend",
   "removeFriend": "Remove friend",
@@ -71,5 +72,7 @@
   "meLikingPost": "and You",
   "iDisLikeIt": "Dislike it!",
   "delFriend": "Removing a friend",
-  "alertDelFriend": "Do you confirm removal of a friend ?"
+  "alertDelFriend": "Do you confirm removal of a friend ?",
+  "sendInvitation": "Send an invitation",
+  "alertSendInvitation":  "Do you confirm send an invitation ?"
 }

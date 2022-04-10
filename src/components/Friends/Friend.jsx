@@ -5,8 +5,10 @@ import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import { useTranslation } from "react-i18next";
 import { useRef, useState } from "react";
 import Alert from "../Alert/Alert";
+import { useDispatch } from "react-redux";
+import { unAcceptFriendInvitation } from "../../actions/meActions";
 
-function Friend({ id, nameFirst, nameLast, avatar, unAcceptFriendInvitation }) {
+function Friend({ id, nameFirst, nameLast, avatar }) {
   const { t } = useTranslation();
   const languageValues = {
     delFriend: t("delFriend"),
@@ -17,9 +19,11 @@ function Friend({ id, nameFirst, nameLast, avatar, unAcceptFriendInvitation }) {
   const onCloseAlert = () => setIsOpen(false);
   const cancelRef = useRef();
 
+  const dispatch = useDispatch();
+
   const ignore = () => {
     onCloseAlert();
-    return unAcceptFriendInvitation(id);
+    return dispatch(unAcceptFriendInvitation(id));
   };
 
   return (

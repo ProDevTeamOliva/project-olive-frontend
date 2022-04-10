@@ -37,7 +37,7 @@ $widthChange: 100%;
         width: 0;
       }
       to {
-        width: $widthChange;
+        width: var(--widthChange);
       }
     }
 
@@ -71,7 +71,7 @@ $widthChange: 100%;
       width: 0;
     }
     to {
-      width: $widthChange;
+      width: var(--widthChange);
     }
   }
 }

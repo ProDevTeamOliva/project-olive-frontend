@@ -211,7 +211,7 @@ function RegisterForm() {
         fun={register}
         cancelRef={cancelRef}
         header={languageValues.createAccount}
-        body={t("alertRegistrationBody")}
+        body={languageValues.alertRegistrationBody}
       />
     </Box>
   );

@@ -1,7 +1,7 @@
 import { Text, Wrap } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import Friend from "./Friend";
-import { useDispatch, useSelector } from "react-redux";
 
 function Friends() {
   const { t } = useTranslation();
@@ -9,11 +9,7 @@ function Friends() {
     noFriends: t("noFriends"),
   };
 
-  const dispatch = useDispatch();
   const friends = useSelector((state) => state.meFriends.friends);
-
-  const unAcceptFriendInvitation = (id) =>
-    dispatch(unAcceptFriendInvitation(id));
 
   return (
     <Wrap spacing="80px" justify="center">
@@ -25,7 +21,6 @@ function Friends() {
             avatar={avatar}
             nameFirst={nameFirst}
             nameLast={nameLast}
-            unAcceptFriendInvitation={unAcceptFriendInvitation}
           />
         ))
       ) : (
