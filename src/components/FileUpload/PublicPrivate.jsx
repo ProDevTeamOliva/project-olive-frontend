@@ -5,15 +5,15 @@ import RadioCard from "./RadioCard";
 function PublicPrivate({ setValue }) {
   const { t } = useTranslation();
   const languageValues = {
-    publicImages: t("publicImages"),
+    public: t("public"),
     privateImages: t("privateImages"),
   };
 
-  const options = [languageValues.publicImages, languageValues.privateImages];
+  const options = [languageValues.public, languageValues.privateImages];
 
   const { getRootProps, getRadioProps } = useRadioGroup({
     name: "publicPrivate",
-    defaultValue: languageValues.publicImages,
+    defaultValue: languageValues.public,
     onChange: (e) => setValue(e === options[1]),
   });
 

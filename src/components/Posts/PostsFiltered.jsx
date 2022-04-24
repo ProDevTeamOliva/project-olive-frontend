@@ -21,7 +21,7 @@ function PostsFiltered({ tag, changeLanguage, getPostsByTag, posts }) {
   }, [tag, getPostsByTag]);
 
   return (
-    <Box h="100vh" mt="75px" d="grid" justifyContent="center">
+    <Box h="100vh" mt="110px" d="grid" justifyContent="center">
       <Navbar changeLanguage={changeLanguage} />
       <Grid m="25px" gap={5}>
         {posts.length > 0 ? (

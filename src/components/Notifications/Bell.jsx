@@ -11,7 +11,7 @@ function Bell({ pendingReceived }) {
     <Box
       pos="relative"
       d="inline-block"
-      gridColumn="3/4"
+      gridColumn="4/5"
       gridRow="1/2"
       role="group"
     >

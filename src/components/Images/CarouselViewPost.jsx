@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import { baseUrl } from "../../config/baseUrl";
 
 const settings = {
-  dots: true,
+  dots: false,
   arrows: false,
   fade: true,
   infinite: true,
@@ -16,11 +16,11 @@ const settings = {
   slidesToScroll: 1,
 };
 
-function Carousel({ cards }) {
+function CarouselViewPost({ cards }) {
   const [slider, setSlider] = useState(null);
 
-  const top = useBreakpointValue({ base: "90%", md: "50%" });
-  const side = useBreakpointValue({ base: "30%", md: "10px" });
+  const top = useBreakpointValue({ base: "50%", md: "50%" });
+  const side = useBreakpointValue({ base: "5px", md: "10px" });
   const iconStyle = {
     colorScheme: "messenger",
     borderRadius: "full",
@@ -78,12 +78,14 @@ function Carousel({ cards }) {
             key={index}
             src={`${baseUrl}${url}`}
             alt={`${baseUrl}${url}`}
+            objectFit="cover"
+            objectPosition="center"
+            h={["190px", "260px", "400px", "530px", "630px"]}
             w="100%"
-            h="100%"
           ></Image>
         ))}
       </Slider>
     </Box>
   );
 }
-export default memo(Carousel);
+export default memo(CarouselViewPost);

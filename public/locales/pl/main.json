@@ -52,7 +52,7 @@
   "noPosts": "Brak postów",
   "images": "Zdjęcia",
   "addImages": "Dodaj zdjęcia",
-  "publicImages": "Publiczne",
+  "public": "Publiczne",
   "privateImages": "Prywatne",
   "noImages": "Brak zdjęć",
   "noFriends": "Brak znajomych",
@@ -65,7 +65,6 @@
   "isFriend": "Jesteśmy znajomymi",
   "sentInvitation": "Wysłano zaproszenie",
   "submitPostAdd": "OPUBLIKUJ",
-  "amountOfFilesUploaded": "Liczba plików:",
   "selectFile": "Wybierz Plik",
   "postType": "Typ Postu",
   "addPostContentPlaceHolder": "O czym myślisz ?",
@@ -74,5 +73,11 @@
   "delFriend": "Usunięcie znajomego",
   "alertDelFriend": "Czy potwierdzasz usunięcie znajomego ?",
   "sendInvitation": "Wyślij zaproszenie",
-  "alertSendInvitation":  "Czy potwierdzasz wysłanie zaproszenia ?"
+  "alertSendInvitation":  "Czy potwierdzasz wysłanie zaproszenia ?",
+  "formatFile": "Nieprawidłowy format (użyj jpg, jpeg lub png) dla: ",
+  "memoryPerFile":"Przekroczono limit pamięci (3 MB) dla: " ,
+  "memoryAllFiles":"Przekroczono limit pamięci (15 MB) dla wszystkich plików",
+  "addingPost": "Dodanie nowego posta",
+  "alertAddPost": "Czy potwierdzasz dodanie nowego posta ?"
+
 }
