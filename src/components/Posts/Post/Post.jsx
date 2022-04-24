@@ -68,7 +68,7 @@ function Post({ id }) {
           <AuthorPostSection
             avatar={property.user.avatar}
             id={id}
-            type={property.type}
+            type={property.type.toLowerCase()}
             nameFirst={property.user.nameFirst}
             nameLast={property.user.nameLast}
           />

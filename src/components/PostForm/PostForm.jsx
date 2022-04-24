@@ -29,7 +29,7 @@ import Alert from "../Alert/Alert";
 
 const initialData = {
   content: "",
-  type: "Public",
+  type: "public",
   selectedFiles: [],
 };
 
