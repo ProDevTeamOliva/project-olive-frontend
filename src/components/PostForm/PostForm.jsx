@@ -137,6 +137,9 @@ function PostForm({ onClose }) {
     });
   };
 
+  const changeType = (value) => {
+    setFormValues({ ...formValues, type: value });
+  };
   const allow = (event) => {
     event.preventDefault();
   };
@@ -189,6 +192,7 @@ function PostForm({ onClose }) {
                             <Radio
                               {...field}
                               value={value}
+                              onChange={() => changeType(value)}
                               key={index}
                               style={{ touchAction: "none" }}
                             >
@@ -237,8 +241,8 @@ function PostForm({ onClose }) {
                       _placeholder={{
                         color: "gray.900",
                       }}
-                      onDrop={(e) => dropFile(e)}
-                      onDragOver={(e) => allow(e)}
+                      onDrop={(event) => dropFile(event)}
+                      onDragOver={(event) => allow(event)}
                       height="150px"
                       color="black"
                       onKeyDown={(event) => incHeightForContent(event)}
