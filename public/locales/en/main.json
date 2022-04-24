@@ -44,7 +44,7 @@
   "passwordValidation": "Password must contain at least one number and one uppercase and lowercase letter",
   "passwordRepeatValidation": "The password is not the same",
   "addProfilePicture": "Add profile picture",
-  "alertAddProfilePicture": "Do you confirm add profile picture ?",
+  "alertAddProfilePicture": "Do you confirm adding a profile picture ?",
   "upload": "Upload",
   "addFriend": "Add friend",
   "removeFriend": "Remove friend",
@@ -65,7 +65,6 @@
   "sentInvitation": "Invitation sent",
   "notifications": "Notifications",
   "submitPostAdd": "PUBLISH",
-  "amountOfFilesUploaded": "Amount of files:",
   "selectFile": "Select File",
   "postType": "Type of Post",
   "addPostContentPlaceHolder": "Share what's on your mind ?",
@@ -74,5 +73,11 @@
   "delFriend": "Removing a friend",
   "alertDelFriend": "Do you confirm removal of a friend ?",
   "sendInvitation": "Send an invitation",
-  "alertSendInvitation":  "Do you confirm send an invitation ?"
+  "alertSendInvitation":  "Do you confirm send an invitation ?",
+  "formatFile": "Wrong format (use jpg, jpeg or png) for: ",
+  "memoryPerFile":"The memory limit (3MB) exceeded for:  ",
+  "memoryAllFiles":"The memory limit (15MB) exceeded for the all files",
+  "addingPost": "Adding a new post",
+  "alertAddPost": "Do you confirm adding a new post ?"
+
 }

@@ -118,19 +118,15 @@ function SearchBar() {
 
   const renderSuggestions = () => (
     <List
-      spacing={3}
-      width={"100%"}
       bg="white"
       border={"1px solid rgba(66, 153, 225, 0.6)"}
       borderRadius={{ sm: "35px", md: "40px", lg: "50px", xl: "60px" }}
       p={{
-        sm: "10px 40px 10px 20px",
-        md: "15px 50px 15px 30px",
-        lg: "20px 70px 20px 50px",
-        xl: "25px 80px 25px 60px",
+        sm: "10px 10px 10px 10px",
+        md: "15px 30px 15px 30px",
+        lg: "20px 40px 20px 40px",
+        xl: "25px 50px 25px 50px",
       }}
-      zIndex={2}
-      position="relative"
       bgGradient="linear(to-tl, #ffffff, #7b68ee)"
     >
       {getResultsToRender()}
@@ -168,19 +164,38 @@ function SearchBar() {
   };
 
   return (
-    <Box>
-      <Center position="relative" gridRow="1">
+    <Box
+      gridRow="2/3"
+      gridColumn="2/3"
+      alignContent="start"
+      justifySelf="center"
+      mb="40px"
+      left="0"
+      right="0"
+      ml="auto"
+      mr="auto"
+      width="100%"
+      height="100%"
+    >
+      <Center gridRow="1" display={["none", "none", "none", "block"]} ml="75px">
         <InputGroup
           ref={searchBarRef}
           className={isOpen ? "m-menu -active" : "m-menu "}
           justifySelf="center"
-          marginTop={isBottomOpen && "15px"}
-          w={{ xl: "40vw" }}
+          left="0"
+          right="0"
+          ml="auto"
+          mr="auto"
+          w={["0vw", "0vw", "0vw", "35vw", "22vw"]}
+          autoComplete="off"
         >
-          <InputLeftElement pointerEvents="none">
-            <Icon as={Search2Icon} />
+          <InputLeftElement
+            pointerEvents="none"
+            justifyContent="center"
+            autoComplete="off"
+          >
+            <Icon as={Search2Icon} w="4" h="10" gridRow="1/2" />
           </InputLeftElement>
-
           <Input
             id="mainInput"
             onKeyPress={handleKeyPressed}
@@ -198,22 +213,30 @@ function SearchBar() {
             bgGradient="linear(to-bl, #ffffff, #7b68ee)"
             borderRadius={"full"}
             _placeholder={{
-              fontFamily: "Ubuntu",
               fontWeight: "lighter",
-              fontStretch: "normal",
-              fontStyle: "normal",
-              fontSize: "medium",
-              lineHeight: "normal",
-              letterSpacing: "1.5px",
+              fontSize: "large",
               textAlign: "left",
               paddingRight: { xl: "60px" },
-              // 'color': 'light-gray',
-              color: "gray.900",
+              color: "black",
             }}
+            position="absolute"
+            width="100%"
+            autoComplete="off"
           />
         </InputGroup>
       </Center>
-      <Center gridRow="2">{isBottomOpen && renderSuggestions()}</Center>
+      <Center
+        position="absolute"
+        top="95px"
+        left="0"
+        right="0"
+        ml="auto"
+        mr="auto"
+        display={["none", "none", "none", "block"]}
+        w={["0vw", "0vw", "0vw", "34vw", "21vw"]}
+      >
+        {isBottomOpen && renderSuggestions()}
+      </Center>
     </Box>
   );
 }

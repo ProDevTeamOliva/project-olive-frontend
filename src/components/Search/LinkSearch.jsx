@@ -7,7 +7,7 @@ function LinkSearch({ id, nameFirst, nameLast, avatar, onClose }) {
     <Link to={`/user/${id}`} params={{ id: id }} onClick={() => onClose()}>
       <Box
         bg="gray.500"
-        w={["300px", "400px"]}
+        w="100%"
         h="50px"
         shadow="md"
         borderRadius="10px"
@@ -18,6 +18,7 @@ function LinkSearch({ id, nameFirst, nameLast, avatar, onClose }) {
         _active={{
           bg: "gray.600",
         }}
+        mb="7px"
       >
         <HStack align="center" h="50px">
           <Flex w="100%" align="center">

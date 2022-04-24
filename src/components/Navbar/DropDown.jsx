@@ -29,7 +29,7 @@ function DropDown({ changeLanguage }) {
   };
 
   return (
-    <Box pos="relative" d="inline-block" gridColumn="4/5" role="group">
+    <Box pos="relative" d="inline-block" gridColumn="5/6" role="group">
       <Image
         src={Account}
         alt="Account"

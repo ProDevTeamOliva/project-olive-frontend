@@ -1,11 +1,11 @@
 import { Box, Grid, Text } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
-import SearchByTags from "../Search/SearchByTags";
-import AddPostModal from "../Posts/AddPost/AddPostModal";
-import { getPosts } from "../../actions/postActions";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import AddPostModal from "../PostForm/AddPostModal";
+import { CgHashtag } from "react-icons/cg";
+// https://github.com/astrit/css.gg
 
 function MainPage({ changeLanguage, getPosts }) {
   const { t } = useTranslation();
@@ -13,17 +13,17 @@ function MainPage({ changeLanguage, getPosts }) {
     noPost: t("noPosts"),
   };
 
-  // useCallback(() => {
-  //   getPosts();
-  // }, [getPosts]);
-
   const postsIds = useSelector((state) => state.posts.map((post) => post.id));
 
   return (
     <Box h="100vh" mt="75px" d="grid" justifyContent="center">
       <Navbar changeLanguage={changeLanguage} />
-      <SearchByTags />
-      <AddPostModal />
+      <Grid mt="50px" mb="20px" templateColumns="50% 40% 10%">
+        <AddPostModal />
+        <Box gridColumn="3/4" gridRow="1" align="left" ml="10px">
+          <CgHashtag style={{ width: "40px", height: "40px" }} />
+        </Box>
+      </Grid>
       <Grid m="25px" gap={5}>
         {postsIds.length > 0 ? (
           postsIds.map((postId) => <Post key={postId} id={postId} />)
@@ -35,7 +35,4 @@ function MainPage({ changeLanguage, getPosts }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  getPosts: () => dispatch(getPosts()),
-});
-export default connect(null, mapDispatchToProps)(MainPage);
+export default MainPage;

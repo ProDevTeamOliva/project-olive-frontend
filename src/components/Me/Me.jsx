@@ -19,7 +19,7 @@ import MagicGridImages from "../Images/MagicGridImages";
 import Friends from "../Friends/Friends";
 import ModalAddImageMe from "../Images/ModalAddImageMe";
 import ModalAddAvatarMe from "../Images/ModalAddAvatarMe";
-import InfoAboutMe from "./InfoAboutMe";
+import InfoAboutMeV1 from "./InfoAboutMeV1";
 
 function Me({ changeLanguage, getMe, getMePosts, getMePictures }) {
   const { t } = useTranslation();
@@ -64,7 +64,7 @@ function Me({ changeLanguage, getMe, getMePosts, getMePictures }) {
           p="4"
         >
           <ModalAddAvatarMe />
-          <InfoAboutMe />
+          <InfoAboutMeV1 />
         </Stack>
         <Tabs variant="soft-rounded" align="center">
           <TabList>

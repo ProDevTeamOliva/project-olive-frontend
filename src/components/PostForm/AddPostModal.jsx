@@ -8,11 +8,13 @@ import {
   useDisclosure,
   Divider,
   Text,
+  Button,
+  Icon,
   Box,
-  Flex,
 } from "@chakra-ui/react";
-import PostForm from "../../PostForm/PostForm";
+import PostForm from "./PostForm";
 import { useTranslation } from "react-i18next";
+import { AddIcon } from "@chakra-ui/icons";
 
 function AddPostModal() {
   const { t } = useTranslation();
@@ -27,28 +29,24 @@ function AddPostModal() {
   };
 
   return (
-    <>
-      <Box
-        height={["10", "45px"]}
-        margin="4"
-        padding="4"
-        borderRadius="full"
-        backgroundColor="gray.500"
-        flexBasis="100%"
+    <Box gridColumn="2/3" gridRow="1" align="right">
+      <Button
+        bg="white"
+        color="black"
         onClick={openModal}
+        _focus={{ outline: "none", bg: "white" }}
+        _hover={{ bg: "purple.300" }}
+        border="none"
+        p="15px"
       >
-        <Flex justify="center" align="center" h="100%">
-          <Box fontSize={["xl"]} textAlign="center" justifyContent="center">
-            {languageValues.writePost}
-          </Box>
-        </Flex>
-      </Box>
-
+        <Icon as={AddIcon} w="20px" h="20px" mr="7px" color="gray.700" />
+        {languageValues.addPost}
+      </Button>
       <Modal onClose={onClose} isOpen={isOpen} size="xl" bg="gray.50">
         <ModalOverlay />
-        <ModalContent mr="3" ml="3" bg="gray.500">
-          <ModalHeader>
-            <Text mb="3px" color="white" fontWeight="bold" fontSize="110%">
+        <ModalContent mr="3" ml="3" bg="gray.50">
+          <ModalHeader pb="0">
+            <Text mb="3px" color="gray.800" fontWeight="bold" fontSize="110%">
               {languageValues.addPost}
             </Text>
             <Divider borderColor="gray.900" border="1px"></Divider>
@@ -64,7 +62,7 @@ function AddPostModal() {
           </ModalBody>
         </ModalContent>
       </Modal>
-    </>
+    </Box>
   );
 }
 

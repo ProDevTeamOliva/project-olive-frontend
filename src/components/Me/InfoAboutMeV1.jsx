@@ -1,7 +1,7 @@
 import { Heading, Stack, Text } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 
-function InfoAboutMe() {
+function InfoAboutMeV1() {
   const me = useSelector((state) => state.me.me);
 
   return (
@@ -22,4 +22,4 @@ function InfoAboutMe() {
   );
 }
 
-export default InfoAboutMe;
+export default InfoAboutMeV1;

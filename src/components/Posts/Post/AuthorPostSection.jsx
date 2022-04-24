@@ -1,27 +1,12 @@
-import { Box, Image, Text } from "@chakra-ui/react";
-import { memo, useCallback } from "react";
+import { Box, Text } from "@chakra-ui/react";
+import { memo } from "react";
 import { useTranslation } from "react-i18next";
-import publicPostIcon from "../../../img/icons/PublicPostIcon.png";
-import FriendsPostIcon from "../../../img/icons/FriendsPostIcon.png";
-import GroupChatPostIcon from "../../../img/icons/GroupChatPostIcon.png";
-import AvatarUser from "./Avatar";
+import AvatarUser from "../../User/AvatarUser";
+import { postTypeIcon } from "./postTypeIcon";
 
 const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
   const { t } = useTranslation();
-
-  const getPostTypeIcon = useCallback(() => {
-    if (type === "Public") {
-      return publicPostIcon;
-    }
-    if (type === "Friends") {
-      return FriendsPostIcon;
-    }
-    if (type === "Group") {
-      return GroupChatPostIcon;
-    }
-    return null;
-  }, [type]);
-
+  const Icon = postTypeIcon[type];
   return (
     <Box display="flex" justifyContent="space-between">
       <AvatarUser avatar={avatar} id={id} />
@@ -31,17 +16,20 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
         fontSize={["xl", "xl", "3xl"]}
         textTransform="capitalization"
         mx="5"
+        mt="20px"
       >
         {nameFirst} {nameLast}
       </Box>
       <Box text="right" color="gray.500">
-        {getPostTypeIcon(type) ? (
+        {Icon ? (
           <Box display="flex" flexDirection="column">
-            <Image
-              boxSize={["25px", "35px"]}
-              src={getPostTypeIcon(type)}
-              borderRadius="full"
-            ></Image>
+            <Icon
+              style={{
+                width: "40px",
+                height: "40px",
+                color: "lightgray",
+              }}
+            />
             <Text fontSize={["xs", "xs"]} textAlign="center">
               {t(type)}
             </Text>

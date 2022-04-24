@@ -3,27 +3,13 @@ import { useTranslation } from "react-i18next";
 import { memo } from "react";
 import { useSelector } from "react-redux";
 import { dislikePost, likePost } from "../../../actions/postActions";
-import Carousel from "../../Images/Carousel.jsx";
+import Carousel from "../../Images/CarouselViewPost.jsx";
 import AddCommentModal from "../AddComment/AddCommentModal";
 import AuthorPostSection from "./AuthorPostSection";
 import Content from "./Content";
-import Feeling from "./Feeling";
 import Tags from "./Tags";
 
-// const getPostTypeIcon = (postType) => {
-//   if (postType === "Public") {
-//     return publicPostIcon;
-//   }
-//   if (postType === "Friends") {
-//     return FriendsPostIcon;
-//   }
-//   if (postType === "Group") {
-//     return GroupChatPostIcon;
-//   }
-//   return null;
-// };
-
-const Post = ({ id }) => {
+function Post({ id }) {
   const { t } = useTranslation();
   const languageValues = {
     iDisLikeIt: t("iDisLikeIt"),
@@ -87,7 +73,7 @@ const Post = ({ id }) => {
             nameLast={property.user.nameLast}
           />
           <Content content={property.content} />
-          <Feeling feeling={property.feeling ?? ""} />
+          {/* <Feeling feeling={property.feeling ?? ""} /> */}
           <Tags tags={property.tags} />
         </Box>
 
@@ -108,6 +94,6 @@ const Post = ({ id }) => {
       </Box>
     </GridItem>
   );
-};
+}
 
 export default memo(Post);
