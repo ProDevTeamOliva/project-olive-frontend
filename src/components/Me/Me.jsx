@@ -20,6 +20,8 @@ import Friends from "../Friends/Friends";
 import ModalAddImageMe from "../Images/ModalAddImageMe";
 import ModalAddAvatarMe from "../Images/ModalAddAvatarMe";
 import InfoAboutMeV1 from "./InfoAboutMeV1";
+import AddPostModal from "../PostForm/AddPostModal";
+import SearchModal from "../Search/SearchModal";
 
 function Me({ changeLanguage, getMe, getMePosts, getMePictures }) {
   const { t } = useTranslation();
@@ -76,6 +78,12 @@ function Me({ changeLanguage, getMe, getMePosts, getMePictures }) {
           <TabPanels>
             {/* Posts */}
             <TabPanel>
+              <Grid mt="10px" mb="40px" templateColumns="50% 40% 10%" mx="40px">
+                <AddPostModal />
+                <Box gridColumn="3/4" ml="10px">
+                  <SearchModal kindOfSearch="tag" />
+                </Box>
+              </Grid>
               {postsMe.length > 0
                 ? postsMe.map((post) => <Post id={post.id} key={post.id} />)
                 : languageValues.noPosts}

@@ -90,7 +90,7 @@ export const dislikePost = (id) => ({
 
 export const getPostsByTag = (tag) => ({
   [RSAA]: {
-    endpoint: `${baseUrl}/post/search/` + tag,
+    endpoint: `${baseUrl}/post?tag=${tag}`,
     method: "GET",
     credentials: "include",
     headers: {
