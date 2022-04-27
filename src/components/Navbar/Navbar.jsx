@@ -1,4 +1,4 @@
-import { Box, Grid, Button, Icon } from "@chakra-ui/react";
+import { Box, Grid, Button } from "@chakra-ui/react";
 import LogoUp from "../Logo/LogoUp";
 import { connect } from "react-redux";
 import { getMeFriends } from "../../actions/meActions";
@@ -7,9 +7,9 @@ import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import { useEffect } from "react";
 import Bell from "../Notifications/Bell";
 import { getPosts } from "../../actions/postActions";
-import Search from "../SearchBar/Search";
+import Search from "../Search/Search";
 import DropDown from "./DropDown";
-import { Search2Icon } from "@chakra-ui/icons";
+import SearchModal from "../Search/SearchModal";
 
 function Navbar({ changeLanguage, getMeFriends, getPosts }) {
   useEffect(() => {
@@ -50,14 +50,14 @@ function Navbar({ changeLanguage, getMeFriends, getPosts }) {
             <LogoUp fontSize="14" scaleWidth={9.2} />
           </Link>
         </Button>
-        <Search />
+        <Search kindOfSearch="personV1" />
         <Box
           pos="relative"
           gridRow="1/2"
           gridColumn="3/4"
           display={["inline-block", "inline-block", "inline-block", "none"]}
         >
-          <Icon as={Search2Icon} w="10" h="10" mr={["-30px", "-5px", "40px"]} />
+          <SearchModal kindOfSearch="personV2" />
         </Box>
         <Bell />
         <DropDown changeLanguage={changeLanguage} />

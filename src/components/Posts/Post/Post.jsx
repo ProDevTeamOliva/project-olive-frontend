@@ -40,13 +40,21 @@ function Post({ id }) {
   const renderLikeDislikeButton = () => {
     if (checkIfILikePost()) {
       return (
-        <Button padding="2" onClick={handleDisLikeButtonClick}>
+        <Button
+          padding="2"
+          onClick={handleDisLikeButtonClick}
+          _focus={{ border: "none" }}
+        >
           {languageValues.iDisLikeIt}
         </Button>
       );
     }
     return (
-      <Button padding="2" onClick={handleLikeButtonClick}>
+      <Button
+        padding="2"
+        onClick={handleLikeButtonClick}
+        _focus={{ border: "none" }}
+      >
         {languageValues.iLikeIt}
       </Button>
     );

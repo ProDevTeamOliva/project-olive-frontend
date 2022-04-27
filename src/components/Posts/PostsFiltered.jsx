@@ -21,14 +21,14 @@ function PostsFiltered({ tag, changeLanguage, getPostsByTag, posts }) {
   }, [tag, getPostsByTag]);
 
   return (
-    <Box h="100vh" mt="110px" d="grid" justifyContent="center">
+    <Box mt="150px" d="grid" justifyContent="center">
       <Navbar changeLanguage={changeLanguage} />
-      <Grid m="25px" gap={5}>
+      <Grid m="25px" gap={8}>
         {posts.length > 0 ? (
           posts.map((post) => (
-            <GridItem key={post.id}>
-              <Post property={post} id={post.id} />
-            </GridItem>
+            // <GridItem key={post.id}>
+            <Post key={post.id} property={post} id={post.id} />
+            // </GridItem>
           ))
         ) : (
           <Text textAlign="center">{languageValues.noPosts}</Text>
