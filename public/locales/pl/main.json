@@ -83,5 +83,6 @@
   "loading": "Ładowanie ...",
   "problemSearch": "Wystąpił problem, spróbuj ponownie"
   "message": "Wiadomość",
-  "reconnecting": "Nawiązywanie połączenia..."
+  "reconnecting": "Nawiązywanie połączenia...",
+  "chat": "Chat"
 }
