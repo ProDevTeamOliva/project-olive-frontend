@@ -6,34 +6,34 @@ import {
 } from "../types/searchTypes";
 
 const init_state = {
-  users: [],
+  payload: [],
   message: "",
   loading: false,
 };
 
-const searchUsersReducer = (state = init_state, action) => {
+const searchReducer = (state = init_state, action) => {
   switch (action.type) {
     case SEARCH_SUCCESS:
       return {
-        users: action.payload.users,
+        payload: action.payload.payload,
         message: "",
         loading: false,
       };
     case SEARCH_FAILURE:
       return {
-        users: [],
+        payload: [],
         message: action.payload.message,
         loading: false,
       };
     case SEARCH_REQUEST:
       return {
-        users: [],
+        payload: [],
         message: "",
         loading: true,
       };
     case SEARCH_RESTART:
       return {
-        users: [],
+        payload: [],
         message: "",
         loading: false,
       };
@@ -41,4 +41,4 @@ const searchUsersReducer = (state = init_state, action) => {
       return state;
   }
 };
-export default searchUsersReducer;
+export default searchReducer;

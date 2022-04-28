@@ -2,7 +2,7 @@ import { Box, HStack, Text, Flex, Avatar } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { BsArrow90DegLeft } from "react-icons/bs";
 
-function LinkSearch({ id, nameFirst, nameLast, avatar, onClose }) {
+function LinkSearchForUser({ id, nameFirst, nameLast, avatar, onClose }) {
   return (
     <Link to={`/user/${id}`} params={{ id: id }} onClick={() => onClose()}>
       <Box
@@ -47,4 +47,4 @@ function LinkSearch({ id, nameFirst, nameLast, avatar, onClose }) {
   );
 }
 
-export default LinkSearch;
+export default LinkSearchForUser;
