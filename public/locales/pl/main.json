@@ -80,5 +80,6 @@
   "addingPost": "Dodanie nowego posta",
   "alertAddPost": "Czy potwierdzasz dodanie nowego posta ?",
   "message": "Wiadomość",
-  "reconnecting": "Nawiązywanie połączenia..."
+  "reconnecting": "Nawiązywanie połączenia...",
+  "chat": "Chat"
 }

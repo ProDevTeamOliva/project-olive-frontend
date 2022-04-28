@@ -1,4 +1,4 @@
-import { Box, Center, Text } from "@chakra-ui/react";
+import { Flex, Box, Center, Text } from "@chakra-ui/react";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import AvatarUser from "../../User/AvatarUser";
@@ -8,7 +8,7 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
   const { t } = useTranslation();
   const Icon = postTypeIcon[type];
   return (
-    <Box display="flex" justifyContent="space-between">
+    <Flex justifyContent="space-between">
       <AvatarUser avatar={avatar} id={id} />
       <Box
         fontWeight="semibold"
@@ -22,7 +22,7 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
       </Box>
       <Box text="right" color="gray.500">
         {Icon ? (
-          <Box display="flex" flexDirection="column">
+          <Flex flexDirection="column">
             <Center>
               <Icon
                 style={{
@@ -35,12 +35,12 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
             <Text fontSize={["xs", "xs"]} textAlign="center">
               {t(type)}
             </Text>
-          </Box>
+          </Flex>
         ) : (
           t(type)
         )}
       </Box>
-    </Box>
+    </Flex>
   );
 };
 

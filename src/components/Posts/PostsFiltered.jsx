@@ -1,4 +1,4 @@
-import { Box, Grid, GridItem, Text } from "@chakra-ui/react";
+import { Grid, GridItem, Text } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
 import { useEffect } from "react";
@@ -21,7 +21,7 @@ function PostsFiltered({ tag, changeLanguage, getPostsByTag, posts }) {
   }, [tag, getPostsByTag]);
 
   return (
-    <Box h="100vh" mt="110px" d="grid" justifyContent="center">
+    <Grid h="100vh" mt="110px" justifyContent="center">
       <Navbar changeLanguage={changeLanguage} />
       <Grid m="25px" gap={5}>
         {posts.length > 0 ? (
@@ -34,7 +34,7 @@ function PostsFiltered({ tag, changeLanguage, getPostsByTag, posts }) {
           <Text textAlign="center">{languageValues.noPosts}</Text>
         )}
       </Grid>
-    </Box>
+    </Grid>
   );
 }
 

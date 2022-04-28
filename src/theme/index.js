@@ -11,6 +11,9 @@ const theme = extendTheme({
       "button[class^='react-scroll-to-bottom']": {
         display: "none",
       },
+      ".swiper-button-disabled": {
+        display: "none",
+      },
     }),
   },
 });

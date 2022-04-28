@@ -4,6 +4,7 @@ import Post from "../Posts/Post/Post";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import AddPostModal from "../PostForm/AddPostModal";
+import FriendsSlider from "../FriendsSlider/FriendsSlider";
 import { CgHashtag } from "react-icons/cg";
 // https://github.com/astrit/css.gg
 
@@ -16,7 +17,7 @@ function MainPage({ changeLanguage, getPosts }) {
   const postsIds = useSelector((state) => state.posts.map((post) => post.id));
 
   return (
-    <Box h="100vh" mt="75px" d="grid" justifyContent="center">
+    <Grid h="100vh" mt="75px" justifyContent="center">
       <Navbar changeLanguage={changeLanguage} />
       <Grid mt="50px" mb="20px" templateColumns="50% 40% 10%">
         <AddPostModal />
@@ -24,6 +25,7 @@ function MainPage({ changeLanguage, getPosts }) {
           <CgHashtag style={{ width: "40px", height: "40px" }} />
         </Box>
       </Grid>
+      <FriendsSlider />
       <Grid m="25px" gap={5}>
         {postsIds.length > 0 ? (
           postsIds.map((postId) => <Post key={postId} id={postId} />)
@@ -31,7 +33,7 @@ function MainPage({ changeLanguage, getPosts }) {
           <Text textAlign="center">{languageValues.noPost}</Text>
         )}
       </Grid>
-    </Box>
+    </Grid>
   );
 }
 

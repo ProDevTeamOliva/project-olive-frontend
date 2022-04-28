@@ -80,5 +80,6 @@
   "addingPost": "Adding a new post",
   "alertAddPost": "Do you confirm adding a new post ?",
   "message": "Message",
-  "reconnecting": "Reconnecting..."
+  "reconnecting": "Reconnecting...",
+  "chat": "Chat"
 }

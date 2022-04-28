@@ -1,0 +1,194 @@
+import { GridItem, Box, Avatar, Text, Tooltip } from "@chakra-ui/react";
+import { useTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { useEffect, useRef } from "react";
+import { getMeFriends } from "../../actions/meActions";
+import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import { baseUrl } from "../../config/baseUrl";
+import { IconContext } from "react-icons";
+import {
+  IoChatboxEllipses,
+  IoEllipse,
+  IoChevronBack,
+  IoChevronForward,
+} from "react-icons/io5";
+// https://ionicons.com/
+
+function FriendsSlider({ friends, getMeFriends }) {
+  const { t } = useTranslation();
+  const languageValues = {
+    chat: t("chat"),
+  };
+
+  useEffect(() => {
+    getMeFriends();
+  }, [getMeFriends]);
+
+  const prevRef = useRef(undefined);
+  const nextRef = useRef(undefined);
+
+  return (
+    <>
+      {friends.length > 0 && (
+        <GridItem m="10px 25px">
+          <Box
+            borderWidth="1px"
+            borderRadius="lg"
+            overflow="hidden"
+            bgColor="rgba(0, 0, 0, 0.1)"
+            backdropFilter="blur(50px)"
+            className="blur"
+            w={["300px", "400px", "600px", "800px", "950px"]}
+          >
+            <Swiper
+              modules={[Navigation]}
+              slidesPerView="auto"
+              slidesPerGroupAuto={true}
+              onInit={(swiper) => {
+                swiper.params.navigation.prevEl = prevRef.current;
+                swiper.params.navigation.nextEl = nextRef.current;
+                swiper.navigation.init();
+                swiper.navigation.update();
+              }}
+              className="mySwiper"
+            >
+              <SwiperSlide style={{ width: "160px" }}>
+                <Avatar
+                  h="60px"
+                  w="140px"
+                  m="10px"
+                  bg="white"
+                  icon={
+                    <IconContext.Provider
+                      value={{
+                        size: "2.5rem",
+                        color: "black",
+                        style: {
+                          marginRight: "5px",
+                        },
+                      }}
+                    >
+                      <IoChatboxEllipses />
+                      <Text textTransform="none" mb="5px">
+                        {languageValues.chat}
+                      </Text>
+                    </IconContext.Provider>
+                  }
+                />
+              </SwiperSlide>
+              {friends.map((f) => (
+                <SwiperSlide key={f.id} style={{ width: "80px" }}>
+                  <Link to={`/chat/${f.idConversation}`}>
+                    <Tooltip label={`${f.nameFirst} ${f.nameLast}`} bg="white">
+                      <Avatar
+                        boxSize="60px"
+                        m="10px"
+                        src={baseUrl + f.avatar}
+                      />
+                    </Tooltip>
+                  </Link>
+                </SwiperSlide>
+              ))}
+              <Box
+                ref={prevRef}
+                pos="absolute"
+                bottom="0"
+                left="0"
+                zIndex="1"
+                cursor="pointer"
+              >
+                <IconContext.Provider
+                  value={{
+                    size: "80px",
+                    color: "black",
+                    style: {
+                      position: "absolute",
+                      bottom: "0",
+                      left: "0",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  <IoEllipse />
+                </IconContext.Provider>
+                <Avatar
+                  boxSize="60px"
+                  m="10px"
+                  bg="white"
+                  icon={
+                    <IconContext.Provider
+                      value={{
+                        size: "3rem",
+                        color: "black",
+                        style: {
+                          marginRight: "5px",
+                        },
+                      }}
+                    >
+                      <IoChevronBack />
+                    </IconContext.Provider>
+                  }
+                />
+              </Box>
+              <Box
+                ref={nextRef}
+                pos="absolute"
+                bottom="0"
+                right="0"
+                zIndex="1"
+                cursor="pointer"
+              >
+                <IconContext.Provider
+                  value={{
+                    size: "80px",
+                    color: "black",
+                    style: {
+                      position: "absolute",
+                      bottom: "0",
+                      right: "0",
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  <IoEllipse />
+                </IconContext.Provider>
+                <Avatar
+                  boxSize="60px"
+                  m="10px"
+                  bg="white"
+                  icon={
+                    <IconContext.Provider
+                      value={{
+                        size: "3rem",
+                        color: "black",
+                        style: {
+                          marginLeft: "5px",
+                        },
+                      }}
+                    >
+                      <IoChevronForward />
+                    </IconContext.Provider>
+                  }
+                />
+              </Box>
+            </Swiper>
+          </Box>
+        </GridItem>
+      )}
+    </>
+  );
+}
+
+const mapStateToProps = (state) => ({
+  friends: state.meFriends.friends,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  getMeFriends: () => dispatch(getMeFriends()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(FriendsSlider);

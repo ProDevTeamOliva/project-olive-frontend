@@ -1,4 +1,4 @@
-import { Box, Button, GridItem } from "@chakra-ui/react";
+import { Button, GridItem, Box, Flex } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { memo } from "react";
 import { useSelector } from "react-redux";
@@ -81,7 +81,7 @@ function Post({ id }) {
           <Carousel cards={property.pictures} />
         )}
 
-        <Box display="flex" flexWrap="wrap" justifyContent="space-between">
+        <Flex flexWrap="wrap" justifyContent="space-between">
           <Box padding="2">
             {languageValues.likes} {property.likes.length}{" "}
             {checkIfILikePost() && languageValues.meLikingPost}
@@ -90,7 +90,7 @@ function Post({ id }) {
           <Box padding="2">{languageValues.postBottomCommentBoxTitle}</Box>
 
           <AddCommentModal idPost={property.id} />
-        </Box>
+        </Flex>
       </Box>
     </GridItem>
   );
