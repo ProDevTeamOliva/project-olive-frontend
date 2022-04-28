@@ -73,14 +73,15 @@
   "delFriend": "Usunięcie znajomego",
   "alertDelFriend": "Czy potwierdzasz usunięcie znajomego ?",
   "sendInvitation": "Wyślij zaproszenie",
-  "alertSendInvitation":  "Czy potwierdzasz wysłanie zaproszenia ?",
+  "alertSendInvitation": "Czy potwierdzasz wysłanie zaproszenia ?",
   "formatFile": "Nieprawidłowy format (użyj jpg, jpeg lub png) dla: ",
-  "memoryPerFile":"Przekroczono limit pamięci (3 MB) dla: " ,
-  "memoryAllFiles":"Przekroczono limit pamięci (15 MB) dla wszystkich plików",
+  "memoryPerFile": "Przekroczono limit pamięci (3 MB) dla: ",
+  "memoryAllFiles": "Przekroczono limit pamięci (15 MB) dla wszystkich plików",
   "addingPost": "Dodanie nowego posta",
   "alertAddPost": "Czy potwierdzasz dodanie nowego posta ?",
-  "findPerson":"Znajdź osobę ...",
-  "loading":"Ładowanie ...",
-  "problemSearch":"Wystąpił problem, spróbuj ponownie"
-
+  "findPerson": "Znajdź osobę ...",
+  "loading": "Ładowanie ...",
+  "problemSearch": "Wystąpił problem, spróbuj ponownie"
+  "message": "Wiadomość",
+  "reconnecting": "Nawiązywanie połączenia..."
 }

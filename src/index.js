@@ -9,12 +9,15 @@ import { createMiddleware } from "redux-api-middleware";
 import thunk from "redux-thunk";
 import reducers from "./reducers/index";
 import { Provider } from "react-redux";
+import { UserSocketProvider } from "./UserSocketContext";
 
 export const store = createStore(
   reducers,
   compose(
     applyMiddleware(thunk, createMiddleware()),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    window.__REDUX_DEVTOOLS_EXTENSION__
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      : (f) => f
   )
 );
 
@@ -22,7 +25,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ChakraProvider theme={theme}>
-        <App />
+        <UserSocketProvider>
+          <App />
+        </UserSocketProvider>
       </ChakraProvider>
     </Provider>
   </React.StrictMode>,

@@ -4,6 +4,7 @@ import Me from "../Me/Me";
 import NoPermission from "../MainPage/NoPermission";
 import User from "../User/User";
 import PostsFiltered from "../Posts/PostsFiltered";
+import Chat from "../Chat/Chat"
 
 function RouteAfterLogin({ changeLanguage }) {
   return (
@@ -38,6 +39,12 @@ function RouteAfterLogin({ changeLanguage }) {
           ></PostsFiltered>
         )}
       ></Route>
+      <Route
+        exact
+        path="/chat/:id"
+        component={(routerProps) => (
+        <Chat id={routerProps.match.params.id}></Chat>
+      )}></Route>
 
       <Route path="*" component={() => <NoPermission></NoPermission>}></Route>
     </Switch>
