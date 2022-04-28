@@ -73,11 +73,12 @@
   "delFriend": "Removing a friend",
   "alertDelFriend": "Do you confirm removal of a friend ?",
   "sendInvitation": "Send an invitation",
-  "alertSendInvitation":  "Do you confirm sending an invitation ?",
+  "alertSendInvitation": "Do you confirm sending an invitation ?",
   "formatFile": "Wrong format (use jpg, jpeg or png) for: ",
-  "memoryPerFile":"The memory limit (3MB) exceeded for:  ",
-  "memoryAllFiles":"The memory limit (15MB) exceeded for the all files",
+  "memoryPerFile": "The memory limit (3MB) exceeded for:  ",
+  "memoryAllFiles": "The memory limit (15MB) exceeded for the all files",
   "addingPost": "Adding a new post",
-  "alertAddPost": "Do you confirm adding a new post ?"
-
+  "alertAddPost": "Do you confirm adding a new post ?",
+  "message": "Message",
+  "reconnecting": "Reconnecting..."
 }
