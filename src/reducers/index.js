@@ -6,7 +6,7 @@ import mePicturesReducer from "./mePicturesReducer";
 import meFriendsReducer from "./meFriendsReducer";
 import registerReducer from "./registerReducer";
 import postsReducer from "./postsReducer";
-import searchUsersReducer from "./searchUsersReducer";
+import searchReducer from "./searchReducer";
 import userReducer from "./userReducer";
 import userPostsReducer from "./userPostsReducer";
 import userPicturesReducer from "./userPicturesReducer";
@@ -16,7 +16,7 @@ const reducers = combineReducers({
   logIn: logInReducer,
   register: registerReducer,
   posts: postsReducer,
-  searchUsers: searchUsersReducer,
+  search: searchReducer,
   me: meReducer,
   mePosts: mePostsReducer,
   mePictures: mePicturesReducer,

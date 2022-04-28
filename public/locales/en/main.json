@@ -79,6 +79,9 @@
   "memoryAllFiles": "The memory limit (15MB) exceeded for the all files",
   "addingPost": "Adding a new post",
   "alertAddPost": "Do you confirm adding a new post ?",
+  "findPerson": "Find a person...",
+  "loading": "Loading ...",
+  "problemSearch": "There was a problem, please try again"
   "message": "Message",
   "reconnecting": "Reconnecting...",
   "chat": "Chat"

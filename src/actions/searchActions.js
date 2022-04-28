@@ -9,7 +9,7 @@ import {
 
 export const searchUsers = ({ valueSearch }) => ({
   [RSAA]: {
-    endpoint: `${baseUrl}/user/search/${valueSearch}`,
+    endpoint: `${baseUrl}/user?namePart=${valueSearch}`,
     method: "GET",
     credentials: "include",
     headers: {
@@ -20,6 +20,19 @@ export const searchUsers = ({ valueSearch }) => ({
   },
 });
 
-export const restartSearchUsers = () => ({
+export const searchTags = ({ valueSearch }) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/post/tag?tagPart=${valueSearch}`,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [SEARCH_REQUEST, SEARCH_SUCCESS, SEARCH_FAILURE],
+  },
+});
+
+export const restartSearch = () => ({
   type: SEARCH_RESTART,
 });
