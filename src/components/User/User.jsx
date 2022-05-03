@@ -20,13 +20,13 @@ import {
 } from "../../actions/userActions";
 import MagicGridImages from "../Images/MagicGridImages";
 import InfoAboutUser from "./InfoAboutUser";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 
 function User({ changeLanguage, id, getUser, getUserPosts, getUserPictures }) {
   const { t } = useTranslation();
   const languageValues = {
     posts: t("posts"),
     images: t("images"),
-    noPosts: t("noPosts"),
   };
 
   const gridRef = useRef();
@@ -68,11 +68,13 @@ function User({ changeLanguage, id, getUser, getUserPosts, getUserPictures }) {
           <TabPanels>
             {/* Posts */}
             <TabPanel>
-              {posts?.posts
-                ? posts.posts.map((post) => (
-                    <Post property={post} key={post.id} id={post.id} />
-                  ))
-                : languageValues.noPosts}
+              {posts.posts.length > 0 ? (
+                posts.posts.map((post) => (
+                  <Post property={post} key={post.id} id={post.id} />
+                ))
+              ) : (
+                <LoadingSpinner />
+              )}
             </TabPanel>
 
             {/* Images */}

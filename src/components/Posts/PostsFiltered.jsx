@@ -1,17 +1,12 @@
-import { Grid, Text } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
 import { useEffect } from "react";
 import { getPostsByTag } from "../../actions/postActions";
 import { connect } from "react-redux";
-import { useTranslation } from "react-i18next";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 
 function PostsFiltered({ tag, changeLanguage, getPostsByTag, posts }) {
-  const { t } = useTranslation();
-  const languageValues = {
-    noPosts: t("noPosts"),
-  };
-
   useEffect(() => {
     getPostsByTag(tag);
     const intervalId = setInterval(() => {
@@ -26,12 +21,10 @@ function PostsFiltered({ tag, changeLanguage, getPostsByTag, posts }) {
       <Grid m="25px" gap={8}>
         {posts.length > 0 ? (
           posts.map((post) => (
-            // <GridItem key={post.id}>
             <Post key={post.id} property={post} id={post.id} />
-            // </GridItem>
           ))
         ) : (
-          <Text textAlign="center">{languageValues.noPosts}</Text>
+          <LoadingSpinner />
         )}
       </Grid>
     </Grid>
