@@ -22,6 +22,7 @@ import ModalAddAvatarMe from "../Images/ModalAddAvatarMe";
 import InfoAboutMeV1 from "./InfoAboutMeV1";
 import AddPostModal from "../PostForm/AddPostModal";
 import SearchModal from "../Search/SearchModal";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 
 function Me({ changeLanguage, getMe, getMePosts, getMePictures }) {
   const { t } = useTranslation();
@@ -29,7 +30,6 @@ function Me({ changeLanguage, getMe, getMePosts, getMePictures }) {
     posts: t("posts"),
     images: t("images"),
     friends: t("friends"),
-    noPosts: t("noPosts"),
   };
 
   const postsMe = useSelector((state) => state.mePosts.posts);
@@ -84,9 +84,11 @@ function Me({ changeLanguage, getMe, getMePosts, getMePictures }) {
                   <SearchModal kindOfSearch="tag" />
                 </Box>
               </Grid>
-              {postsMe.length > 0
-                ? postsMe.map((post) => <Post id={post.id} key={post.id} />)
-                : languageValues.noPosts}
+              {postsMe.length > 0 ? (
+                postsMe.map((post) => <Post id={post.id} key={post.id} />)
+              ) : (
+                <LoadingSpinner />
+              )}
             </TabPanel>
 
             {/* Images */}
