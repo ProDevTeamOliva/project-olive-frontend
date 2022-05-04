@@ -1,17 +1,13 @@
-import { Grid, Text } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
 import { useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
+import SearchModal from "../Search/SearchModal";
 import FriendsSlider from "../FriendsSlider/FriendsSlider";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 import MidSection from "./MidSection";
 
 function MainPage({ changeLanguage }) {
-  const { t } = useTranslation();
-  const languageValues = {
-    noPost: t("noPosts"),
-  };
-
   const postsIds = useSelector((state) => state.posts.map((post) => post.id));
 
   return (
@@ -19,11 +15,11 @@ function MainPage({ changeLanguage }) {
       <Navbar changeLanguage={changeLanguage} />
       <MidSection />
       <FriendsSlider />
-      <Grid m="25px" gap={8}>
+      <Grid m="25px" w={["300px", "400px", "600px", "800px", "950px"]}>
         {postsIds.length > 0 ? (
           postsIds.map((postId) => <Post key={postId} id={postId} />)
         ) : (
-          <Text textAlign="center">{languageValues.noPost}</Text>
+          <LoadingSpinner />
         )}
       </Grid>
     </Grid>

@@ -1,14 +1,9 @@
 import MagicGrid from "magic-grid-react";
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Image } from "@chakra-ui/react";
 import { baseUrl } from "../../config/baseUrl";
-import { useTranslation } from "react-i18next";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 
 function MagicGridImages({ pictures, gridRef }) {
-  const { t } = useTranslation();
-  const languageValues = {
-    noImages: t("noImages"),
-  };
-
   const sizeOfPictures = pictures.length;
 
   return sizeOfPictures > 0 ? (
@@ -20,7 +15,7 @@ function MagicGridImages({ pictures, gridRef }) {
       ))}
     </MagicGrid>
   ) : (
-    <Text>{languageValues.noImages}</Text>
+    <LoadingSpinner />
   );
 }
 

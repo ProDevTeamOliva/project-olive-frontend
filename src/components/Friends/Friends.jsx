@@ -1,14 +1,9 @@
-import { Text, Wrap } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
+import { Wrap } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 import Friend from "./Friend";
 
 function Friends() {
-  const { t } = useTranslation();
-  const languageValues = {
-    noFriends: t("noFriends"),
-  };
-
   const friends = useSelector((state) => state.meFriends.friends);
 
   return (
@@ -24,7 +19,7 @@ function Friends() {
           />
         ))
       ) : (
-        <Text>{languageValues.noFriends}</Text>
+        <LoadingSpinner />
       )}
     </Wrap>
   );

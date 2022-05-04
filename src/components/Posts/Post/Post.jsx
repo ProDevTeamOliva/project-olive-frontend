@@ -77,7 +77,7 @@ function Post({ id }) {
         backdropFilter="blur(50px)"
         className="blur"
         w={["300px", "400px", "600px", "800px", "950px"]}
-        mb="2"
+        mb="50px"
       >
         <Box p="6">
           <AuthorPostSection
