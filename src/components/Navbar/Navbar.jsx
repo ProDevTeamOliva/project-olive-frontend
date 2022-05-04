@@ -1,25 +1,29 @@
 import { Box, Grid, Button } from "@chakra-ui/react";
 import LogoUp from "../Logo/LogoUp";
-import { connect } from "react-redux";
 import { getMeFriends } from "../../actions/meActions";
 import { Link } from "react-router-dom";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import Bell from "../Notifications/Bell";
 import { getPosts } from "../../actions/postActions";
 import Search from "../Search/Search";
 import DropDown from "./DropDown";
 import SearchModal from "../Search/SearchModal";
+import { useDispatch } from "react-redux";
 
-function Navbar({ changeLanguage, getMeFriends, getPosts }) {
+function Navbar({ changeLanguage }) {
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    getPosts();
+    dispatch(getPosts());
+
     const intervalId = setInterval(() => {
-      getPosts();
-      getMeFriends();
+      dispatch(getPosts());
+      dispatch(getMeFriends());
     }, 3000);
+
     return () => clearInterval(intervalId);
-  }, [getPosts, getMeFriends]);
+  }, [dispatch]);
 
   return (
     <Box
@@ -66,11 +70,4 @@ function Navbar({ changeLanguage, getMeFriends, getPosts }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    getMeFriends: () => dispatch(getMeFriends()),
-    getPosts: () => dispatch(getPosts()),
-  };
-};
-
-export default connect(null, mapDispatchToProps)(Navbar);
+export default memo(Navbar);

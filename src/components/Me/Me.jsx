@@ -11,9 +11,9 @@ import {
 import { useTranslation } from "react-i18next";
 import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import { getMe, getMePosts, getMePictures } from "../../actions/meActions";
 import MagicGridImages from "../Images/MagicGridImages";
 import Friends from "../Friends/Friends";
@@ -23,7 +23,8 @@ import InfoAboutMeV1 from "./InfoAboutMeV1";
 import AddPostModal from "../PostForm/AddPostModal";
 import SearchModal from "../Search/SearchModal";
 
-function Me({ changeLanguage, getMe, getMePosts, getMePictures }) {
+function Me({ changeLanguage }) {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const languageValues = {
     posts: t("posts"),
@@ -38,18 +39,20 @@ function Me({ changeLanguage, getMe, getMePosts, getMePictures }) {
   const gridRef = useRef();
 
   useEffect(() => {
-    getMe();
-  }, [getMe]);
+    dispatch(getMe());
+    dispatch(getMePosts());
+    dispatch(getMePictures());
+  }, [dispatch]);
 
-  useEffect(() => {
-    getMePosts();
-    getMePictures();
-    const intervalId = setInterval(() => {
-      getMePosts();
-      getMePictures();
-    }, 3000);
-    return () => clearInterval(intervalId);
-  }, [getMePosts, getMePictures]);
+  // useEffect(() => {
+  //   dispatch(getMePosts());
+  //   dispatch(getMePictures());
+  //   const intervalId = setInterval(() => {
+  //     dispatch(getMePosts());
+  //     dispatch(getMePictures());
+  //   }, 3000);
+  //   return () => clearInterval(intervalId);
+  // }, [dispatch]);
 
   return (
     <Grid
@@ -106,10 +109,4 @@ function Me({ changeLanguage, getMe, getMePosts, getMePictures }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  getMe: () => dispatch(getMe()),
-  getMePosts: () => dispatch(getMePosts()),
-  getMePictures: () => dispatch(getMePictures()),
-});
-
-export default connect(null, mapDispatchToProps)(Me);
+export default memo(Me);

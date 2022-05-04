@@ -7,12 +7,13 @@ import {
 import AuthRoute from "./components/Auth/AuthRoute";
 import LogInPage from "./components/LogInPage/LogInPage";
 import NoPermission from "./components/MainPage/NoPermission";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import i18next from "i18next";
 import { initReactI18next, useTranslation } from "react-i18next";
 import Backend from "i18next-http-backend";
 import languages from "./config/languages";
 import RouteAfterLogin from "./components/Auth/RouteAfterLogin";
+import { memo, useCallback } from "react";
 
 const language = languages.find(
   (value) => value === localStorage.getItem("language")
@@ -42,13 +43,18 @@ i18next
     },
   });
 
-function App({ isAuth }) {
+function App() {
   const { i18n } = useTranslation();
 
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng);
-    localStorage.setItem("language", lng);
-  };
+  const changeLanguage = useCallback(
+    (lng) => {
+      i18n.changeLanguage(lng);
+      localStorage.setItem("language", lng);
+    },
+    [i18n]
+  );
+
+  const isAuth = useSelector((state) => state.logIn.isAuth);
 
   return (
     <div className="App" style={{ height: "100%" }}>
@@ -76,10 +82,4 @@ function App({ isAuth }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  isAuth: state.logIn.isAuth,
-});
-
-const mapDispatchToProps = () => ({});
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default memo(App);

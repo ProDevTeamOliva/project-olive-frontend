@@ -1,7 +1,7 @@
 import { GridItem, Box, Avatar, Text, Tooltip } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { memo, useEffect, useRef } from "react";
 import { getMeFriends } from "../../actions/meActions";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,15 +18,18 @@ import {
 } from "react-icons/io5";
 // https://ionicons.com/
 
-function FriendsSlider({ friends, getMeFriends }) {
+function FriendsSlider() {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const languageValues = {
     chat: t("chat"),
   };
 
+  const friends = useSelector((state) => state.meFriends.friends);
+
   useEffect(() => {
-    getMeFriends();
-  }, [getMeFriends]);
+    dispatch(getMeFriends());
+  }, [dispatch]);
 
   const prevRef = useRef(undefined);
   const nextRef = useRef(undefined);
@@ -183,12 +186,4 @@ function FriendsSlider({ friends, getMeFriends }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  friends: state.meFriends.friends,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getMeFriends: () => dispatch(getMeFriends()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(FriendsSlider);
+export default memo(FriendsSlider);
