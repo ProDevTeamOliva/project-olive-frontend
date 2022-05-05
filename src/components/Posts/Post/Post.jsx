@@ -104,7 +104,7 @@ function Post({ id }) {
               likes={property.likes.length}
             />
           </Box>
-          {/* {renderLikeDislikeButton()} */}
+          {renderLikeDislikeButton()}
           <Box padding="2">{languageValues.postBottomCommentBoxTitle}</Box>
 
           <AddCommentModal idPost={property.id} />
