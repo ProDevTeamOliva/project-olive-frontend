@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import CommentForm from "../../CommentForm/CommentForm";
 import { useTranslation } from "react-i18next";
+import { memo } from "react";
 
 function AddCommentModal() {
   const { t } = useTranslation();
@@ -61,4 +62,4 @@ function AddCommentModal() {
   );
 }
 
-export default AddCommentModal;
+export default memo(AddCommentModal);

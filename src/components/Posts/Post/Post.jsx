@@ -1,44 +1,46 @@
 import { Button, GridItem, Box, Flex } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { memo } from "react";
-import { useSelector } from "react-redux";
+import { memo, useCallback, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { dislikePost, likePost } from "../../../actions/postActions";
 import Carousel from "../../Images/CarouselViewPost.jsx";
 import AddCommentModal from "../AddComment/AddCommentModal";
 import AuthorPostSection from "./AuthorPostSection";
 import Content from "./Content";
 import Tags from "./Tags";
+import Like from "./Like";
 
 function Post({ id }) {
   const { t } = useTranslation();
-  const languageValues = {
-    iDisLikeIt: t("iDisLikeIt"),
-    iLikeIt: t("iLikeIt"),
-    likes: t("likes"),
-    meLikingPost: t("meLikingPost"),
-    postBottomCommentBoxTitle: t("postBottomCommentBoxTitle"),
-  };
+  const dispatch = useDispatch();
+  const languageValues = useMemo(
+    () => ({
+      iDisLikeIt: t("iDisLikeIt"),
+      iLikeIt: t("iLikeIt"),
+      likes: t("likes"),
+      meLikingPost: t("meLikingPost"),
+      postBottomCommentBoxTitle: t("postBottomCommentBoxTitle"),
+    }),
+    [t]
+  );
 
   const me = useSelector((state) => state.me);
   const property = useSelector((state) =>
     state.posts.find((post) => post.id === id)
   );
 
-  const handleLikeButtonClick = () => {
-    likePost(property.id);
-  };
-  const handleDisLikeButtonClick = () => {
-    dislikePost(property.id);
-  };
-  const checkIfILikePost = () => {
-    const res = property.likes.filter((like) => like.login === me.me.login);
-    if (res.length > 0) {
-      return true;
-    }
-    return false;
-  };
-  const renderLikeDislikeButton = () => {
-    if (checkIfILikePost()) {
+  const handleLikeButtonClick = useCallback(() => {
+    dispatch(likePost(property.id));
+  }, [property.id, dispatch]);
+  const handleDisLikeButtonClick = useCallback(() => {
+    dispatch(dislikePost(property.id));
+  }, [property.id, dispatch]);
+
+  const isLikedByMe =
+    property.likes.filter((like) => like.login === me.me.login).length > 0;
+
+  const renderLikeDislikeButton = useCallback(() => {
+    if (isLikedByMe) {
       return (
         <Button
           padding="2"
@@ -58,7 +60,12 @@ function Post({ id }) {
         {languageValues.iLikeIt}
       </Button>
     );
-  };
+  }, [
+    handleLikeButtonClick,
+    handleDisLikeButtonClick,
+    isLikedByMe,
+    languageValues,
+  ]);
 
   return (
     <GridItem>
@@ -91,10 +98,13 @@ function Post({ id }) {
 
         <Flex flexWrap="wrap" justifyContent="space-between">
           <Box padding="2">
-            {languageValues.likes} {property.likes.length}{" "}
-            {checkIfILikePost() && languageValues.meLikingPost}
+            <Like
+              isLikedByMe={isLikedByMe}
+              languageValues={languageValues}
+              likes={property.likes.length}
+            />
           </Box>
-          {renderLikeDislikeButton()}
+          {/* {renderLikeDislikeButton()} */}
           <Box padding="2">{languageValues.postBottomCommentBoxTitle}</Box>
 
           <AddCommentModal idPost={property.id} />
