@@ -26,18 +26,18 @@ function Post({ id }) {
 
   const me = useSelector((state) => state.me);
   const property = useSelector((state) =>
-    state.posts.find((post) => post.id === id)
+    state.posts.posts.find((post) => post.id === id)
   );
 
   const handleLikeButtonClick = useCallback(() => {
-    dispatch(likePost(property.id));
-  }, [property.id, dispatch]);
+    dispatch(likePost(property?.id));
+  }, [property?.id, dispatch]);
   const handleDisLikeButtonClick = useCallback(() => {
-    dispatch(dislikePost(property.id));
-  }, [property.id, dispatch]);
+    dispatch(dislikePost(property?.id));
+  }, [property?.id, dispatch]);
 
   const isLikedByMe =
-    property.likes.filter((like) => like.login === me.me.login).length > 0;
+    property?.likes.filter((like) => like.login === me.me.login).length > 0;
 
   const renderLikeDislikeButton = useCallback(() => {
     if (isLikedByMe) {
@@ -67,6 +67,10 @@ function Post({ id }) {
     languageValues,
   ]);
 
+  if(!property) {
+    return null
+  }
+  
   return (
     <GridItem>
       <Box
@@ -104,7 +108,7 @@ function Post({ id }) {
               likes={property.likes.length}
             />
           </Box>
-          {/* {renderLikeDislikeButton()} */}
+          {renderLikeDislikeButton()}
           <Box padding="2">{languageValues.postBottomCommentBoxTitle}</Box>
 
           <AddCommentModal idPost={property.id} />
