@@ -14,7 +14,10 @@ const mePostsReducer = (state = init_state, action) => {
         message: action.payload.message,
       };
     case ADD_POST_SUCCESS:
-      return { ...state, posts: [{...action.payload.post, likes: []}, ...state.posts] };
+      return {
+        ...state,
+        posts: [{ ...action.payload.post, likes: [] }, ...state.posts],
+      };
     case ME_POSTS_FAILURE:
       return {
         ...state,

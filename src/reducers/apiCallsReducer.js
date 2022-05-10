@@ -1,4 +1,8 @@
-import { ADD_POST_FAILURE, ADD_POST_REQUEST, GET_MORE_POSTS_SUCCESS } from "../types/postTypes";
+import {
+  ADD_POST_FAILURE,
+  ADD_POST_REQUEST,
+  GET_MORE_POSTS_SUCCESS,
+} from "../types/postTypes";
 
 const init_state = {
   isLoadingPosts: true,
@@ -9,15 +13,12 @@ const init_state = {
 const apiCallsReducer = (state = init_state, action) => {
   switch (action.type) {
     case ADD_POST_REQUEST:
-      return {...state,
-        isLoadingPosts: true,
-        isErrorPosts: false,
-      };
+      return { ...state, isLoadingPosts: true, isErrorPosts: false };
     case GET_MORE_POSTS_SUCCESS:
-      return{
-        ...state, 
-        isMorePosts: action.payload.posts.length > 0
-      }
+      return {
+        ...state,
+        isMorePosts: action.payload.posts.length > 0,
+      };
     case ADD_POST_FAILURE:
       return {
         isLoadingPosts: false,

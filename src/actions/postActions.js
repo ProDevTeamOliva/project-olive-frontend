@@ -74,9 +74,13 @@ export const getMorePosts = (id) => ({
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    types: [GET_MORE_POSTS_REQUEST, GET_MORE_POSTS_SUCCESS, GET_MORE_POSTS_FAILURE],
+    types: [
+      GET_MORE_POSTS_REQUEST,
+      GET_MORE_POSTS_SUCCESS,
+      GET_MORE_POSTS_FAILURE,
+    ],
   },
-})
+});
 
 export const likePost = (id) => ({
   [RSAA]: {
