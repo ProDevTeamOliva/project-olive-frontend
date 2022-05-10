@@ -10,7 +10,7 @@ import searchReducer from "./searchReducer";
 import userReducer from "./userReducer";
 import userPostsReducer from "./userPostsReducer";
 import userPicturesReducer from "./userPicturesReducer";
-import postsFiltered from "./postsFiltered";
+import postsFiltered from "./postsFilteredByTag";
 
 const reducers = combineReducers({
   logIn: logInReducer,
