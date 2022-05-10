@@ -11,12 +11,17 @@ import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import { CgHashtag } from "react-icons/cg";
 import Search from "./Search";
 // https://github.com/astrit/css.gg
+import { restartSearch } from "../../actions/searchActions";
 import { Search2Icon } from "@chakra-ui/icons";
+import { useDispatch } from "react-redux";
 
 function SearchModal({ kindOfSearch }) {
+  const dispatch = useDispatch();
+  const clearSuggestions = () => dispatch(restartSearch());
   const { isOpen, onOpen, onClose } = useDisclosure();
   const openModal = () => {
     onOpen();
+    clearSuggestions();
   };
 
   return (
