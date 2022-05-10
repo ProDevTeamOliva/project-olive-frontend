@@ -11,6 +11,7 @@ import userReducer from "./userReducer";
 import userPostsReducer from "./userPostsReducer";
 import userPicturesReducer from "./userPicturesReducer";
 import postsFiltered from "./postsFilteredByTag";
+import commentsReducer from "./commentsReducer";
 
 const reducers = combineReducers({
   logIn: logInReducer,
@@ -25,6 +26,7 @@ const reducers = combineReducers({
   userPosts: userPostsReducer,
   userPictures: userPicturesReducer,
   postsFiltered: postsFiltered,
+  comments: commentsReducer,
 });
 
 export default reducers;
