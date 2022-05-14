@@ -77,10 +77,10 @@ function Post({ id }) {
     languageValues,
   ]);
 
-  if(!property) {
-    return null
+  if (!property) {
+    return null;
   }
-  
+
   return (
     <GridItem>
       <Box
@@ -118,7 +118,7 @@ function Post({ id }) {
               likes={property.likes.length}
             />
           </Box>
-          renderLikeDislikeButton()
+          {renderLikeDislikeButton()}
           <Box onClick={onOpen} padding="2" cursor="pointer">
             {languageValues.postBottomCommentBoxTitle}
             {" " + commentsForPost.length}

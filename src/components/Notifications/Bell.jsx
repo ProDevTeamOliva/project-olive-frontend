@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import { BsFillBellFill } from "react-icons/bs";
 import Notifications from "./Notifications";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
+import { useState } from "react";
 
 function Bell({ pendingReceived }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [animation, setAnimation] = useState(false);
 
   return (
     <Box
@@ -44,10 +46,16 @@ function Bell({ pendingReceived }) {
           mb="1"
         >
           <BsFillBellFill
-            style={{ width: "45px", height: "45px" }}
+            style={{
+              width: "45px",
+              height: "45px",
+              transform: animation ? `rotate(20deg)` : `rotate(0deg)`,
+              transition: `transform 150ms`,
+            }}
+            onMouseOver={() => setAnimation(true)}
+            onMouseLeave={() => setAnimation(false)}
           ></BsFillBellFill>
         </Button>
-
         <Notifications isOpen={isOpen} onClose={onClose} />
       </Box>
     </Box>

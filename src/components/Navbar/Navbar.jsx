@@ -16,6 +16,7 @@ function Navbar({ changeLanguage }) {
 
   useEffect(() => {
     dispatch(getPosts());
+    dispatch(getMeFriends());
 
     // const intervalId = setInterval(() => {
     //   dispatch(getPosts());
