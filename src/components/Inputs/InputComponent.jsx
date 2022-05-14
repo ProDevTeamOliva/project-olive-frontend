@@ -7,13 +7,15 @@ import {
 import { Field } from "formik";
 
 function InputComponent({
-  name,
+  namePlaceholder,
+  nameFormLabel,
   id,
   value,
   type,
   color,
   borderColor,
   validate,
+  autoComplete = "on",
 }) {
   return (
     <>
@@ -27,13 +29,13 @@ function InputComponent({
               fontSize="auto"
               fontWeight="bold"
             >
-              {name}
+              {nameFormLabel}
             </FormLabel>
             <Input
               {...field}
               id={id}
               type={type}
-              placeholder={name}
+              placeholder={namePlaceholder}
               color={color}
               borderWidth="0.125rem"
               _placeholder={{ color: "#2D3748" }}
@@ -42,6 +44,7 @@ function InputComponent({
               _hover={{}}
               borderRadius="1.25em"
               shadow="0px 0px 4px 0px #171923"
+              autoComplete={autoComplete}
             />
             <FormErrorMessage color="red">{form.errors[id]}</FormErrorMessage>
           </FormControl>

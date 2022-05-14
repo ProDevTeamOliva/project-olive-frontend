@@ -23,7 +23,7 @@ function Bell({ pendingReceived }) {
             position="absolute"
             bg="blue.400"
             borderRadius="20px"
-            right={["-9px", "-4px", "33px"]}
+            right={["-21px", "-4px", "33px"]}
             bottom="6"
           >
             <Text
