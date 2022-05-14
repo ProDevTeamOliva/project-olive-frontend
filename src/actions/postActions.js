@@ -17,6 +17,9 @@ import {
   TAGS_REQUEST,
   TAGS_SUCCESS,
   TAGS_FAILURE,
+  GET_MORE_POSTS_REQUEST,
+  GET_MORE_POSTS_SUCCESS,
+  GET_MORE_POSTS_FAILURE,
 } from "../types/postTypes";
 
 import { RSAA } from "redux-api-middleware";
@@ -59,6 +62,23 @@ export const getPosts = () => ({
       "Content-Type": "application/json",
     },
     types: [GET_POSTS_REQUEST, GET_POSTS_SUCCESS, GET_POSTS_FAILURE],
+  },
+});
+
+export const getMorePosts = (id) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/post?id=${id}`,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      GET_MORE_POSTS_REQUEST,
+      GET_MORE_POSTS_SUCCESS,
+      GET_MORE_POSTS_FAILURE,
+    ],
   },
 });
 

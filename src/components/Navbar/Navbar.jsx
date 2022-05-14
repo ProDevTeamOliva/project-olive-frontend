@@ -17,12 +17,12 @@ function Navbar({ changeLanguage }) {
   useEffect(() => {
     dispatch(getPosts());
 
-    const intervalId = setInterval(() => {
-      dispatch(getPosts());
-      dispatch(getMeFriends());
-    }, 3000);
+    // const intervalId = setInterval(() => {
+    //   dispatch(getPosts());
+    //   dispatch(getMeFriends());
+    // }, 3000);
 
-    return () => clearInterval(intervalId);
+    // return () => clearInterval(intervalId);
   }, [dispatch]);
 
   return (
