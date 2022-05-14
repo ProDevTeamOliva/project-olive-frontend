@@ -1,18 +1,18 @@
-import { Button, GridItem, Box, Flex } from "@chakra-ui/react";
+import { Button, GridItem, Box, Flex, useDisclosure } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { dislikePost, likePost } from "../../../actions/postActions";
 import Carousel from "../../Images/CarouselViewPost.jsx";
-import AddCommentModal from "../AddComment/AddCommentModal";
+import AddCommentModal from "../../CommentForm/AddCommentModal";
 import AuthorPostSection from "./AuthorPostSection";
 import Content from "./Content";
 import Tags from "./Tags";
 import Like from "./Like";
+import { getComments } from "../../../actions/commentActions";
 
 function Post({ id }) {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const languageValues = useMemo(
     () => ({
       iDisLikeIt: t("iDisLikeIt"),
@@ -24,10 +24,20 @@ function Post({ id }) {
     [t]
   );
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getComments(id));
+  }, [dispatch, id]);
+
+  const commentsForPost =
+    useSelector((state) => state.comments.comments[id]) || [];
   const me = useSelector((state) => state.me);
   const property = useSelector((state) =>
     state.posts.find((post) => post.id === id)
   );
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleLikeButtonClick = useCallback(() => {
     dispatch(likePost(property.id));
@@ -105,9 +115,18 @@ function Post({ id }) {
             />
           </Box>
           {/* {renderLikeDislikeButton()} */}
-          <Box padding="2">{languageValues.postBottomCommentBoxTitle}</Box>
+          <Box onClick={onOpen} padding="2" cursor="pointer">
+            {languageValues.postBottomCommentBoxTitle}
 
-          <AddCommentModal idPost={property.id} />
+            {" " + commentsForPost.length}
+          </Box>
+
+          <AddCommentModal
+            idPost={id}
+            isOpen={isOpen}
+            onOpen={onOpen}
+            onClose={onClose}
+          />
         </Flex>
       </Box>
     </GridItem>

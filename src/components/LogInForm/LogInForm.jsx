@@ -68,7 +68,8 @@ function LogInForm({ logIn, message, status }) {
           >
             <Grid placeItems="center" templateRows="auto" gap="20px">
               <InputComponent
-                name={languageValues.login}
+                namePlaceholder={languageValues.login}
+                nameFormLabel={languageValues.login}
                 id="login"
                 type="text"
                 validate={(value) => validateRequired(value)}
@@ -76,7 +77,8 @@ function LogInForm({ logIn, message, status }) {
                 {...inputColors}
               />
               <InputComponent
-                name={languageValues.password}
+                namePlaceholder={languageValues.password}
+                nameFormLabel={languageValues.password}
                 type="password"
                 id="password"
                 validate={(value) => validateRequired(value)}

@@ -6,13 +6,14 @@ const Content = ({ content }) => {
 
   return (
     <Box
-      mt="1"
+      my="10px"
       fontWeight="semibold"
       as="h4"
       fontSize={["xl", "2xl"]}
       lineHeight="tight"
       isTruncated={hiddenContent}
       onClick={() => setHiddenContent((state) => !state)}
+      align="start"
     >
       {content}
     </Box>

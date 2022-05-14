@@ -7,7 +7,7 @@ import {
 
 const init_state = {
   message: "",
-  comments: [],
+  comments: {},
 };
 
 const commentsReducer = (state = init_state, action) => {
@@ -15,18 +15,27 @@ const commentsReducer = (state = init_state, action) => {
     case GET_COMMENTS_SUCCESS:
       return {
         message: action.payload.message,
-        comments: action.payload.comments,
+        comments: {
+          ...state.comments,
+          [action.payload.idPost]: action.payload.response.comments,
+        },
       };
     case GET_COMMENTS_FAILURE:
-      return { message: action.payload.message, comments: [] };
+      return { message: action.payload.message, comments: {} };
 
     case ADD_COMMENT_SUCCESS:
       return {
         message: action.payload.message,
-        comments: [...state.comments, action.payload.comment],
+        comments: {
+          ...state.comments,
+          [action.payload.comment.postId]: [
+            ...state.comments[action.payload.comment.postId],
+            action.payload.comment,
+          ],
+        },
       };
     case ADD_COMMENT_FAILURE:
-      return { message: action.payload.message, comments: [] };
+      return { message: action.payload.message, comments: {} };
     default:
       return state;
   }

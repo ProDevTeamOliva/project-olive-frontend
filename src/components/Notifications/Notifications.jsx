@@ -32,12 +32,12 @@ function Notifications({
   return (
     <>
       <Drawer onClose={onClose} isOpen={isOpen} size={["xs"]}>
-        <DrawerOverlay />
+        <DrawerOverlay p="0px" />
         <DrawerContent mt="75px" bg="blue.700">
           <DrawerCloseButton color="white" {...unStyledButton} />
 
-          <DrawerHeader>{languageValues.notifications}</DrawerHeader>
-          <DrawerBody>
+          <DrawerHeader px="20px">{languageValues.notifications}</DrawerHeader>
+          <DrawerBody px="20px">
             {pendingReceived.length > 0 ? (
               pendingReceived.map(({ id, nameFirst, nameLast, avatar }) => (
                 <Notification
