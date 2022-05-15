@@ -7,9 +7,8 @@ const Content = ({ content }) => {
   return (
     <Box
       my="10px"
-      fontWeight="semibold"
       as="h4"
-      fontSize={["xl", "2xl"]}
+      fontSize={["md", "xl"]}
       lineHeight="tight"
       isTruncated={hiddenContent}
       onClick={() => setHiddenContent((state) => !state)}

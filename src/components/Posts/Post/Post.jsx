@@ -10,6 +10,8 @@ import Content from "./Content";
 import Tags from "./Tags";
 import Like from "./Like";
 import { getComments } from "../../../actions/commentActions";
+import { unStyledButton } from "../../../styles/Buttons/unStyledButton";
+import { BsXLg } from "react-icons/bs";
 
 function Post({ id }) {
   const { t } = useTranslation();
@@ -93,7 +95,21 @@ function Post({ id }) {
         w={["300px", "400px", "600px", "800px", "950px"]}
         mb="50px"
       >
-        <Box p="6">
+        <Box align="left" justify="left">
+          <Button
+            variant="unstyled"
+            fontSize={["15px", "20px"]}
+            {...unStyledButton}
+            // onClick={() => setIsOpen(true)}
+            w="10px"
+            h="10px"
+            ml="15px"
+            mt="10px"
+          >
+            <BsXLg m="0px" p="0px"></BsXLg>
+          </Button>
+        </Box>
+        <Box px="6" pb="6">
           <AuthorPostSection
             avatar={property.user.avatar}
             id={id}
