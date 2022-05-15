@@ -87,5 +87,7 @@
   "chat": "Chat",
   "search":"Search",
   "deletingComment": "Deleting a comment",
-  "alertDeleteComment": "Do you confirm deleting comment ?"
+  "alertDeleteComment": "Do you confirm deleting comment ?",
+  "deletingPost": "Deleting a post",
+  "alertDeletePost": "Do you confirm deleting post ?"
 }

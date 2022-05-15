@@ -1,8 +1,12 @@
 import { Button, GridItem, Box, Flex, useDisclosure } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { memo, useCallback, useEffect, useMemo } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { dislikePost, likePost } from "../../../actions/postActions";
+import {
+  deletePost,
+  dislikePost,
+  likePost,
+} from "../../../actions/postActions";
 import Carousel from "../../Images/CarouselViewPost.jsx";
 import AddCommentModal from "../../CommentForm/AddCommentModal";
 import AuthorPostSection from "./AuthorPostSection";
@@ -12,6 +16,7 @@ import Like from "./Like";
 import { getComments } from "../../../actions/commentActions";
 import { unStyledButton } from "../../../styles/Buttons/unStyledButton";
 import { BsXLg } from "react-icons/bs";
+import Alert from "../../Alert/Alert";
 
 function Post({ id }) {
   const { t } = useTranslation();
@@ -22,6 +27,8 @@ function Post({ id }) {
       likes: t("likes"),
       meLikingPost: t("meLikingPost"),
       postBottomCommentBoxTitle: t("postBottomCommentBoxTitle"),
+      deletingPost: t("deletingPost"),
+      alertDeletePost: t("alertDeletePost"),
     }),
     [t]
   );
@@ -32,14 +39,22 @@ function Post({ id }) {
     dispatch(getComments(id));
   }, [dispatch, id]);
 
+  const removePost = () => {
+    onCloseAlert();
+    return dispatch(deletePost(id));
+  };
+
   const commentsForPost =
     useSelector((state) => state.comments.comments[id]) || [];
-  const me = useSelector((state) => state.me);
+  const me = useSelector((state) => state.me.me);
   const property = useSelector((state) =>
     state.posts.posts.find((post) => post.id === id)
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const onCloseAlert = () => setIsOpenAlert(false);
+  const cancelRef = useRef();
 
   const handleLikeButtonClick = useCallback(() => {
     dispatch(likePost(property?.id));
@@ -49,7 +64,7 @@ function Post({ id }) {
   }, [property?.id, dispatch]);
 
   const isLikedByMe =
-    property?.likes.filter((like) => like.login === me.me.login).length > 0;
+    property?.likes.filter((like) => like.login === me.login).length > 0;
 
   const renderLikeDislikeButton = useCallback(() => {
     if (isLikedByMe) {
@@ -95,21 +110,26 @@ function Post({ id }) {
         w={["300px", "400px", "600px", "800px", "950px"]}
         mb="50px"
       >
-        <Box align="left" justify="left">
-          <Button
-            variant="unstyled"
-            fontSize={["15px", "20px"]}
-            {...unStyledButton}
-            // onClick={() => setIsOpen(true)}
-            w="10px"
-            h="10px"
-            ml="15px"
-            mt="10px"
-          >
-            <BsXLg m="0px" p="0px"></BsXLg>
-          </Button>
-        </Box>
-        <Box px="6" pb="6">
+        {me.id === property.user.id ? (
+          <Box align="left" justify="left">
+            <Button
+              variant="unstyled"
+              fontSize={["15px", "20px"]}
+              {...unStyledButton}
+              onClick={() => setIsOpenAlert(true)}
+              w="10px"
+              h="10px"
+              ml="15px"
+              mt="10px"
+            >
+              <BsXLg m="0px" p="0px"></BsXLg>
+            </Button>
+          </Box>
+        ) : (
+          <></>
+        )}
+
+        <Box px={["3", "6"]} pb="6">
           <AuthorPostSection
             avatar={property.user.avatar}
             id={id}
@@ -147,6 +167,14 @@ function Post({ id }) {
           />
         </Flex>
       </Box>
+      <Alert
+        isOpen={isOpenAlert}
+        onCloseAlert={onCloseAlert}
+        fun={removePost}
+        cancelRef={cancelRef}
+        header={languageValues.deletingPost}
+        body={languageValues.alertDeletePost}
+      />
     </GridItem>
   );
 }

@@ -1,14 +1,4 @@
-import {
-  Flex,
-  Box,
-  Center,
-  Text,
-  VStack,
-  HStack,
-  Wrap,
-  Grid,
-  GridItem,
-} from "@chakra-ui/react";
+import { Flex, Box, Text, Grid, GridItem } from "@chakra-ui/react";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -44,14 +34,10 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
         </Box>
       </GridItem>
       <GridItem colStart="3" colEnd="4">
-        <Box text="right" color="gray.500" align="right">
+        <Box color="gray.500">
           {Icon ? (
-            <Flex
-              flexDirection="column"
-              w={["30px", "40px"]}
-              h={["30px", "40px"]}
-            >
-              <Center>
+            <Flex flexDirection="column" align="end">
+              <Box w={["30px", "40px"]} h={["30px", "40px"]} mr="2px">
                 <Icon
                   style={{
                     width: "100%",
@@ -59,7 +45,7 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
                     color: "lightgray",
                   }}
                 />
-              </Center>
+              </Box>
               <Text fontSize={["9px", "xs"]} textAlign="center">
                 {t(type)}
               </Text>

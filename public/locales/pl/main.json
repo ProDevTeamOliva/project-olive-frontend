@@ -87,5 +87,7 @@
   "chat": "Chat",
   "search":"Szukaj",
   "deletingComment": "Usuwanie komentarza",
-  "alertDeleteComment": "Czy potwierdzasz usunięcie komentarza ?"
+  "alertDeleteComment": "Czy potwierdzasz usunięcie komentarza ?",
+   "deletingPost": "Usuwanie posta",
+  "alertDeletePost": "Czy potwierdzasz usunięcie posta ?"
 }

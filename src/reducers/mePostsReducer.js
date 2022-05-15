@@ -1,5 +1,5 @@
 import { ME_POSTS_SUCCESS, ME_POSTS_FAILURE } from "../types/meTypes";
-import { ADD_POST_SUCCESS } from "../types/postTypes";
+import { ADD_POST_SUCCESS, DELETE_POST_SUCCESS } from "../types/postTypes";
 
 const init_state = {
   posts: [],
@@ -21,6 +21,11 @@ const mePostsReducer = (state = init_state, action) => {
     case ME_POSTS_FAILURE:
       return {
         ...state,
+        message: action.payload.message,
+      };
+    case DELETE_POST_SUCCESS:
+      return {
+        posts: state.posts.filter((post) => post.id !== action.payload.idPost),
         message: action.payload.message,
       };
     default:
