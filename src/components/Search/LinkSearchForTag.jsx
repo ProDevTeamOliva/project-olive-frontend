@@ -1,30 +1,29 @@
-import { Box, HStack, Text } from "@chakra-ui/react";
+import { Flex, Grid, GridItem, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 function LinkSearchForTag({ tag, onClose }) {
   return (
     <Link to={`/posts/${tag}`} params={{ tag: tag }} onClick={() => onClose()}>
-      <Box
-        bg="gray.500"
+      <Grid
+        templateColumns="100%"
+        bgGradient="linear(to-r,gray.800, gray.600, gray.400)"
         w="100%"
-        h="45px"
+        minH="50px"
         shadow="md"
-        borderRadius="25px"
-        _focus={{ bg: "gray.600" }}
+        borderRadius="20px"
         _hover={{
-          bg: "gray.600",
+          bgGradient: "linear(to-r,gray.900, gray.700, gray.400)",
         }}
-        _active={{
-          bg: "gray.600",
-        }}
-        mb="7px"
+        mb="10px"
       >
-        <HStack align="center" h="45px">
-          <Text textAlign="left" pl="20px" w="100%" fontSize="25px">
-            #{tag}
-          </Text>
-        </HStack>
-      </Box>
+        <GridItem colStart="1" colEnd="2">
+          <Flex flexDirection="row" align="center" h="100%" w="100%">
+            <Text textAlign="left" px="20px" fontSize="25px" w="100%">
+              #{tag}
+            </Text>
+          </Flex>
+        </GridItem>
+      </Grid>
     </Link>
   );
 }

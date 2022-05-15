@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 import AvatarUser from "../../User/AvatarUser";
 import { postTypeIcon } from "./postTypeIcon";
 
-const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
+const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type, link }) => {
   const { t } = useTranslation();
   const Icon = postTypeIcon[type];
   return (
     <Grid templateColumns="20% 60% 20%">
       <GridItem colStart="1" colEnd="2" align="center">
-        <AvatarUser avatar={avatar} id={id} />
+        <AvatarUser avatar={avatar} id={id} link={link} />
       </GridItem>
       <GridItem colStart="2" colEnd="3">
         <Box
@@ -27,7 +27,7 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
               fontWeight: "bold",
             }}
           >
-            <Link to="/me">
+            <Link to={link}>
               {nameFirst} {nameLast}
             </Link>
           </Text>
@@ -37,7 +37,7 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
         <Box color="gray.500">
           {Icon ? (
             <Flex flexDirection="column" align="end">
-              <Box w={["30px", "40px"]} h={["30px", "40px"]} mr="2px">
+              <Box w={["30px", "40px"]} h={["30px", "40px"]}>
                 <Icon
                   style={{
                     width: "100%",
@@ -46,9 +46,11 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type }) => {
                   }}
                 />
               </Box>
-              <Text fontSize={["9px", "xs"]} textAlign="center">
-                {t(type)}
-              </Text>
+              <Box w={["30px", "40px"]} h={["30px", "40px"]}>
+                <Text fontSize={["9px", "xs"]} textAlign="center">
+                  {t(type)}
+                </Text>
+              </Box>
             </Flex>
           ) : (
             t(type)

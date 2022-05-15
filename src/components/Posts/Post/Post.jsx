@@ -130,13 +130,26 @@ function Post({ id }) {
         )}
 
         <Box px={["3", "6"]} pb="6">
-          <AuthorPostSection
-            avatar={property.user.avatar}
-            id={id}
-            type={property.type.toLowerCase()}
-            nameFirst={property.user.nameFirst}
-            nameLast={property.user.nameLast}
-          />
+          {me.id === property.user.id ? (
+            <AuthorPostSection
+              avatar={me.avatar}
+              id={id}
+              type={property.type.toLowerCase()}
+              nameFirst={me.nameFirst}
+              nameLast={me.nameLast}
+              link="/me"
+            />
+          ) : (
+            <AuthorPostSection
+              avatar={property.user.avatar}
+              id={id}
+              type={property.type.toLowerCase()}
+              nameFirst={property.user.nameFirst}
+              nameLast={property.user.nameLast}
+              link={`/user/${property.user.id}`}
+            />
+          )}
+
           <Content content={property.content} />
           {/* <Feeling feeling={property.feeling ?? ""} /> */}
           <Tags tags={property.tags} />

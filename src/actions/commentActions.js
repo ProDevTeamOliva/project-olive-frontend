@@ -54,9 +54,8 @@ export const getComments = (idPost) => ({
 
 export const deleteComment = (idPost, payload) => ({
   [RSAA]: {
-    endpoint: `${baseUrl}/post/${idPost}/comment`,
+    endpoint: `${baseUrl}/post/comment/${payload.id}`,
     method: "DELETE",
-    body: JSON.stringify(payload),
     credentials: "include",
     headers: {
       Accept: "application/json",

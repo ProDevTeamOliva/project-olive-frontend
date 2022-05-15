@@ -134,9 +134,9 @@ function SearchBar({ kindOfSearch }) {
       return (
         <ListItem
           p="3"
-          borderBottom={"2px solid light-white"}
+          borderBottom="2px solid light-white"
           fontFamily="Ubuntu"
-          color={"black"}
+          color="black"
         >
           {languageValues.problemSearch}
         </ListItem>
