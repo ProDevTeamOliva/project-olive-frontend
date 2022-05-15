@@ -8,6 +8,7 @@ import {
   GET_POSTS_REQUEST,
   GET_POSTS_SUCCESS,
   LIKE_SUCCESS,
+  DELETE_POST_SUCCESS,
 } from "../types/postTypes";
 
 const init_state = {
@@ -95,6 +96,14 @@ const postsReducer = (state = init_state, action) => {
       return {
         ...state,
         posts: [{ ...action.payload.post, likes: [] }, ...state.posts],
+        isFetching: false,
+        isFetched: true,
+        isFetchingError: false,
+      };
+    case DELETE_POST_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post.id !== action.payload.idPost),
         isFetching: false,
         isFetched: true,
         isFetchingError: false,
