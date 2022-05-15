@@ -83,7 +83,7 @@ function Me({ changeLanguage }) {
             <TabPanel>
               <Grid mt="10px" mb="40px" templateColumns="50% 40% 10%" mx="40px">
                 <AddPostModal />
-                <Box gridColumn="3/4" ml="10px">
+                <Box gridColumn="3/4" ml={["40px", "30px", "20px", "10px"]}>
                   <SearchModal kindOfSearch="tag" />
                 </Box>
               </Grid>

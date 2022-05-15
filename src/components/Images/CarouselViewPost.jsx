@@ -3,6 +3,7 @@ import { Box, IconButton, Image, useBreakpointValue } from "@chakra-ui/react";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 import Slider from "react-slick";
 import { baseUrl } from "../../config/baseUrl";
+import LinkWithCss from "./LinkWithCss";
 
 const settings = {
   dots: false,
@@ -31,7 +32,6 @@ function CarouselViewPost({ cards }) {
     _focus: { border: "none" },
   };
 
-  const link = "https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0";
   return (
     <Box
       position={"relative"}
@@ -39,18 +39,7 @@ function CarouselViewPost({ cards }) {
       width={"full"}
       overflow={"hidden"}
     >
-      <link
-        rel="stylesheet"
-        type="text/css"
-        charSet="UTF-8"
-        href={link + "/slick.min.css"}
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href={link + "/slick-theme.min.css"}
-      />
-
+      <LinkWithCss />
       {cards.length > 1 && (
         <>
           <IconButton

@@ -23,6 +23,9 @@ function Comments({ idPost }) {
                   comment={comment}
                   bgColor="mediumslateblue"
                   link="/me"
+                  closeButton={true}
+                  idPost={idPost}
+                  idComment={id}
                 />
               </GridItem>
             ) : (
@@ -32,7 +35,10 @@ function Comments({ idPost }) {
                   date={date}
                   comment={comment}
                   bgColor="gray.400"
-                  link={`/user/${id}`}
+                  link={`/user/${user.id}`}
+                  closeButton={false}
+                  idPost={idPost}
+                  idComment={id}
                 />
               </GridItem>
             )
