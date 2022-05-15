@@ -17,6 +17,10 @@ export const parseDate = (date) => {
     newDate.getDate().toString().length > 1
       ? newDate.getDate()
       : "0" + newDate.getDate()
-  } ${newDate.getHours()}:${newDate.getMinutes()}`;
+  } ${newDate.getHours()}:${
+    newDate.getMinutes().toString().length > 1
+      ? newDate.getMinutes()
+      : "0" + newDate.getMinutes()
+  }`;
   return convertDate;
 };

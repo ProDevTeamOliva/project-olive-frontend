@@ -36,17 +36,9 @@ function User({ changeLanguage, id, getUser, getUserPosts, getUserPictures }) {
 
   useEffect(() => {
     getUser(id);
-  }, [getUser, id]);
-
-  useEffect(() => {
     getUserPosts(id);
     getUserPictures(id);
-    const intervalId = setInterval(() => {
-      getUserPosts(id);
-      getUserPictures(id);
-    }, 3000);
-    return () => clearInterval(intervalId);
-  }, [getUserPosts, getUserPictures, id]);
+  }, [getUser, getUserPosts, getUserPictures, id]);
 
   return (
     <Grid

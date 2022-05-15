@@ -5,6 +5,9 @@ import {
   ADD_COMMENT_SUCCESS,
   ADD_COMMENT_FAILURE,
   ADD_COMMENT_REQUEST,
+  DELETE_COMMENT_SUCCESS,
+  DELETE_COMMENT_FAILURE,
+  DELETE_COMMENT_REQUEST,
 } from "../types/commentTypes";
 
 import { RSAA } from "redux-api-middleware";
@@ -24,9 +27,9 @@ export const addComment = (payload, id) => ({
   },
 });
 
-export const getComments = (id) => ({
+export const getComments = (idPost) => ({
   [RSAA]: {
-    endpoint: `${baseUrl}/post/${id}/comment`,
+    endpoint: `${baseUrl}/post/${idPost}/comment`,
     method: "GET",
     credentials: "include",
     headers: {
@@ -40,11 +43,38 @@ export const getComments = (id) => ({
         payload: async (action, state, res) => {
           return res.json().then((json) => ({
             response: json,
-            idPost: id,
+            idPost: idPost,
           }));
         },
       },
       GET_COMMENTS_FAILURE,
+    ],
+  },
+});
+
+export const deleteComment = (idPost, payload) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/post/${idPost}/comment`,
+    method: "DELETE",
+    body: JSON.stringify(payload),
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      DELETE_COMMENT_REQUEST,
+      {
+        type: DELETE_COMMENT_SUCCESS,
+        payload: async (action, state, res) => {
+          return res.json().then((json) => ({
+            response: json,
+            idComment: payload.id,
+            idPost: idPost,
+          }));
+        },
+      },
+      DELETE_COMMENT_FAILURE,
     ],
   },
 });

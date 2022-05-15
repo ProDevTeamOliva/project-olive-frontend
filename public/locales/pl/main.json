@@ -85,5 +85,7 @@
   "message": "Wiadomość",
   "reconnecting": "Nawiązywanie połączenia...",
   "chat": "Chat",
-  "search":"Szukaj"
+  "search":"Szukaj",
+  "deletingComment": "Usuwanie komentarza",
+  "alertDeleteComment": "Czy potwierdzasz usunięcie komentarza ?"
 }

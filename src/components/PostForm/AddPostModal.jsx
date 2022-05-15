@@ -49,7 +49,7 @@ function AddPostModal() {
       </Button>
       <Modal onClose={onClose} isOpen={isOpen} size="xl" bg="gray.50">
         <ModalOverlay />
-        <ModalContent mr="3" ml="3" bg="gray.50">
+        <ModalContent bg="gray.50">
           <ModalHeader pb="0">
             <Text mb="3px" color="gray.800" fontWeight="bold" fontSize="110%">
               {languageValues.addPost}
