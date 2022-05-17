@@ -13,31 +13,53 @@ function ChatMessages({ chatSocket, me }) {
 
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
+  const [allMessages, setAllMessages] = useState(false);
+
+  const onMessage = (m) => {
+    setMessages((messages) => [...messages, m]);
+  };
+
+  const loadMore = () => {
+    chatSocket?.emit(
+      "history",
+      { id: Math.min(...messages.map((message) => message.messageId)) },
+      (response) => {
+        if (response?.messages.length === 0) {
+          setAllMessages(true);
+        }
+        setMessages([...response?.messages?.reverse(), ...messages]);
+      }
+    );
+  };
+
+  const handleSubmit = () => {
+    if (message.length > 0) {
+      chatSocket?.emit("message", { message: message }, (response) =>
+        onMessage(response)
+      );
+      setMessage("");
+    }
+  };
 
   useEffect(() => {
-    chatSocket?.emit("history", (data) => {
-      setMessages(data?.messages);
+    chatSocket?.emit("history", (response) => {
+      setMessages(response?.messages?.reverse());
     });
-
-    const onMessage = (m) => {
-      setMessages((messages) => [...messages, m]);
-    };
 
     chatSocket?.on("message", onMessage);
 
     return () => chatSocket?.off("message", onMessage);
   }, [chatSocket]);
 
-  const handleSubmit = () => {
-    if (message.length > 0) {
-      chatSocket?.emit("message", { message: message });
-      setMessage("");
-    }
-  };
-
   return (
     <Grid h="100%" templateRows="minmax(50px, 1fr) 50px" overflowY="auto">
-      <ReactScrollToBottom messages={messages} me={me} overflowY="scroll" />
+      <ReactScrollToBottom
+        messages={messages}
+        me={me}
+        loadMore={loadMore}
+        allMessages={allMessages}
+        overflowY="scroll"
+      />
       <Grid
         templateColumns="1fr 50px"
         placeItems="center"

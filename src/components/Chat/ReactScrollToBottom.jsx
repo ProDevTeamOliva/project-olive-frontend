@@ -1,5 +1,6 @@
 import { Grid, Box } from "@chakra-ui/react";
 import ScrollToBottom, {
+  useObserveScrollPosition,
   FunctionContext,
   StateContext,
 } from "react-scroll-to-bottom";
@@ -7,7 +8,23 @@ import { IconContext } from "react-icons";
 import { IoEllipse, IoArrowDownCircle } from "react-icons/io5";
 // https://ionicons.com/
 
-const Content = ({ scrollToBottom, sticky, messages, me }) => {
+const Content = ({
+  scrollToBottom,
+  sticky,
+  messages,
+  me,
+  loadMore,
+  allMessages,
+}) => {
+  useObserveScrollPosition(
+    ({ scrollTop }) => {
+      if (!allMessages && scrollTop !== 0 && scrollTop < 100) {
+        loadMore();
+      }
+    },
+    [loadMore]
+  );
+
   return (
     <Grid>
       {messages?.map((m) =>
@@ -83,8 +100,8 @@ const Content = ({ scrollToBottom, sticky, messages, me }) => {
   );
 };
 
-const ReactScrollToBottom = ({ messages, me }) => (
-  <ScrollToBottom>
+const ReactScrollToBottom = ({ messages, me, loadMore, allMessages }) => (
+  <ScrollToBottom initialScrollBehavior="auto">
     <FunctionContext.Consumer>
       {({ scrollToBottom }) => (
         <StateContext.Consumer>
@@ -94,6 +111,8 @@ const ReactScrollToBottom = ({ messages, me }) => (
               sticky={sticky}
               messages={messages}
               me={me}
+              loadMore={loadMore}
+              allMessages={allMessages}
             />
           )}
         </StateContext.Consumer>
