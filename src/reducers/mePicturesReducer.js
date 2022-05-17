@@ -24,7 +24,7 @@ const mePicturesReducer = (state = init_state, action) => {
       };
     case ME_POST_PICTURES_SUCCESS:
       return {
-        pictures: action.payload.pictures,
+        pictures: [...state.pictures, ...action.payload.pictures],
         message: action.payload.message,
       };
     case ME_POST_PICTURES_FAILURE:
