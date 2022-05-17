@@ -1,4 +1,11 @@
-import { Text, Flex, Avatar, WrapItem, CloseButton } from "@chakra-ui/react";
+import {
+  Text,
+  Flex,
+  Avatar,
+  WrapItem,
+  CloseButton,
+  Box,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../config/baseUrl";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
@@ -29,7 +36,7 @@ function Friend({ id, nameFirst, nameLast, avatar }) {
   return (
     <WrapItem key={id}>
       <Flex direction="column" align="center" justify="center">
-        <Flex justify="right" width="100%">
+        <Flex justify="right" width="150px">
           <CloseButton
             {...unStyledButton}
             pl="40px"
@@ -42,12 +49,13 @@ function Friend({ id, nameFirst, nameLast, avatar }) {
             src={baseUrl + avatar}
           ></Avatar>
         </Link>
-
-        <Link to={`/user/${id}`}>
-          <Text textAlign="center" mt="1">
-            {nameFirst} {nameLast}
-          </Text>
-        </Link>
+        <Box width="150px">
+          <Link to={`/user/${id}`}>
+            <Text textAlign="center" mt="1">
+              {nameFirst} {nameLast}
+            </Text>
+          </Link>
+        </Box>
       </Flex>
       <Alert
         isOpen={isOpen}
