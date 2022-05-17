@@ -6,8 +6,8 @@ function ChatInfo({ chatSocket, me }) {
   const [user, setUser] = useState(undefined);
 
   useEffect(() => {
-    chatSocket?.emit("info", (data) =>
-      setUser(data?.users?.filter((u) => u.id !== me.id)[0])
+    chatSocket?.emit("info", (response) =>
+      setUser(response?.users?.filter((u) => u.id !== me.id)[0])
     );
   }, [me, chatSocket]);
 
