@@ -1,12 +1,13 @@
+import { useSelector, useDispatch } from "react-redux";
+import { useCallback } from "react";
+
 import { Grid } from "@chakra-ui/react";
 import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
-import { useSelector, useDispatch } from "react-redux";
-
 import FriendsSlider from "../FriendsSlider/FriendsSlider";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 import MidSection from "./MidSection";
-import { useCallback } from "react";
+
 import { getMorePosts } from "../../actions/postActions";
 
 function MainPage({ changeLanguage }) {
