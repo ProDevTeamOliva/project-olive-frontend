@@ -37,7 +37,7 @@ function FriendsSlider() {
   return (
     <>
       {friends.length > 0 && (
-        <GridItem m="10px 25px">
+        <GridItem m="10px 25px" mt="20px">
           <Box
             borderWidth="1px"
             borderRadius="lg"

@@ -7,7 +7,7 @@ export const getLinkForUser =
   (setIsOpen) =>
     (
       <LinkSearchForUser
-        key={id}
+        key={index}
         id={id}
         nameFirst={nameFirst}
         nameLast={nameLast}

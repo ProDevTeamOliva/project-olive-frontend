@@ -40,6 +40,7 @@ function RegisterForm() {
     register: t("register"),
     createAccount: t("createAccount"),
     alertRegistrationBody: t("alertRegistrationBody"),
+    login: t("login"),
   };
 
   const dispatch = useDispatch();
@@ -135,7 +136,8 @@ function RegisterForm() {
               <Divider borderColor="mediumslateblue" border="1px"></Divider>
 
               <InputComponent
-                name={languageValues.firstName}
+                namePlaceholder={languageValues.firstName}
+                nameFormLabel={languageValues.firstName}
                 id="nameFirst"
                 type="text"
                 validate={(value) => validateNameFirst(value)}
@@ -143,7 +145,8 @@ function RegisterForm() {
                 {...inputColors}
               />
               <InputComponent
-                name={languageValues.secondName}
+                namePlaceholder={languageValues.secondName}
+                nameFormLabel={languageValues.secondName}
                 id="nameLast"
                 type="text"
                 validate={(value) => validateNameLast(value)}
@@ -155,7 +158,8 @@ function RegisterForm() {
               </Text>
               <Divider borderColor="mediumslateblue" border="1px"></Divider>
               <InputComponent
-                name={t("login")}
+                namePlaceholder={languageValues.login}
+                nameFormLabel={languageValues.login}
                 id="login"
                 type="text"
                 validate={(value) => validateLogin(value)}
@@ -163,7 +167,8 @@ function RegisterForm() {
                 {...inputColors}
               />
               <InputComponent
-                name={languageValues.password}
+                namePlaceholder={languageValues.password}
+                nameFormLabel={languageValues.password}
                 id="password"
                 type="password"
                 value={password}
@@ -171,7 +176,8 @@ function RegisterForm() {
                 {...inputColors}
               />
               <InputComponent
-                name={languageValues.repeatPassword}
+                namePlaceholder={languageValues.repeatPassword}
+                nameFormLabel={languageValues.repeatPassword}
                 id="repeatPassword"
                 type="password"
                 value={repeatPassword}

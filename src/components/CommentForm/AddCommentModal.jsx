@@ -5,25 +5,22 @@ import {
   ModalHeader,
   ModalBody,
   ModalCloseButton,
-  useDisclosure,
+  ModalFooter,
   Divider,
   Text,
   Box,
 } from "@chakra-ui/react";
-import CommentForm from "../../CommentForm/CommentForm";
+import CommentForm from "./CommentForm";
 import { useTranslation } from "react-i18next";
 import { memo } from "react";
 
-function AddCommentModal() {
+import Comments from "../Comments/Comments";
+
+function AddCommentModal({ idPost, isOpen, onOpen, onClose }) {
   const { t } = useTranslation();
   const languageValues = {
     writeCommentPlaceHolder: t("writeCommentPlaceHolder"),
     addComment: t("addComment"),
-  };
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const openModal = () => {
-    onOpen();
   };
 
   return (
@@ -34,16 +31,22 @@ function AddCommentModal() {
         borderRadius="full"
         backgroundColor="gray.500"
         flexBasis="100%"
-        onClick={openModal}
+        onClick={onOpen}
+        pl="20px"
       >
         {languageValues.writeCommentPlaceHolder}
       </Box>
-
-      <Modal onClose={onClose} isOpen={isOpen} size="xl" bg="gray.50">
+      <Modal
+        onClose={onClose}
+        scrollBehavior="inside"
+        isOpen={isOpen}
+        size="xl"
+        bg="gray.50"
+      >
         <ModalOverlay />
-        <ModalContent mr="3" ml="3" bg="gray.500">
-          <ModalHeader>
-            <Text mb="3px" color="white" fontWeight="bold" fontSize="110%">
+        <ModalContent mr="3" ml="3" bg="gray.50">
+          <ModalHeader pb="0">
+            <Text mb="3px" color="gray.800" fontWeight="bold" fontSize="110%">
               {languageValues.addComment}
             </Text>
             <Divider borderColor="gray.900" border="1px"></Divider>
@@ -53,9 +56,13 @@ function AddCommentModal() {
             _focus={{ borderColor: "gray.900" }}
             fontSize="120%"
           />
-          <ModalBody>
-            <CommentForm onClose={onClose} />
+
+          <ModalBody color="black" px="35px">
+            <Comments idPost={idPost} />
           </ModalBody>
+          <ModalFooter w="100%">
+            <CommentForm idPost={idPost} />
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

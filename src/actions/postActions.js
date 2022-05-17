@@ -17,6 +17,12 @@ import {
   TAGS_REQUEST,
   TAGS_SUCCESS,
   TAGS_FAILURE,
+  GET_MORE_POSTS_REQUEST,
+  GET_MORE_POSTS_SUCCESS,
+  GET_MORE_POSTS_FAILURE,
+  DELETE_POST_REQUEST,
+  DELETE_POST_SUCCESS,
+  DELETE_POST_FAILURE,
 } from "../types/postTypes";
 
 import { RSAA } from "redux-api-middleware";
@@ -49,6 +55,32 @@ export const getPostById = (id) => ({
   },
 });
 
+export const deletePost = (id) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/post/` + id,
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      DELETE_POST_REQUEST,
+      {
+        type: DELETE_POST_SUCCESS,
+        payload: async (action, state, res) => {
+          return res.json().then((json) => ({
+            response: json,
+            idPost: id,
+          }));
+        },
+      },
+
+      DELETE_POST_FAILURE,
+    ],
+  },
+});
+
 export const getPosts = () => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/`,
@@ -59,6 +91,23 @@ export const getPosts = () => ({
       "Content-Type": "application/json",
     },
     types: [GET_POSTS_REQUEST, GET_POSTS_SUCCESS, GET_POSTS_FAILURE],
+  },
+});
+
+export const getMorePosts = (id) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/post?id=${id}`,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      GET_MORE_POSTS_REQUEST,
+      GET_MORE_POSTS_SUCCESS,
+      GET_MORE_POSTS_FAILURE,
+    ],
   },
 });
 

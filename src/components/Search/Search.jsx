@@ -79,18 +79,11 @@ function SearchBar({ kindOfSearch }) {
     return setIsOpen(true);
   };
 
-  const mouseClickCloseSearch = useCallback(
-    (event) => {
-      if (
-        searchBarRef.current &&
-        !searchBarRef.current.contains(event.target)
-      ) {
-        dispatch(restartSearch());
-        return setIsOpen(false);
-      }
-    },
-    [dispatch]
-  );
+  const mouseClickCloseSearch = useCallback((event) => {
+    if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+      return setIsOpen(false);
+    }
+  }, []);
 
   useEffect(() => {
     const moves = ["click", "touchstart"];
@@ -109,7 +102,7 @@ function SearchBar({ kindOfSearch }) {
     clearTimeout(timer);
     setIsOpen(true);
     const newTimer = setTimeout(() => {
-      if (inputValue.length > 1) {
+      if (e.target.value.length >= 2) {
         clearSuggestions();
         config[kindOfSearch].getPayload({ valueSearch: e.target.value });
       }
@@ -118,7 +111,7 @@ function SearchBar({ kindOfSearch }) {
   };
 
   const getResultsToRender = () => {
-    if (inputValue.length > 2 && !loading && suggestions.length > 0) {
+    if (inputValue.length >= 2 && !loading && suggestions.length > 0) {
       return suggestions.map((props, index) => {
         return config[kindOfSearch].getLink(props, index)(setIsOpen);
       });
@@ -141,9 +134,9 @@ function SearchBar({ kindOfSearch }) {
       return (
         <ListItem
           p="3"
-          borderBottom={"2px solid light-white"}
+          borderBottom="2px solid light-white"
           fontFamily="Ubuntu"
-          color={"black"}
+          color="black"
         >
           {languageValues.problemSearch}
         </ListItem>
@@ -174,7 +167,7 @@ function SearchBar({ kindOfSearch }) {
     </List>
   );
 
-  const isBottomOpen = isOpen && inputValue.length > 2;
+  const isBottomOpen = isOpen && inputValue.length >= 2;
 
   return (
     <Box

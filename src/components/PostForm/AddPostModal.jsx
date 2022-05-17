@@ -15,6 +15,7 @@ import {
 import PostForm from "./PostForm";
 import { useTranslation } from "react-i18next";
 import { AddIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 
 function AddPostModal() {
   const { t } = useTranslation();
@@ -28,6 +29,8 @@ function AddPostModal() {
     onOpen();
   };
 
+  const [color, setColor] = useState("black");
+
   return (
     <Box gridColumn="2/3" gridRow="1" align="right">
       <Button
@@ -35,16 +38,18 @@ function AddPostModal() {
         color="black"
         onClick={openModal}
         _focus={{ outline: "none", bg: "white" }}
-        _hover={{ bg: "purple.300" }}
+        _hover={{ bg: "gray.50", fontWeight: "700" }}
         border="none"
         p="15px"
+        onMouseOver={() => setColor("mediumslateblue")}
+        onMouseLeave={() => setColor("black")}
       >
-        <Icon as={AddIcon} w="20px" h="20px" mr="7px" color="gray.700" />
+        <Icon as={AddIcon} w="20px" h="20px" mr="7px" color={color} />
         {languageValues.addPost}
       </Button>
       <Modal onClose={onClose} isOpen={isOpen} size="xl" bg="gray.50">
         <ModalOverlay />
-        <ModalContent mr="3" ml="3" bg="gray.50">
+        <ModalContent bg="gray.50">
           <ModalHeader pb="0">
             <Text mb="3px" color="gray.800" fontWeight="bold" fontSize="110%">
               {languageValues.addPost}
@@ -56,7 +61,6 @@ function AddPostModal() {
             _focus={{ borderColor: "gray.900" }}
             fontSize="120%"
           />
-
           <ModalBody>
             <PostForm onClose={onClose} />
           </ModalBody>

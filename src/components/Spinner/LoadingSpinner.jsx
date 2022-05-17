@@ -16,7 +16,7 @@ function LoadingSpinner() {
       if (isMounted) {
         setLoad(false);
       }
-    }, 3000);
+    }, 2500);
     return () => {
       isMounted = false;
     };
