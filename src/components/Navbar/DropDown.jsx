@@ -1,12 +1,8 @@
 import {
   Box,
   Image,
-  Button,
   Text,
   Menu,
-  MenuList,
-  Center,
-  Avatar,
   MenuDivider,
   MenuItem,
 } from "@chakra-ui/react";
