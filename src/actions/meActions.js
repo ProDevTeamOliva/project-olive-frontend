@@ -10,9 +10,9 @@ import {
   ME_PICTURES_REQUEST,
   ME_PICTURES_SUCCESS,
   ME_PICTURES_FAILURE,
-  ME_AVATAR_REQUEST,
-  ME_AVATAR_SUCCESS,
-  ME_AVATAR_FAILURE,
+  PATCH_ME_AVATAR_REQUEST,
+  PATCH_ME_AVATAR_SUCCESS,
+  PATCH_ME_AVATAR_FAILURE,
   ME_POST_PICTURES_REQUEST,
   ME_POST_PICTURES_SUCCESS,
   ME_POST_PICTURES_FAILURE,
@@ -22,6 +22,9 @@ import {
   ME_ACCEPT_INVITATION_REQUEST,
   ME_ACCEPT_INVITATION_SUCCESS,
   ME_ACCEPT_INVITATION_FAILURE,
+  DELETE_ME_AVATAR_REQUEST,
+  DELETE_ME_AVATAR_SUCCESS,
+  DELETE_ME_AVATAR_FAILURE,
 } from "../types/meTypes";
 
 export const getMe = () => ({
@@ -76,7 +79,28 @@ export const patchMeAvatar = (filename, avatar) => ({
       filename: filename,
       avatar: avatar,
     }),
-    types: [ME_AVATAR_REQUEST, ME_AVATAR_SUCCESS, ME_AVATAR_FAILURE],
+    types: [
+      PATCH_ME_AVATAR_REQUEST,
+      PATCH_ME_AVATAR_SUCCESS,
+      PATCH_ME_AVATAR_FAILURE,
+    ],
+  },
+});
+
+export const deleteMeAvatar = () => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/me/avatar`,
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      DELETE_ME_AVATAR_REQUEST,
+      DELETE_ME_AVATAR_SUCCESS,
+      DELETE_ME_AVATAR_FAILURE,
+    ],
   },
 });
 

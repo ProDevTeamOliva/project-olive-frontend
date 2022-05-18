@@ -18,7 +18,7 @@ import { getMe, getMePosts, getMePictures } from "../../actions/meActions";
 import MagicGridImages from "../Images/MagicGridImages";
 import Friends from "../Friends/Friends";
 import ModalAddImageMe from "../Images/ModalAddImageMe";
-import ModalAddAvatarMe from "../Images/ModalAddAvatarMe";
+import ModalAvatarMe from "../Images/ModalAvatarMe";
 import InfoAboutMeV1 from "./InfoAboutMeV1";
 import AddPostModal from "../PostForm/AddPostModal";
 import SearchModal from "../Search/SearchModal";
@@ -44,16 +44,6 @@ function Me({ changeLanguage }) {
     dispatch(getMePictures());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(getMePosts());
-  //   dispatch(getMePictures());
-  //   const intervalId = setInterval(() => {
-  //     dispatch(getMePosts());
-  //     dispatch(getMePictures());
-  //   }, 3000);
-  //   return () => clearInterval(intervalId);
-  // }, [dispatch]);
-
   return (
     <Grid
       h="100vh"
@@ -68,7 +58,7 @@ function Me({ changeLanguage }) {
           direction={{ base: "column", md: "row" }}
           p="4"
         >
-          <ModalAddAvatarMe />
+          <ModalAvatarMe />
           <InfoAboutMeV1 />
         </Stack>
         <Tabs variant="soft-rounded" align="center">

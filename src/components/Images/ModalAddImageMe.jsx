@@ -13,14 +13,17 @@ import { useTranslation } from "react-i18next";
 import FileUpload from "../FileUpload/FileUpload";
 import toBase64 from "../../operations/base64";
 import PublicPrivate from "../FileUpload/PublicPrivate";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { postMePictures } from "../../actions/meActions";
 import { useDispatch } from "react-redux";
+import Alert from "../Alert/Alert";
 
 function ModalAddImageMe() {
   const { t } = useTranslation();
   const languageValues = {
     addImages: t("addImages"),
+    addingPhotos: t("addingPhotos"),
+    alertAddPhotos: t("alertAddPhotos"),
   };
 
   const dispatch = useDispatch();
@@ -33,7 +36,15 @@ function ModalAddImageMe() {
     onClose: onClosePictures,
   } = useDisclosure();
 
+  const [isOpen, setIsOpen] = useState(false);
+  const onCloseAlert = () => {
+    setIsOpen(false);
+    onClosePictures();
+  };
+  const cancelRef = useRef();
+
   const handlePicturesUpload = async () => {
+    onCloseAlert();
     const files = document.querySelector("#picturesUpload")["files"];
     let pictures = [];
 
@@ -46,7 +57,6 @@ function ModalAddImageMe() {
       });
     }
     dispatch(postMePictures(pictures));
-    onClosePictures();
   };
 
   return (
@@ -71,11 +81,19 @@ function ModalAddImageMe() {
               w="75%"
               d="block"
               mx="auto"
-              onChange={handlePicturesUpload}
+              onChange={() => setIsOpen(true)}
             />
           </ModalBody>
         </ModalContent>
       </Modal>
+      <Alert
+        isOpen={isOpen}
+        onCloseAlert={onCloseAlert}
+        fun={handlePicturesUpload}
+        cancelRef={cancelRef}
+        header={languageValues.addingPhotos}
+        body={languageValues.alertAddPhotos}
+      />
     </>
   );
 }
