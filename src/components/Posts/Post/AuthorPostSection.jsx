@@ -37,20 +37,22 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type, link }) => {
         <Box color="gray.500">
           {Icon ? (
             <Flex flexDirection="column" align="end">
-              <Box w={["30px", "40px"]} h={["30px", "40px"]}>
-                <Icon
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    color: "lightgray",
-                  }}
-                />
-              </Box>
-              <Box w={["30px", "40px"]} h={["30px", "40px"]}>
-                <Text fontSize={["9px", "xs"]} textAlign="center">
-                  {t(type)}
-                </Text>
-              </Box>
+              <Flex flexDirection="column" align="center">
+                <Box w={["30px", "40px"]} h={["30px", "40px"]}>
+                  <Icon
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      color: "lightgray",
+                    }}
+                  />
+                </Box>
+                <Box>
+                  <Text fontSize={["9px", "xs"]} textAlign="center">
+                    {t(type)}
+                  </Text>
+                </Box>
+              </Flex>
             </Flex>
           ) : (
             t(type)
