@@ -1,4 +1,15 @@
-import { Box, Image, Button, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Button,
+  Text,
+  Menu,
+  MenuList,
+  Center,
+  Avatar,
+  MenuDivider,
+  MenuItem,
+} from "@chakra-ui/react";
 import Account from "../../img/account_white.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, restartRegisterMessage } from "../../actions/authActions";
@@ -7,6 +18,7 @@ import Language from "../Language/Language";
 import { getMe } from "../../actions/meActions";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import AvatarUser from "../User/AvatarUser";
 
 function DropDown({ changeLanguage }) {
   const { t } = useTranslation();
@@ -16,11 +28,12 @@ function DropDown({ changeLanguage }) {
   };
 
   const dispatch = useDispatch();
-  const me = useSelector((state) => state.me.me);
 
   useEffect(() => {
     dispatch(getMe());
   }, [dispatch]);
+
+  const me = useSelector((state) => state.me.me);
 
   const logOut = () => {
     localStorage.removeItem("token");
@@ -40,41 +53,54 @@ function DropDown({ changeLanguage }) {
       <Box
         d="none"
         pos="absolute"
-        bgColor="#283141"
-        minW="150px"
+        bgColor="gray.700"
+        w="160px"
         right="0"
+        borderRadius="0 0 0 12px"
         _groupHover={{
           display: "grid",
-          gridAutoRows: "50px",
+          gridTemplateRows: "20px 120px 50px  20px",
           placeItems: "center",
-          padding: "0 12.5px 7.5px 12.5px",
+          padding: "0 0px 10px 0px",
+          boxShadow: "1px 1px 2px 1px white",
         }}
       >
-        <Box mt="-30px">
-          <Language changeLanguage={changeLanguage} />
-        </Box>
-        <Text
-          textAlign="center"
-          mt="-30px"
-          color="blue.200"
-          _focus={{ color: "blue.100" }}
-          _hover={{
-            color: "blue.100",
-          }}
-          _active={{
-            color: "blue.100",
-          }}
-        >
-          <Link to="/me">
-            {me.nameFirst} {me.nameLast}
-          </Link>
-        </Text>
-        <Button w="125px">
-          <Link to="/me">{languageValues.myAccount}</Link>
-        </Button>
-        <Button w="125px" onClick={logOut}>
-          {languageValues.logout}
-        </Button>
+        <Menu>
+          <Box>
+            <Language changeLanguage={changeLanguage} />
+          </Box>
+          <Box>
+            <AvatarUser link="/me" avatar={me.avatar} id={me.id} />
+          </Box>
+          <Box w="160px" px="2px">
+            <Text
+              textAlign="center"
+              color="blue.200"
+              _focus={{ color: "blue.100" }}
+              _hover={{
+                color: "blue.100",
+              }}
+              _active={{
+                color: "blue.100",
+              }}
+            >
+              <Link to="/me">
+                {me.nameFirst} {me.nameLast}
+              </Link>
+            </Text>
+          </Box>
+          <MenuDivider width="100%" borderColor="gray.200" />
+
+          <MenuItem
+            onClick={logOut}
+            _hover={{
+              bgColor: "mediumslateblue",
+              boxShadow: "1px 1px 1px 1px mediumslateblue",
+            }}
+          >
+            {languageValues.logout}
+          </MenuItem>
+        </Menu>
       </Box>
     </Box>
   );
