@@ -1,7 +1,8 @@
 import { Grid, Input } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import ReactScrollToBottom from "./ReactScrollToBottom";
+import Alert from "../Alert/Alert";
 import { IoSend } from "react-icons/io5";
 // https://ionicons.com/
 
@@ -9,34 +10,51 @@ function ChatMessages({ chatSocket, me }) {
   const { t } = useTranslation();
   const languageValues = {
     message: t("message"),
+    deletingMessage: t("deletingMessage"),
+    alertDeleteMessage: t("alertDeleteMessage"),
   };
 
   const [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
   const [allMessages, setAllMessages] = useState(false);
 
-  const onMessage = (m) => {
-    setMessages((messages) => [...messages, m]);
-  };
+  const [messageId, setMessageId] = useState(undefined);
+  const [isOpen, setIsOpen] = useState(false);
+  const onCloseAlert = () => setIsOpen(false);
+  const cancelRef = useRef();
+
+  const onMessage = useCallback((response) => {
+    setMessages((messages) => [...messages, response]);
+  }, []);
+
+  const onMore = useCallback((response) => {
+    if (response?.messages.length === 0) {
+      setAllMessages(true);
+    }
+    setMessages((messages) => [...response?.messages?.reverse(), ...messages]);
+  }, []);
+
+  const onDelete = useCallback((response) => {
+    setMessages((messages) =>
+      messages.filter((m) => m.messageId !== response.id)
+    );
+  }, []);
 
   const loadMore = () => {
     chatSocket?.emit(
       "history",
       { id: Math.min(...messages.map((message) => message.messageId)) },
-      (response) => {
-        if (response?.messages.length === 0) {
-          setAllMessages(true);
-        }
-        setMessages([...response?.messages?.reverse(), ...messages]);
-      }
+      onMore
     );
+  };
+
+  const messegeDelete = (id) => {
+    chatSocket?.emit("messegeDelete", { id: id }, onDelete);
   };
 
   const handleSubmit = () => {
     if (message.length > 0) {
-      chatSocket?.emit("message", { message: message }, (response) =>
-        onMessage(response)
-      );
+      chatSocket?.emit("message", { message: message }, onMessage);
       setMessage("");
     }
   };
@@ -47,9 +65,13 @@ function ChatMessages({ chatSocket, me }) {
     });
 
     chatSocket?.on("message", onMessage);
+    chatSocket?.on("messegeDelete", onDelete);
 
-    return () => chatSocket?.off("message", onMessage);
-  }, [chatSocket]);
+    return () => {
+      chatSocket?.off("message", onMessage);
+      chatSocket?.off("messegeDelete", onDelete);
+    };
+  }, [chatSocket, onMessage, onDelete]);
 
   return (
     <Grid h="100%" templateRows="minmax(50px, 1fr) 50px" overflowY="auto">
@@ -58,8 +80,11 @@ function ChatMessages({ chatSocket, me }) {
         me={me}
         loadMore={loadMore}
         allMessages={allMessages}
+        setMessageId={setMessageId}
+        setIsOpen={setIsOpen}
         overflowY="scroll"
       />
+
       <Grid
         templateColumns="1fr 50px"
         placeItems="center"
@@ -76,6 +101,15 @@ function ChatMessages({ chatSocket, me }) {
         />
         <IoSend size="30px" cursor="pointer" onClick={handleSubmit} />
       </Grid>
+
+      <Alert
+        isOpen={isOpen}
+        onCloseAlert={onCloseAlert}
+        fun={() => onCloseAlert() || messegeDelete(messageId)}
+        cancelRef={cancelRef}
+        header={languageValues.deletingMessage}
+        body={languageValues.alertDeleteMessage}
+      />
     </Grid>
   );
 }
