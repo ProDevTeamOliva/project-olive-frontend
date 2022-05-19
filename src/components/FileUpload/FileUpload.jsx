@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 function FileUpload(props) {
   const { t } = useTranslation();
   const languageValues = {
-    upload: t("upload"),
+    choose: t("choose"),
   };
 
   let hiddenInput = null;
@@ -21,7 +21,7 @@ function FileUpload(props) {
       />
 
       <Button {...props} _focus={{ border: "none" }}>
-        {props?.text ? props.text : languageValues.upload}
+        {props?.text ? props.text : languageValues.choose}
       </Button>
     </InputGroup>
   );
