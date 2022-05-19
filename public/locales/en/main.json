@@ -85,9 +85,10 @@
   "message": "Message",
   "reconnecting": "Reconnecting...",
   "chat": "Chat",
-  "search":"Search",
+  "search": "Search",
   "deletingComment": "Deleting a comment",
   "alertDeleteComment": "Do you confirm deleting comment ?",
   "deletingPost": "Deleting a post",
-  "alertDeletePost": "Do you confirm deleting post ?"
+  "alertDeletePost": "Do you confirm deleting post ?",
+  "addFriendsChat": "Add friends to use chat"
 }

@@ -85,9 +85,10 @@
   "message": "Wiadomość",
   "reconnecting": "Nawiązywanie połączenia...",
   "chat": "Chat",
-  "search":"Szukaj",
+  "search": "Szukaj",
   "deletingComment": "Usuwanie komentarza",
   "alertDeleteComment": "Czy potwierdzasz usunięcie komentarza ?",
-   "deletingPost": "Usuwanie posta",
-  "alertDeletePost": "Czy potwierdzasz usunięcie posta ?"
+  "deletingPost": "Usuwanie posta",
+  "alertDeletePost": "Czy potwierdzasz usunięcie posta ?",
+  "addFriendsChat": "Dodaj znajomych, aby używać chatu"
 }

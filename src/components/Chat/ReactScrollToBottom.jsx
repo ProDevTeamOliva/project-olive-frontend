@@ -1,4 +1,5 @@
-import { Grid, Box } from "@chakra-ui/react";
+import { Grid, Tooltip, Box } from "@chakra-ui/react";
+import { parseDate } from "../../operations/parseDate";
 import ScrollToBottom, {
   useObserveScrollPosition,
   FunctionContext,
@@ -29,33 +30,39 @@ const Content = ({
     <Grid>
       {messages?.map((m) =>
         m?.user?.id === me?.id ? (
-          <Box
-            key={m.messageId}
-            m={{ base: "5px 10px 5px 25px", sm: "5px 10px 5px 50px" }}
-            p="5px 10px"
-            bgColor="mediumslateblue"
-            color="white"
-            borderRadius="15px"
-            maxW="600px"
-            w="fit-content"
-            justifySelf="end"
-          >
-            {m.message}
-          </Box>
+          <Grid key={m.messageId}>
+            <Tooltip label={`${parseDate(m.date)}`} bg="white" placement="left">
+              <Box
+                m={{ base: "5px 10px 5px 25px", sm: "5px 10px 5px 50px" }}
+                p="5px 10px"
+                bgColor="mediumslateblue"
+                color="white"
+                borderRadius="15px"
+                maxW="600px"
+                w="fit-content"
+                justifySelf="end"
+              >
+                {m.message}
+              </Box>
+            </Tooltip>
+          </Grid>
         ) : (
-          <Box
-            key={m.messageId}
-            m={{ base: "5px 25px 5px 10px", sm: "5px 50px 5px 10px" }}
-            p="5px 10px"
-            bgColor="white"
-            color="black"
-            borderRadius="15px"
-            maxW="600px"
-            w="fit-content"
-            justifySelf="start"
-          >
-            {m.message}
-          </Box>
+          <Grid key={m.messageId}>
+            <Tooltip label={`${parseDate(m.date)}`} bg="white" placement="left">
+              <Box
+                m={{ base: "5px 25px 5px 10px", sm: "5px 50px 5px 10px" }}
+                p="5px 10px"
+                bgColor="white"
+                color="black"
+                borderRadius="15px"
+                maxW="600px"
+                w="fit-content"
+                justifySelf="start"
+              >
+                {m.message}
+              </Box>
+            </Tooltip>
+          </Grid>
         )
       )}
       {!sticky && (
