@@ -3,13 +3,13 @@ import { memo } from "react";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../config/baseUrl";
 
-function AvatarUser(props) {
+function AvatarUser({ link, avatar, id }) {
   return (
-    <Link to={props.link}>
+    <Link to={link}>
       <Avatar
         boxSize={["50", "70px", "100px"]}
-        src={baseUrl + props.avatar}
-        alt={props.id}
+        src={avatar && baseUrl + avatar}
+        alt={id}
         mt="30px"
       />
     </Link>
