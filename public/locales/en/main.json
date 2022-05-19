@@ -85,7 +85,7 @@
   "message": "Message",
   "reconnecting": "Reconnecting...",
   "chat": "Chat",
-  "search":"Search",
+  "search": "Search",
   "deletingComment": "Deleting a comment",
   "alertDeleteComment": "Do you confirm deleting comment ?",
   "deletingPost": "Deleting a post",
@@ -96,5 +96,6 @@
   "deleteProfilePicture": "Deleting a profile picture",
   "profilePicture": "Profile picture",
   "addingPhotos": "Adding new photos",
-  "alertAddPhotos": "Do you confirm adding photos ?"
+  "alertAddPhotos": "Do you confirm adding photos ?",
+  "addFriendsChat": "Add friends to use chat"
 }

@@ -43,7 +43,7 @@ function RouteAfterLogin({ changeLanguage }) {
         exact
         path="/chat/:id"
         component={(routerProps) => (
-          <Chat id={parseInt(routerProps.match.params.id)}></Chat>
+          <Chat id={routerProps.match.params.id}></Chat>
         )}
       ></Route>
 

@@ -1,17 +1,18 @@
 .writingAnimation {
   display: -ms-grid;
   display: grid;
+  width: 100%;
+  height: 100%;
   place-items: center;
   -ms-grid-columns: (auto)[3];
       grid-template-columns: repeat(3, auto);
-  grid-gap: 1em;
 }
 
-.writingAnimation .sign {
+.sign {
   width: 50%;
-  height: 50%;
-  margin: 1.5em;
-  background: #bac3ce;
+  aspect-ratio: 1;
+  margin: 25%;
+  background: white;
   border-radius: 50%;
   -webkit-animation: writingAnimation 1.5s linear infinite;
           animation: writingAnimation 1.5s linear infinite;
@@ -35,8 +36,8 @@
             transform: initial;
   }
   15% {
-    -webkit-transform: translateY(-15px);
-            transform: translateY(-15px);
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
   }
 }
 
@@ -46,8 +47,8 @@
             transform: initial;
   }
   15% {
-    -webkit-transform: translateY(-15px);
-            transform: translateY(-15px);
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
   }
 }
 /*# sourceMappingURL=LogoDown.css.map */

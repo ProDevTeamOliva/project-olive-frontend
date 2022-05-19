@@ -85,7 +85,7 @@
   "message": "Wiadomość",
   "reconnecting": "Nawiązywanie połączenia...",
   "chat": "Chat",
-  "search":"Szukaj",
+  "search": "Szukaj",
   "deletingComment": "Usuwanie komentarza",
   "alertDeleteComment": "Czy potwierdzasz usunięcie komentarza ?",
   "deletingPost": "Usuwanie posta",
@@ -96,5 +96,6 @@
   "deleteProfilePicture": "Usuwanie zdjęcia profilowego",
   "profilePicture": "Zdjęcie profilowe",
   "addingPhotos": "Dodawanie zdjęć",
-  "alertAddPhotos": "Czy potwierdzasz dodawanie zdjęć ?"
+  "alertAddPhotos": "Czy potwierdzasz dodawanie zdjęć ?",
+  "addFriendsChat": "Dodaj znajomych, aby używać chatu"
 }
