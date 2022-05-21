@@ -1,6 +1,6 @@
 import { Box, CloseButton, Image } from "@chakra-ui/react";
 import { baseUrl } from "../../config/baseUrl";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
 import { useRef, useState } from "react";
 import { deleteMePictures } from "../../actions/meActions";
 import { useTranslation } from "react-i18next";
@@ -34,7 +34,7 @@ function Picture({ picture }) {
         />
       </Box>
       <Image src={baseUrl + picture.picture} w="100%"></Image>
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
         fun={() => handlePictureDelete(picture.id)}

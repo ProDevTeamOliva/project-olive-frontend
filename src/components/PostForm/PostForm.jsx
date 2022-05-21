@@ -25,7 +25,7 @@ import InfoAboutMeV2 from "../Me/InfoAboutMeV2";
 import Carousel from "../Images/CarouselAddPost";
 import { v4 as uuidv4 } from "uuid";
 import { validatorOfFiles } from "../../validators/validatorOfFiles";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
 
 const initialData = {
   content: "",
@@ -308,7 +308,7 @@ function PostForm({ onClose }) {
           </>
         )}
       </Formik>
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
         fun={sendPost}

@@ -11,7 +11,7 @@ import { baseUrl } from "../../config/baseUrl";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import { useTranslation } from "react-i18next";
 import { useRef, useState } from "react";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
 import { useDispatch } from "react-redux";
 import { unAcceptFriendInvitation } from "../../actions/meActions";
 
@@ -57,7 +57,7 @@ function Friend({ id, nameFirst, nameLast, avatar }) {
           </Link>
         </Box>
       </Flex>
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
         fun={ignore}

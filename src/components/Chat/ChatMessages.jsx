@@ -2,7 +2,7 @@ import { Grid, Input } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 import { useState, useRef, useCallback, useEffect } from "react";
 import ReactScrollToBottom from "./ReactScrollToBottom";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
 import { IoSend } from "react-icons/io5";
 // https://ionicons.com/
 
@@ -102,7 +102,7 @@ function ChatMessages({ chatSocket, me }) {
         <IoSend size="30px" cursor="pointer" onClick={handleSubmit} />
       </Grid>
 
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
         fun={() => onCloseAlert() || messegeDelete(messageId)}

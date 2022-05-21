@@ -74,8 +74,8 @@
   "alertDelFriend": "Czy potwierdzasz usunięcie znajomego?",
   "sendInvitation": "Wyślij zaproszenie",
   "alertSendInvitation": "Czy potwierdzasz wysłanie zaproszenia?",
-  "formatFile": "Nieprawidłowy format (użyj jpg, jpeg lub png) dla: ",
-  "memoryPerFile": "Przekroczono limit pamięci (3 MB) dla: ",
+  "formatFile": "Nieprawidłowy format (użyj jpg, jpeg lub png) dla:",
+  "memoryPerFile": "Przekroczono limit pamięci (3 MB) dla:",
   "memoryAllFiles": "Przekroczono limit pamięci (15 MB) dla wszystkich plików",
   "addingPost": "Dodawanie nowego posta",
   "alertAddPost": "Czy potwierdzasz dodawanie nowego posta?",
@@ -102,5 +102,6 @@
   "alertDeleteMessage": "Czy potwierdzasz usunięcie wiadomości?",
   "maxSizeOfContent": "Treść jest za długa, ponad 1024 znaki",
   "alertDeletePicture": "Czy potwierdzasz usunięcie zdjęcia?",
-  "deletePicture": "Usuwanie zdjęcia"
+  "deletePicture": "Usuwanie zdjęcia",
+  "incorrectData": "Niepoprawne dane"
 }

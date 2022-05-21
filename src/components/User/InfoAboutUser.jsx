@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToFriends } from "../../actions/userActions";
 import { baseUrl } from "../../config/baseUrl";
 import { useRef, useState } from "react";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
 
 const textStyle = {
   textAlign: "center",
@@ -99,7 +99,7 @@ function InfoAboutUser({ id }) {
           )}
         </Stack>
       </Stack>
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
         fun={addFriend}

@@ -16,7 +16,7 @@ import Like from "./Like";
 import { getComments } from "../../../actions/commentActions";
 import { unStyledButton } from "../../../styles/Buttons/unStyledButton";
 import { BsXLg } from "react-icons/bs";
-import Alert from "../../Alert/Alert";
+import AlertToConfirmation from "../../Alert/AlertToConfirmation";
 
 function Post({ id }) {
   const { t } = useTranslation();
@@ -180,7 +180,7 @@ function Post({ id }) {
           />
         </Flex>
       </Box>
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpenAlert}
         onCloseAlert={onCloseAlert}
         fun={removePost}
