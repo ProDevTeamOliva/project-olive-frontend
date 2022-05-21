@@ -3,10 +3,9 @@ import { Formik, Form } from "formik";
 import InputComponent from "../Inputs/InputComponent";
 import { purpleButtonStyle } from "../../styles/Buttons/purpleButton";
 import { useTranslation } from "react-i18next";
-import { validatorOfRequired } from "../../validators/validatorOfRequired";
+import { validatorOfContent } from "../../validators/validatorOfContent";
 import { useDispatch } from "react-redux";
 import { addComment } from "../../actions/commentActions";
-import { useState } from "react";
 
 const initialData = {
   comment: "",
@@ -18,6 +17,7 @@ function CommentForm({ idPost }) {
     addComment: t("addComment"),
     writeCommentPlaceHolder: t("writeCommentPlaceHolder"),
     required: t("required"),
+    maxSizeOfContent: t("maxSizeOfContent"),
   };
 
   const dispatch = useDispatch();
@@ -25,7 +25,10 @@ function CommentForm({ idPost }) {
     dispatch(addComment({ comment: values.comment }, idPost));
     resetForm();
   };
-  const validateRequired = validatorOfRequired(languageValues.required);
+  const validateContent = validatorOfContent(
+    languageValues.required,
+    languageValues.maxSizeOfContent
+  );
 
   return (
     <Box p="20px" w="100%">
@@ -40,7 +43,7 @@ function CommentForm({ idPost }) {
               nameFormLabel=""
               id="comment"
               type="text"
-              validate={(value) => validateRequired(value)}
+              validate={(value) => validateContent(value)}
               value={comment}
               color="gray.800"
               borderColor="gray.600"

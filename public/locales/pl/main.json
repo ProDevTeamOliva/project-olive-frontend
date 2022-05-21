@@ -99,5 +99,6 @@
   "alertAddPhotos": "Czy potwierdzasz dodawanie zdjęć?",
   "addFriendsChat": "Dodaj znajomych, aby używać chatu",
   "deletingMessage": "Usuwanie wiadomości",
-  "alertDeleteMessage": "Czy potwierdzasz usunięcie wiadomości?"
+  "alertDeleteMessage": "Czy potwierdzasz usunięcie wiadomości?",
+  "maxSizeOfContent": "Treść jest za długa, ponad 1024 znaki"
 }
