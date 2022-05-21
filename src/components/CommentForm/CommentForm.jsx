@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { validatorOfRequired } from "../../validators/validatorOfRequired";
 import { useDispatch } from "react-redux";
 import { addComment } from "../../actions/commentActions";
+import { useState } from "react";
 
 const initialData = {
   comment: "",
@@ -20,16 +21,18 @@ function CommentForm({ idPost }) {
   };
 
   const dispatch = useDispatch();
-
-  const handleSubmit = (values) => {
-    // onClose();
+  const handleSubmit = (values, resetForm) => {
     dispatch(addComment({ comment: values.comment }, idPost));
+    resetForm();
   };
   const validateRequired = validatorOfRequired(languageValues.required);
 
   return (
     <Box p="20px" w="100%">
-      <Formik initialValues={initialData} onSubmit={handleSubmit}>
+      <Formik
+        initialValues={initialData}
+        onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
+      >
         {({ handleSubmit, initialValues: { comment } }) => (
           <Form onSubmit={handleSubmit}>
             <InputComponent
