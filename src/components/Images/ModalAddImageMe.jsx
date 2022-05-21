@@ -16,7 +16,9 @@ import PublicPrivate from "../FileUpload/PublicPrivate";
 import { useRef, useState } from "react";
 import { postMePictures } from "../../actions/meActions";
 import { useDispatch } from "react-redux";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
+import AlertToError from "../Alert/AlertToError";
+import { validatorOfFiles } from "../../validators/validatorOfFiles";
 
 function ModalAddImageMe() {
   const { t } = useTranslation();
@@ -24,6 +26,10 @@ function ModalAddImageMe() {
     addImages: t("addImages"),
     addingPhotos: t("addingPhotos"),
     alertAddPhotos: t("alertAddPhotos"),
+    formatFile: t("formatFile"),
+    memoryPerFile: t("memoryPerFile"),
+    memoryAllFiles: t("memoryAllFiles"),
+    incorrectData: t("incorrectData"),
   };
 
   const dispatch = useDispatch();
@@ -37,26 +43,49 @@ function ModalAddImageMe() {
   } = useDisclosure();
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenErrorAlert, setIsOpenErrorAlert] = useState(false);
+
   const onCloseAlert = () => {
     setIsOpen(false);
     onClosePictures();
   };
+  const onCloseAlertError = () => {
+    setIsOpenErrorAlert(false);
+    onClosePictures();
+  };
   const cancelRef = useRef();
+  const cancelRefError = useRef();
+
+  const [validationResult, setValidationResult] = useState(undefined);
+  const validateFiles = validatorOfFiles(
+    languageValues.formatFile,
+    languageValues.memoryPerFile,
+    languageValues.memoryAllFiles
+  );
 
   const handlePicturesUpload = async () => {
     onCloseAlert();
     const files = document.querySelector("#picturesUpload")["files"];
-    let pictures = [];
+    const resultFromValidate = validateFiles(
+      Array.from(files).map((file) => ({ file: file }))
+    );
+    setValidationResult(resultFromValidate);
 
-    for (const file of files) {
-      const file64 = await toBase64(file);
-      pictures.push({
-        filename: file.name,
-        picture: file64,
-        private: publicPrivate,
-      });
+    if (resultFromValidate === undefined) {
+      let pictures = [];
+
+      for (const file of files) {
+        const file64 = await toBase64(file);
+        pictures.push({
+          filename: file.name,
+          picture: file64,
+          private: publicPrivate,
+        });
+      }
+      dispatch(postMePictures(pictures));
+    } else {
+      setIsOpenErrorAlert(true);
     }
-    dispatch(postMePictures(pictures));
   };
 
   return (
@@ -86,13 +115,20 @@ function ModalAddImageMe() {
           </ModalBody>
         </ModalContent>
       </Modal>
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
         fun={handlePicturesUpload}
         cancelRef={cancelRef}
         header={languageValues.addingPhotos}
         body={languageValues.alertAddPhotos}
+      />
+      <AlertToError
+        isOpen={isOpenErrorAlert}
+        onCloseAlert={onCloseAlertError}
+        cancelRef={cancelRefError}
+        title={languageValues.incorrectData}
+        description={validationResult}
       />
     </>
   );

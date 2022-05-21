@@ -9,7 +9,14 @@ import {
 } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
 
-function Alert({ isOpen, onCloseAlert, fun, cancelRef, header, body }) {
+function AlertToConfirmation({
+  isOpen,
+  onCloseAlert,
+  fun,
+  cancelRef,
+  header,
+  body,
+}) {
   const { t } = useTranslation();
   const languageValues = {
     cancel: t("cancel"),
@@ -53,4 +60,4 @@ function Alert({ isOpen, onCloseAlert, fun, cancelRef, header, body }) {
   );
 }
 
-export default Alert;
+export default AlertToConfirmation;

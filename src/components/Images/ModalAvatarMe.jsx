@@ -16,7 +16,9 @@ import { baseUrl } from "../../config/baseUrl";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteMeAvatar, getMe, patchMeAvatar } from "../../actions/meActions";
 import { useRef, useState } from "react";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
+import { validatorOfFiles } from "../../validators/validatorOfFiles";
+import AlertToError from "../Alert/AlertToError";
 
 function ModalAvatarMe() {
   const { t } = useTranslation();
@@ -27,6 +29,10 @@ function ModalAvatarMe() {
     profilePicture: t("profilePicture"),
     deleteProfilePicture: t("deleteProfilePicture"),
     alertDeleteProfilePicture: t("alertDeleteProfilePicture"),
+    formatFile: t("formatFile"),
+    memoryPerFile: t("memoryPerFile"),
+    memoryAllFiles: t("memoryAllFiles"),
+    incorrectData: t("incorrectData"),
   };
   const dispatch = useDispatch();
   const avatar = useSelector((state) => state.me.me.avatar);
@@ -37,30 +43,53 @@ function ModalAvatarMe() {
     onClose: onCloseAvatar,
   } = useDisclosure();
 
-  const [isOpenUpdateAvatar, setIsOpenUpdateAvatar] = useState(false);
-  const [isOpenDeleteAvatar, setIsOpenDeleteAvatar] = useState(false);
+  const [isOpenUpdateAlert, setIsOpenUpdateAlert] = useState(false);
+  const [isOpenDeleteAlert, setIsOpenDeleteAlert] = useState(false);
+  const [isOpenErrorAlert, setIsOpenErrorAlert] = useState(false);
+
   const onCloseAlertUpdateAvatar = () => {
-    setIsOpenUpdateAvatar(false);
+    setIsOpenUpdateAlert(false);
     onCloseAvatar();
   };
   const onCloseAlertDeleteAvatar = () => {
-    setIsOpenDeleteAvatar(false);
+    setIsOpenDeleteAlert(false);
+    onCloseAvatar();
+  };
+  const onCloseAlertError = () => {
+    setIsOpenErrorAlert(false);
     onCloseAvatar();
   };
   const cancelRefAdd = useRef();
   const cancelRefDelete = useRef();
+  const cancelRefError = useRef();
+
+  const [validationResult, setValidationResult] = useState(undefined);
+  const validateFiles = validatorOfFiles(
+    languageValues.formatFile,
+    languageValues.memoryPerFile,
+    languageValues.memoryAllFiles
+  );
 
   const handleAvatarUpload = () => {
     onCloseAlertUpdateAvatar();
-    const file = document.querySelector("#avatarUpload")["files"][0];
-    const reader = new FileReader();
+    const files = document.querySelector("#avatarUpload")["files"];
+    const file = files[0];
+    const resultFromValidate = validateFiles(
+      Array.from(files).map((file) => ({ file: file }))
+    );
+    setValidationResult(resultFromValidate);
 
-    reader.onloadend = () => {
-      dispatch(patchMeAvatar(file.name, reader.result));
-      dispatch(getMe());
-    };
+    if (resultFromValidate === undefined) {
+      const reader = new FileReader();
 
-    reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        dispatch(patchMeAvatar(file.name, reader.result));
+        dispatch(getMe());
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setIsOpenErrorAlert(true);
+    }
   };
 
   const handleAvatarDelete = () => {
@@ -94,7 +123,7 @@ function ModalAvatarMe() {
               w="75%"
               d="block"
               mx="auto"
-              onChange={() => setIsOpenUpdateAvatar(true)}
+              onChange={() => setIsOpenUpdateAlert(true)}
             />
             {avatar.endsWith("/public/pictures/avatar_default.png") ? (
               <></>
@@ -107,7 +136,7 @@ function ModalAvatarMe() {
                 bgColor="red.500"
                 _focus={{ border: "none" }}
                 _hover={{ bg: "red.600" }}
-                onClick={() => setIsOpenDeleteAvatar(true)}
+                onClick={() => setIsOpenDeleteAlert(true)}
               >
                 {languageValues.delete}
               </Button>
@@ -115,21 +144,28 @@ function ModalAvatarMe() {
           </ModalBody>
         </ModalContent>
       </Modal>
-      <Alert
-        isOpen={isOpenUpdateAvatar}
+      <AlertToConfirmation
+        isOpen={isOpenUpdateAlert}
         onCloseAlert={onCloseAlertUpdateAvatar}
         fun={handleAvatarUpload}
         cancelRef={cancelRefAdd}
         header={languageValues.updateProfilePicture}
         body={languageValues.alertUpdateProfilePicture}
       />
-      <Alert
-        isOpen={isOpenDeleteAvatar}
+      <AlertToConfirmation
+        isOpen={isOpenDeleteAlert}
         onCloseAlert={onCloseAlertDeleteAvatar}
         fun={handleAvatarDelete}
         cancelRef={cancelRefDelete}
         header={languageValues.deleteProfilePicture}
         body={languageValues.alertDeleteProfilePicture}
+      />
+      <AlertToError
+        isOpen={isOpenErrorAlert}
+        onCloseAlert={onCloseAlertError}
+        cancelRef={cancelRefError}
+        title={languageValues.incorrectData}
+        description={validationResult}
       />
     </Flex>
   );

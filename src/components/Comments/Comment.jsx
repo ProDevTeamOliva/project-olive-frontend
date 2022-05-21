@@ -15,7 +15,7 @@ import { BsXLg } from "react-icons/bs";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import { useDispatch } from "react-redux";
 import { deleteComment } from "../../actions/commentActions";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
 import { useTranslation } from "react-i18next";
 
 function Comment({
@@ -109,7 +109,7 @@ function Comment({
       <Text align="end" mr="10px" fontSize="11px">
         {parseDate(date)}
       </Text>
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
         fun={removeComment}

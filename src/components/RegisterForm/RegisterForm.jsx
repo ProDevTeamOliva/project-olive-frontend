@@ -5,7 +5,7 @@ import { purpleButtonStyle } from "../../styles/Buttons/purpleButton";
 import { useSelector, useDispatch } from "react-redux";
 import { logIn, signUp } from "../../actions/authActions";
 import { useState, useRef, memo } from "react";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
 import { validatorOfPassword } from "../../validators/validatorOfPassword";
 import { useTranslation } from "react-i18next";
 import { validatorOfUserData } from "../../validators/validatorOfUserData";
@@ -211,7 +211,7 @@ function RegisterForm() {
         )}
       </Formik>
 
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
         fun={register}
