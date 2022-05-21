@@ -100,5 +100,7 @@
   "addFriendsChat": "Dodaj znajomych, aby używać chatu",
   "deletingMessage": "Usuwanie wiadomości",
   "alertDeleteMessage": "Czy potwierdzasz usunięcie wiadomości?",
-  "maxSizeOfContent": "Treść jest za długa, ponad 1024 znaki"
+  "maxSizeOfContent": "Treść jest za długa, ponad 1024 znaki",
+  "alertDeletePicture": "Czy potwierdzasz usunięcie zdjęcia?",
+  "deletePicture": "Usuwanie zdjęcia"
 }

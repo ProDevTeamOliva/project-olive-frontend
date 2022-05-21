@@ -13,7 +13,7 @@ import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect } from "react";
 import { getMe, getMePosts, getMePictures } from "../../actions/meActions";
 import MagicGridImages from "../Images/MagicGridImages";
 import Friends from "../Friends/Friends";
@@ -34,9 +34,6 @@ function Me({ changeLanguage }) {
   };
 
   const postsMe = useSelector((state) => state.mePosts.posts);
-  const pictures = useSelector((state) => state.mePictures.pictures);
-
-  const gridRef = useRef();
 
   useEffect(() => {
     dispatch(getMe());
@@ -87,7 +84,7 @@ function Me({ changeLanguage }) {
             {/* Images */}
             <TabPanel px="0" py="4">
               <ModalAddImageMe />
-              <MagicGridImages pictures={pictures} gridRef={gridRef} />
+              <MagicGridImages />
             </TabPanel>
 
             {/* Friends */}
