@@ -5,7 +5,7 @@ import RegisterModal from "../RegisterForm/RegisterModal";
 import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import { logIn } from "../../actions/authActions";
-import { validatorOfRequired } from "../../validators/validatorOfRequired";
+import { validatorOfContent } from "../../validators/validatorOfContent";
 import ButtonLoginForm from "./ButtonLoginForm";
 
 const initialDataLogin = { login: "", password: "" };
@@ -17,12 +17,16 @@ function LogInForm({ logIn, message, status }) {
     required: t("required"),
     login: t("login"),
     password: t("password"),
+    maxSizeOfContent: t("maxSizeOfContent"),
   };
 
   const handleSubmit = (values) => {
     return logIn(values);
   };
-  const validateRequired = validatorOfRequired(languageValues.required);
+  const validateContent = validatorOfContent(
+    languageValues.required,
+    languageValues.maxSizeOfContent
+  );
 
   return (
     <Box
@@ -72,7 +76,7 @@ function LogInForm({ logIn, message, status }) {
                 nameFormLabel={languageValues.login}
                 id="login"
                 type="text"
-                validate={(value) => validateRequired(value)}
+                validate={(value) => validateContent(value)}
                 value={login}
                 {...inputColors}
               />
@@ -81,7 +85,7 @@ function LogInForm({ logIn, message, status }) {
                 nameFormLabel={languageValues.password}
                 type="password"
                 id="password"
-                validate={(value) => validateRequired(value)}
+                validate={(value) => validateContent(value)}
                 value={password}
                 {...inputColors}
               />

@@ -99,5 +99,6 @@
   "alertAddPhotos": "Do you confirm adding photos?",
   "addFriendsChat": "Add friends to use chat",
   "deletingMessage": "Deleting a message",
-  "alertDeleteMessage": "Do you confirm deleting a message?"
+  "alertDeleteMessage": "Do you confirm deleting a message?",
+  "maxSizeOfContent": "Content too long, over 1024 signs"
 }
