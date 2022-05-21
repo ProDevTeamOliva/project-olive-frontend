@@ -92,7 +92,7 @@
   "alertDeletePost": "Do you confirm deleting post?",
   "choose": "Choose",
   "delete": "Delete",
-  "alertDeleteProfilePicture": "Do you confirm profile picture?",
+  "alertDeleteProfilePicture": "Do you confirm deleting a profile picture?",
   "deleteProfilePicture": "Deleting a profile picture",
   "profilePicture": "Profile picture",
   "addingPhotos": "Adding new photos",
@@ -100,5 +100,7 @@
   "addFriendsChat": "Add friends to use chat",
   "deletingMessage": "Deleting a message",
   "alertDeleteMessage": "Do you confirm deleting a message?",
-  "maxSizeOfContent": "Content too long, over 1024 signs"
+  "maxSizeOfContent": "Content too long, over 1024 signs",
+  "alertDeletePicture": "Do you confirm deleting a picture?",
+  "deletePicture": "Deleting a picture"
 }

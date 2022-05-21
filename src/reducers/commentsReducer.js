@@ -16,14 +16,17 @@ const commentsReducer = (state = init_state, action) => {
   switch (action.type) {
     case GET_COMMENTS_SUCCESS:
       return {
-        message: action.payload.message,
+        message: action.payload.response.message,
         comments: {
           ...state.comments,
           [action.payload.idPost]: action.payload.response.comments,
         },
       };
     case GET_COMMENTS_FAILURE:
-      return { message: action.payload.message, comments: state.comments };
+      return {
+        message: action.payload.response.message,
+        comments: state.comments,
+      };
 
     case ADD_COMMENT_SUCCESS:
       return {
@@ -40,7 +43,7 @@ const commentsReducer = (state = init_state, action) => {
       return { message: action.payload.message, comments: state.comments };
     case DELETE_COMMENT_SUCCESS:
       return {
-        message: action.payload.message,
+        message: action.payload.response.message,
         comments: {
           ...state.comments,
           [action.payload.idPost]: state.comments[action.payload.idPost].filter(
@@ -49,7 +52,10 @@ const commentsReducer = (state = init_state, action) => {
         },
       };
     case DELETE_COMMENT_FAILURE:
-      return { message: action.payload.message, comments: state.comments };
+      return {
+        message: action.payload.response.message,
+        comments: state.comments,
+      };
     default:
       return state;
   }
