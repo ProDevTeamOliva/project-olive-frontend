@@ -22,6 +22,9 @@ import {
   ME_ACCEPT_INVITATION_REQUEST,
   ME_ACCEPT_INVITATION_SUCCESS,
   ME_ACCEPT_INVITATION_FAILURE,
+  ME_MORE_POSTS_REQUEST,
+  ME_MORE_POSTS_SUCCESS,
+  ME_MORE_POSTS_FAILURE,
 } from "../types/meTypes";
 
 export const getMe = () => ({
@@ -47,6 +50,23 @@ export const getMePosts = () => ({
       "Content-Type": "application/json",
     },
     types: [ME_POSTS_REQUEST, ME_POSTS_SUCCESS, ME_POSTS_FAILURE],
+  },
+});
+
+export const getMoreMePosts = (id) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/me/post?id=` + id,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      ME_MORE_POSTS_REQUEST,
+      ME_MORE_POSTS_SUCCESS,
+      ME_MORE_POSTS_FAILURE,
+    ],
   },
 });
 

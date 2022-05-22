@@ -9,11 +9,7 @@ import LoadingSpinner from "../Spinner/LoadingSpinner";
 function PostsFiltered({ tag, changeLanguage, getPostsByTag, posts }) {
   useEffect(() => {
     getPostsByTag(tag);
-    const intervalId = setInterval(() => {
-      getPostsByTag(tag);
-    }, 3000);
-    return () => clearInterval(intervalId);
-  }, [tag, getPostsByTag]);
+  }, []);
 
   return (
     <Grid mt="150px" justifyContent="center">

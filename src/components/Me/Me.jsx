@@ -13,8 +13,13 @@ import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
-import { memo, useEffect, useRef } from "react";
-import { getMe, getMePosts, getMePictures } from "../../actions/meActions";
+import { memo, useCallback, useEffect, useRef } from "react";
+import {
+  getMe,
+  getMePosts,
+  getMePictures,
+  getMoreMePosts,
+} from "../../actions/meActions";
 import MagicGridImages from "../Images/MagicGridImages";
 import Friends from "../Friends/Friends";
 import ModalAddImageMe from "../Images/ModalAddImageMe";
@@ -23,6 +28,7 @@ import InfoAboutMeV1 from "./InfoAboutMeV1";
 import AddPostModal from "../PostForm/AddPostModal";
 import SearchModal from "../Search/SearchModal";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
+import LoadMore from "../InfinityScroll/LoadMore";
 
 function Me({ changeLanguage }) {
   const dispatch = useDispatch();
@@ -31,9 +37,13 @@ function Me({ changeLanguage }) {
     posts: t("posts"),
     images: t("images"),
     friends: t("friends"),
+    loadMorePosts: t("loadMorePosts"),
+    noMorePosts: t("noMorePosts"),
   };
 
   const postsMe = useSelector((state) => state.mePosts.posts);
+  const isMorePosts = useSelector((state) => state.mePosts.isMorePosts);
+  const isLoading = useSelector((state) => state.mePosts.isFetching);
   const pictures = useSelector((state) => state.mePictures.pictures);
 
   const gridRef = useRef();
@@ -44,15 +54,11 @@ function Me({ changeLanguage }) {
     dispatch(getMePictures());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(getMePosts());
-  //   dispatch(getMePictures());
-  //   const intervalId = setInterval(() => {
-  //     dispatch(getMePosts());
-  //     dispatch(getMePictures());
-  //   }, 3000);
-  //   return () => clearInterval(intervalId);
-  // }, [dispatch]);
+  const onClickLoadMore = useCallback(() => {
+    if (postsMe?.length > 0) {
+      dispatch(getMoreMePosts(postsMe[postsMe.length - 1].id));
+    }
+  }, [dispatch, postsMe]);
 
   return (
     <Grid
@@ -88,7 +94,18 @@ function Me({ changeLanguage }) {
                 </Box>
               </Grid>
               {postsMe.length > 0 ? (
-                postsMe.map((post) => <Post id={post.id} key={post.id} />)
+                <>
+                  {postsMe.map((post) => (
+                    <Post id={post.id} key={post.id} />
+                  ))}
+                  <LoadMore
+                    isMore={isMorePosts}
+                    isLoading={isLoading}
+                    onClickLoadMore={onClickLoadMore}
+                    loadMoreText={languageValues.loadMorePosts}
+                    noMoreText={languageValues.noMorePosts}
+                  />
+                </>
               ) : (
                 <LoadingSpinner />
               )}

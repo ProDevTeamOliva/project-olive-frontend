@@ -3,25 +3,28 @@ import { Formik, Form } from "formik";
 import InputComponent from "../Inputs/InputComponent";
 import RegisterModal from "../RegisterForm/RegisterModal";
 import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logIn } from "../../actions/authActions";
 import { validatorOfRequired } from "../../validators/validatorOfRequired";
 import ButtonLoginForm from "./ButtonLoginForm";
+import { memo } from "react";
 
 const initialDataLogin = { login: "", password: "" };
 const inputColors = { color: "gray.800", borderColor: "gray.600" };
 
-function LogInForm({ logIn, message, status }) {
+function LogInForm() {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const languageValues = {
     required: t("required"),
     login: t("login"),
     password: t("password"),
   };
+  const message = useSelector((state) => state.logIn.message);
+  const status = useSelector((state) => state.logIn.status.toString());
 
-  const handleSubmit = (values) => {
-    return logIn(values);
-  };
+  const handleSubmit = (values) => dispatch(logIn(values));
+
   const validateRequired = validatorOfRequired(languageValues.required);
 
   return (
@@ -95,13 +98,4 @@ function LogInForm({ logIn, message, status }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  message: state.logIn.message,
-  status: state.logIn.status.toString(),
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  logIn: (data) => dispatch(logIn(data)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(LogInForm);
+export default memo(LogInForm);

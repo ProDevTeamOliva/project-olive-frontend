@@ -18,7 +18,7 @@ import { unStyledButton } from "../../../styles/Buttons/unStyledButton";
 import { BsXLg } from "react-icons/bs";
 import Alert from "../../Alert/Alert";
 
-function Post({ id }) {
+function Post({ id, isMePost = false }) {
   const { t } = useTranslation();
   const languageValues = useMemo(
     () => ({
@@ -47,8 +47,10 @@ function Post({ id }) {
   const commentsForPost =
     useSelector((state) => state.comments.comments[id]) || [];
   const me = useSelector((state) => state.me.me);
-  const property = useSelector((state) =>
-    state.posts.posts.find((post) => post.id === id)
+  const property = useSelector(
+    (state) =>
+      state.mePosts.posts.find((post) => post.id === id) ||
+      state.posts.posts.find((post) => post.id === id)
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -1,23 +1,26 @@
 import { Grid, Text } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
-import { useEffect, useState } from "react";
-import { getMe } from "../../actions/meActions";
+import { useDispatch, useSelector } from "react-redux";
+import { memo, useEffect, useState } from "react";
 import io from "socket.io-client";
 import { baseUrl } from "../../config/baseUrl";
 import ChatInfo from "./ChatInfo";
 import ChatMessages from "./ChatMessages";
+import { getMe } from "../../actions/meActions";
 
-function Chat({ id, me, getMe }) {
+function Chat({ id }) {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const languageValues = {
     reconnecting: t("reconnecting"),
   };
 
+  const me = useSelector((state) => state.me.me);
+
   const [chatSocket, setChatSocket] = useState(undefined);
 
   useEffect(() => {
-    getMe();
+    dispatch(getMe());
 
     const socket = io(`${baseUrl}/chat/${id}`, {
       forceNew: true,
@@ -29,7 +32,7 @@ function Chat({ id, me, getMe }) {
     socket.on("connect_error", () => setChatSocket(undefined));
 
     return () => socket.close();
-  }, [getMe, id]);
+  }, [dispatch, id]);
 
   return (
     <>
@@ -54,12 +57,4 @@ function Chat({ id, me, getMe }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  me: state.me.me,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  getMe: () => dispatch(getMe()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Chat);
+export default memo(Chat);
