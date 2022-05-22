@@ -46,7 +46,7 @@ function Friend({ id, nameFirst, nameLast, avatar }) {
         <Link to={`/user/${id}`}>
           <Avatar
             boxSize={["50px", "60px", "80px"]}
-            src={baseUrl + avatar}
+            src={avatar && baseUrl + avatar}
           ></Avatar>
         </Link>
         <Box width="150px">

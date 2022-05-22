@@ -11,7 +11,7 @@ export const getLinkForUser =
         id={id}
         nameFirst={nameFirst}
         nameLast={nameLast}
-        avatar={baseUrl + avatar}
+        avatar={avatar && baseUrl + avatar}
         onClose={() => setIsOpen(false)}
       />
     );
