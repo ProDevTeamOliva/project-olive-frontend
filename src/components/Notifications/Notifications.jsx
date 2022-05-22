@@ -7,28 +7,32 @@ import {
   DrawerCloseButton,
   Text,
 } from "@chakra-ui/react";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import Notification from "./Notification";
-import {
-  acceptFriendInvitation,
-  unAcceptFriendInvitation,
-} from "../../actions/meActions";
+import { memo, useCallback } from "react";
 
-function Notifications({
-  onClose,
-  isOpen,
-  pendingReceived,
-  acceptFriendInvitation,
-  unAcceptFriendInvitation,
-}) {
+function Notifications({ onClose, isOpen }) {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const languageValues = {
     notifications: t("notifications"),
     noResults: t("noResults"),
   };
 
+  const pendingReceived = useSelector(
+    (state) => state.meFriends.pendingReceived
+  );
+
+  const acceptFriendInvitation = useCallback(
+    (id) => dispatch(acceptFriendInvitation(id)),
+    [dispatch]
+  );
+  const unAcceptFriendInvitation = useCallback(
+    (id) => dispatch(unAcceptFriendInvitation(id)),
+    [dispatch]
+  );
   return (
     <>
       <Drawer onClose={onClose} isOpen={isOpen} size={["xs"]}>
@@ -62,15 +66,4 @@ function Notifications({
   );
 }
 
-const mapStateToProps = (state) => ({
-  pendingReceived: state.meFriends.pendingReceived,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    acceptFriendInvitation: (id) => dispatch(acceptFriendInvitation(id)),
-    unAcceptFriendInvitation: (id) => dispatch(unAcceptFriendInvitation(id)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
+export default memo(Notifications);
