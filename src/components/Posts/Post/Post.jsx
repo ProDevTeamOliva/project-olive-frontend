@@ -50,7 +50,8 @@ function Post({ id, isMePost = false }) {
   const property = useSelector(
     (state) =>
       state.mePosts.posts.find((post) => post.id === id) ||
-      state.posts.posts.find((post) => post.id === id)
+      state.posts.posts.find((post) => post.id === id) ||
+      state.postsFiltered.posts.find((post) => post.id === id)
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();

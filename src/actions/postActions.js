@@ -23,6 +23,9 @@ import {
   DELETE_POST_REQUEST,
   DELETE_POST_SUCCESS,
   DELETE_POST_FAILURE,
+  TAGS_MORE_REQUEST,
+  TAGS_MORE_SUCCESS,
+  TAGS_MORE_FAILURE,
 } from "../types/postTypes";
 
 import { RSAA } from "redux-api-middleware";
@@ -147,5 +150,18 @@ export const getPostsByTag = (tag) => ({
       "Content-Type": "application/json",
     },
     types: [TAGS_REQUEST, TAGS_SUCCESS, TAGS_FAILURE],
+  },
+});
+
+export const getMorePostsByTag = (tag, id) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/post?tag=${tag}${id ? `&id=${id}` : ""}`,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [TAGS_MORE_REQUEST, TAGS_MORE_SUCCESS, TAGS_MORE_FAILURE],
   },
 });
