@@ -66,11 +66,9 @@ const mapStateToProps = (state) => ({
   pendingReceived: state.meFriends.pendingReceived,
 });
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    acceptFriendInvitation: (id) => dispatch(acceptFriendInvitation(id)),
-    unAcceptFriendInvitation: (id) => dispatch(unAcceptFriendInvitation(id)),
-  };
-};
+const mapDispatchToProps = (dispatch) => ({
+  acceptFriendInvitation: (id) => dispatch(acceptFriendInvitation(id)),
+  unAcceptFriendInvitation: (id) => dispatch(unAcceptFriendInvitation(id)),
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

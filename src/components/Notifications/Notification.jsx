@@ -75,11 +75,11 @@ function Notification({
       </HStack>
       <HStack mt="-12px" justify="right" mr="7px">
         <Button {...buttonStyle("gray.100", "white")} onClick={() => accept()}>
-          <BsCheckLg></BsCheckLg>
+          <BsCheckLg />
         </Button>
 
         <Button {...buttonStyle("gray.800", "black")} onClick={() => ignore()}>
-          <BsXLg></BsXLg>
+          <BsXLg />
         </Button>
       </HStack>
       <Alert

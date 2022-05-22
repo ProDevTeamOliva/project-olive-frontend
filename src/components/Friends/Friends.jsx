@@ -1,9 +1,9 @@
-import { Box, Input, Wrap } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
-import LoadingSpinner from "../Spinner/LoadingSpinner";
-import Friend from "./Friend";
-import { useState } from "react";
+import { Wrap, Box, Input } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import Friend from "./Friend";
+import LoadingSpinner from "../Spinner/LoadingSpinner";
 
 function Friends() {
   const { t } = useTranslation();
@@ -12,17 +12,19 @@ function Friends() {
   };
 
   const friends = useSelector((state) => state.meFriends.friends);
+  const [search, setSearch] = useState("");
   const [friendsFromSearch, setFriendsFromSearch] = useState(friends);
 
-  const search = (value) => {
+  useEffect(() => {
     setFriendsFromSearch(
       friends.filter(
         (friend) =>
-          friend.nameFirst.toLowerCase().includes(value.toLowerCase()) ||
-          friend.nameLast.toLowerCase().includes(value.toLowerCase())
+          friend.nameFirst.toLowerCase().includes(search.toLowerCase()) ||
+          friend.nameLast.toLowerCase().includes(search.toLowerCase())
       )
     );
-  };
+  }, [setFriendsFromSearch, friends, search]);
+
   return (
     <Wrap spacing="40px" justify="center">
       <Box w="100%" mt="0px">
@@ -34,7 +36,7 @@ function Friends() {
           borderRadius="10px"
           _hover={{}}
           _placeholder={{ color: "gray.400" }}
-          onChange={(e) => search(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           defaultValue=""
         />
       </Box>

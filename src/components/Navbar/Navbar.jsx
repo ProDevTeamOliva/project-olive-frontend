@@ -1,15 +1,15 @@
+import { useEffect, memo } from "react";
+import { useDispatch } from "react-redux";
 import { Box, Grid, Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import LogoUp from "../Logo/LogoUp";
 import { getMeFriends } from "../../actions/meActions";
-import { Link } from "react-router-dom";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
-import { memo, useEffect } from "react";
 import Bell from "../Notifications/Bell";
 import { getPosts } from "../../actions/postActions";
 import Search from "../Search/Search";
 import DropDown from "./DropDown";
 import SearchModal from "../Search/SearchModal";
-import { useDispatch } from "react-redux";
 
 function Navbar({ changeLanguage }) {
   const dispatch = useDispatch();
@@ -17,13 +17,6 @@ function Navbar({ changeLanguage }) {
   useEffect(() => {
     dispatch(getPosts());
     dispatch(getMeFriends());
-
-    // const intervalId = setInterval(() => {
-    //   dispatch(getPosts());
-    //   dispatch(getMeFriends());
-    // }, 3000);
-
-    // return () => clearInterval(intervalId);
   }, [dispatch]);
 
   return (

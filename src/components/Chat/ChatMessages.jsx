@@ -49,7 +49,7 @@ function ChatMessages({ chatSocket, me }) {
   };
 
   const messegeDelete = (id) => {
-    chatSocket?.emit("messegeDelete", { id: id }, onDelete);
+    chatSocket?.emit("messageRemove", { id: id }, onDelete);
   };
 
   const handleSubmit = () => {
@@ -65,11 +65,11 @@ function ChatMessages({ chatSocket, me }) {
     });
 
     chatSocket?.on("message", onMessage);
-    chatSocket?.on("messegeDelete", onDelete);
+    chatSocket?.on("messageRemove", onDelete);
 
     return () => {
       chatSocket?.off("message", onMessage);
-      chatSocket?.off("messegeDelete", onDelete);
+      chatSocket?.off("messageRemove", onDelete);
     };
   }, [chatSocket, onMessage, onDelete]);
 
