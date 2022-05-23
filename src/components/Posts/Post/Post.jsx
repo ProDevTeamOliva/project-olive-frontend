@@ -66,11 +66,8 @@ function Post({ id, isMePost = false }) {
     dispatch(dislikePost(property?.id));
   }, [property?.id, dispatch]);
 
-  const isLikedByMe =
-    property?.likes.filter((like) => like.login === me.login).length > 0;
-
   const renderLikeDislikeButton = useCallback(() => {
-    if (isLikedByMe) {
+    if (property.likesMe) {
       return (
         <Button
           padding="2"
@@ -93,7 +90,7 @@ function Post({ id, isMePost = false }) {
   }, [
     handleLikeButtonClick,
     handleDisLikeButtonClick,
-    isLikedByMe,
+    property.likesMe,
     languageValues,
   ]);
 
@@ -165,9 +162,9 @@ function Post({ id, isMePost = false }) {
         <Flex flexWrap="wrap" justifyContent="space-between">
           <Box padding="2">
             <Like
-              isLikedByMe={isLikedByMe}
+              isLikedByMe={property.likesMe}
               languageValues={languageValues}
-              likes={property.likes.length}
+              likes={property.likes}
             />
           </Box>
           {renderLikeDislikeButton()}
