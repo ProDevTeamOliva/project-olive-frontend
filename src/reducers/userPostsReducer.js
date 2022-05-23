@@ -1,3 +1,4 @@
+import { DISLIKE_SUCCESS, LIKE_SUCCESS } from "../types/postTypes";
 import { USER_POSTS_SUCCESS, USER_POSTS_FAILURE } from "../types/userTypes";
 
 const init_state = {
@@ -16,6 +17,31 @@ const userPostsReducer = (state = init_state, action) => {
       return {
         ...state,
         message: action.payload.message,
+      };
+
+    case LIKE_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.id) {
+            return { ...post, likes: post.likes + 1, likesMe: true };
+          }
+          return post;
+        }),
+      };
+    case DISLIKE_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.id) {
+            return {
+              ...post,
+              likes: post.likes - 1,
+              likesMe: false,
+            };
+          }
+          return post;
+        }),
       };
     default:
       return state;
