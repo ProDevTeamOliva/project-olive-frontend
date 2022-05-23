@@ -81,8 +81,8 @@ const commentsReducer = (state = init_state, action) => {
         comments: {
           ...state.comments,
           [action.payload.comment.postId]: [
-            ...state.comments[action.payload.comment.postId],
             action.payload.comment,
+            ...state.comments[action.payload.comment.postId],
           ],
         },
       };

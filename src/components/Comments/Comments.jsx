@@ -30,8 +30,6 @@ function Comments({ idPost }) {
     dispatch(getComments(idPost));
   }, [dispatch, idPost]);
 
-  console.log("commentsForPost", commentsForPost);
-
   return (
     <>
       {commentsForPost.length > 0 ? (
