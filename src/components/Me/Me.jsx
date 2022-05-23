@@ -42,14 +42,8 @@ function Me({ changeLanguage }) {
   };
 
   const postsMe = useSelector((state) => state.mePosts.posts);
-<<<<<<< HEAD
   const isMorePosts = useSelector((state) => state.mePosts.isMorePosts);
   const isLoading = useSelector((state) => state.mePosts.isFetching);
-  const pictures = useSelector((state) => state.mePictures.pictures);
-
-  const gridRef = useRef();
-=======
->>>>>>> 6a993ec897b20b8c026dfa0da9bb92309f850f12
 
   useEffect(() => {
     dispatch(getMe());
@@ -57,15 +51,12 @@ function Me({ changeLanguage }) {
     dispatch(getMePictures());
   }, [dispatch]);
 
-<<<<<<< HEAD
   const onClickLoadMore = useCallback(() => {
     if (postsMe?.length > 0) {
       dispatch(getMoreMePosts(postsMe[postsMe.length - 1].id));
     }
   }, [dispatch, postsMe]);
 
-=======
->>>>>>> 6a993ec897b20b8c026dfa0da9bb92309f850f12
   return (
     <Grid
       h="100vh"
