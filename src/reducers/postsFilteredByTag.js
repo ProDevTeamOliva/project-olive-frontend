@@ -6,6 +6,8 @@ import {
   TAGS_MORE_SUCCESS,
   TAGS_MORE_REQUEST,
   TAGS_MORE_FAILURE,
+  DISLIKE_SUCCESS,
+  LIKE_SUCCESS,
 } from "../types/postTypes";
 
 const init_state = {
@@ -63,6 +65,31 @@ const postsFilteredByTag = (state = init_state, action) => {
       return {
         ...state,
         posts: state.filter((post) => post.id !== action.payload.idPost),
+      };
+
+    case LIKE_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.id) {
+            return { ...post, likes: post.likes + 1, likesMe: true };
+          }
+          return post;
+        }),
+      };
+    case DISLIKE_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.id) {
+            return {
+              ...post,
+              likes: post.likes - 1,
+              likesMe: false,
+            };
+          }
+          return post;
+        }),
       };
     default:
       return state;

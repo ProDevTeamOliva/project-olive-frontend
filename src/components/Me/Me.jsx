@@ -13,7 +13,7 @@ import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
-import { memo, useCallback, useEffect, useRef } from "react";
+import { memo, useCallback, useEffect } from "react";
 import {
   getMe,
   getMePosts,
