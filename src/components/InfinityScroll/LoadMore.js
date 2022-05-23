@@ -14,7 +14,7 @@ const LoadMore = ({
     return <Button onClick={onClickLoadMore}>{loadMoreText}</Button>;
   }
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner isLoading={isLoading} />;
   }
   if (!isMore) {
     return (

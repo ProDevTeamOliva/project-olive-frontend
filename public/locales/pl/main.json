@@ -105,5 +105,7 @@
   "maxSizeOfContent": "Treść jest za długa, ponad 1024 znaki",
   "alertDeletePicture": "Czy potwierdzasz usunięcie zdjęcia?",
   "deletePicture": "Usuwanie zdjęcia",
-  "incorrectData": "Niepoprawne dane"
+  "incorrectData": "Niepoprawne dane",
+  "noMoreComments": "Brak starszych komentarzy",
+  "loadMoreComments": "Załaduj więcej komentarzy"
 }

@@ -105,5 +105,7 @@
   "deletePicture": "Deleting a picture",
   "incorrectData": "Incorrect data",
   "noMorePosts": "No more posts",
-  "loadMorePosts": "Load more posts"
+  "loadMorePosts": "Load more posts",
+  "noMoreComments": "No more comments",
+  "loadMoreComments": "Load more comments"
 }

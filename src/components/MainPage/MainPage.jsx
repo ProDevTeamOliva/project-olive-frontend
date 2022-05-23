@@ -48,7 +48,7 @@ function MainPage({ changeLanguage }) {
             />
           </>
         ) : (
-          <LoadingSpinner />
+          <LoadingSpinner isLoading={isLoading} />
         )}
       </Grid>
     </Grid>

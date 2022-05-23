@@ -1,11 +1,15 @@
 import {
   USER_PICTURES_SUCCESS,
   USER_PICTURES_FAILURE,
+  USER_PICTURES_REQUEST,
 } from "../types/userTypes";
 
 const init_state = {
   pictures: [],
   message: "",
+  isFetching: false,
+  isFetched: false,
+  isFetchingError: false,
 };
 
 const userPicturesReducer = (state = init_state, action) => {
@@ -14,6 +18,13 @@ const userPicturesReducer = (state = init_state, action) => {
       return {
         pictures: [...action.payload.pictures],
         message: action.payload.message,
+      };
+    case USER_PICTURES_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+        isFetched: false,
+        isFetchingError: false,
       };
     case USER_PICTURES_FAILURE:
       return {

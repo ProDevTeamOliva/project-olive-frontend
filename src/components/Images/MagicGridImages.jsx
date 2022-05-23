@@ -7,6 +7,7 @@ import LoadingSpinner from "../Spinner/LoadingSpinner";
 function MagicGridImages() {
   const gridRef = useRef();
   const pictures = useSelector((state) => state.mePictures.pictures);
+  const isLoading = useSelector((state) => state.mePictures.isFetching);
   const sizeOfPictures = pictures.length;
 
   return sizeOfPictures > 0 ? (
@@ -16,7 +17,7 @@ function MagicGridImages() {
       ))}
     </MagicGrid>
   ) : (
-    <LoadingSpinner />
+    <LoadingSpinner isLoading={isLoading} />
   );
 }
 

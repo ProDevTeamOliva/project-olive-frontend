@@ -104,7 +104,7 @@ function Me({ changeLanguage }) {
                   />
                 </>
               ) : (
-                <LoadingSpinner />
+                <LoadingSpinner isLoading={isLoading} />
               )}
             </TabPanel>
 

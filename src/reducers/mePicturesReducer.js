@@ -5,11 +5,15 @@ import {
   ME_POST_PICTURES_FAILURE,
   ME_DELETE_PICTURES_SUCCESS,
   ME_DELETE_PICTURES_FAILURE,
+  ME_GET_PICTURES_REQUEST,
 } from "../types/meTypes";
 
 const init_state = {
   pictures: [],
   message: "",
+  isFetching: false,
+  isFetched: false,
+  isFetchingError: false,
 };
 
 const mePicturesReducer = (state = init_state, action) => {
@@ -18,6 +22,13 @@ const mePicturesReducer = (state = init_state, action) => {
       return {
         pictures: [...action.payload.pictures],
         message: action.payload.message,
+      };
+    case ME_GET_PICTURES_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+        isFetched: false,
+        isFetchingError: false,
       };
     case ME_GET_PICTURES_FAILURE:
       return {

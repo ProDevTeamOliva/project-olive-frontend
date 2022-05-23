@@ -1,6 +1,6 @@
 import { Button, GridItem, Box, Flex, useDisclosure } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useCallback, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   deletePost,
@@ -13,12 +13,11 @@ import AuthorPostSection from "./AuthorPostSection";
 import Content from "./Content";
 import Tags from "./Tags";
 import Like from "./Like";
-import { getComments } from "../../../actions/commentActions";
 import { unStyledButton } from "../../../styles/Buttons/unStyledButton";
 import { BsXLg } from "react-icons/bs";
 import AlertToConfirmation from "../../Alert/AlertToConfirmation";
 
-function Post({ id, isMePost = false }) {
+function Post({ id }) {
   const { t } = useTranslation();
   const languageValues = useMemo(
     () => ({
@@ -35,17 +34,11 @@ function Post({ id, isMePost = false }) {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getComments(id));
-  }, [dispatch, id]);
-
   const removePost = () => {
     onCloseAlert();
     return dispatch(deletePost(id));
   };
 
-  const commentsForPost =
-    useSelector((state) => state.comments.comments[id]) || [];
   const me = useSelector((state) => state.me.me);
   const property = useSelector(
     (state) =>
@@ -170,7 +163,7 @@ function Post({ id, isMePost = false }) {
           {renderLikeDislikeButton()}
           <Box onClick={onOpen} padding="2" cursor="pointer">
             {languageValues.postBottomCommentBoxTitle}
-            {" " + commentsForPost.length}
+            {" " + property.comments}
           </Box>
           <AddCommentModal
             idPost={id}
