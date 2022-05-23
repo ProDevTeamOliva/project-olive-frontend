@@ -12,6 +12,7 @@ function Friends() {
   };
 
   const friends = useSelector((state) => state.meFriends.friends);
+  const isLoading = useSelector((state) => state.meFriends.isFetching);
   const [search, setSearch] = useState("");
   const [friendsFromSearch, setFriendsFromSearch] = useState(friends);
 
@@ -51,7 +52,7 @@ function Friends() {
           />
         ))
       ) : (
-        <LoadingSpinner />
+        <LoadingSpinner isLoading={isLoading} />
       )}
     </Wrap>
   );

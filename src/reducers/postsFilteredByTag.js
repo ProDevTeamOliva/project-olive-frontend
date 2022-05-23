@@ -1,4 +1,8 @@
 import {
+  ADD_COMMENT_SUCCESS,
+  DELETE_COMMENT_SUCCESS,
+} from "../types/commentTypes";
+import {
   TAGS_SUCCESS,
   TAGS_FAILURE,
   DELETE_POST_SUCCESS,
@@ -64,7 +68,7 @@ const postsFilteredByTag = (state = init_state, action) => {
     case DELETE_POST_SUCCESS:
       return {
         ...state,
-        posts: state.filter((post) => post.id !== action.payload.idPost),
+        posts: state.posts.filter((post) => post.id !== action.payload.idPost),
       };
 
     case LIKE_SUCCESS:
@@ -86,6 +90,32 @@ const postsFilteredByTag = (state = init_state, action) => {
               ...post,
               likes: post.likes - 1,
               likesMe: false,
+            };
+          }
+          return post;
+        }),
+      };
+    case ADD_COMMENT_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.comment.postId) {
+            return {
+              ...post,
+              comments: post.comments + 1,
+            };
+          }
+          return post;
+        }),
+      };
+    case DELETE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.postId) {
+            return {
+              ...post,
+              comments: post.comments - 1,
             };
           }
           return post;

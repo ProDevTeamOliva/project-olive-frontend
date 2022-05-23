@@ -26,7 +26,7 @@ function PostsFiltered({ tag, changeLanguage }) {
 
   useEffect(() => {
     dispatch(getPostsByTag(tag));
-  }, [dispatch]);
+  }, [dispatch, tag]);
 
   return (
     <Grid mt="150px" justifyContent="center">
@@ -46,7 +46,7 @@ function PostsFiltered({ tag, changeLanguage }) {
             />
           </>
         ) : (
-          <LoadingSpinner />
+          <LoadingSpinner isLoading={isLoading} />
         )}
       </Grid>
     </Grid>

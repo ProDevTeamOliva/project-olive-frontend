@@ -1,4 +1,8 @@
 import {
+  ADD_COMMENT_SUCCESS,
+  DELETE_COMMENT_SUCCESS,
+} from "../types/commentTypes";
+import {
   ADD_POST_SUCCESS,
   DISLIKE_SUCCESS,
   GET_MORE_POSTS_FAILURE,
@@ -109,6 +113,32 @@ const postsReducer = (state = init_state, action) => {
         isFetching: false,
         isFetched: true,
         isFetchingError: false,
+      };
+    case ADD_COMMENT_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.comment.postId) {
+            return {
+              ...post,
+              comments: post.comments + 1,
+            };
+          }
+          return post;
+        }),
+      };
+    case DELETE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.postId) {
+            return {
+              ...post,
+              comments: post.comments - 1,
+            };
+          }
+          return post;
+        }),
       };
     default:
       return state;

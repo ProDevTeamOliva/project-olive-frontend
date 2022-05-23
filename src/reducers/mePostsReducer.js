@@ -1,4 +1,8 @@
 import {
+  ADD_COMMENT_SUCCESS,
+  DELETE_COMMENT_SUCCESS,
+} from "../types/commentTypes";
+import {
   ME_POSTS_SUCCESS,
   ME_POSTS_FAILURE,
   ME_MORE_POSTS_REQUEST,
@@ -99,15 +103,36 @@ const mePostsReducer = (state = init_state, action) => {
         ...state,
         posts: [{ ...action.payload.post, likes: 0 }, ...state.posts],
       };
-    case ME_POSTS_FAILURE:
-      return {
-        ...state,
-        message: action.payload.message,
-      };
     case DELETE_POST_SUCCESS:
       return {
         posts: state.posts.filter((post) => post.id !== action.payload.idPost),
         message: action.payload.message,
+      };
+    case ADD_COMMENT_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.comment.postId) {
+            return {
+              ...post,
+              comments: post.comments + 1,
+            };
+          }
+          return post;
+        }),
+      };
+    case DELETE_COMMENT_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.postId) {
+            return {
+              ...post,
+              comments: post.comments - 1,
+            };
+          }
+          return post;
+        }),
       };
     default:
       return state;

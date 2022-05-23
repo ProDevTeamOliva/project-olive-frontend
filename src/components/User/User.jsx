@@ -33,6 +33,7 @@ function User({ changeLanguage, id }) {
   const gridRef = useRef();
 
   const pictures = useSelector((state) => state.userPictures.pictures);
+  const isLoading = useSelector((state) => state.userPictures.isFetching);
   const posts = useSelector((state) => state.userPosts);
 
   useEffect(() => {
@@ -66,7 +67,7 @@ function User({ changeLanguage, id }) {
                   <Post property={post} key={post.id} id={post.id} />
                 ))
               ) : (
-                <LoadingSpinner />
+                <LoadingSpinner isLoading={isLoading} />
               )}
             </TabPanel>
 

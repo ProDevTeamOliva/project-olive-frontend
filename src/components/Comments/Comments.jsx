@@ -1,14 +1,36 @@
 import { Grid, GridItem, Box } from "@chakra-ui/react";
-import { memo } from "react";
+import { memo, useCallback, useEffect } from "react";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Comment from "../Comments/Comment";
+import { getComments, getMoreComments } from "../../actions/commentActions";
+import LoadMore from "../InfinityScroll/LoadMore";
+import { useTranslation } from "react-i18next";
 
 function Comments({ idPost }) {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+
   const commentsForPost =
     useSelector((state) => state.comments.comments[idPost]) || [];
-
   const me = useSelector((state) => state.me.me);
+
+  const isLoading = useSelector((state) => state.comments.isFetching);
+  const isMoreComments = useSelector((state) => state.comments.isMoreComments);
+
+  const lastCommentId = commentsForPost[commentsForPost.length - 1]?.id || 0;
+
+  const onClickLoadMore = useCallback(() => {
+    if (commentsForPost?.length > 0) {
+      dispatch(getMoreComments(idPost, lastCommentId));
+    }
+  }, [idPost, dispatch, lastCommentId, commentsForPost?.length]);
+
+  useEffect(() => {
+    dispatch(getComments(idPost));
+  }, [dispatch, idPost]);
+
+  console.log("commentsForPost", commentsForPost);
 
   return (
     <>
@@ -43,10 +65,17 @@ function Comments({ idPost }) {
               </GridItem>
             )
           )}
+          <LoadMore
+            isMore={isMoreComments}
+            isLoading={isLoading}
+            onClickLoadMore={onClickLoadMore}
+            loadMoreText={t("loadMoreComments")}
+            noMoreText={t("noMoreComments")}
+          />
         </Grid>
       ) : (
         <Box h="150px">
-          <LoadingSpinner />
+          <LoadingSpinner isLoading={isLoading} />
         </Box>
       )}
     </>

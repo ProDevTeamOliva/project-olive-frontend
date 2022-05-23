@@ -3,6 +3,7 @@ import {
   ME_FRIENDS_FAILURE,
   ME_ACCEPT_INVITATION_SUCCESS,
   ME_ACCEPT_INVITATION_FAILURE,
+  ME_FRIENDS_REQUEST,
 } from "../types/meTypes";
 
 const init_state = {
@@ -10,6 +11,10 @@ const init_state = {
   pendingSent: [],
   pendingReceived: [],
   message: "",
+  isMorePosts: false,
+  isFetching: false,
+  isFetched: false,
+  isFetchingError: false,
 };
 
 const meFriendsReducer = (state = init_state, action) => {
@@ -21,6 +26,14 @@ const meFriendsReducer = (state = init_state, action) => {
         pendingReceived: [...action.payload.pendingReceived],
         message: action.payload.message,
       };
+    case ME_FRIENDS_REQUEST:
+      return {
+        ...state,
+        isFetching: true,
+        isFetched: false,
+        isFetchingError: false,
+      };
+
     case ME_FRIENDS_FAILURE:
       return {
         ...state,

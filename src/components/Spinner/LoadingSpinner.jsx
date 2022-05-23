@@ -1,30 +1,15 @@
 import { Box, Center, Spinner, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-function LoadingSpinner() {
+function LoadingSpinner({ isLoading }) {
   const { t } = useTranslation();
   const languageValues = {
     noResults: t("noResults"),
   };
 
-  const [load, setLoad] = useState(true);
-
-  useEffect(() => {
-    let isMounted = true;
-    setTimeout(() => {
-      if (isMounted) {
-        setLoad(false);
-      }
-    }, 2500);
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
   return (
     <Box h="100vh" mt="75px" justifyContent="center">
-      {load ? (
+      {isLoading ? (
         <Center>
           <Spinner
             thickness="4px"

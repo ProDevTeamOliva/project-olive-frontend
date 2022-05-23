@@ -8,6 +8,9 @@ import {
   DELETE_COMMENT_SUCCESS,
   DELETE_COMMENT_FAILURE,
   DELETE_COMMENT_REQUEST,
+  GET_MORE_COMMENTS_REQUEST,
+  GET_MORE_COMMENTS_SUCCESS,
+  GET_MORE_COMMENTS_FAILURE,
 } from "../types/commentTypes";
 
 import { RSAA } from "redux-api-middleware";
@@ -48,6 +51,31 @@ export const getComments = (idPost) => ({
         },
       },
       GET_COMMENTS_FAILURE,
+    ],
+  },
+});
+
+export const getMoreComments = (idPost, id) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/post/${idPost}/comment?id=${id}`,
+    method: "GET",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      GET_MORE_COMMENTS_REQUEST,
+      {
+        type: GET_MORE_COMMENTS_SUCCESS,
+        payload: async (action, state, res) => {
+          return res.json().then((json) => ({
+            response: json,
+            idPost: idPost,
+          }));
+        },
+      },
+      GET_MORE_COMMENTS_FAILURE,
     ],
   },
 });
