@@ -13,14 +13,23 @@ import { useTranslation } from "react-i18next";
 import FileUpload from "../FileUpload/FileUpload";
 import toBase64 from "../../operations/base64";
 import PublicPrivate from "../FileUpload/PublicPrivate";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { postMePictures } from "../../actions/meActions";
 import { useDispatch } from "react-redux";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
+import AlertToError from "../Alert/AlertToError";
+import { validatorOfFiles } from "../../validators/validatorOfFiles";
 
 function ModalAddImageMe() {
   const { t } = useTranslation();
   const languageValues = {
     addImages: t("addImages"),
+    addingPhotos: t("addingPhotos"),
+    alertAddPhotos: t("alertAddPhotos"),
+    formatFile: t("formatFile"),
+    memoryPerFile: t("memoryPerFile"),
+    memoryAllFiles: t("memoryAllFiles"),
+    incorrectData: t("incorrectData"),
   };
 
   const dispatch = useDispatch();
@@ -33,20 +42,50 @@ function ModalAddImageMe() {
     onClose: onClosePictures,
   } = useDisclosure();
 
-  const handlePicturesUpload = async () => {
-    const files = document.querySelector("#picturesUpload")["files"];
-    let pictures = [];
+  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenErrorAlert, setIsOpenErrorAlert] = useState(false);
 
-    for (const file of files) {
-      const file64 = await toBase64(file);
-      pictures.push({
-        filename: file.name,
-        picture: file64,
-        private: publicPrivate,
-      });
-    }
-    dispatch(postMePictures(pictures));
+  const onCloseAlert = () => {
+    setIsOpen(false);
     onClosePictures();
+  };
+  const onCloseAlertError = () => {
+    setIsOpenErrorAlert(false);
+    onClosePictures();
+  };
+  const cancelRef = useRef();
+  const cancelRefError = useRef();
+
+  const [validationResult, setValidationResult] = useState(undefined);
+  const validateFiles = validatorOfFiles(
+    languageValues.formatFile,
+    languageValues.memoryPerFile,
+    languageValues.memoryAllFiles
+  );
+
+  const handlePicturesUpload = async () => {
+    onCloseAlert();
+    const files = document.querySelector("#picturesUpload")["files"];
+    const resultFromValidate = validateFiles(
+      Array.from(files).map((file) => ({ file: file }))
+    );
+    setValidationResult(resultFromValidate);
+
+    if (resultFromValidate === undefined) {
+      let pictures = [];
+
+      for (const file of files) {
+        const file64 = await toBase64(file);
+        pictures.push({
+          filename: file.name,
+          picture: file64,
+          private: publicPrivate,
+        });
+      }
+      dispatch(postMePictures(pictures));
+    } else {
+      setIsOpenErrorAlert(true);
+    }
   };
 
   return (
@@ -71,11 +110,26 @@ function ModalAddImageMe() {
               w="75%"
               d="block"
               mx="auto"
-              onChange={handlePicturesUpload}
+              onChange={() => setIsOpen(true)}
             />
           </ModalBody>
         </ModalContent>
       </Modal>
+      <AlertToConfirmation
+        isOpen={isOpen}
+        onCloseAlert={onCloseAlert}
+        fun={handlePicturesUpload}
+        cancelRef={cancelRef}
+        header={languageValues.addingPhotos}
+        body={languageValues.alertAddPhotos}
+      />
+      <AlertToError
+        isOpen={isOpenErrorAlert}
+        onCloseAlert={onCloseAlertError}
+        cancelRef={cancelRefError}
+        title={languageValues.incorrectData}
+        description={validationResult}
+      />
     </>
   );
 }

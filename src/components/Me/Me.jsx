@@ -23,7 +23,7 @@ import {
 import MagicGridImages from "../Images/MagicGridImages";
 import Friends from "../Friends/Friends";
 import ModalAddImageMe from "../Images/ModalAddImageMe";
-import ModalAddAvatarMe from "../Images/ModalAddAvatarMe";
+import ModalAvatarMe from "../Images/ModalAvatarMe";
 import InfoAboutMeV1 from "./InfoAboutMeV1";
 import AddPostModal from "../PostForm/AddPostModal";
 import SearchModal from "../Search/SearchModal";
@@ -42,11 +42,14 @@ function Me({ changeLanguage }) {
   };
 
   const postsMe = useSelector((state) => state.mePosts.posts);
+<<<<<<< HEAD
   const isMorePosts = useSelector((state) => state.mePosts.isMorePosts);
   const isLoading = useSelector((state) => state.mePosts.isFetching);
   const pictures = useSelector((state) => state.mePictures.pictures);
 
   const gridRef = useRef();
+=======
+>>>>>>> 6a993ec897b20b8c026dfa0da9bb92309f850f12
 
   useEffect(() => {
     dispatch(getMe());
@@ -54,12 +57,15 @@ function Me({ changeLanguage }) {
     dispatch(getMePictures());
   }, [dispatch]);
 
+<<<<<<< HEAD
   const onClickLoadMore = useCallback(() => {
     if (postsMe?.length > 0) {
       dispatch(getMoreMePosts(postsMe[postsMe.length - 1].id));
     }
   }, [dispatch, postsMe]);
 
+=======
+>>>>>>> 6a993ec897b20b8c026dfa0da9bb92309f850f12
   return (
     <Grid
       h="100vh"
@@ -74,7 +80,7 @@ function Me({ changeLanguage }) {
           direction={{ base: "column", md: "row" }}
           p="4"
         >
-          <ModalAddAvatarMe />
+          <ModalAvatarMe />
           <InfoAboutMeV1 />
         </Stack>
         <Tabs variant="soft-rounded" align="center">
@@ -114,7 +120,7 @@ function Me({ changeLanguage }) {
             {/* Images */}
             <TabPanel px="0" py="4">
               <ModalAddImageMe />
-              <MagicGridImages pictures={pictures} gridRef={gridRef} />
+              <MagicGridImages />
             </TabPanel>
 
             {/* Friends */}

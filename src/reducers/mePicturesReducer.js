@@ -1,8 +1,10 @@
 import {
-  ME_PICTURES_SUCCESS,
-  ME_PICTURES_FAILURE,
+  ME_GET_PICTURES_SUCCESS,
+  ME_GET_PICTURES_FAILURE,
   ME_POST_PICTURES_SUCCESS,
   ME_POST_PICTURES_FAILURE,
+  ME_DELETE_PICTURES_SUCCESS,
+  ME_DELETE_PICTURES_FAILURE,
 } from "../types/meTypes";
 
 const init_state = {
@@ -12,25 +14,37 @@ const init_state = {
 
 const mePicturesReducer = (state = init_state, action) => {
   switch (action.type) {
-    case ME_PICTURES_SUCCESS:
+    case ME_GET_PICTURES_SUCCESS:
       return {
         pictures: [...action.payload.pictures],
         message: action.payload.message,
       };
-    case ME_PICTURES_FAILURE:
+    case ME_GET_PICTURES_FAILURE:
       return {
         ...state,
         message: action.payload.message,
       };
     case ME_POST_PICTURES_SUCCESS:
       return {
-        pictures: action.payload.pictures,
+        pictures: [...state.pictures, ...action.payload.pictures],
         message: action.payload.message,
       };
     case ME_POST_PICTURES_FAILURE:
       return {
         ...state,
         message: action.payload.message,
+      };
+    case ME_DELETE_PICTURES_SUCCESS:
+      return {
+        pictures: state.pictures.filter(
+          (picture) => picture.id !== action.payload.idPicture
+        ),
+        message: action.payload.response.message,
+      };
+    case ME_DELETE_PICTURES_FAILURE:
+      return {
+        ...state,
+        message: action.payload.response.message,
       };
     default:
       return state;

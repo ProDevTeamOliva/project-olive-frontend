@@ -7,12 +7,12 @@ import {
   ME_POSTS_REQUEST,
   ME_POSTS_SUCCESS,
   ME_POSTS_FAILURE,
-  ME_PICTURES_REQUEST,
-  ME_PICTURES_SUCCESS,
-  ME_PICTURES_FAILURE,
-  ME_AVATAR_REQUEST,
-  ME_AVATAR_SUCCESS,
-  ME_AVATAR_FAILURE,
+  ME_GET_PICTURES_REQUEST,
+  ME_GET_PICTURES_SUCCESS,
+  ME_GET_PICTURES_FAILURE,
+  PATCH_ME_AVATAR_REQUEST,
+  PATCH_ME_AVATAR_SUCCESS,
+  PATCH_ME_AVATAR_FAILURE,
   ME_POST_PICTURES_REQUEST,
   ME_POST_PICTURES_SUCCESS,
   ME_POST_PICTURES_FAILURE,
@@ -25,6 +25,12 @@ import {
   ME_MORE_POSTS_REQUEST,
   ME_MORE_POSTS_SUCCESS,
   ME_MORE_POSTS_FAILURE,
+  DELETE_ME_AVATAR_REQUEST,
+  DELETE_ME_AVATAR_SUCCESS,
+  DELETE_ME_AVATAR_FAILURE,
+  ME_DELETE_PICTURES_REQUEST,
+  ME_DELETE_PICTURES_SUCCESS,
+  ME_DELETE_PICTURES_FAILURE,
 } from "../types/meTypes";
 
 export const getMe = () => ({
@@ -79,7 +85,36 @@ export const getMePictures = () => ({
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    types: [ME_PICTURES_REQUEST, ME_PICTURES_SUCCESS, ME_PICTURES_FAILURE],
+    types: [
+      ME_GET_PICTURES_REQUEST,
+      ME_GET_PICTURES_SUCCESS,
+      ME_GET_PICTURES_FAILURE,
+    ],
+  },
+});
+
+export const deleteMePictures = (idPicture) => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/me/picture/${idPicture}`,
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      ME_DELETE_PICTURES_REQUEST,
+      {
+        type: ME_DELETE_PICTURES_SUCCESS,
+        payload: async (action, state, res) => {
+          return res.json().then((json) => ({
+            response: json,
+            idPicture: idPicture,
+          }));
+        },
+      },
+      ME_DELETE_PICTURES_FAILURE,
+    ],
   },
 });
 
@@ -96,7 +131,28 @@ export const patchMeAvatar = (filename, avatar) => ({
       filename: filename,
       avatar: avatar,
     }),
-    types: [ME_AVATAR_REQUEST, ME_AVATAR_SUCCESS, ME_AVATAR_FAILURE],
+    types: [
+      PATCH_ME_AVATAR_REQUEST,
+      PATCH_ME_AVATAR_SUCCESS,
+      PATCH_ME_AVATAR_FAILURE,
+    ],
+  },
+});
+
+export const deleteMeAvatar = () => ({
+  [RSAA]: {
+    endpoint: `${baseUrl}/me/avatar`,
+    method: "DELETE",
+    credentials: "include",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    types: [
+      DELETE_ME_AVATAR_REQUEST,
+      DELETE_ME_AVATAR_SUCCESS,
+      DELETE_ME_AVATAR_FAILURE,
+    ],
   },
 });
 

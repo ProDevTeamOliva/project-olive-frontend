@@ -1,19 +1,22 @@
+import languages from "./config/languages";
+import i18next from "i18next";
+import Backend from "i18next-http-backend";
+import { initReactI18next, useTranslation } from "react-i18next";
+import { useCallback, useContext, useEffect, memo } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { UserSocketContext } from "./UserSocketContext";
+import { LOGIN_SUCCESS, LOGOUT_SUCCESS } from "./types/loginTypes";
+import { getMeFriends } from "./actions/meActions";
 import {
   BrowserRouter as Router,
-  Route,
   Switch,
+  Route,
   Redirect,
 } from "react-router-dom";
-import AuthRoute from "./components/Auth/AuthRoute";
-import LogInPage from "./components/LogInPage/LogInPage";
 import NoPermission from "./components/MainPage/NoPermission";
-import { useSelector } from "react-redux";
-import i18next from "i18next";
-import { initReactI18next, useTranslation } from "react-i18next";
-import Backend from "i18next-http-backend";
-import languages from "./config/languages";
+import AuthRoute from "./components/Auth/AuthRoute";
 import RouteAfterLogin from "./components/Auth/RouteAfterLogin";
-import { memo, useCallback } from "react";
+import LogInPage from "./components/LogInPage/LogInPage";
 
 const language = languages.find(
   (value) => value === localStorage.getItem("language")
@@ -56,6 +59,43 @@ function App() {
 
   const isAuth = useSelector((state) => state.logIn.isAuth);
 
+  const dispatch = useDispatch();
+  const userSocket = useContext(UserSocketContext);
+
+  useEffect(() => {
+    const handleToken = (e) => {
+      if (e.key === "token" && !e.oldValue && e.newValue) {
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: { message: "apiLoginSuccess" },
+        });
+      } else if (e.key === "token" && e.oldValue && !e.newValue) {
+        dispatch({
+          type: LOGOUT_SUCCESS,
+          payload: { message: "apiLogoutSuccess" },
+        });
+      }
+    };
+
+    const getMeFriendsCallback = () => {
+      dispatch(getMeFriends());
+    };
+
+    window.addEventListener("storage", handleToken);
+
+    userSocket?.on("friendPendingSuccess", getMeFriendsCallback);
+    userSocket?.on("friendAcceptSuccess", getMeFriendsCallback);
+    userSocket?.on("friendRemoveSuccess", getMeFriendsCallback);
+
+    return () => {
+      window.removeEventListener("storage", handleToken);
+
+      userSocket?.off("friendPendingSuccess", getMeFriendsCallback);
+      userSocket?.off("friendAcceptSuccess", getMeFriendsCallback);
+      userSocket?.off("friendRemoveSuccess", getMeFriendsCallback);
+    };
+  }, [dispatch, userSocket]);
+
   return (
     <div className="App" style={{ height: "100%" }}>
       <Router>
@@ -63,13 +103,13 @@ function App() {
           <Route exact path="/">
             <Redirect to="/login" />
           </Route>
-          <Route path="/noPermission" component={NoPermission}></Route>
+          <Route path="/noPermission" component={NoPermission} />
           <AuthRoute
             component={<RouteAfterLogin changeLanguage={changeLanguage} />}
             isAuth={isAuth}
             exact
             path="*"
-          ></AuthRoute>
+          />
         </Switch>
         <Route
           path="/login"

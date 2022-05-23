@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, Box } from "@chakra-ui/react";
 import { memo } from "react";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 import { useSelector } from "react-redux";
@@ -45,7 +45,9 @@ function Comments({ idPost }) {
           )}
         </Grid>
       ) : (
-        <LoadingSpinner />
+        <Box h="150px">
+          <LoadingSpinner />
+        </Box>
       )}
     </>
   );

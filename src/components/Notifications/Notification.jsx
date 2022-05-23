@@ -2,7 +2,7 @@ import { Box, HStack, Text, Flex, Avatar, Button } from "@chakra-ui/react";
 import { BsCheckLg, BsXLg } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
 import { useRef, useState } from "react";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
 
 function Notification({
   id,
@@ -75,14 +75,14 @@ function Notification({
       </HStack>
       <HStack mt="-12px" justify="right" mr="7px">
         <Button {...buttonStyle("gray.100", "white")} onClick={() => accept()}>
-          <BsCheckLg></BsCheckLg>
+          <BsCheckLg />
         </Button>
 
         <Button {...buttonStyle("gray.800", "black")} onClick={() => ignore()}>
-          <BsXLg></BsXLg>
+          <BsXLg />
         </Button>
       </HStack>
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
         fun={acceptFriend}

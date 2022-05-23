@@ -19,13 +19,13 @@ import toBase64 from "../../operations/base64";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import { BsFillImageFill } from "react-icons/bs";
 // https://github.com/twbs/icons
-import { validatorOfRequired } from "../../validators/validatorOfRequired";
+import { validatorOfContent } from "../../validators/validatorOfContent";
 import { postTypeIcon } from "../Posts/Post/postTypeIcon";
 import InfoAboutMeV2 from "../Me/InfoAboutMeV2";
 import Carousel from "../Images/CarouselAddPost";
 import { v4 as uuidv4 } from "uuid";
 import { validatorOfFiles } from "../../validators/validatorOfFiles";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
 
 const initialData = {
   content: "",
@@ -46,6 +46,7 @@ function PostForm({ onClose }) {
     memoryAllFiles: t("memoryAllFiles"),
     addingPost: t("addingPost"),
     alertAddPost: t("alertAddPost"),
+    maxSizeOfContent: t("maxSizeOfContent"),
   };
 
   const dispatch = useDispatch();
@@ -154,7 +155,10 @@ function PostForm({ onClose }) {
     event.target.style.height = `${event.target.scrollHeight + 50}px`;
   };
 
-  const validateContent = validatorOfRequired(languageValues.required);
+  const validateContent = validatorOfContent(
+    languageValues.required,
+    languageValues.maxSizeOfContent
+  );
   const validateFiles = validatorOfFiles(
     languageValues.formatFile,
     languageValues.memoryPerFile,
@@ -304,7 +308,7 @@ function PostForm({ onClose }) {
           </>
         )}
       </Formik>
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
         fun={sendPost}

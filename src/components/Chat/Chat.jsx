@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { memo, useEffect, useState } from "react";
 import io from "socket.io-client";
 import { baseUrl } from "../../config/baseUrl";
-import ChatInfo from "./ChatInfo";
+import ChatNavbar from "./ChatNavbar";
+import ChatFriends from "./ChatFriends";
 import ChatMessages from "./ChatMessages";
 import { getMe } from "../../actions/meActions";
 
@@ -18,6 +19,7 @@ function Chat({ id }) {
   const me = useSelector((state) => state.me.me);
 
   const [chatSocket, setChatSocket] = useState(undefined);
+  const [user, setUser] = useState(undefined);
 
   useEffect(() => {
     dispatch(getMe());
@@ -34,16 +36,23 @@ function Chat({ id }) {
     return () => socket.close();
   }, [dispatch, id]);
 
+  useEffect(() => {
+    chatSocket?.emit("info", { id: id }, (response) =>
+      setUser(response?.users?.filter((u) => u.id !== me.id)[0])
+    );
+  }, [chatSocket, id, me]);
+
   return (
     <>
       {chatSocket ? (
         <Grid
           h="100vh"
           justifyContent="center"
-          templateColumns={{ base: "1fr", md: "300px 1fr" }}
-          templateRows={{ base: "75px 1fr", md: "1fr" }}
+          templateColumns={{ base: "75px 1fr", md: "300px 1fr" }}
+          templateRows="75px 1fr"
         >
-          <ChatInfo chatSocket={chatSocket} me={me} />
+          <ChatNavbar user={user} />
+          <ChatFriends user={user} />
           <ChatMessages chatSocket={chatSocket} me={me} />
         </Grid>
       ) : (

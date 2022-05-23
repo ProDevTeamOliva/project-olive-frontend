@@ -1,10 +1,17 @@
-import { Text, Flex, Avatar, WrapItem, CloseButton } from "@chakra-ui/react";
+import {
+  Text,
+  Flex,
+  Avatar,
+  WrapItem,
+  CloseButton,
+  Box,
+} from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { baseUrl } from "../../config/baseUrl";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import { useTranslation } from "react-i18next";
 import { useRef, useState } from "react";
-import Alert from "../Alert/Alert";
+import AlertToConfirmation from "../Alert/AlertToConfirmation";
 import { useDispatch } from "react-redux";
 import { unAcceptFriendInvitation } from "../../actions/meActions";
 
@@ -29,7 +36,7 @@ function Friend({ id, nameFirst, nameLast, avatar }) {
   return (
     <WrapItem key={id}>
       <Flex direction="column" align="center" justify="center">
-        <Flex justify="right" width="100%">
+        <Flex justify="right" width="150px">
           <CloseButton
             {...unStyledButton}
             pl="40px"
@@ -39,17 +46,18 @@ function Friend({ id, nameFirst, nameLast, avatar }) {
         <Link to={`/user/${id}`}>
           <Avatar
             boxSize={["50px", "60px", "80px"]}
-            src={baseUrl + avatar}
+            src={avatar && baseUrl + avatar}
           ></Avatar>
         </Link>
-
-        <Link to={`/user/${id}`}>
-          <Text textAlign="center" mt="1">
-            {nameFirst} {nameLast}
-          </Text>
-        </Link>
+        <Box width="150px">
+          <Link to={`/user/${id}`}>
+            <Text textAlign="center" mt="1">
+              {nameFirst} {nameLast}
+            </Text>
+          </Link>
+        </Box>
       </Flex>
-      <Alert
+      <AlertToConfirmation
         isOpen={isOpen}
         onCloseAlert={onCloseAlert}
         fun={ignore}

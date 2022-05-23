@@ -9,11 +9,11 @@ function LogoUp({ fontSize, scaleWidth }) {
     if (isFirefox) {
       document
         .getElementById("animation")
-        .style.setProperty("--widthChange", `${widthForFirefox}px`);
+        ?.style.setProperty("--widthChange", `${widthForFirefox}px`);
     } else {
       document
         .getElementById("animation")
-        .style.setProperty("--widthChange", `${width}px`);
+        ?.style.setProperty("--widthChange", `${width}px`);
     }
   }, 5);
 
