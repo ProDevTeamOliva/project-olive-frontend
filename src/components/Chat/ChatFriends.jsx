@@ -63,11 +63,18 @@ function ChatFriends({ user }) {
                         backgroundColor: "rgba(0, 0, 0, 0.1)",
                       }}
                     >
-                      <Avatar
-                        boxSize="48px"
-                        m="13px"
-                        src={baseUrl + f.avatar}
-                      />
+                      <Avatar boxSize="48px" m="13px" src={baseUrl + f.avatar}>
+                        {f.unreadConversation && (
+                          <Box
+                            position="absolute"
+                            boxSize="12px"
+                            bg="mediumslateblue"
+                            borderRadius="12px"
+                            top="0"
+                            right="0"
+                          />
+                        )}
+                      </Avatar>
                       <Text
                         fontSize="lg"
                         fontWeight="500"
@@ -91,11 +98,18 @@ function ChatFriends({ user }) {
                       bg="white"
                       placement="right"
                     >
-                      <Avatar
-                        boxSize="48px"
-                        m="13px"
-                        src={baseUrl + f.avatar}
-                      />
+                      <Avatar boxSize="48px" m="13px" src={baseUrl + f.avatar}>
+                        {f.unreadConversation && (
+                          <Box
+                            position="absolute"
+                            boxSize="12px"
+                            bg="mediumslateblue"
+                            borderRadius="12px"
+                            top="0"
+                            right="0"
+                          />
+                        )}
+                      </Avatar>
                     </Tooltip>
                   </Link>
                 </SwiperSlide>
