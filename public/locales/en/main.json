@@ -68,7 +68,7 @@
   "selectFile": "Select File",
   "postType": "Type of Post",
   "addPostContentPlaceHolder": "Share what's on your mind?",
-  "meLikingPost": "and You",
+  "meLikingPost": "including You",
   "iDisLikeIt": "Dislike it!",
   "delFriend": "Removing a friend",
   "alertDelFriend": "Do you confirm removal of a friend?",
@@ -103,5 +103,7 @@
   "maxSizeOfContent": "Content too long, over 1024 signs",
   "alertDeletePicture": "Do you confirm deleting a picture?",
   "deletePicture": "Deleting a picture",
-  "incorrectData": "Incorrect data"
+  "incorrectData": "Incorrect data",
+  "noMorePosts": "No more posts",
+  "loadMorePosts": "Load more posts"
 }

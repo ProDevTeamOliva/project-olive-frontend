@@ -9,9 +9,12 @@ import LoadingSpinner from "../Spinner/LoadingSpinner";
 import MidSection from "./MidSection";
 
 import { getMorePosts } from "../../actions/postActions";
+import { useTranslation } from "react-i18next";
+import LoadMore from "../InfinityScroll/LoadMore";
 
 function MainPage({ changeLanguage }) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const postsIds = useSelector((state) =>
     state.posts.posts.map((post) => post.id)
@@ -36,9 +39,13 @@ function MainPage({ changeLanguage }) {
             {postsIds.map((postId) => (
               <Post key={postId} id={postId} />
             ))}
-            {isMorePosts && !isLoading && (
-              <button onClick={onClickLoadMore}>LOAD MORE</button>
-            )}
+            <LoadMore
+              isMore={isMorePosts}
+              isLoading={isLoading}
+              onClickLoadMore={onClickLoadMore}
+              loadMoreText={t("loadMorePosts")}
+              noMoreText={t("noMorePosts")}
+            />
           </>
         ) : (
           <LoadingSpinner />

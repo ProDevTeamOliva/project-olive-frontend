@@ -1,13 +1,17 @@
 import { Box, Button, Text, useDisclosure } from "@chakra-ui/react";
-import { connect } from "react-redux";
+import { useSelector } from "react-redux";
 import { BsFillBellFill } from "react-icons/bs";
 import Notifications from "./Notifications";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
-import { useState } from "react";
+import { memo, useState } from "react";
 
-function Bell({ pendingReceived }) {
+function Bell() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [animation, setAnimation] = useState(false);
+
+  const pendingReceived = useSelector(
+    (state) => state.meFriends.pendingReceived
+  );
 
   return (
     <Box
@@ -62,12 +66,4 @@ function Bell({ pendingReceived }) {
   );
 }
 
-const mapStateToProps = (state) => ({
-  pendingReceived: state.meFriends.pendingReceived,
-});
-
-const mapDispatchToProps = (dispatch) => {
-  return {};
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Bell);
+export default memo(Bell);

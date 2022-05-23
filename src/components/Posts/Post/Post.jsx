@@ -18,7 +18,7 @@ import { unStyledButton } from "../../../styles/Buttons/unStyledButton";
 import { BsXLg } from "react-icons/bs";
 import AlertToConfirmation from "../../Alert/AlertToConfirmation";
 
-function Post({ id }) {
+function Post({ id, isMePost = false }) {
   const { t } = useTranslation();
   const languageValues = useMemo(
     () => ({
@@ -47,8 +47,11 @@ function Post({ id }) {
   const commentsForPost =
     useSelector((state) => state.comments.comments[id]) || [];
   const me = useSelector((state) => state.me.me);
-  const property = useSelector((state) =>
-    state.posts.posts.find((post) => post.id === id)
+  const property = useSelector(
+    (state) =>
+      state.mePosts.posts.find((post) => post.id === id) ||
+      state.posts.posts.find((post) => post.id === id) ||
+      state.postsFiltered.posts.find((post) => post.id === id)
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -63,11 +66,8 @@ function Post({ id }) {
     dispatch(dislikePost(property?.id));
   }, [property?.id, dispatch]);
 
-  const isLikedByMe =
-    property?.likes.filter((like) => like.login === me.login).length > 0;
-
   const renderLikeDislikeButton = useCallback(() => {
-    if (isLikedByMe) {
+    if (property.likesMe) {
       return (
         <Button
           padding="2"
@@ -90,7 +90,7 @@ function Post({ id }) {
   }, [
     handleLikeButtonClick,
     handleDisLikeButtonClick,
-    isLikedByMe,
+    property.likesMe,
     languageValues,
   ]);
 
@@ -162,9 +162,9 @@ function Post({ id }) {
         <Flex flexWrap="wrap" justifyContent="space-between">
           <Box padding="2">
             <Like
-              isLikedByMe={isLikedByMe}
+              isLikedByMe={property.likesMe}
               languageValues={languageValues}
-              likes={property.likes.length}
+              likes={property.likes}
             />
           </Box>
           {renderLikeDislikeButton()}

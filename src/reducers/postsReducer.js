@@ -72,7 +72,7 @@ const postsReducer = (state = init_state, action) => {
         ...state,
         posts: state.posts.map((post) => {
           if (post.id === action.payload.id) {
-            return { ...post, likes: [...post.likes, action.payload.user] };
+            return { ...post, likes: post.likes + 1, likesMe: true };
           }
           return post;
         }),
@@ -84,9 +84,8 @@ const postsReducer = (state = init_state, action) => {
           if (post.id === action.payload.id) {
             return {
               ...post,
-              likes: post.likes.filter(
-                (like) => like.id !== action.payload.user.id
-              ),
+              likes: post.likes - 1,
+              likesMe: false,
             };
           }
           return post;
@@ -95,7 +94,10 @@ const postsReducer = (state = init_state, action) => {
     case ADD_POST_SUCCESS:
       return {
         ...state,
-        posts: [{ ...action.payload.post, likes: [] }, ...state.posts],
+        posts: [
+          { ...action.payload.post, likes: 0, likesMe: false },
+          ...state.posts,
+        ],
         isFetching: false,
         isFetched: true,
         isFetchingError: false,

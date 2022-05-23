@@ -13,13 +13,15 @@ import {
 import RegisterForm from "./RegisterForm";
 import { purpleButtonStyle } from "../../styles/Buttons/purpleButton";
 import { useTranslation } from "react-i18next";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   restartLogInMessage,
   restartRegisterMessage,
 } from "../../actions/authActions";
+import { memo } from "react";
 
-function RegisterModal({ restartLogInMessage, restartRegisterMessage }) {
+function RegisterModal() {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const languageValues = {
     register: t("register"),
@@ -29,8 +31,8 @@ function RegisterModal({ restartLogInMessage, restartRegisterMessage }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const openModal = () => {
     onOpen();
-    restartLogInMessage();
-    restartRegisterMessage();
+    dispatch(restartLogInMessage());
+    dispatch(restartRegisterMessage());
   };
 
   return (
@@ -67,13 +69,4 @@ function RegisterModal({ restartLogInMessage, restartRegisterMessage }) {
   );
 }
 
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    restartLogInMessage: () => dispatch(restartLogInMessage()),
-    restartRegisterMessage: () => dispatch(restartRegisterMessage()),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterModal);
+export default memo(RegisterModal);

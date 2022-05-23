@@ -10,9 +10,9 @@ import {
 import { useTranslation } from "react-i18next";
 import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
-import { connect, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
-import { useEffect, useRef } from "react";
+import { memo, useEffect, useRef } from "react";
 import {
   getUser,
   getUserPosts,
@@ -22,7 +22,8 @@ import MagicGridImages from "../Images/MagicGridImages";
 import InfoAboutUser from "./InfoAboutUser";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 
-function User({ changeLanguage, id, getUser, getUserPosts, getUserPictures }) {
+function User({ changeLanguage, id }) {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const languageValues = {
     posts: t("posts"),
@@ -35,10 +36,10 @@ function User({ changeLanguage, id, getUser, getUserPosts, getUserPictures }) {
   const posts = useSelector((state) => state.userPosts);
 
   useEffect(() => {
-    getUser(id);
-    getUserPosts(id);
-    getUserPictures(id);
-  }, [getUser, getUserPosts, getUserPictures, id]);
+    dispatch(getUser(id));
+    dispatch(getUserPosts(id));
+    dispatch(getUserPictures(id));
+  }, [id, dispatch]);
 
   return (
     <Grid
@@ -80,10 +81,4 @@ function User({ changeLanguage, id, getUser, getUserPosts, getUserPictures }) {
   );
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  getUser: (id) => dispatch(getUser(id)),
-  getUserPosts: (id) => dispatch(getUserPosts(id)),
-  getUserPictures: (id) => dispatch(getUserPictures(id)),
-});
-
-export default connect(null, mapDispatchToProps)(User);
+export default memo(User);
