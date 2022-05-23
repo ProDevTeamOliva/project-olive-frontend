@@ -88,7 +88,18 @@ function FriendsSlider() {
               <SwiperSlide key={f.id} style={{ width: "80px" }}>
                 <Link to={`/chat/${f.idConversation}`}>
                   <Tooltip label={`${f.nameFirst} ${f.nameLast}`} bg="white">
-                    <Avatar boxSize="60px" m="10px" src={baseUrl + f.avatar} />
+                    <Avatar boxSize="60px" m="10px" src={baseUrl + f.avatar}>
+                      {f.unreadConversation && (
+                        <Box
+                          position="absolute"
+                          boxSize="16px"
+                          bg="mediumslateblue"
+                          borderRadius="12px"
+                          top="0"
+                          right="0"
+                        />
+                      )}
+                    </Avatar>
                   </Tooltip>
                 </Link>
               </SwiperSlide>

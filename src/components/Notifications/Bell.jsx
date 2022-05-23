@@ -24,10 +24,9 @@ function Bell() {
       <Box mr={["-15px", "-5px", "40px"]}>
         {pendingReceived.length > 0 && (
           <Box
-            h="22px"
-            w="22px"
+            boxSize="22px"
             position="absolute"
-            bg="blue.400"
+            bg="mediumslateblue"
             borderRadius="20px"
             right={["-21px", "-4px", "33px"]}
             bottom="6"
@@ -58,7 +57,7 @@ function Bell() {
             }}
             onMouseOver={() => setAnimation(true)}
             onMouseLeave={() => setAnimation(false)}
-          ></BsFillBellFill>
+          />
         </Button>
         <Notifications isOpen={isOpen} onClose={onClose} />
       </Box>

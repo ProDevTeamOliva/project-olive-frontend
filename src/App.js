@@ -86,6 +86,8 @@ function App() {
     userSocket?.on("friendPendingSuccess", getMeFriendsCallback);
     userSocket?.on("friendAcceptSuccess", getMeFriendsCallback);
     userSocket?.on("friendRemoveSuccess", getMeFriendsCallback);
+    userSocket?.on("newMessage", getMeFriendsCallback);
+    userSocket?.on("readConversation", getMeFriendsCallback);
 
     return () => {
       window.removeEventListener("storage", handleToken);
@@ -93,6 +95,8 @@ function App() {
       userSocket?.off("friendPendingSuccess", getMeFriendsCallback);
       userSocket?.off("friendAcceptSuccess", getMeFriendsCallback);
       userSocket?.off("friendRemoveSuccess", getMeFriendsCallback);
+      userSocket?.off("newMessage", getMeFriendsCallback);
+      userSocket?.off("readConversation", getMeFriendsCallback);
     };
   }, [dispatch, userSocket]);
 
