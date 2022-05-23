@@ -33,6 +33,31 @@ const mePostsReducer = (state = init_state, action) => {
         isFetched: true,
         isFetchingError: false,
       };
+    case LIKE_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.id) {
+            return { ...post, likes: [...post.likes, action.payload.user] };
+          }
+          return post;
+        }),
+      };
+    case DISLIKE_SUCCESS:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post.id === action.payload.id) {
+            return {
+              ...post,
+              likes: post.likes.filter(
+                (like) => like.id !== action.payload.user.id
+              ),
+            };
+          }
+          return post;
+        }),
+      };
     case ME_POSTS_FAILURE:
       return {
         ...state,
