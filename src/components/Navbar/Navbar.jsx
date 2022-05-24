@@ -1,8 +1,9 @@
 import { useEffect, memo } from "react";
 import { useDispatch } from "react-redux";
-import { Box, Grid, Button } from "@chakra-ui/react";
+import { useMediaQuery, Box, Grid, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import LogoUp from "../Logo/LogoUp";
+import LogoMobile from "../Logo/LogoMobile";
 import { getMeFriends } from "../../actions/meActions";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import Bell from "../Notifications/Bell";
@@ -12,6 +13,8 @@ import DropDown from "./DropDown";
 import SearchModal from "../Search/SearchModal";
 
 function Navbar({ changeLanguage }) {
+  const [isDesktop] = useMediaQuery("(min-width: 48em)");
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,20 +35,34 @@ function Navbar({ changeLanguage }) {
       className="blur"
     >
       <Grid
-        templateColumns="150px 1fr 75px 75px 75px"
+        templateColumns={{
+          base: "75px 1fr 75px 75px 75px",
+          md: "150px 1fr 75px 75px 75px",
+        }}
         placeItems="center"
         templateRows="1fr 35px"
       >
         <Button
           variant="unstyled"
           {...unStyledButton}
-          w="100%"
+          w={{ base: "75px", md: "150px" }}
           h="100%"
-          ml="2"
           gridRow="1"
         >
-          <Link to="/main">
-            <LogoUp fontSize="14" scaleWidth={9.2} />
+          <Link
+            to="/main"
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "grid",
+              placeItems: "center",
+            }}
+          >
+            {isDesktop ? (
+              <LogoUp fontSize="14" scaleWidth={9.2} />
+            ) : (
+              <LogoMobile />
+            )}
           </Link>
         </Button>
         <Search kindOfSearch="personV1" />

@@ -37,11 +37,7 @@ function Friend({ id, nameFirst, nameLast, avatar }) {
     <WrapItem key={id}>
       <Flex direction="column" align="center" justify="center">
         <Flex justify="right" width="150px">
-          <CloseButton
-            {...unStyledButton}
-            pl="40px"
-            onClick={() => setIsOpen(true)}
-          ></CloseButton>
+          <CloseButton {...unStyledButton} onClick={() => setIsOpen(true)} />
         </Flex>
         <Link to={`/user/${id}`}>
           <Avatar

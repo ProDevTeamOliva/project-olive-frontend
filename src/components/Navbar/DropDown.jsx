@@ -55,9 +55,9 @@ function DropDown({ changeLanguage }) {
         borderRadius="0 0 0 12px"
         _groupHover={{
           display: "grid",
-          gridTemplateRows: "20px 120px 50px  20px",
+          gridTemplateRows: "20px 120px 50px 20px",
           placeItems: "center",
-          padding: "0 0px 10px 0px",
+          padding: "0px 0px 10px 0px",
           boxShadow: "1px 1px 2px 1px white",
         }}
       >
@@ -65,7 +65,7 @@ function DropDown({ changeLanguage }) {
           <Box>
             <Language changeLanguage={changeLanguage} />
           </Box>
-          <Box>
+          <Box boxSize="100px" mt="30px">
             <AvatarUser link="/me" avatar={me.avatar} id={me.id} />
           </Box>
           <Box w="160px" px="2px">
