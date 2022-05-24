@@ -12,13 +12,13 @@ import Navbar from "../Navbar/Navbar";
 import Post from "../Posts/Post/Post";
 import { useDispatch, useSelector } from "react-redux";
 import { tabStyle } from "../../styles/Tabs/tabStyle";
-import { memo, useEffect, useRef } from "react";
+import { useEffect, memo } from "react";
 import {
   getUser,
   getUserPosts,
   getUserPictures,
 } from "../../actions/userActions";
-import MagicGridImages from "../Images/MagicGridImages";
+import ResponsiveMasonryImages from "../Images/ResponsiveMasonryImages";
 import InfoAboutUser from "./InfoAboutUser";
 import LoadingSpinner from "../Spinner/LoadingSpinner";
 
@@ -30,11 +30,9 @@ function User({ changeLanguage, id }) {
     images: t("images"),
   };
 
-  const gridRef = useRef();
-
-  const pictures = useSelector((state) => state.userPictures.pictures);
   const isLoading = useSelector((state) => state.userPictures.isFetching);
-  const posts = useSelector((state) => state.userPosts);
+  const posts = useSelector((state) => state.userPosts.posts);
+  const pictures = useSelector((state) => state.userPictures.pictures);
 
   useEffect(() => {
     dispatch(getUser(id));
@@ -62,8 +60,8 @@ function User({ changeLanguage, id }) {
           <TabPanels>
             {/* Posts */}
             <TabPanel>
-              {posts.posts.length > 0 ? (
-                posts.posts.map((post) => (
+              {posts.length > 0 ? (
+                posts.map((post) => (
                   <Post property={post} key={post.id} id={post.id} />
                 ))
               ) : (
@@ -73,7 +71,7 @@ function User({ changeLanguage, id }) {
 
             {/* Images */}
             <TabPanel px="0" py="4">
-              <MagicGridImages pictures={pictures} gridRef={gridRef} />
+              <ResponsiveMasonryImages pictures={pictures} />
             </TabPanel>
           </TabPanels>
         </Tabs>

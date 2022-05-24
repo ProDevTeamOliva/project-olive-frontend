@@ -32,7 +32,7 @@ function AddPostModal() {
   const [color, setColor] = useState("black");
 
   return (
-    <Box gridColumn="2/3" gridRow="1" align="right">
+    <Box>
       <Button
         bg="white"
         color="black"

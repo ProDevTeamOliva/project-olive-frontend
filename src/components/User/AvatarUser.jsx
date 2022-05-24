@@ -6,12 +6,7 @@ import { baseUrl } from "../../config/baseUrl";
 function AvatarUser({ link, avatar, id }) {
   return (
     <Link to={link}>
-      <Avatar
-        boxSize={["50", "70px", "100px"]}
-        src={avatar && baseUrl + avatar}
-        alt={id}
-        mt="30px"
-      />
+      <Avatar boxSize="100%" src={avatar && baseUrl + avatar} alt={id} />
     </Link>
   );
 }

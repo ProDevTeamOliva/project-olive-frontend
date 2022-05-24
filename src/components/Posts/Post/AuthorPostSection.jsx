@@ -10,7 +10,13 @@ const AuthorPostSection = ({ avatar, id, nameFirst, nameLast, type, link }) => {
   const Icon = postTypeIcon[type];
   return (
     <Grid templateColumns="20% 60% 20%">
-      <GridItem colStart="1" colEnd="2" align="center">
+      <GridItem
+        colStart="1"
+        colEnd="2"
+        align="center"
+        boxSize={{ base: "50px", sm: "70px", md: "100px" }}
+        mt="30px"
+      >
         <AvatarUser avatar={avatar} id={id} link={link} />
       </GridItem>
       <GridItem colStart="2" colEnd="3">

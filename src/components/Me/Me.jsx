@@ -20,7 +20,7 @@ import {
   getMePictures,
   getMoreMePosts,
 } from "../../actions/meActions";
-import MagicGridImages from "../Images/MagicGridImages";
+import ResponsiveMasonryImages from "../Images/ResponsiveMasonryImages";
 import Friends from "../Friends/Friends";
 import ModalAddImageMe from "../Images/ModalAddImageMe";
 import ModalAvatarMe from "../Images/ModalAvatarMe";
@@ -44,6 +44,7 @@ function Me({ changeLanguage }) {
   const postsMe = useSelector((state) => state.mePosts.posts);
   const isMorePosts = useSelector((state) => state.mePosts.isMorePosts);
   const isLoading = useSelector((state) => state.mePosts.isFetching);
+  const pictures = useSelector((state) => state.mePictures.pictures);
 
   useEffect(() => {
     dispatch(getMe());
@@ -84,9 +85,14 @@ function Me({ changeLanguage }) {
           <TabPanels>
             {/* Posts */}
             <TabPanel>
-              <Grid mt="10px" mb="40px" templateColumns="50% 40% 10%" mx="40px">
+              <Grid
+                w={["300px", "400px", "600px", "800px", "950px"]}
+                m="10px 0px 40px 0px"
+                templateColumns="1fr 50px"
+                justifyItems="end"
+              >
                 <AddPostModal />
-                <Box gridColumn="3/4" ml={["40px", "30px", "20px", "10px"]}>
+                <Box>
                   <SearchModal kindOfSearch="tag" />
                 </Box>
               </Grid>
@@ -111,7 +117,7 @@ function Me({ changeLanguage }) {
             {/* Images */}
             <TabPanel px="0" py="4">
               <ModalAddImageMe />
-              <MagicGridImages />
+              <ResponsiveMasonryImages pictures={pictures} />
             </TabPanel>
 
             {/* Friends */}

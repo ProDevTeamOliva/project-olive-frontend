@@ -45,7 +45,7 @@ function SearchModal({ kindOfSearch }) {
         {...unStyledButton}
       >
         {kindOfSearch === "tag" ? (
-          <Tooltip label={languageValues.search} placement="bottom-start">
+          <Tooltip label={languageValues.search} placement="bottom">
             <Box>
               <CgHashtag
                 style={{

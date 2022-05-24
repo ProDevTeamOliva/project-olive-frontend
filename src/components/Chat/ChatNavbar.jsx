@@ -9,7 +9,7 @@ import {
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import { Link } from "react-router-dom";
 import LogoUp from "../Logo/LogoUp";
-import LogoDown from "../Logo/LogoDown";
+import LogoMobile from "../Logo/LogoMobile";
 import { baseUrl } from "../../config/baseUrl";
 
 function ChatNavbar({ user }) {
@@ -47,24 +47,14 @@ function ChatNavbar({ user }) {
             {isDesktop ? (
               <LogoUp fontSize="14" scaleWidth={9.2} />
             ) : (
-              <Grid
-                boxSize="50px"
-                borderRadius="16px"
-                bg="mediumslateblue"
-                placeItems="center"
-              >
-                <Grid boxSize="84%">
-                  <LogoDown />
-                </Grid>
-              </Grid>
+              <LogoMobile />
             )}
           </Link>
         </Button>
       </Grid>
 
       <Flex
-        w="100%"
-        h="100%"
+        boxSize="100%"
         flexDirection="row"
         justifyContent="center"
         alignItems="center"

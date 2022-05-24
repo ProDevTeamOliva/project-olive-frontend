@@ -5,9 +5,14 @@ import SearchModal from "../Search/SearchModal";
 
 function MidSection() {
   return (
-    <Grid mt="50px" mb="20px" templateColumns="50% 40% 10%">
+    <Grid
+      w={["300px", "400px", "600px", "800px", "950px"]}
+      m="50px 25px 25px 25px"
+      templateColumns="1fr 50px"
+      justifyItems="end"
+    >
       <AddPostModal />
-      <Box gridColumn="3/4" gridRow="1" align="left" ml="10px">
+      <Box>
         <SearchModal kindOfSearch="tag" />
       </Box>
     </Grid>
