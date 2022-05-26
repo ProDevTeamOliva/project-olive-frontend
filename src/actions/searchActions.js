@@ -6,12 +6,13 @@ import {
   SEARCH_RESTART,
   SEARCH_SUCCESS,
 } from "../types/searchTypes";
+import credentials from "../config/credentials"
 
 export const searchUsers = ({ valueSearch }) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/user?namePart=${valueSearch}`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -24,7 +25,7 @@ export const searchTags = ({ valueSearch }) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/tag?tagPart=${valueSearch}`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

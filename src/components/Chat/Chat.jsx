@@ -8,6 +8,7 @@ import ChatNavbar from "./ChatNavbar";
 import ChatFriends from "./ChatFriends";
 import ChatMessages from "./ChatMessages";
 import { getMe } from "../../actions/meActions";
+import isDevelopment from "../../config/isDevelopment";
 
 function Chat({ id }) {
   const dispatch = useDispatch();
@@ -26,7 +27,7 @@ function Chat({ id }) {
 
     const socket = io(`${baseUrl}/chat/${id}`, {
       forceNew: true,
-      withCredentials: true,
+      withCredentials: isDevelopment,
     });
 
     socket.on("connect", () => setChatSocket(socket));

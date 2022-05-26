@@ -45,7 +45,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "linkEnv": "rm -f .env ; ln -s ../project-olive-main/.env .env",
+    "linkEnvWin": "del /q .env & powershell start powershell -ArgumentList '-command Set-Location %cd% ; New-Item -ItemType SymbolicLink -Path .env -Target ../project-olive-main/.env' -Verb runAs"
   },
   "eslintConfig": {
     "extends": [

@@ -15,13 +15,14 @@ import {
 
 import { RSAA } from "redux-api-middleware";
 import { baseUrl } from "../config/baseUrl";
+import credentials from "../config/credentials"
 
 export const addComment = (payload, id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/${id}/comment`,
     method: "POST",
     body: JSON.stringify(payload),
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -34,7 +35,7 @@ export const getComments = (idPost) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/${idPost}/comment`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -59,7 +60,7 @@ export const getMoreComments = (idPost, id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/${idPost}/comment?id=${id}`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -84,7 +85,7 @@ export const deleteComment = (idPost, payload) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/comment/${payload.id}`,
     method: "DELETE",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

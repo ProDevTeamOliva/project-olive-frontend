@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { baseUrl } from "./config/baseUrl";
 import io from "socket.io-client";
+import isDevelopment from "./config/isDevelopment";
 
 const UserSocketContext = createContext();
 
@@ -14,7 +15,7 @@ const UserSocketProvider = ({ children }) => {
     if (isAuth) {
       const socket = io(`${baseUrl}/user/${id}`, {
         forceNew: true,
-        withCredentials: true,
+        withCredentials: isDevelopment
       });
 
       socket.on("connect", () => setUserSocket(socket));

@@ -30,13 +30,14 @@ import {
 
 import { RSAA } from "redux-api-middleware";
 import { baseUrl } from "../config/baseUrl";
+import credentials from "../config/credentials"
 
 export const addPost = (payload) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post`,
     method: "POST",
     body: JSON.stringify(payload),
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -49,7 +50,7 @@ export const getPostById = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/` + id,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -62,7 +63,7 @@ export const deletePost = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/` + id,
     method: "DELETE",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -88,7 +89,7 @@ export const getPosts = () => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -101,7 +102,7 @@ export const getMorePosts = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post?id=${id}`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -118,7 +119,7 @@ export const likePost = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/${id}/like`,
     method: "POST",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -131,7 +132,7 @@ export const dislikePost = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post/${id}/like`,
     method: "DELETE",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -144,7 +145,7 @@ export const getPostsByTag = (tag) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post?tag=${tag}`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -157,7 +158,7 @@ export const getMorePostsByTag = (tag, id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/post?tag=${tag}${id ? `&id=${id}` : ""}`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
