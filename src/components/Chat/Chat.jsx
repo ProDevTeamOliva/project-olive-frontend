@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { memo, useEffect, useState } from "react";
 import io from "socket.io-client";
-import { baseUrlSio } from "../../config/baseUrl";
+import { baseUrl } from "../../config/baseUrl";
 import ChatNavbar from "./ChatNavbar";
 import ChatFriends from "./ChatFriends";
 import ChatMessages from "./ChatMessages";
@@ -25,9 +25,10 @@ function Chat({ id }) {
   useEffect(() => {
     dispatch(getMe());
 
-    const socket = io(`${baseUrlSio}/chat/${id}`, {
+    const socket = io(`${isDevelopment ? baseUrl : ""}/chat/${id}`, {
       forceNew: true,
       withCredentials: isDevelopment,
+      path: `${isDevelopment ? "" : baseUrl}/socket.io/`
     });
 
     socket.on("connect", () => setChatSocket(socket));
