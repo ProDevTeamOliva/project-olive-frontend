@@ -32,7 +32,7 @@ import {
   ME_DELETE_PICTURES_SUCCESS,
   ME_DELETE_PICTURES_FAILURE,
 } from "../types/meTypes";
-import credentials from "../config/credentials"
+import credentials from "../config/credentials";
 
 export const getMe = () => ({
   [RSAA]: {

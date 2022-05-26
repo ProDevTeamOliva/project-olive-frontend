@@ -16,7 +16,7 @@ const UserSocketProvider = ({ children }) => {
       const socket = io(`${isDevelopment ? baseUrl : ""}/user/${id}`, {
         forceNew: true,
         withCredentials: isDevelopment,
-        path: `${isDevelopment ? "" : baseUrl}/socket.io/`
+        path: `${isDevelopment ? "" : baseUrl}/socket.io/`,
       });
 
       socket.on("connect", () => setUserSocket(socket));
