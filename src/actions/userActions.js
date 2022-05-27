@@ -14,7 +14,7 @@ import {
   USER_ADD_TO_FRIENDS_SUCCESS,
   USER_ADD_TO_FRIENDS_FAILURE,
 } from "../types/userTypes";
-import credentials from "../config/credentials"
+import credentials from "../config/credentials";
 
 export const getUser = (id) => ({
   [RSAA]: {

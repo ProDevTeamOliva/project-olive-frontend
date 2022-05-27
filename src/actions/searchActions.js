@@ -6,7 +6,7 @@ import {
   SEARCH_RESTART,
   SEARCH_SUCCESS,
 } from "../types/searchTypes";
-import credentials from "../config/credentials"
+import credentials from "../config/credentials";
 
 export const searchUsers = ({ valueSearch }) => ({
   [RSAA]: {

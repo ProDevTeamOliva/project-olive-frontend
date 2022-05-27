@@ -30,7 +30,7 @@ import {
 
 import { RSAA } from "redux-api-middleware";
 import { baseUrl } from "../config/baseUrl";
-import credentials from "../config/credentials"
+import credentials from "../config/credentials";
 
 export const addPost = (payload) => ({
   [RSAA]: {

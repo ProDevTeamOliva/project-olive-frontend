@@ -1,3 +1,3 @@
 import isDevelopment from "./isDevelopment";
 
-export default isDevelopment ? "include" : "same-origin"
+export default isDevelopment ? "include" : "same-origin";
