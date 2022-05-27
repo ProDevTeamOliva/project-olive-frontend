@@ -7,16 +7,13 @@ import {
   Tooltip,
 } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { memo, useEffect, useRef } from "react";
+import { memo, useEffect } from "react";
 import { getMeFriends } from "../../actions/meActions";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
-import { baseUrl } from "../../config/baseUrl";
-import { IconContext } from "react-icons";
-import { IoEllipse, IoChevronUp, IoChevronDown } from "react-icons/io5";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
 // https://ionicons.com/
 
 function ChatFriends({ user }) {
@@ -28,8 +25,8 @@ function ChatFriends({ user }) {
     dispatch(getMeFriends());
   }, [dispatch]);
 
-  const prevRef = useRef(undefined);
-  const nextRef = useRef(undefined);
+  // const prevRef = useRef(undefined);
+  // const nextRef = useRef(undefined);
 
   return (
     <Box borderRight="1px" borderColor="gray.500">
@@ -38,13 +35,13 @@ function ChatFriends({ user }) {
           modules={[Navigation]}
           direction="vertical"
           slidesPerView="auto"
-          slidesPerGroupAuto={true}
-          onInit={(swiper) => {
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
-            swiper.navigation.init();
-            swiper.navigation.update();
-          }}
+          // slidesPerGroupAuto={true}
+          // onInit={(swiper) => {
+          //   swiper.params.navigation.prevEl = prevRef.current;
+          //   swiper.params.navigation.nextEl = nextRef.current;
+          //   swiper.navigation.init();
+          //   swiper.navigation.update();
+          // }}
           className="mySwiper"
         >
           {isDesktop
@@ -100,7 +97,7 @@ function ChatFriends({ user }) {
                   </Link>
                 </SwiperSlide>
               ))}
-          <Box ref={prevRef} pos="absolute" top="0" zIndex="1" cursor="pointer">
+          {/* <Box ref={prevRef} pos="absolute" top="0" zIndex="1" cursor="pointer">
             <IconContext.Provider
               value={{
                 size: "80px",
@@ -173,7 +170,7 @@ function ChatFriends({ user }) {
                 </IconContext.Provider>
               }
             />
-          </Box>
+          </Box> */}
         </Swiper>
       )}
     </Box>

@@ -1,22 +1,17 @@
 import { GridItem, Box, Avatar, Text, Tooltip } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useEffect, useRef, memo } from "react";
+import { useEffect, memo } from "react";
 import { getMeFriends } from "../../actions/meActions";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
+import "swiper/swiper-bundle.min.css";
+import "swiper/swiper.min.css";
 import { baseUrl } from "../../config/baseUrl";
 import FriendsSliderModal from "./FriendsSliderModal";
 import { IconContext } from "react-icons";
-import {
-  IoChatboxEllipses,
-  IoEllipse,
-  IoChevronBack,
-  IoChevronForward,
-} from "react-icons/io5";
+import { IoChatboxEllipses } from "react-icons/io5";
 // https://ionicons.com/
 
 function FriendsSlider() {
@@ -32,8 +27,8 @@ function FriendsSlider() {
     dispatch(getMeFriends());
   }, [dispatch]);
 
-  const prevRef = useRef(undefined);
-  const nextRef = useRef(undefined);
+  // const prevRef = useRef(undefined);
+  // const nextRef = useRef(undefined);
 
   return (
     <GridItem m="10px 25px" mt="20px">
@@ -49,13 +44,13 @@ function FriendsSlider() {
         <Swiper
           modules={[Navigation]}
           slidesPerView="auto"
-          slidesPerGroupAuto={true}
-          onInit={(swiper) => {
-            swiper.params.navigation.prevEl = prevRef.current;
-            swiper.params.navigation.nextEl = nextRef.current;
-            swiper.navigation.init();
-            swiper.navigation.update();
-          }}
+          // slidesPerGroupAuto={true}
+          // onInit={(swiper) => {
+          //   swiper.params.navigation.prevEl = prevRef.current;
+          //   swiper.params.navigation.nextEl = nextRef.current;
+          //   swiper.navigation.init();
+          //   swiper.navigation.update();
+          // }}
           className="mySwiper"
         >
           <SwiperSlide style={{ width: "160px" }}>
@@ -99,7 +94,7 @@ function FriendsSlider() {
             </SwiperSlide>
           )}
 
-          <Box
+          {/* <Box
             ref={prevRef}
             pos="absolute"
             bottom="0"
@@ -180,7 +175,7 @@ function FriendsSlider() {
                 </IconContext.Provider>
               }
             />
-          </Box>
+          </Box> */}
         </Swiper>
       </Box>
     </GridItem>
