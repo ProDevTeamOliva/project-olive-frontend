@@ -12,9 +12,10 @@ const UserSocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (isAuth) {
-      const socket = io(`${baseUrl}/user/${id}`, {
+      const socket = io(`${import.meta.env.DEV ? baseUrl : ""}/user/${id}`, {
         forceNew: true,
-        withCredentials: true,
+        withCredentials: !!import.meta.env.DEV,
+        path: `${import.meta.env.DEV ? "" : baseUrl}/socket.io/`
       });
 
       socket.on("connect", () => setUserSocket(socket));
