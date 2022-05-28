@@ -7,7 +7,7 @@ export default defineConfig({
     server: {
         open: true,
         port: loadEnv("", ".").VITE_PORT || 3000,
-        strictPort: true
+        strictPort: true,
     },
     build: {
         outDir: "build",
