@@ -1,7 +1,8 @@
-import { Box, HStack, Text, Flex, Avatar, Button } from "@chakra-ui/react";
-import { BsCheckLg, BsXLg } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
-import { useRef, useState } from "react";
+import { useState, useRef } from "react";
+import { Box, HStack, Text, Flex, Avatar, Button } from "@chakra-ui/react";
+import { baseUrl } from "../../config/baseUrl"
+import { BsCheckLg, BsXLg } from "react-icons/bs";
 import AlertToConfirmation from "../Alert/AlertToConfirmation";
 
 function Notification({
@@ -64,7 +65,7 @@ function Notification({
           <Avatar
             boxSize="50px"
             ml="5"
-            src={avatar}
+            src={avatar && baseUrl + avatar}
             alt={avatar}
             bg="gray.700"
           />

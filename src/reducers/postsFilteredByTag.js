@@ -1,129 +1,135 @@
 import {
-  ADD_COMMENT_SUCCESS,
-  DELETE_COMMENT_SUCCESS,
+    ADD_COMMENT_SUCCESS,
+    DELETE_COMMENT_SUCCESS,
 } from "../types/commentTypes";
 import {
-  TAGS_SUCCESS,
-  TAGS_FAILURE,
-  DELETE_POST_SUCCESS,
-  TAGS_REQUEST,
-  TAGS_MORE_SUCCESS,
-  TAGS_MORE_REQUEST,
-  TAGS_MORE_FAILURE,
-  DISLIKE_SUCCESS,
-  LIKE_SUCCESS,
+    TAGS_SUCCESS,
+    TAGS_FAILURE,
+    DELETE_POST_SUCCESS,
+    TAGS_REQUEST,
+    TAGS_MORE_SUCCESS,
+    TAGS_MORE_REQUEST,
+    TAGS_MORE_FAILURE,
+    DISLIKE_SUCCESS,
+    LIKE_SUCCESS,
 } from "../types/postTypes";
 
 const init_state = {
-  posts: [],
-  isMorePosts: false,
-  isFetching: false,
-  isFetched: false,
-  isFetchingError: false,
+    posts: [],
+    isMorePosts: false,
+    isFetching: false,
+    isFetched: false,
+    isFetchingError: false,
 };
 
 const postsFilteredByTag = (state = init_state, action) => {
-  switch (action.type) {
-    case TAGS_SUCCESS:
-      return {
-        ...state,
-        posts: action.payload.posts,
-        isMorePosts: action.payload.posts?.length > 0,
-        isFetching: false,
-        isFetched: true,
-        isFetchingError: false,
-      };
-    case TAGS_REQUEST:
-      return {
-        ...state,
-        isFetching: true,
-        isFetched: false,
-        isFetchingError: false,
-      };
-    case TAGS_MORE_FAILURE:
-      return {
-        ...state,
-        isFetchingError: true,
-        isFetched: false,
-        isFetching: false,
-      };
-    case TAGS_MORE_REQUEST:
-      return {
-        ...state,
-        isFetching: true,
-        isFetched: false,
-        isFetchingError: false,
-      };
-    case TAGS_MORE_SUCCESS:
-      return {
-        ...state,
-        posts: [...state.posts, ...action.payload.posts],
-        isMorePosts: action.payload.posts?.length > 0,
-        isFetching: false,
-        isFetched: true,
-        isFetchingError: false,
-      };
-    case TAGS_FAILURE:
-      return { ...state, isFetching: false, isFetchingError: true };
-    case DELETE_POST_SUCCESS:
-      return {
-        ...state,
-        posts: state.posts.filter((post) => post.id !== action.payload.idPost),
-      };
+    switch (action.type) {
+        case TAGS_SUCCESS:
+            return {
+                ...state,
+                posts: action.payload.posts,
+                isMorePosts: action.payload.posts?.length > 0,
+                isFetching: false,
+                isFetched: true,
+                isFetchingError: false,
+            };
+        case TAGS_REQUEST:
+            return {
+                ...state,
+                isFetching: true,
+                isFetched: false,
+                isFetchingError: false,
+            };
+        case TAGS_MORE_FAILURE:
+            return {
+                ...state,
+                isFetchingError: true,
+                isFetched: false,
+                isFetching: false,
+            };
+        case TAGS_MORE_REQUEST:
+            return {
+                ...state,
+                isFetching: true,
+                isFetched: false,
+                isFetchingError: false,
+            };
+        case TAGS_MORE_SUCCESS:
+            return {
+                ...state,
+                posts: [...state.posts, ...action.payload.posts],
+                isMorePosts: action.payload.posts?.length > 0,
+                isFetching: false,
+                isFetched: true,
+                isFetchingError: false,
+            };
+        case TAGS_FAILURE:
+            return { ...state, isFetching: false, isFetchingError: true };
+        case DELETE_POST_SUCCESS:
+            return {
+                ...state,
+                posts: state.posts.filter(
+                    post => post.id !== action.payload.idPost
+                ),
+            };
 
-    case LIKE_SUCCESS:
-      return {
-        ...state,
-        posts: state.posts.map((post) => {
-          if (post.id === action.payload.id) {
-            return { ...post, likes: post.likes + 1, likesMe: true };
-          }
-          return post;
-        }),
-      };
-    case DISLIKE_SUCCESS:
-      return {
-        ...state,
-        posts: state.posts.map((post) => {
-          if (post.id === action.payload.id) {
+        case LIKE_SUCCESS:
             return {
-              ...post,
-              likes: post.likes - 1,
-              likesMe: false,
+                ...state,
+                posts: state.posts.map(post => {
+                    if (post.id === action.payload.id) {
+                        return {
+                            ...post,
+                            likes: post.likes + 1,
+                            likesMe: true,
+                        };
+                    }
+                    return post;
+                }),
             };
-          }
-          return post;
-        }),
-      };
-    case ADD_COMMENT_SUCCESS:
-      return {
-        ...state,
-        posts: state.posts.map((post) => {
-          if (post.id === action.payload.comment.postId) {
+        case DISLIKE_SUCCESS:
             return {
-              ...post,
-              comments: post.comments + 1,
+                ...state,
+                posts: state.posts.map(post => {
+                    if (post.id === action.payload.id) {
+                        return {
+                            ...post,
+                            likes: post.likes - 1,
+                            likesMe: false,
+                        };
+                    }
+                    return post;
+                }),
             };
-          }
-          return post;
-        }),
-      };
-    case DELETE_COMMENT_SUCCESS:
-      return {
-        ...state,
-        posts: state.posts.map((post) => {
-          if (post.id === action.payload.idPost) {
+        case ADD_COMMENT_SUCCESS:
             return {
-              ...post,
-              comments: post.comments - 1,
+                ...state,
+                posts: state.posts.map(post => {
+                    if (post.id === action.payload.comment.postId) {
+                        return {
+                            ...post,
+                            comments: post.comments + 1,
+                        };
+                    }
+                    return post;
+                }),
             };
-          }
-          return post;
-        }),
-      };
-    default:
-      return state;
-  }
+        case DELETE_COMMENT_SUCCESS:
+            return {
+                ...state,
+                posts: state.posts.map(post => {
+                    if (post.id === action.payload.idPost) {
+                        return {
+                            ...post,
+                            comments: post.comments - 1,
+                        };
+                    }
+                    return post;
+                }),
+            };
+        default:
+            return state;
+    }
 };
 
 export default postsFilteredByTag;

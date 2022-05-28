@@ -14,19 +14,19 @@ import postsFiltered from "./postsFilteredByTag";
 import commentsReducer from "./commentsReducer";
 
 const reducers = combineReducers({
-  logIn: logInReducer,
-  register: registerReducer,
-  posts: postsReducer,
-  search: searchReducer,
-  me: meReducer,
-  mePosts: mePostsReducer,
-  mePictures: mePicturesReducer,
-  meFriends: meFriendsReducer,
-  user: userReducer,
-  userPosts: userPostsReducer,
-  userPictures: userPicturesReducer,
-  postsFiltered: postsFiltered,
-  comments: commentsReducer,
+    logIn: logInReducer,
+    register: registerReducer,
+    posts: postsReducer,
+    search: searchReducer,
+    me: meReducer,
+    mePosts: mePostsReducer,
+    mePictures: mePicturesReducer,
+    meFriends: meFriendsReducer,
+    user: userReducer,
+    userPosts: userPostsReducer,
+    userPictures: userPicturesReducer,
+    postsFiltered: postsFiltered,
+    comments: commentsReducer,
 });
 
 export default reducers;
