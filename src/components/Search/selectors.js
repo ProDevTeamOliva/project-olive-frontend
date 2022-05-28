@@ -1,5 +1,5 @@
-export const getPayloadSearch = (state) => state.search.payload;
+export const getPayloadSearch = state => state.search.payload;
 
-export const getLoading = (state) => state.search.loading;
+export const getLoading = state => state.search.loading;
 
-export const getError = (state) => state.search.message;
+export const getError = state => state.search.message;
