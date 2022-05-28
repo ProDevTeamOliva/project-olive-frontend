@@ -33,36 +33,38 @@ function Comments({ idPost }) {
   return (
     <>
       {commentsForPost.length > 0 ? (
-        <Grid templateColumns="repeat(3, 40%,20%,40%)">
-          {commentsForPost.map(({ id, user, date, comment }) =>
-            me.id === user.id ? (
-              <GridItem colStart={["1", "2"]} colEnd={["3", "4"]} key={id}>
-                <Comment
-                  user={me}
-                  date={date}
-                  comment={comment}
-                  bgColor="mediumslateblue"
-                  link="/me"
-                  closeButton={true}
-                  idPost={idPost}
-                  idComment={id}
-                />
-              </GridItem>
-            ) : (
-              <GridItem colStart="1" colEnd="3" key={id}>
-                <Comment
-                  user={user}
-                  date={date}
-                  comment={comment}
-                  bgColor="gray.400"
-                  link={`/user/${user.id}`}
-                  closeButton={false}
-                  idPost={idPost}
-                  idComment={id}
-                />
-              </GridItem>
-            )
-          )}
+        <>
+          <Grid templateColumns="repeat(3, 40%,20%,40%)">
+            {commentsForPost.map(({ id, user, date, comment }) =>
+              me.id === user.id ? (
+                <GridItem colStart={["1", "2"]} colEnd={["3", "4"]} key={id}>
+                  <Comment
+                    user={me}
+                    date={date}
+                    comment={comment}
+                    bgColor="mediumslateblue"
+                    link="/me"
+                    closeButton={true}
+                    idPost={idPost}
+                    idComment={id}
+                  />
+                </GridItem>
+              ) : (
+                <GridItem colStart="1" colEnd="3" key={id}>
+                  <Comment
+                    user={user}
+                    date={date}
+                    comment={comment}
+                    bgColor="gray.400"
+                    link={`/user/${user.id}`}
+                    closeButton={false}
+                    idPost={idPost}
+                    idComment={id}
+                  />
+                </GridItem>
+              )
+            )}
+          </Grid>
           <LoadMore
             isMore={isMoreComments}
             isLoading={isLoading}
@@ -70,7 +72,7 @@ function Comments({ idPost }) {
             loadMoreText={t("loadMoreComments")}
             noMoreText={t("noMoreComments")}
           />
-        </Grid>
+        </>
       ) : (
         <Box h="150px">
           <LoadingSpinner isLoading={isLoading} />

@@ -112,7 +112,7 @@ const postsFilteredByTag = (state = init_state, action) => {
       return {
         ...state,
         posts: state.posts.map((post) => {
-          if (post.id === action.payload.postId) {
+          if (post.id === action.payload.idPost) {
             return {
               ...post,
               comments: post.comments - 1,
