@@ -49,7 +49,7 @@ function DropDown({ changeLanguage }) {
       <Box
         d="none"
         pos="absolute"
-        bgColor="gray.700"
+        bg="gray.800"
         w="160px"
         right="0"
         borderRadius="0 0 0 12px"
@@ -58,7 +58,6 @@ function DropDown({ changeLanguage }) {
           gridTemplateRows: "20px 120px 50px 20px",
           placeItems: "center",
           padding: "0px 0px 10px 0px",
-          boxShadow: "1px 1px 2px 1px white",
         }}
       >
         <Menu>

@@ -125,7 +125,7 @@ function ModalAvatarMe() {
               mx="auto"
               onChange={() => setIsOpenUpdateAlert(true)}
             />
-            {avatar.endsWith("/public/pictures/avatar_default.png") ? (
+            {avatar.endsWith("/public/avatar_default.png") ? (
               <></>
             ) : (
               <Button
