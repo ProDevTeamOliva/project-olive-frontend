@@ -15,6 +15,7 @@ import {
 } from "../types/registerTypes";
 import { RSAA } from "redux-api-middleware";
 import { baseUrl } from "../config/baseUrl";
+import credentials from "../config/credentials";
 
 export const signUp = (payload) => ({
   [RSAA]: {
@@ -34,7 +35,7 @@ export const logIn = (payload) => ({
     endpoint: `${baseUrl}/login`,
     method: "POST",
     body: JSON.stringify(payload),
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -47,7 +48,7 @@ export const logout = () => ({
   [RSAA]: {
     endpoint: `${baseUrl}/logout`,
     method: "POST",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

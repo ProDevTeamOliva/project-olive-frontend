@@ -32,12 +32,13 @@ import {
   ME_DELETE_PICTURES_SUCCESS,
   ME_DELETE_PICTURES_FAILURE,
 } from "../types/meTypes";
+import credentials from "../config/credentials";
 
 export const getMe = () => ({
   [RSAA]: {
     endpoint: `${baseUrl}/me`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -50,7 +51,7 @@ export const getMePosts = () => ({
   [RSAA]: {
     endpoint: `${baseUrl}/me/post`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -63,7 +64,7 @@ export const getMoreMePosts = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/me/post?id=` + id,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -80,7 +81,7 @@ export const getMePictures = () => ({
   [RSAA]: {
     endpoint: `${baseUrl}/me/picture`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -97,7 +98,7 @@ export const deleteMePictures = (idPicture) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/me/picture/${idPicture}`,
     method: "DELETE",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -122,7 +123,7 @@ export const patchMeAvatar = (filename, avatar) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/me/avatar`,
     method: "PATCH",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -143,7 +144,7 @@ export const deleteMeAvatar = () => ({
   [RSAA]: {
     endpoint: `${baseUrl}/me/avatar`,
     method: "DELETE",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -160,7 +161,7 @@ export const postMePictures = (pictures) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/me/picture`,
     method: "POST",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -180,7 +181,7 @@ export const getMeFriends = () => ({
   [RSAA]: {
     endpoint: `${baseUrl}/me/friend`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -193,7 +194,7 @@ export const acceptFriendInvitation = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/user/${id}/accept`,
     method: "POST",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -210,7 +211,7 @@ export const unAcceptFriendInvitation = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/user/${id}/friend`,
     method: "DELETE",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

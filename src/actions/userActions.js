@@ -14,12 +14,13 @@ import {
   USER_ADD_TO_FRIENDS_SUCCESS,
   USER_ADD_TO_FRIENDS_FAILURE,
 } from "../types/userTypes";
+import credentials from "../config/credentials";
 
 export const getUser = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/user/${id}`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -32,7 +33,7 @@ export const getUserPosts = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/user/${id}/post`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -45,7 +46,7 @@ export const getUserPictures = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/user/${id}/picture`,
     method: "GET",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -62,7 +63,7 @@ export const addToFriends = (id) => ({
   [RSAA]: {
     endpoint: `${baseUrl}/user/${id}/friend`,
     method: "POST",
-    credentials: "include",
+    credentials,
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
