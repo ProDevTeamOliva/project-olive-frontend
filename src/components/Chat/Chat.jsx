@@ -8,7 +8,6 @@ import ChatNavbar from "./ChatNavbar";
 import ChatFriends from "./ChatFriends";
 import ChatMessages from "./ChatMessages";
 import { getMe } from "../../actions/meActions";
-import isDevelopment from "../../config/isDevelopment";
 
 function Chat({ id }) {
   const dispatch = useDispatch();
@@ -25,10 +24,10 @@ function Chat({ id }) {
   useEffect(() => {
     dispatch(getMe());
 
-    const socket = io(`${isDevelopment ? baseUrl : ""}/chat/${id}`, {
+    const socket = io(`${import.meta.env.DEV ? baseUrl : ""}/chat/${id}`, {
       forceNew: true,
-      withCredentials: isDevelopment,
-      path: `${isDevelopment ? "" : baseUrl}/socket.io/`
+      withCredentials: import.meta.env.DEV,
+      path: `${import.meta.env.DEV ? "" : baseUrl}/socket.io/`
     });
 
     socket.on("connect", () => setChatSocket(socket));
