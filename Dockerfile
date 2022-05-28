@@ -1,7 +1,7 @@
 FROM node:16.14.0 as builder
 WORKDIR /opt/chattermatter
 COPY . .
-RUN yarn install --prod
+RUN yarn install
 RUN yarn build
 
 FROM nginx:1.21.6

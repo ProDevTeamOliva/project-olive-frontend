@@ -26,7 +26,7 @@ function Chat({ id }) {
 
     const socket = io(`${import.meta.env.DEV ? baseUrl : ""}/chat/${id}`, {
       forceNew: true,
-      withCredentials: import.meta.env.DEV,
+      withCredentials: !!import.meta.env.DEV,
       path: `${import.meta.env.DEV ? "" : baseUrl}/socket.io/`
     });
 
