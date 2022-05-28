@@ -12,6 +12,10 @@ import { useTranslation } from "react-i18next";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import Notification from "./Notification";
 import { memo, useCallback } from "react";
+import {
+  acceptFriendInvitation,
+  unAcceptFriendInvitation,
+} from "../../actions/meActions";
 
 function Notifications({ onClose, isOpen }) {
   const dispatch = useDispatch();
@@ -25,11 +29,11 @@ function Notifications({ onClose, isOpen }) {
     (state) => state.meFriends.pendingReceived
   );
 
-  const acceptFriendInvitation = useCallback(
+  const acceptInvitation = useCallback(
     (id) => dispatch(acceptFriendInvitation(id)),
     [dispatch]
   );
-  const unAcceptFriendInvitation = useCallback(
+  const unAcceptInvitation = useCallback(
     (id) => dispatch(unAcceptFriendInvitation(id)),
     [dispatch]
   );
@@ -50,8 +54,8 @@ function Notifications({ onClose, isOpen }) {
                   nameFirst={nameFirst}
                   nameLast={nameLast}
                   avatar={avatar}
-                  acceptFriendInvitation={acceptFriendInvitation}
-                  unAcceptFriendInvitation={unAcceptFriendInvitation}
+                  acceptFriendInvitation={acceptInvitation}
+                  unAcceptFriendInvitation={unAcceptInvitation}
                 />
               ))
             ) : (
