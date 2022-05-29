@@ -3,11 +3,22 @@ import {
     DELETE_COMMENT_SUCCESS,
 } from "../types/commentTypes";
 import { DISLIKE_SUCCESS, LIKE_SUCCESS } from "../types/postTypes";
-import { USER_POSTS_SUCCESS, USER_POSTS_FAILURE } from "../types/userTypes";
+import {
+    USER_POSTS_SUCCESS,
+    USER_POSTS_FAILURE,
+    USER_MORE_POSTS_REQUEST,
+    USER_MORE_POSTS_SUCCESS,
+    USER_MORE_POSTS_FAILURE,
+    USER_POSTS_REQUEST,
+} from "../types/userTypes";
 
 const init_state = {
     posts: [],
     message: "",
+    isMorePosts: false,
+    isFetching: false,
+    isFetched: false,
+    isFetchingError: false,
 };
 
 const userPostsReducer = (state = init_state, action) => {
@@ -42,11 +53,49 @@ const userPostsReducer = (state = init_state, action) => {
             return {
                 posts: [...action.payload.posts],
                 message: action.payload.message,
+                isMorePosts: action.payload.posts?.length > 0,
+                isFetching: false,
+                isFetched: true,
+                isFetchingError: false,
+            };
+        case USER_POSTS_REQUEST:
+            return {
+                ...state,
+                isFetching: true,
+                isFetched: false,
+                isFetchingError: false,
             };
         case USER_POSTS_FAILURE:
             return {
                 ...state,
                 message: action.payload.message,
+                isFetching: false,
+                isFetchingError: true,
+                isFetched: false,
+            };
+        case USER_MORE_POSTS_REQUEST:
+            return {
+                ...state,
+                isFetching: true,
+                isFetchingError: false,
+                isFetched: false,
+                isMorePosts: true,
+            };
+        case USER_MORE_POSTS_SUCCESS:
+            return {
+                posts: [...state.posts, ...action.payload.posts],
+                message: action.payload.message,
+                isMorePosts: action.payload.posts?.length > 0,
+                isFetching: false,
+                isFetched: true,
+                isFetchingError: false,
+            };
+        case USER_MORE_POSTS_FAILURE:
+            return {
+                ...state,
+                isFetching: false,
+                isFetchingError: true,
+                isFetched: false,
             };
 
         case LIKE_SUCCESS:
