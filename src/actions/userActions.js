@@ -13,6 +13,9 @@ import {
     USER_ADD_TO_FRIENDS_REQUEST,
     USER_ADD_TO_FRIENDS_SUCCESS,
     USER_ADD_TO_FRIENDS_FAILURE,
+    USER_MORE_POSTS_REQUEST,
+    USER_MORE_POSTS_SUCCESS,
+    USER_MORE_POSTS_FAILURE,
 } from "../types/userTypes";
 import credentials from "../config/credentials";
 
@@ -39,6 +42,23 @@ export const getUserPosts = id => ({
             "Content-Type": "application/json",
         },
         types: [USER_POSTS_REQUEST, USER_POSTS_SUCCESS, USER_POSTS_FAILURE],
+    },
+});
+
+export const getMoreUserPosts = (idUser, idPost) => ({
+    [RSAA]: {
+        endpoint: `${baseUrl}/user/${idUser}/post?id=` + idPost,
+        method: "GET",
+        credentials,
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        types: [
+            USER_MORE_POSTS_REQUEST,
+            USER_MORE_POSTS_SUCCESS,
+            USER_MORE_POSTS_FAILURE,
+        ],
     },
 });
 
