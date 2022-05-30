@@ -107,5 +107,6 @@
   "deletePicture": "Usuwanie zdjęcia",
   "incorrectData": "Niepoprawne dane",
   "noMoreComments": "Brak starszych komentarzy",
-  "loadMoreComments": "Załaduj więcej komentarzy"
+  "loadMoreComments": "Załaduj więcej komentarzy",
+  "confirmInvitation":"Potwierdź zaproszenie"
 }

@@ -9,7 +9,7 @@
   "firstName": "First name",
   "secondName": "Second name",
   "registrationData": "Registration data",
-  "userData": "User date",
+  "userData": "User data",
   "noAccess": "Page Not Found",
   "searchNavBar": "Search...",
   "alertRegistrationBody": "Do you confirm account creation?",
@@ -107,5 +107,6 @@
   "noMorePosts": "No more posts",
   "loadMorePosts": "Load more posts",
   "noMoreComments": "No more comments",
-  "loadMoreComments": "Load more comments"
+  "loadMoreComments": "Load more comments",
+  "confirmInvitation":"Confirm the invitation"
 }
