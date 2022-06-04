@@ -9,7 +9,7 @@ import {
     HStack,
 } from "@chakra-ui/react";
 import { FormControl, FormErrorMessage } from "@chakra-ui/form-control";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form, Field, FastField } from "formik";
 import { memo, useRef, useState } from "react";
 import { purpleButtonStyle } from "../../styles/Buttons/purpleButton";
 import { useDispatch } from "react-redux";
@@ -272,7 +272,7 @@ function PostForm({ onClose }) {
                                 )}
                             </Field>
 
-                            <Field
+                            <FastField
                                 name="selectedFiles"
                                 validate={value => validateFiles(value)}>
                                 {({ field, form }) => (
@@ -291,7 +291,7 @@ function PostForm({ onClose }) {
                                         </FormErrorMessage>
                                     </FormControl>
                                 )}
-                            </Field>
+                            </FastField>
 
                             <HStack justify="right" mt="20px">
                                 <Button

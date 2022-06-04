@@ -62,8 +62,6 @@
   "addToFriends": "Zaproszenie do grona znajomych od",
   "alertAddFriend": "Czy potwierdzasz dodawanie do znajomych?",
   "noResults": "Brak rezultatów",
-  "isFriend": "Jesteśmy znajomymi",
-  "sentInvitation": "Wysłano zaproszenie",
   "submitPostAdd": "OPUBLIKUJ",
   "selectFile": "Wybierz Plik",
   "postType": "Typ Postu",
@@ -108,5 +106,6 @@
   "incorrectData": "Niepoprawne dane",
   "noMoreComments": "Brak starszych komentarzy",
   "loadMoreComments": "Załaduj więcej komentarzy",
-  "confirmInvitation":"Potwierdź zaproszenie"
+  "confirmInvitation":"Potwierdź zaproszenie",
+  "cancelInvitation":"Anuluj zaproszenie"
 }

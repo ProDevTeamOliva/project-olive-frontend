@@ -4,34 +4,48 @@ import { blueButtonStyle } from "../../styles/Buttons/blueButton";
 import { useDispatch, useSelector } from "react-redux";
 import { addToFriends } from "../../actions/userActions";
 import { baseUrl } from "../../config/baseUrl";
-import { useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import AlertToConfirmation from "../Alert/AlertToConfirmation";
+import {
+    acceptFriendInvitation,
+    unAcceptFriendInvitation,
+} from "../../actions/meActions";
 
-const textStyle = {
-    textAlign: "center",
-    color: "blue.400",
-    fontSize: "25px",
-    w: "100%",
+const styleButton = {
+    w: "80%",
+    m: "auto",
+    d: "block",
 };
-
 function InfoAboutUser({ id }) {
     const { t } = useTranslation();
     const languageValues = {
         addFriend: t("addFriend"),
-        sentInvitation: t("sentInvitation"),
-        isFriend: t("isFriend"),
         sendInvitation: t("sendInvitation"),
         alertSendInvitation: t("alertSendInvitation"),
         confirmInvitation: t("confirmInvitation"),
+        delFriend: t("delFriend"),
+        alertDelFriend: t("alertDelFriend"),
+        removeFriend: t("removeFriend"),
+        addFriends: t("addFriend"),
+        alertAddFriend: t("alertAddFriend"),
+        cancelInvitation: t("cancelInvitation"),
     };
 
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.user);
     const meFriends = useSelector(state => state.meFriends);
 
-    const [isOpen, setIsOpen] = useState(false);
-    const onCloseAlert = () => setIsOpen(false);
-    const cancelRef = useRef();
+    const [isOpenSendInvitation, setIsOpenSendInvitation] = useState(false);
+    const onCloseAlertSendInvitation = () => setIsOpenSendInvitation(false);
+    const cancelRefSendInvitation = useRef();
+
+    const [isOpenDeleteFriend, setIsOpenDeleteFriend] = useState(false);
+    const onCloseAlertDeleteFriend = () => setIsOpenDeleteFriend(false);
+    const cancelRefDeleteFriend = useRef();
+
+    const [isOpenAcceptInvitation, setIsOpenAcceptInvitation] = useState(false);
+    const onCloseAlertAcceptInvitation = () => setIsOpenAcceptInvitation(false);
+    const cancelRefAcceptInvitation = useRef();
 
     const checkExistUserInMeListOfFriends = () => {
         return (
@@ -53,10 +67,34 @@ function InfoAboutUser({ id }) {
         );
     };
 
-    const addFriend = () => {
-        onCloseAlert();
-        return dispatch(addToFriends(id));
-    };
+    const addFriend = useCallback(
+        id => {
+            onCloseAlertSendInvitation();
+            dispatch(addToFriends(id));
+        },
+        [dispatch]
+    );
+
+    const deleteFriend = useCallback(
+        id => {
+            onCloseAlertDeleteFriend();
+            dispatch(unAcceptFriendInvitation(id));
+        },
+        [dispatch]
+    );
+
+    const ignoreInvitation = useCallback(
+        id => dispatch(unAcceptFriendInvitation(id)),
+        [dispatch]
+    );
+
+    const acceptInvitation = useCallback(
+        id => {
+            onCloseAlertAcceptInvitation();
+            dispatch(acceptFriendInvitation(id));
+        },
+        [dispatch]
+    );
 
     return (
         <Stack
@@ -92,36 +130,61 @@ function InfoAboutUser({ id }) {
                         !checkExistUserInPendingSent() &&
                         !checkExistUserInPendingReceived() && (
                             <Button
-                                {...blueButtonStyle}
-                                w="80%"
-                                m="auto"
-                                d="block"
-                                onClick={() => setIsOpen(true)}>
+                                {...blueButtonStyle("blue.600", "blue.500")}
+                                {...styleButton}
+                                onClick={() => setIsOpenSendInvitation(true)}>
                                 {languageValues.addFriend}
                             </Button>
                         )}
                     {checkExistUserInPendingSent() && (
-                        <Text {...textStyle}>
-                            {languageValues.sentInvitation}
-                        </Text>
+                        <Button
+                            {...blueButtonStyle("red.600", "red.500")}
+                            {...styleButton}
+                            onClick={() => ignoreInvitation(id)}>
+                            {languageValues.cancelInvitation}
+                        </Button>
                     )}
                     {checkExistUserInPendingReceived() && (
-                        <Text {...textStyle}>
+                        <Button
+                            {...blueButtonStyle("green.600", "green.500")}
+                            {...styleButton}
+                            onClick={() => setIsOpenAcceptInvitation(true)}>
                             {languageValues.confirmInvitation}
-                        </Text>
+                        </Button>
                     )}
                     {!checkExistUserInMeListOfFriends() && (
-                        <Text {...textStyle}>{languageValues.isFriend}</Text>
+                        <Button
+                            {...blueButtonStyle("red.600", "red.500")}
+                            {...styleButton}
+                            onClick={() => setIsOpenDeleteFriend(true)}>
+                            {languageValues.removeFriend}
+                        </Button>
                     )}
                 </Stack>
             </Stack>
             <AlertToConfirmation
-                isOpen={isOpen}
-                onCloseAlert={onCloseAlert}
-                fun={addFriend}
-                cancelRef={cancelRef}
+                isOpen={isOpenSendInvitation}
+                onCloseAlert={onCloseAlertSendInvitation}
+                fun={() => addFriend(id)}
+                cancelRef={cancelRefSendInvitation}
                 header={languageValues.sendInvitation}
                 body={languageValues.alertSendInvitation}
+            />
+            <AlertToConfirmation
+                isOpen={isOpenDeleteFriend}
+                onCloseAlert={onCloseAlertDeleteFriend}
+                fun={() => deleteFriend(id)}
+                cancelRef={cancelRefDeleteFriend}
+                header={languageValues.delFriend}
+                body={languageValues.alertDelFriend}
+            />
+            <AlertToConfirmation
+                isOpen={isOpenAcceptInvitation}
+                onCloseAlert={onCloseAlertAcceptInvitation}
+                fun={() => acceptInvitation(id)}
+                cancelRef={cancelRefAcceptInvitation}
+                header={languageValues.addFriends}
+                body={languageValues.alertAddFriend}
             />
         </Stack>
     );

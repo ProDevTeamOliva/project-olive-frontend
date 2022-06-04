@@ -61,8 +61,6 @@
   "addToFriends": "An invitation to a group of friends from",
   "alertAddFriend": "Do you confirm adding to friends?",
   "noResults": "No results",
-  "isFriend": "We are friends",
-  "sentInvitation": "Invitation sent",
   "notifications": "Notifications",
   "submitPostAdd": "PUBLISH",
   "selectFile": "Select File",
@@ -108,5 +106,6 @@
   "loadMorePosts": "Load more posts",
   "noMoreComments": "No more comments",
   "loadMoreComments": "Load more comments",
-  "confirmInvitation":"Confirm the invitation"
+  "confirmInvitation":"Confirm the invitation",
+  "cancelInvitation":"Cancel the invitation"
 }

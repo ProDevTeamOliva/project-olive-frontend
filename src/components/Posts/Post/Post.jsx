@@ -81,7 +81,7 @@ function Post({ id }) {
     }, [
         handleLikeButtonClick,
         handleDisLikeButtonClick,
-        property.likesMe,
+        property?.likesMe,
         languageValues,
     ]);
 
