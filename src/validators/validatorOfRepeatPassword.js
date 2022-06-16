@@ -1,11 +1,13 @@
 export const validatorOfRepeatPassword =
     (required, passwordRepeatValidation) => (value, valuePassword) => {
         const error = {};
+        const regex = /^\s+$/;
+
         if (value !== valuePassword) {
             error.value = passwordRepeatValidation;
         }
 
-        if (!value) {
+        if (!value || regex.test(value)) {
             error.value = required;
         }
 

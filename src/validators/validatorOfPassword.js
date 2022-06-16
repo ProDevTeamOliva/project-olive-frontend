@@ -2,6 +2,8 @@ export const validatorOfPassword =
     (required, amoutOfSignMin8, amoutOfSignMax20, passwordValidation) =>
     value => {
         const error = {};
+        const regex = /^\s+$/;
+
         if (value.length < 8) {
             error.value = amoutOfSignMin8;
         }
@@ -12,7 +14,7 @@ export const validatorOfPassword =
         if (!re.test(value)) {
             error.value = passwordValidation;
         }
-        if (!value) {
+        if (!value || regex.test(value)) {
             error.value = required;
         }
         return error.value;
