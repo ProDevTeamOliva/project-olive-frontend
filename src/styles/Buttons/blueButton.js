@@ -1,4 +1,4 @@
-export const blueButtonStyle = (colorFirst, colorSecond) => ({
+export const universalButtonStyle = (colorFirst, colorSecond) => ({
     w: "100%",
     color: "white",
     fontSize: "120%",

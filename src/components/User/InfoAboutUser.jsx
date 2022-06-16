@@ -1,6 +1,6 @@
 import { Button, Heading, Stack, Text, Flex, Avatar } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { blueButtonStyle } from "../../styles/Buttons/blueButton";
+import { universalButtonStyle } from "../../styles/Buttons/blueButton";
 import { useDispatch, useSelector } from "react-redux";
 import { addToFriends } from "../../actions/userActions";
 import { baseUrl } from "../../config/baseUrl";
@@ -130,7 +130,10 @@ function InfoAboutUser({ id }) {
                         !checkExistUserInPendingSent() &&
                         !checkExistUserInPendingReceived() && (
                             <Button
-                                {...blueButtonStyle("blue.600", "blue.500")}
+                                {...universalButtonStyle(
+                                    "blue.600",
+                                    "blue.500"
+                                )}
                                 {...styleButton}
                                 onClick={() => setIsOpenSendInvitation(true)}>
                                 {languageValues.addFriend}
@@ -138,7 +141,7 @@ function InfoAboutUser({ id }) {
                         )}
                     {checkExistUserInPendingSent() && (
                         <Button
-                            {...blueButtonStyle("red.600", "red.500")}
+                            {...universalButtonStyle("red.600", "red.500")}
                             {...styleButton}
                             onClick={() => ignoreInvitation(id)}>
                             {languageValues.cancelInvitation}
@@ -146,7 +149,7 @@ function InfoAboutUser({ id }) {
                     )}
                     {checkExistUserInPendingReceived() && (
                         <Button
-                            {...blueButtonStyle("green.600", "green.500")}
+                            {...universalButtonStyle("green.600", "green.500")}
                             {...styleButton}
                             onClick={() => setIsOpenAcceptInvitation(true)}>
                             {languageValues.confirmInvitation}
@@ -154,7 +157,7 @@ function InfoAboutUser({ id }) {
                     )}
                     {!checkExistUserInMeListOfFriends() && (
                         <Button
-                            {...blueButtonStyle("red.600", "red.500")}
+                            {...universalButtonStyle("red.600", "red.500")}
                             {...styleButton}
                             onClick={() => setIsOpenDeleteFriend(true)}>
                             {languageValues.removeFriend}

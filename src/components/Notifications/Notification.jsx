@@ -10,6 +10,7 @@ import {
 } from "../../actions/meActions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { notificationButton } from "../../styles/Buttons/notificationButton";
 function Notification({ id, nameFirst, nameLast, avatar }) {
     const { t } = useTranslation();
     const languageValues = {
@@ -20,21 +21,6 @@ function Notification({ id, nameFirst, nameLast, avatar }) {
     const [isOpen, setIsOpen] = useState(false);
     const onCloseAlert = () => setIsOpen(false);
     const cancelRef = useRef();
-
-    const buttonStyle = (color1, color2) => {
-        return {
-            variant: "unstyled",
-            fontSize: "18px",
-            color: color1,
-            _focus: { color: color2 },
-            _hover: {
-                color: color2,
-            },
-            _active: {
-                color: color2,
-            },
-        };
-    };
 
     const dispatch = useDispatch();
 
@@ -81,13 +67,13 @@ function Notification({ id, nameFirst, nameLast, avatar }) {
             </HStack>
             <HStack mt="-12px" justify="right" mr="7px">
                 <Button
-                    {...buttonStyle("gray.100", "white")}
+                    {...notificationButton("gray.100", "white")}
                     onClick={() => accept()}>
                     <BsCheckLg />
                 </Button>
 
                 <Button
-                    {...buttonStyle("gray.800", "black")}
+                    {...notificationButton("gray.800", "black")}
                     onClick={() => unAcceptInvitation(id)}>
                     <BsXLg />
                 </Button>
