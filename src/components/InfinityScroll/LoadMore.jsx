@@ -9,10 +9,13 @@ const LoadMore = ({
     onClickLoadMore,
     loadMoreText,
     noMoreText,
+    inverse = false,
 }) => {
     if (isMore && !isLoading) {
         return (
-            <Button mb="20px" onClick={onClickLoadMore}>
+            <Button
+                m={inverse ? "10px 10px 5px 10px" : "0 0 20px 0"}
+                onClick={onClickLoadMore}>
                 {loadMoreText}
             </Button>
         );
@@ -22,9 +25,9 @@ const LoadMore = ({
     }
     if (!isMore) {
         return (
-            <Center mb="20px">
+            <Center m={inverse ? "10px 10px 5px 10px" : "0 0 20px 0"}>
                 <InfoIcon />
-                <Text px={"3"}>{noMoreText}</Text>
+                <Text px="3">{noMoreText}</Text>
             </Center>
         );
     }
