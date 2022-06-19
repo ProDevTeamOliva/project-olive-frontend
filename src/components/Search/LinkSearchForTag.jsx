@@ -8,12 +8,12 @@ function LinkSearchForTag({ tag, onClose }) {
             params={{ tag: tag }}
             onClick={() => onClose()}>
             <Grid
-                bg="gray.700"
+                bg="gray.600"
                 w="100%"
-                minH={["40px", "50px"]}
+                minH="50px"
                 borderRadius="16px"
                 _hover={{
-                    bg: "gray.800",
+                    bg: "gray.700",
                 }}
                 mb="10px">
                 <Flex flexDirection="row" align="center" h="100%" w="100%">

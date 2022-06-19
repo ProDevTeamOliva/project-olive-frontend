@@ -1,11 +1,4 @@
-import {
-    Box,
-    Image,
-    Text,
-    Menu,
-    MenuDivider,
-    MenuItem,
-} from "@chakra-ui/react";
+import { Box, Avatar, Text, Menu, MenuItem } from "@chakra-ui/react";
 import Account from "../../img/account_white.png";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, restartRegisterMessage } from "../../actions/authActions";
@@ -39,7 +32,13 @@ function DropDown({ changeLanguage }) {
 
     return (
         <Box pos="relative" d="inline-block" role="group">
-            <Image src={Account} alt="Account" p="12.5px" cursor="pointer" />
+            <Avatar
+                src={Account}
+                boxSize="50px"
+                m="12.5px"
+                cursor="pointer"
+                bg="transparent"
+            />
             <Box
                 d="none"
                 pos="absolute"
