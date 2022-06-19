@@ -28,7 +28,7 @@ function Notifications({ onClose, isOpen }) {
         <>
             <Drawer onClose={onClose} isOpen={isOpen} size={["xs"]}>
                 <DrawerOverlay p="0px" />
-                <DrawerContent mt="75px" bg="blue.700">
+                <DrawerContent bg="blue.700">
                     <DrawerCloseButton color="white" {...unStyledButton} />
 
                     <DrawerHeader px="20px">

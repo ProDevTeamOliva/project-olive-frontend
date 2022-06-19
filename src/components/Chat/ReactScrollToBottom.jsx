@@ -28,7 +28,7 @@ const Content = ({
 
     return (
         <Grid>
-            {messages.length > 0 && (
+            {messages.length >= 60 && (
                 <LoadMore
                     isMore={isMore}
                     isLoading={false}
