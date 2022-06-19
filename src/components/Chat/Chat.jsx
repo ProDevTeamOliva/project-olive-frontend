@@ -10,61 +10,60 @@ import ChatMessages from "./ChatMessages";
 import { getMe } from "../../actions/meActions";
 
 function Chat({ id }) {
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
-  const languageValues = {
-    reconnecting: t("reconnecting"),
-  };
+    const dispatch = useDispatch();
+    const { t } = useTranslation();
+    const languageValues = {
+        reconnecting: t("reconnecting"),
+    };
 
-  const me = useSelector((state) => state.me.me);
+    const me = useSelector(state => state.me.me);
 
-  const [chatSocket, setChatSocket] = useState(undefined);
-  const [user, setUser] = useState(undefined);
+    const [chatSocket, setChatSocket] = useState(undefined);
+    const [user, setUser] = useState(undefined);
 
-  useEffect(() => {
-    dispatch(getMe());
+    useEffect(() => {
+        dispatch(getMe());
 
-    const socket = io(`${import.meta.env.DEV ? baseUrl : ""}/chat/${id}`, {
-      forceNew: true,
-      withCredentials: !!import.meta.env.DEV,
-      path: `${import.meta.env.DEV ? "" : baseUrl}/socket.io/`
-    });
+        const socket = io(`${import.meta.env.DEV ? baseUrl : ""}/chat/${id}`, {
+            forceNew: true,
+            withCredentials: !!import.meta.env.DEV,
+            path: `${import.meta.env.DEV ? "" : baseUrl}/socket.io/`,
+        });
 
-    socket.on("connect", () => setChatSocket(socket));
-    socket.on("reconnect", () => setChatSocket(socket));
-    socket.on("connect_error", () => setChatSocket(undefined));
+        socket.on("connect", () => setChatSocket(socket));
+        socket.on("reconnect", () => setChatSocket(socket));
+        socket.on("connect_error", () => setChatSocket(undefined));
 
-    return () => socket.close();
-  }, [dispatch, id]);
+        return () => socket?.close();
+    }, [dispatch, id]);
 
-  useEffect(() => {
-    chatSocket?.emit("info", { id: id }, (response) =>
-      setUser(response?.users?.filter((u) => u.id !== me.id)[0])
+    useEffect(() => {
+        chatSocket?.emit("info", { id: id }, response =>
+            setUser(response?.users?.filter(u => u.id !== me.id)[0])
+        );
+    }, [chatSocket, id, me]);
+
+    return (
+        <>
+            {chatSocket ? (
+                <Grid
+                    h="100vh"
+                    justifyContent="center"
+                    templateColumns={{ base: "75px 1fr", md: "300px 1fr" }}
+                    templateRows="75px 1fr">
+                    <ChatNavbar user={user} />
+                    <ChatFriends user={user} />
+                    <ChatMessages chatSocket={chatSocket} me={me} />
+                </Grid>
+            ) : (
+                <Grid h="100vh" placeItems="center">
+                    <Text fontSize="2xl" fontWeight="600">
+                        {languageValues.reconnecting}
+                    </Text>
+                </Grid>
+            )}
+        </>
     );
-  }, [chatSocket, id, me]);
-
-  return (
-    <>
-      {chatSocket ? (
-        <Grid
-          h="100vh"
-          justifyContent="center"
-          templateColumns={{ base: "75px 1fr", md: "300px 1fr" }}
-          templateRows="75px 1fr"
-        >
-          <ChatNavbar user={user} />
-          <ChatFriends user={user} />
-          <ChatMessages chatSocket={chatSocket} me={me} />
-        </Grid>
-      ) : (
-        <Grid h="100vh" placeItems="center">
-          <Text fontSize="2xl" fontWeight="600">
-            {languageValues.reconnecting}
-          </Text>
-        </Grid>
-      )}
-    </>
-  );
 }
 
 export default memo(Chat);

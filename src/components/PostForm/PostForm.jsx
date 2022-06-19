@@ -211,7 +211,6 @@ function PostForm({ onClose }) {
                                                                                 width: "40px",
                                                                                 height: "40px",
                                                                                 color: "#1A202C",
-                                                                                // gray.800
                                                                             }}
                                                                         />
                                                                     </Box>
@@ -306,7 +305,6 @@ function PostForm({ onClose }) {
                                             width: "40px",
                                             height: "40px",
                                             color: "#1A202C",
-                                            // gray.800
                                         }}
                                     />
                                     <Input

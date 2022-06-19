@@ -1,70 +1,68 @@
-import { Text, Flex, Avatar, GridItem, Grid } from "@chakra-ui/react";
+import { Text, Flex, Avatar, Grid } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { IoSend } from "react-icons/io5";
 import { useSelector } from "react-redux";
 
 function LinkSearchForUser({ id, nameFirst, nameLast, avatar, onClose }) {
-  const friends = useSelector((state) =>
-    state.meFriends.friends.filter((friend) => friend.id === id)
-  );
-  return (
-    <Grid
-      templateColumns="20% 60% 20%"
-      bgGradient="linear(to-r,gray.300, gray.500, gray.700)"
-      w="100%"
-      minH="50px"
-      shadow="md"
-      borderRadius="20px"
-      _hover={{
-        bgGradient: "linear(to-r,gray.400, gray.600, gray.700)",
-      }}
-      mb="10px"
-    >
-      <GridItem colStart="1" colEnd="2" ml="15px">
-        <Flex flexDirection="row" align="center" justify="center" h="100%">
-          <Link
-            to={`/user/${id}`}
-            params={{ id: id }}
-            onClick={() => onClose()}
-          >
-            <Avatar
-              boxSize="40px"
-              src={avatar}
-              alt={avatar}
-              bg="mediumslateblue"
-            />
-          </Link>
-        </Flex>
-      </GridItem>
-      <GridItem colStart="2" colEnd="3">
-        <Flex flexDirection="row" align="center" h="100%" ml="20px">
-          <Link
-            to={`/user/${id}`}
-            params={{ id: id }}
-            onClick={() => onClose()}
-          >
-            <Text textAlign="left" w="100%" fontWeight="semibold">
-              {nameFirst} {nameLast}
-            </Text>
-          </Link>
-        </Flex>
-      </GridItem>
+    const friend = useSelector(state =>
+        state.meFriends.friends.find(friend => friend.id === id)
+    );
 
-      <GridItem colStart="3" colEnd="4">
-        {Array.from(friends).length > 0 ? (
-          <Flex flexDirection="row" align="center" h="100%">
-            <Link to={`/chat/${friends[0].idConversation}`}>
-              <Text mr="25px" fontWeight="bold">
-                <IoSend color="white" size="28px" cursor="pointer" />
-              </Text>
+    return (
+        <Grid
+            templateColumns={
+                !isNaN(friend?.idConversation)
+                    ? "70px minmax(80px, 1fr) 50px"
+                    : "70px minmax(120px, 1fr) 10px"
+            }
+            bg="gray.600"
+            minW="200px"
+            minH="50px"
+            borderRadius="16px"
+            _hover={{
+                bg: "gray.700",
+            }}
+            mb="10px">
+            <Link
+                to={`/user/${id}`}
+                params={{ id: id }}
+                onClick={() => onClose()}
+                mx="10px">
+                <Flex
+                    flexDirection="row"
+                    align="center"
+                    justify="center"
+                    h="100%">
+                    <Avatar boxSize="40px" src={avatar} alt={avatar} />
+                </Flex>
             </Link>
-          </Flex>
-        ) : (
-          <></>
-        )}
-      </GridItem>
-    </Grid>
-  );
+
+            <Link
+                to={`/user/${id}`}
+                params={{ id: id }}
+                onClick={() => onClose()}>
+                <Flex flexDirection="row" align="center" h="100%">
+                    <Text textAlign="left" w="100%" fontWeight="semibold">
+                        {nameFirst} {nameLast}
+                    </Text>
+                </Flex>
+            </Link>
+
+            {!isNaN(friend?.idConversation) && (
+                <Flex flexDirection="row" align="center" h="100%">
+                    <Link to={`/chat/${friend.idConversation}`}>
+                        <Text mx="10px" fontWeight="bold">
+                            <IoSend
+                                color="white"
+                                size="30px"
+                                cursor="pointer"
+                            />
+                        </Text>
+                    </Link>
+                </Flex>
+            )}
+        </Grid>
+    );
 }
 
 export default LinkSearchForUser;

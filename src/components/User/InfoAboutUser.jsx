@@ -131,8 +131,8 @@ function InfoAboutUser({ id }) {
                         !checkExistUserInPendingReceived() && (
                             <Button
                                 {...universalButtonStyle(
-                                    "blue.600",
-                                    "blue.500"
+                                    "mediumslateblue",
+                                    "slateblue"
                                 )}
                                 {...styleButton}
                                 onClick={() => setIsOpenSendInvitation(true)}>
@@ -141,7 +141,7 @@ function InfoAboutUser({ id }) {
                         )}
                     {checkExistUserInPendingSent() && (
                         <Button
-                            {...universalButtonStyle("red.600", "red.500")}
+                            {...universalButtonStyle("red.600", "red.700")}
                             {...styleButton}
                             onClick={() => ignoreInvitation(id)}>
                             {languageValues.cancelInvitation}
@@ -149,7 +149,7 @@ function InfoAboutUser({ id }) {
                     )}
                     {checkExistUserInPendingReceived() && (
                         <Button
-                            {...universalButtonStyle("green.600", "green.500")}
+                            {...universalButtonStyle("green.600", "green.700")}
                             {...styleButton}
                             onClick={() => setIsOpenAcceptInvitation(true)}>
                             {languageValues.confirmInvitation}
@@ -157,7 +157,7 @@ function InfoAboutUser({ id }) {
                     )}
                     {!checkExistUserInMeListOfFriends() && (
                         <Button
-                            {...universalButtonStyle("red.600", "red.500")}
+                            {...universalButtonStyle("red.600", "red.700")}
                             {...styleButton}
                             onClick={() => setIsOpenDeleteFriend(true)}>
                             {languageValues.removeFriend}
