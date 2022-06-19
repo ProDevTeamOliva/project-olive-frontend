@@ -56,6 +56,7 @@ function Notification({ id, nameFirst, nameLast, avatar }) {
                             ml="5"
                             src={avatar && baseUrl + avatar}
                             alt={avatar}
+                            bg="transparent"
                         />
                     </Link>
 

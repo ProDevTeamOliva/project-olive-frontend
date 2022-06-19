@@ -22,7 +22,8 @@ function Bell() {
                         position="absolute"
                         bg="mediumslateblue"
                         borderRadius="20px"
-                        right={["-21px", "-4px", "33px"]}
+                        top="-6px"
+                        right="-8px"
                         bottom="6">
                         <Text
                             textAlign="center"

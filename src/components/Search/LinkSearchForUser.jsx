@@ -33,7 +33,12 @@ function LinkSearchForUser({ id, nameFirst, nameLast, avatar, onClose }) {
                     align="center"
                     justify="center"
                     h="100%">
-                    <Avatar boxSize="40px" src={avatar} alt={avatar} />
+                    <Avatar
+                        boxSize="40px"
+                        src={avatar}
+                        alt={avatar}
+                        bg="transparent"
+                    />
                 </Flex>
             </Link>
 

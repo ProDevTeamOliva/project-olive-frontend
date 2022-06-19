@@ -105,6 +105,7 @@ function InfoAboutUser({ id }) {
                 <Avatar
                     boxSize={{ base: "12rem", md: "16rem" }}
                     src={baseUrl + user.avatar}
+                    bg="transparent"
                 />
             </Flex>
             <Stack
