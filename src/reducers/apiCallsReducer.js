@@ -17,7 +17,7 @@ const apiCallsReducer = (state = init_state, action) => {
         case GET_MORE_POSTS_SUCCESS:
             return {
                 ...state,
-                isMorePosts: action.payload.posts.length > 0,
+                isMorePosts: action.payload.posts?.length >= 15,
             };
         case ADD_POST_FAILURE:
             return {

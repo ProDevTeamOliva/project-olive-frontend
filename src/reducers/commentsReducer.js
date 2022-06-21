@@ -22,7 +22,7 @@ const commentsReducer = (state = init_state, action) => {
     switch (action.type) {
         case GET_COMMENTS_SUCCESS:
             return {
-                isMoreComments: action.payload.response.comments?.length > 0,
+                isMoreComments: action.payload.response.comments?.length >= 15,
                 isFetching: false,
                 isFetched: true,
                 isFetchingError: false,
@@ -48,7 +48,7 @@ const commentsReducer = (state = init_state, action) => {
             };
         case GET_MORE_COMMENTS_SUCCESS:
             return {
-                isMoreComments: action.payload.response.comments?.length > 0,
+                isMoreComments: action.payload.response.comments?.length >= 15,
                 isFetching: false,
                 isFetched: true,
                 isFetchingError: false,
