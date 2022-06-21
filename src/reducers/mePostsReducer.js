@@ -32,7 +32,7 @@ const mePostsReducer = (state = init_state, action) => {
             return {
                 posts: [...action.payload.posts],
                 message: action.payload.message,
-                isMorePosts: action.payload.posts?.length > 0,
+                isMorePosts: action.payload.posts?.length >= 15,
                 isFetching: false,
                 isFetched: true,
                 isFetchingError: false,
@@ -83,7 +83,7 @@ const mePostsReducer = (state = init_state, action) => {
             return {
                 posts: [...state.posts, ...action.payload.posts],
                 message: action.payload.message,
-                isMorePosts: action.payload.posts?.length > 0,
+                isMorePosts: action.payload.posts?.length >= 15,
                 isFetching: false,
                 isFetched: true,
                 isFetchingError: false,

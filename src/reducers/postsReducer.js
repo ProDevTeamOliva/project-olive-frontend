@@ -43,7 +43,7 @@ const postsReducer = (state = init_state, action) => {
             return {
                 ...state,
                 posts: action.payload.posts,
-                isMorePosts: action.payload.posts?.length > 0,
+                isMorePosts: action.payload.posts?.length >= 15,
                 isFetching: false,
                 isFetched: true,
                 isFetchingError: false,
@@ -66,7 +66,7 @@ const postsReducer = (state = init_state, action) => {
             return {
                 ...state,
                 posts: [...state.posts, ...action.payload.posts],
-                isMorePosts: action.payload.posts?.length > 0,
+                isMorePosts: action.payload.posts?.length >= 15,
                 isFetching: false,
                 isFetched: true,
                 isFetchingError: false,
