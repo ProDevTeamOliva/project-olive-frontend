@@ -11,8 +11,8 @@ import {
 } from "@chakra-ui/react";
 import { unStyledButton } from "../../styles/Buttons/unStyledButton";
 import { CgHashtag } from "react-icons/cg";
-import Search from "./Search";
 // https://github.com/astrit/css.gg
+import Search from "./Search";
 import { restartSearch } from "../../actions/searchActions";
 import { Search2Icon } from "@chakra-ui/icons";
 import { useDispatch } from "react-redux";

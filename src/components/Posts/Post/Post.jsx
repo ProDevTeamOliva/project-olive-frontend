@@ -15,6 +15,7 @@ import Tags from "./Tags";
 import Like from "./Like";
 import { unStyledButton } from "../../../styles/Buttons/unStyledButton";
 import { BsXLg } from "react-icons/bs";
+// https://github.com/twbs/icons
 import AlertToConfirmation from "../../Alert/AlertToConfirmation";
 
 function Post({ id }) {

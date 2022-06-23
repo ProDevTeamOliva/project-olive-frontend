@@ -3,6 +3,7 @@ import { useState, useRef, useCallback } from "react";
 import { Box, HStack, Text, Flex, Avatar, Button } from "@chakra-ui/react";
 import { baseUrl } from "../../config/baseUrl";
 import { BsCheckLg, BsXLg } from "react-icons/bs";
+// https://github.com/twbs/icons
 import AlertToConfirmation from "../Alert/AlertToConfirmation";
 import {
     acceptFriendInvitation,
