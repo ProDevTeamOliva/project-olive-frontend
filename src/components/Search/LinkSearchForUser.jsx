@@ -1,6 +1,7 @@
 import { Text, Flex, Avatar, Grid } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { IoSend } from "react-icons/io5";
+// 	https://ionicons.com/
 import { useSelector } from "react-redux";
 
 function LinkSearchForUser({ id, nameFirst, nameLast, avatar, onClose }) {
